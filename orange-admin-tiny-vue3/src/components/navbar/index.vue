@@ -2,11 +2,7 @@
   <div class="navbar">
     <div class="left-side">
       <div style="display: flex; align-items: center">
-        <img
-          src="@/assets/images/opentiny-logo.png"
-          alt="logo"
-          @click="jumpUrl"
-        />
+        <img src="@/assets/images/opentiny-logo.png" alt="logo" @click="jumpUrl" />
         <h5 @click="jumpUrl">OpenTiny</h5>
         <div class="divider"></div>
         <img class="vue-icon" alt="logo" src="@/assets/images/pro.png" />
@@ -15,11 +11,7 @@
     </div>
     <ul class="right-side">
       <li>
-        <input
-          id="navbar-search"
-          class="input-icon"
-          :placeholder="$t('setting.input.search')"
-        />
+        <input id="navbar-search" class="input-icon" :placeholder="$t('setting.input.search')" />
       </li>
       <li>
         <div class="divider"></div>
@@ -28,49 +20,38 @@
         <span>{{ i18.locale.value }}</span>
         <img src="@/assets/images/lan.png" alt="lan" class="navbar-lan" />
         <div v-if="lan" class="trigger-lan">
-          <li
-            v-for="(item, index) in locales"
-            :key="index"
-            :value="item.value"
-            @click="changeLocale(locales[index].value)"
-            >{{ item.label }}</li
-          >
-        </div>
-      </li>
+      <li v-for="(item, index) in locales" :key="index" :value="item.value" @click="changeLocale(locales[index].value)">
+        {{ item.label }}</li>
+  </div>
+  </li>
 
-      <li>
-        <span @click="help">{{ $t('settings.navbar.help') }}</span>
-      </li>
-      <li>
-        <span @click="setVisible">{{ $t('settings.title') }}</span>
-      </li>
-      <li class="navbar-user">
-        <tiny-user-head type="icon" round min>
-          <div class="user-image">
-            <img src="@/assets/images/avatar.png" alt="user" />
-          </div>
-        </tiny-user-head>
-        <div class="trigger-user">
-          <li
-            v-for="(item, index) in userlist"
-            :key="index"
-            :value="item.label"
-            @click="switchUser(item.value)"
-          >
-            <iconReplace v-if="item.value === 1"></iconReplace>
-            <iconUser v-if="item.value === 2"></iconUser>
-            <iconWriting v-if="item.value === 3"></iconWriting>
-            <iconCheckOut v-if="item.value === 4"></iconCheckOut>
-            {{ $t(item.label) }}
-          </li>
-        </div>
-      </li>
-    </ul>
+  <li>
+    <span @click="help">{{ $t('settings.navbar.help') }}</span>
+  </li>
+  <li>
+    <span @click="setVisible">{{ $t('settings.title') }}</span>
+  </li>
+  <li class="navbar-user">
+    <tiny-user-head type="icon" round min>
+      <div class="user-image">
+        <img src="@/assets/images/avatar.png" alt="user" />
+      </div>
+    </tiny-user-head>
+    <div class="trigger-user">
+  <li v-for="(item, index) in userlist" :key="index" :value="item.label" @click="switchUser(item.value)">
+    <iconReplace v-if="item.value === 1"></iconReplace>
+    <iconUser v-if="item.value === 2"></iconUser>
+    <iconWriting v-if="item.value === 3"></iconWriting>
+    <iconCheckOut v-if="item.value === 4"></iconCheckOut>
+    {{ $t(item.label) }}
+  </li>
+  </div>
+  </li>
+  </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { UserHead as TinyUserHead, Modal } from '@opentiny/vue';
   import {
@@ -174,8 +155,7 @@
   }
 
   .input-icon {
-    background: url('@/assets/images/search.png') no-repeat scroll right center
-      transparent;
+    background: url('@/assets/images/search.png') no-repeat scroll right center transparent;
   }
 
   .divider {
@@ -276,7 +256,7 @@
       margin-left: -35px;
     }
 
-    .navbar-user:hover > .trigger-user {
+    .navbar-user:hover>.trigger-user {
       display: inline-block;
     }
 

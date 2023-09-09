@@ -69,7 +69,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, toRefs } from 'vue';
 
   import {
     Grid as TinyGrid,

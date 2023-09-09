@@ -1,21 +1,10 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      ref="evaluationRef"
-      :rules="rules"
-      :mode="filterOptions"
-      :responsive-layout="true"
-      label-width="120px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form ref="evaluationRef" :rules="rules" :mode="filterOptions" :responsive-layout="true" label-width="120px"
+      :label-align="true" label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.wholeconfirm')"
-            prop="wholeconfirm"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.wholeconfirm')" prop="wholeconfirm">
             <div>
               <tiny-radio v-model="filterOptions.wholeconfirm" label="1">
                 {{ $t('baseForm.form.label.yes') }}
@@ -29,17 +18,14 @@
       </tiny-row>
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.evaluation')"
-            prop="overallevaluation"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.evaluation')" prop="overallevaluation">
             <div>
               <tiny-radio v-model="filterOptions.overallevaluation" label="1">{{
                 $t('baseForm.form.label.evaluationyes')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.overallevaluation" label="2">{{
                 $t('baseForm.form.label.evaluationno')
-              }}</tiny-radio>
+                }}</tiny-radio>
             </div>
           </tiny-form-item>
         </tiny-col>
@@ -49,7 +35,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, toRefs, computed, ref, defineExpose } from 'vue';
   import {
     Layout as TinyLayout,
     Form as TinyForm,
@@ -65,9 +50,9 @@
   }
 
   // 加载效果
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
-  }>({
+  } > ({
     filterOptions: {
       wholeconfirm: '1',
       overallevaluation: '1',

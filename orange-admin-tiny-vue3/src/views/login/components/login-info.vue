@@ -1,29 +1,15 @@
 <template>
   <div class="login-form-container">
-    <tiny-form
-      ref="loginFormInfo"
-      :model="loginInfo"
-      class="login-form"
-      :rules="rules"
-      validate-type="text"
-      label-width="0"
-      size="medium"
-    >
+    <tiny-form ref="loginFormInfo" :model="loginInfo" class="login-form" :rules="rules" validate-type="text"
+      label-width="0" size="medium">
       <tiny-form-item prop="username" size="medium">
-        <tiny-input
-          v-model="loginInfo.username"
-          :placeholder="$t('login.form.userName.placeholder')"
-        >
+        <tiny-input v-model="loginInfo.username" :placeholder="$t('login.form.userName.placeholder')">
         </tiny-input>
       </tiny-form-item>
 
       <tiny-form-item prop="password" size="medium">
-        <tiny-input
-          v-model="loginInfo.password"
-          type="password"
-          show-password
-          :placeholder="$t('login.form.password.placeholder')"
-        >
+        <tiny-input v-model="loginInfo.password" type="password" show-password
+          :placeholder="$t('login.form.password.placeholder')">
         </tiny-input>
       </tiny-form-item>
 
@@ -41,13 +27,8 @@
       </div>
 
       <tiny-form-item size="medium">
-        <tiny-button
-          type="primary"
-          class="login-form-btn"
-          :loading="loading"
-          @click="handleSubmit"
-          >{{ $t('login.form.login') }}</tiny-button
-        >
+        <tiny-button type="primary" class="login-form-btn" :loading="loading" @click="handleSubmit">{{
+          $t('login.form.login') }}</tiny-button>
       </tiny-form-item>
     </tiny-form>
   </div>
@@ -98,7 +79,7 @@
 
   const loginInfo = reactive({
     username: 'admin',
-    password: 'admin',
+    password: 'eeX00Wzl3zXFB+4QsmpgYX7zChzxqde/M8w21o3PKifqmMzjIiG8fH+j34iJcGoCt3iZS/aJ5l2q9QztIwVhKRDz3VhQEP0NClbT7sKECg5DPK98gxGlnTUYJ3w8fMF91gXdSA6BrwEdRtlNfSiNeL9OXiyua964ITohLzFMMzE=',
     rememberPassword: true,
   });
 
@@ -108,12 +89,12 @@
     handle(true);
   };
 
-  function handleSubmit() {
+  function handleSubmit () {
     loginFormInfo.value?.validate(async (valid: boolean) => {
       if (!valid) {
         return;
       }
-      if(!import.meta.env.VITE_USE_MOCK){
+      if (!import.meta.env.VITE_USE_MOCK) {
         window.localStorage.setItem('userRole', 'admin');
         setToken('12345');
 
@@ -195,6 +176,7 @@
   .divide-line {
     margin: 0 5px;
   }
+
   // responsive
   @media (max-width: @screen-ms) {
     .login-form {

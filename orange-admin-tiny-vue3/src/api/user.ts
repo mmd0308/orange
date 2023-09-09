@@ -32,7 +32,7 @@ export interface UserData {
 }
 
 export function login(data: LoginData) {
-  return axios.post<LoginRes>('/api/user/login', data);
+  return axios.post<LoginRes>('/system/permission/v1.0/auth/login', data);
 }
 export function loginMail(data: LoginDataMail) {
   return axios.post<LoginRes>('/api/mail/login', data);

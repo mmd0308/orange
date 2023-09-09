@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader';
 import { viteMockServe } from 'vite-plugin-mock';
+import AutoImport from 'unplugin-auto-import/vite'
 
 const useMock = !!process.env.VITE_USE_MOCK
 
@@ -21,6 +22,19 @@ const config = {
       supportTs: false, // 打开后，可以读取 ts 文件模块。 请注意，打开后将无法监视.js 文件
       watchFiles: true,
       injectFile: resolve('../src/main.ts'),
+    }),
+    AutoImport({
+      imports: [
+        'vue',
+      ],
+      // eslint报错解决 https://blog.csdn.net/sayUonly/article/details/123482912
+      eslintrc: {
+        enabled: false, // Default `false`
+        filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
+        globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+      },
+      // 生成auto-import.d.ts声明文件
+      dts: './auto-import.d.ts'
     })
   ],
   build: {
