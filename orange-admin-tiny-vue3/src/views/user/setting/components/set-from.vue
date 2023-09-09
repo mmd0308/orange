@@ -1,20 +1,10 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      ref="setFormRef"
-      :model="state.filterOptions"
-      :rules="rules"
-      label-width="150px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form ref="setFormRef" :model="state.filterOptions" :rules="rules" label-width="150px" :label-align="true"
+      label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="5" label-width="100px">
-          <tiny-form-item
-            :label="$t('userSetting.department')"
-            prop="department"
-          >
+          <tiny-form-item :label="$t('userSetting.department')" prop="department">
             <tiny-input v-model="state.filterOptions.department"></tiny-input>
           </tiny-form-item>
         </tiny-col>
@@ -28,29 +18,16 @@
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="5" label-width="100px">
           <tiny-form-item :label="$t('userSetting.type')" prop="type">
-            <tiny-select
-              v-model="state.filterOptions.type"
-              :placeholder="$t('baseForm.form.label.placeholder')"
-            >
-              <tiny-option
-                v-for="item in (projectData as any)"
-                :key="item.value"
-                :label="$t(item.label)"
-                :value="item.label"
-              ></tiny-option>
+            <tiny-select v-model="state.filterOptions.type" :placeholder="$t('baseForm.form.label.placeholder')">
+              <tiny-option v-for="item in (projectData as any)" :key="item.value" :label="$t(item.label)"
+                :value="item.label"></tiny-option>
             </tiny-select>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="5" label-width="100px">
           <tiny-form-item :label="$t('userSetting.date')" prop="date">
-            <tiny-date-picker
-              v-model="state.filterOptions.date"
-              unlink-panels
-              type="daterange"
-              range-separator="-"
-              :start-placeholder="$t('userSetting.first')"
-              :end-placeholder="$t('userSetting.last')"
-            ></tiny-date-picker>
+            <tiny-date-picker v-model="state.filterOptions.date" unlink-panels type="daterange" range-separator="-"
+              :start-placeholder="$t('userSetting.first')" :end-placeholder="$t('userSetting.last')"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
@@ -63,10 +40,7 @@
         </tiny-col>
         <tiny-col :span="5" label-width="100px">
           <tiny-form-item :label="$t('userSetting.startTime')" prop="startTime">
-            <tiny-date-picker
-              v-model="state.filterOptions.startTime"
-              @blur="handleBlur"
-            ></tiny-date-picker>
+            <tiny-date-picker v-model="state.filterOptions.startTime" @blur="handleBlur"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
@@ -74,10 +48,7 @@
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="5" label-width="100px">
           <tiny-form-item :label="$t('userSetting.endTime')" prop="endTime">
-            <tiny-date-picker
-              v-model="state.filterOptions.endTime"
-              @blur="handleBlur"
-            ></tiny-date-picker>
+            <tiny-date-picker v-model="state.filterOptions.endTime" @blur="handleBlur"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
@@ -86,7 +57,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive, defineProps, computed, defineExpose } from 'vue';
+  import { ref, reactive, computed, defineExpose } from 'vue';
   import { useI18n } from 'vue-i18n';
   import {
     Select as TinySelect,
@@ -127,16 +98,16 @@
   ];
 
   // 加载效果
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
     department: string;
-    position: Array<object>;
-    type: Array<object>;
-    date: Array<object>;
+    position: Array < object >;
+    type: Array < object >;
+    date: Array < object >;
     during: string;
     startTime: string;
     endTime: string;
-  }>({
+  } > ({
     filterOptions: {} as FilterOptions,
     department: '',
     position: [],

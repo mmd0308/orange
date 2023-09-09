@@ -5,7 +5,7 @@ import router from '@/router';
 import { getToken, clearToken } from '@/utils/auth';
 
 export interface HttpResponse<T = unknown> {
-  errMsg: string;
+  msg: string;
   code: string | number;
   data: T;
 }
@@ -18,43 +18,51 @@ if (VITE_API_BASE_URL) {
 }
 
 const ignoreMockApiList = VITE_MOCK_IGNORE?.split(',') || [];
+
+
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+
+
 axios.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    const isProxy = ignoreMockApiList.includes(config.url);
-    if (isProxy) {
-      config.url = config.url?.replace(VITE_BASE_API, '/api/v1');
-    }
+    // const isProxy = ignoreMockApiList.includes(config.url);
+    // debugger
+    // if (isProxy) {
+    //   config.url = config.url?.replace(VITE_BASE_API, '/api/v1');
+    // }
+    // const token = getToken();
+    // if (token) {
+    //   if (!config.headers) {
+    //     config.headers = {};
+    //   }
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
 
-    const token = getToken();
-    if (token) {
-      if (!config.headers) {
-        config.headers = {};
-      }
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
+    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQyMjExMzQsImV4cCI6MTY5NDI2NDMzNCwiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.79v9lJ9qbcJsWtdz3GT1mvEOCRpXcwUk9W29jVfYHtU'
     config.headers = { ...config.headers };
 
     return config;
   },
   (error) => {
-    // do something
-    return Promise.reject(error);
   }
 );
-// add response interceptors
+
 axios.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
-    const res = response.data;
-    if (res.code !== '0') {
-      res.errMsg &&
-        Modal.message({
-          message: res.errMsg,
-          status: 'error',
-        });
-      return Promise.reject(new Error(res.errMsg || 'Error'));
+    // 接口响应数据
+    const result = response.data;
+    // http请求状态码为200,接口响应码为200 表示请求成功
+    if (result.code === '200' || result.code === 200) {
+      //  {code: '200', msg: '操作成功', data: {…}}
+      // 返回整个response
+      return result
     }
-    return res;
+    result.msg &&
+      Modal.message({
+        message: result.msg,
+        status: 'error',
+      });
+    return Promise.reject(new Error(result.msg || 'Error'));
   },
   (error) => {
     const { status, data } = error.response;
@@ -76,3 +84,4 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+

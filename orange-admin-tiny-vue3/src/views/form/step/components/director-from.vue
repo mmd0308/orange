@@ -1,64 +1,34 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      ref="directorFormRef"
-      :model="state.filterOptions"
-      :rules="rules"
-      label-width="150px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form ref="directorFormRef" :model="state.filterOptions" :rules="rules" label-width="150px" :label-align="true"
+      label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item
-            :label="$t('stepForm.dire.supervisor')"
-            prop="director"
-          >
-            <tiny-select
-              v-model="state.filterOptions.director"
-              :disabled="disabled"
-              :placeholder="$t('baseForm.form.label.placeholder')"
-              multiple
-            >
-              <tiny-option
-                v-for="item in (projectData?.director as any)"
-                :key="item"
-                :label="$t(item)"
-                :value="item"
-              ></tiny-option>
+          <tiny-form-item :label="$t('stepForm.dire.supervisor')" prop="director">
+            <tiny-select v-model="state.filterOptions.director" :disabled="disabled"
+              :placeholder="$t('baseForm.form.label.placeholder')" multiple>
+              <tiny-option v-for="item in (projectData?.director as any)" :key="item" :label="$t(item)"
+                :value="item"></tiny-option>
             </tiny-select>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('stepForm.dire.remarks')" prop="remark">
-            <tiny-input
-              v-model="state.filterOptions.remark"
-              :disabled="disabled"
-            ></tiny-input>
+            <tiny-input v-model="state.filterOptions.remark" :disabled="disabled"></tiny-input>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
 
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item
-            :label="$t('stepForm.dire.startTime')"
-            prop="startTime"
-          >
-            <tiny-date-picker
-              v-model="state.filterOptions.startTime"
-              :disabled="disabled"
-            ></tiny-date-picker>
+          <tiny-form-item :label="$t('stepForm.dire.startTime')" prop="startTime">
+            <tiny-date-picker v-model="state.filterOptions.startTime" :disabled="disabled"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('stepForm.dire.endTime')" prop="endTime">
-            <tiny-date-picker
-              v-model="state.filterOptions.endTime"
-              :disabled="disabled"
-              @blur="handleBlur"
-            ></tiny-date-picker>
+            <tiny-date-picker v-model="state.filterOptions.endTime" :disabled="disabled"
+              @blur="handleBlur"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
@@ -70,7 +40,6 @@
   import {
     ref,
     reactive,
-    defineProps,
     computed,
     defineExpose,
     toRefs,
@@ -105,9 +74,9 @@
   const { directorPlay } = toRefs(props);
 
   // 加载效果
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
-  }>({
+  } > ({
     filterOptions: {} as FilterOptions,
   });
 

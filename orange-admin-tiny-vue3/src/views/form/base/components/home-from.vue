@@ -1,28 +1,12 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      label-width="120px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form label-width="120px" :label-align="true" label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.project')"
-            prop="department"
-          >
-            <tiny-select
-              v-model="filterOptions.project"
-              :placeholder="$t('baseForm.form.label.placeholder')"
-              filterable
-            >
-              <tiny-option
-                v-for="item in projectData"
-                :key="item"
-                :label="$t(item)"
-                :value="item"
-              ></tiny-option>
+          <tiny-form-item :label="$t('baseForm.form.project')" prop="department">
+            <tiny-select v-model="filterOptions.project" :placeholder="$t('baseForm.form.label.placeholder')"
+              filterable>
+              <tiny-option v-for="item in projectData" :key="item" :label="$t(item)" :value="item"></tiny-option>
             </tiny-select>
           </tiny-form-item>
         </tiny-col>
@@ -32,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, toRefs, defineProps } from 'vue';
+  import { reactive, toRefs } from 'vue';
   import {
     Layout as TinyLayout,
     Form as TinyForm,
@@ -47,9 +31,9 @@
     project: string;
   }
 
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
-  }>({
+  } > ({
     filterOptions: {} as FilterOptions,
   });
   const { filterOptions } = toRefs(state);

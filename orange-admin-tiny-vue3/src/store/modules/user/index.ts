@@ -25,7 +25,7 @@ const useUserStore = defineStore('user', {
     protocolEnd: '2024-04-19',
     address: '',
     status: '',
-    role: '',
+    role: 'admin',
     sort: 1,
     startTime: '',
     endTime: '',

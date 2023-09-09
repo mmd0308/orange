@@ -1,0 +1,43 @@
+.container-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 60px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  margin: 20px 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 8px rgba(169, 174, 184, 0.05);
+
+
+  .contain-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 52px;
+  }
+
+  .contain-img {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+
+    img:hover {
+      background: whitesmoke;
+    }
+  }
+
+  .contain-text {
+    padding-left: 10px;
+    color: #4e5969;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .table {
+    min-height: 710px;
+    padding: 0 30px;
+  }
+}

@@ -18,10 +18,10 @@ export default function setupPermissionGuard(router: Router) {
           appRoutes,
           userStore.role
         ) || {
-            name: 'notFound',
-          } || {
-            name: 'preview',
-          };
+          name: 'notFound',
+        } || {
+          name: 'preview',
+        };
         next(destination);
       }
       NProgress.done();

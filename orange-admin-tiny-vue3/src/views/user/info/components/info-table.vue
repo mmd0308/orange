@@ -24,14 +24,8 @@
           </ul>
         </template>
       </tiny-grid-column>
-      <tiny-grid-column
-        field="name"
-        :title="$t('userInfo.table.columnA')"
-      ></tiny-grid-column>
-      <tiny-grid-column
-        field="time"
-        :title="$t('userInfo.table.columnB')"
-      ></tiny-grid-column>
+      <tiny-grid-column field="name" :title="$t('userInfo.table.columnA')"></tiny-grid-column>
+      <tiny-grid-column field="time" :title="$t('userInfo.table.columnB')"></tiny-grid-column>
       <tiny-grid-column field="type" :title="$t('userInfo.table.columnC')">
         <template #default="data">
           <span>{{ $t(`${data.row.type}`) }}</span>
@@ -47,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineProps } from 'vue';
   import {
     GridColumn as TinyGridColumn,
     Grid as TinyGrid,

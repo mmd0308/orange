@@ -1,18 +1,9 @@
 <template>
   <div class="chart">
-    <div
-      v-for="item in chartData"
-      :key="item.title"
-      class="list"
-      :value="item.value"
-    >
+    <div v-for="item in chartData" :key="item.title" class="list" :value="item.value">
       <h4>{{ $t(item.title) }}</h4>
       <div v-if="item.value === 1">
-        <div
-          v-for="itemson in item.list"
-          :key="itemson.sort"
-          :value="itemson.type"
-        >
+        <div v-for="itemson in item.list" :key="itemson.sort" :value="itemson.type">
           <div v-if="itemson.len === 1" class="cardold" :class="itemson.pid">
             <div class="cardtip">
               <span class="cardType">{{ $t(itemson.type) }}</span>
@@ -23,12 +14,8 @@
               <span class="cardStatus">{{ $t(itemson.status) }}</span>
             </div>
           </div>
-          <div
-            v-if="itemson.len !== 1"
-            class="cardnew"
-            :class="itemson.pid"
-            :style="{ width: `${itemson.len * 199}px` }"
-          >
+          <div v-if="itemson.len !== 1" class="cardnew" :class="itemson.pid"
+            :style="{ width: `${itemson.len * 199}px` }">
             <div class="cardtip">
               <span class="cardType">{{ $t(itemson.type) }}</span>
               <img v-if="itemson.pid === 'A'" :src="tip1" />
@@ -45,7 +32,6 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineProps } from 'vue';
   import tip1 from '@/assets/images/tip1.png';
   import tip2 from '@/assets/images/tip2.png';
   import tip3 from '@/assets/images/tip3.png';

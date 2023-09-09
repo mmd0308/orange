@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { UserInfo } from '@/store/modules/user/types';
 
+const BASE_URL = "/system/permission/v1.0/user"
+
+
+
 export interface LoginData {
   username: string;
   password: string;
@@ -39,7 +43,7 @@ export function logout() {
 }
 
 export function getUserInfo() {
-  return axios.get<UserInfo>(`/api/user/userInfo`);
+  return axios.get<UserInfo>(`/system/permission/v1.0/auth/info`);
 }
 
 export function updateUserInfo(data: UserInfo) {

@@ -1,10 +1,10 @@
 import { RoleType } from '@/types/roleType';
 
 export default {
-  path: 'system',
-  name: 'User',
-  id: 'User',
-  label: 'User',
+  path: 'system/permission',
+  name: 'SystemPermission',
+  id: 'SystemPermission',
+  label: 'SystemPermission',
   component: () => import('@/views/user/index.vue'),
   meta: {
     locale: 'menu.system.permission',
@@ -14,28 +14,29 @@ export default {
   },
   children: [
     {
-      path: 'info',
-      name: 'Info',
-      id: 'Info',
-      label: 'Info',
-      component: () => import('@/views/user/info/index.vue'),
+      path: 'department',
+      name: 'SystemPermissionDepartment',
+      id: 'SystemPermissionDepartment',
+      label: 'SystemPermissionDepartment',
+      component: () => import('@/views/admin/system/department/index.vue'),
       meta: {
-        locale: 'menu.user.info',
+        locale: 'menu.system.permission.department',
         requiresAuth: true,
         roles: [RoleType.admin, RoleType.user],
       },
     },
     {
-      path: 'setting',
-      name: 'Setting',
-      id: 'Setting',
-      label: 'Setting',
-      component: () => import('@/views/user/setting/index.vue'),
+      path: 'role',
+      name: 'SystemPermissionRole',
+      id: 'SystemPermissionRole',
+      label: 'SystemPermissionRole',
+      component: () => import('@/views/admin/system/role/index.vue'),
       meta: {
-        locale: 'menu.user.setting',
+        locale: 'menu.system.permission.role',
         requiresAuth: true,
         roles: [RoleType.admin, RoleType.user],
       },
-    },
+    }
   ],
+
 };

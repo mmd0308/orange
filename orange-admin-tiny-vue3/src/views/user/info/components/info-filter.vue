@@ -1,24 +1,18 @@
 <template>
   <div>
-    <infofilterstarttime
-      v-if="activeName === '1'"
-      ref="filterstarttime"
-    ></infofilterstarttime>
-    <infofilterendtime
-      v-if="activeName === '1'"
-      ref="filterendtime"
-    ></infofilterendtime>
+    <infofilterstarttime v-if="activeName === '1'" ref="filterstarttime"></infofilterstarttime>
+    <infofilterendtime v-if="activeName === '1'" ref="filterendtime"></infofilterendtime>
     <infofilterstatus ref="filterstatus"></infofilterstatus>
     <infofiltertype ref="filtertype"></infofiltertype>
     <tiny-button type="primary" @click="submit">{{
       $t('userInfo.btn.search')
-    }}</tiny-button>
+      }}</tiny-button>
     <tiny-button @click="reset">{{ $t('userInfo.btn.reset') }}</tiny-button>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { defineProps, ref } from 'vue';
+  import { ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { Button as TinyButton, Modal } from '@opentiny/vue';
   import { useUserStore } from '@/store';
@@ -52,20 +46,20 @@
   const submit = () => {
     if (props.activeName === '1') {
       userStore.startTime === '' ||
-      userStore.endTime === '' ||
-      userStore.filterStatus?.length === 0 ||
-      userStore.filterType?.length === 0
+        userStore.endTime === '' ||
+        userStore.filterStatus?.length === 0 ||
+        userStore.filterType?.length === 0
         ? Modal.message({
-            message: t('userInfo.filter.all'),
-            status: 'error',
-          })
+          message: t('userInfo.filter.all'),
+          status: 'error',
+        })
         : userStore.setInfo({ submit: true, sort: undefined });
     } else {
       userStore.filterStatus?.length === 0 || userStore.filterType?.length === 0
         ? Modal.message({
-            message: t('userInfo.filter.all'),
-            status: 'error',
-          })
+          message: t('userInfo.filter.all'),
+          status: 'error',
+        })
         : userStore.setInfo({ submit: true, sort: undefined });
     }
   };

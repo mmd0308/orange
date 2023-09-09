@@ -1,44 +1,21 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      ref="peopleFormRef"
-      :model="filterOptions"
-      :rules="rules"
-      label-width="120px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form ref="peopleFormRef" :model="filterOptions" :rules="rules" label-width="120px" :label-align="true"
+      label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('baseForm.form.label.type')" prop="person">
-            <tiny-select
-              v-model="filterOptions.person"
-              :placeholder="$t('baseForm.form.label.placeholder')"
-              multiple
-            >
-              <tiny-option
-                v-for="item in (projectData?.person as any)"
-                :key="item.value"
-                :label="$t(item.label)"
-                :value="item.value"
-              ></tiny-option>
+            <tiny-select v-model="filterOptions.person" :placeholder="$t('baseForm.form.label.placeholder')" multiple>
+              <tiny-option v-for="item in (projectData?.person as any)" :key="item.value" :label="$t(item.label)"
+                :value="item.value"></tiny-option>
             </tiny-select>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('baseForm.form.label.rank')" prop="rank">
-            <tiny-select
-              v-model="filterOptions.rank"
-              :placeholder="$t('baseForm.form.label.placeholder')"
-              multiple
-            >
-              <tiny-option
-                v-for="item in (projectData?.rank as any)"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></tiny-option>
+            <tiny-select v-model="filterOptions.rank" :placeholder="$t('baseForm.form.label.placeholder')" multiple>
+              <tiny-option v-for="item in (projectData?.rank as any)" :key="item.value" :label="item.label"
+                :value="item.value"></tiny-option>
             </tiny-select>
           </tiny-form-item>
         </tiny-col>
@@ -46,22 +23,13 @@
 
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.culture')"
-            prop="department"
-          >
-            <tiny-input
-              v-model="filterOptions.department"
-              :placeholder="$t('searchTable.form.input')"
-            ></tiny-input>
+          <tiny-form-item :label="$t('baseForm.form.label.culture')" prop="department">
+            <tiny-input v-model="filterOptions.department" :placeholder="$t('searchTable.form.input')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('baseForm.form.label.business')">
-            <tiny-input
-              v-model="filterOptions.business"
-              :placeholder="$t('searchTable.form.input')"
-            ></tiny-input>
+            <tiny-input v-model="filterOptions.business" :placeholder="$t('searchTable.form.input')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
       </tiny-row>
@@ -74,7 +42,6 @@
     ref,
     reactive,
     toRefs,
-    defineProps,
     computed,
     defineExpose,
   } from 'vue';
@@ -97,9 +64,9 @@
   }
 
   // 加载效果
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
-  }>({
+  } > ({
     filterOptions: {} as FilterOptions,
   });
   const { filterOptions } = toRefs(state);

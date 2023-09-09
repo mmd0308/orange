@@ -122,6 +122,24 @@
       bold: 'title',
     },
     {
+      value: 'Cloud',
+      name: 'menu.cloud',
+      icon: iconDownloadCloud,
+      bold: 'main-title',
+    },
+    {
+      value: 'Hello',
+      name: 'menu.cloud.hello',
+      icon: null,
+      bold: 'title',
+    },
+    {
+      value: 'Contracts',
+      name: 'menu.cloud.contracts',
+      icon: null,
+      bold: 'title',
+    },
+    {
       value: 'Exception',
       name: 'menu.exception',
       icon: iconCueL,
@@ -162,6 +180,24 @@
       name: 'menu.user.setting',
       icon: null,
       bold: 'title',
+    },
+    {
+      value: 'SystemPermission',
+      name: 'menu.system.permission',
+      icon: iconUser,
+      bold: 'main-title',
+    },
+    {
+      value: 'SystemPermissionDepartment',
+      name: 'menu.system.permission.department',
+      icon: iconUser,
+      bold: 'main-title',
+    },
+    {
+      value: 'SystemPermissionRole',
+      name: 'menu.system.permission.role',
+      icon: iconUser,
+      bold: 'main-title',
     },
   ];
 

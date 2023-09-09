@@ -1,28 +1,17 @@
 <template>
   <tiny-layout>
-    <tiny-form
-      ref="planFromRef"
-      :rules="rules"
-      :model="filterOptions"
-      :responsive-layout="true"
-      label-width="120px"
-      :label-align="true"
-      label-position="left"
-      size="small"
-    >
+    <tiny-form ref="planFromRef" :rules="rules" :model="filterOptions" :responsive-layout="true" label-width="120px"
+      :label-align="true" label-position="left" size="small">
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.confirm')"
-            prop="confirm"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.confirm')" prop="confirm">
             <div>
               <tiny-radio v-model="filterOptions.confirm" label="1">{{
                 $t('baseForm.form.label.yes')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.confirm" label="2">{{
                 $t('baseForm.form.label.no')
-              }}</tiny-radio>
+                }}</tiny-radio>
             </div>
           </tiny-form-item>
         </tiny-col>
@@ -30,22 +19,12 @@
 
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.frequency')"
-            prop="frequency"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.frequency')" prop="frequency">
             <div class="frequency">
-              <tiny-select
-                v-model="filterOptions.frequency"
-                :placeholder="$t('baseForm.form.label.placeholder')"
-                filterable
-              >
-                <tiny-option
-                  v-for="item in projectData?.frequency"
-                  :key="item"
-                  :label="$t(item)"
-                  :value="item"
-                ></tiny-option>
+              <tiny-select v-model="filterOptions.frequency" :placeholder="$t('baseForm.form.label.placeholder')"
+                filterable>
+                <tiny-option v-for="item in projectData?.frequency" :key="item" :label="$t(item)"
+                  :value="item"></tiny-option>
               </tiny-select>
             </div>
           </tiny-form-item>
@@ -58,10 +37,10 @@
             <div>
               <tiny-radio v-model="filterOptions.role" label="1">{{
                 $t('baseForm.form.label.roleone')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.role" label="2">{{
                 $t('baseForm.form.label.roletwo')
-              }}</tiny-radio>
+                }}</tiny-radio>
             </div>
           </tiny-form-item>
         </tiny-col>
@@ -69,23 +48,20 @@
 
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.condition')"
-            prop="condition"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.condition')" prop="condition">
             <div>
               <tiny-radio v-model="filterOptions.condition" label="1">{{
                 $t('baseForm.form.label.conditionone')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.condition" label="2">{{
                 $t('baseForm.form.label.conditiontwo')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.condition" label="3">{{
                 $t('baseForm.form.label.conditionthree')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.condition" label="4">{{
                 $t('baseForm.form.label.conditionfour')
-              }}</tiny-radio>
+                }}</tiny-radio>
             </div>
           </tiny-form-item>
         </tiny-col>
@@ -93,20 +69,17 @@
 
       <tiny-row :flex="true" justify="left">
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item
-            :label="$t('baseForm.form.label.staged')"
-            prop="staged"
-          >
+          <tiny-form-item :label="$t('baseForm.form.label.staged')" prop="staged">
             <div>
               <tiny-radio v-model="filterOptions.staged" label="1">{{
                 $t('baseForm.form.label.stagedone')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.staged" label="2">{{
                 $t('baseForm.form.label.stagedtwo')
-              }}</tiny-radio>
+                }}</tiny-radio>
               <tiny-radio v-model="filterOptions.staged" label="3">{{
                 $t('baseForm.form.label.stagedthree')
-              }}</tiny-radio>
+                }}</tiny-radio>
             </div>
           </tiny-form-item>
         </tiny-col>
@@ -120,7 +93,6 @@
     ref,
     reactive,
     toRefs,
-    defineProps,
     computed,
     defineExpose,
   } from 'vue';
@@ -144,9 +116,9 @@
   }
 
   // 加载效果
-  const state = reactive<{
+  const state = reactive < {
     filterOptions: FilterOptions;
-  }>({
+  } > ({
     filterOptions: {
       confirm: '1',
       role: '1',
