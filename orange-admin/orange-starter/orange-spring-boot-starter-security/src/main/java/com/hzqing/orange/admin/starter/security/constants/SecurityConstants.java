@@ -10,7 +10,7 @@ public interface SecurityConstants {
     /**
      * Token Key
      */
-    String TOKEN = "token";
+    String TOKEN = "orange-token";
 
 
     /**

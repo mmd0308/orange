@@ -1,14 +1,7 @@
 <template>
   <div class="menu-router">
-    <tiny-tree-menu
-      ref="tree"
-      :data="treeDataFilter"
-      :show-filter="false"
-      node-key="id"
-      wrap
-      :default-expanded-keys="[expandeArr]"
-      @current-change="currentChange"
-    >
+    <tiny-tree-menu ref="tree" :data="treeDataFilter" :show-filter="false" node-key="id" wrap
+      :default-expanded-keys="[expandeArr]" @current-change="currentChange">
       <template #default="slotScope">
         <template v-for="(item, index) in routerTitle" :key="index">
           <span v-if="slotScope.label === item.value" class="menu-title">
@@ -125,24 +118,6 @@
     {
       value: 'Error',
       name: 'menu.result.error',
-      icon: null,
-      bold: 'title',
-    },
-    {
-      value: 'Cloud',
-      name: 'menu.cloud',
-      icon: iconDownloadCloud,
-      bold: 'main-title',
-    },
-    {
-      value: 'Hello',
-      name: 'menu.cloud.hello',
-      icon: null,
-      bold: 'title',
-    },
-    {
-      value: 'Contracts',
-      name: 'menu.cloud.contracts',
       icon: null,
       bold: 'title',
     },
@@ -290,27 +265,26 @@
     align-items: center;
     height: 20px;
 
-    > svg {
+    >svg {
       width: 1.3em;
       height: 1.3em;
     }
   }
+
   :deep(.tiny-tree-node__wrapper > .is-current > .tiny-tree-node__content) {
     background: var(--ti-tree-menu-node-hover-bg-color);
     margin-left: 0 !important;
+
     &:hover {
       background: var(--ti-tree-menu-node-hover-bg-color) !important;
     }
   }
+
   :deep(.tiny-tree-node > .tiny-tree-node__content) {
     margin-left: 0 !important;
   }
-  .tiny-tree-menu
-    .tiny-tree
-    .tiny-tree-node.is-current
-    > .tiny-tree-node__content
-    .tree-node-name
-    .tiny-svg {
+
+  .tiny-tree-menu .tiny-tree .tiny-tree-node.is-current>.tiny-tree-node__content .tree-node-name .tiny-svg {
     fill: var(--ti-base-icon-color);
   }
 </style>
