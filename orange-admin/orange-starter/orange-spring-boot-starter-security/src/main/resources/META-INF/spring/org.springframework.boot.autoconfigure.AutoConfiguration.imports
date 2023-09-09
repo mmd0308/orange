@@ -1,0 +1,5 @@
+com.hzqing.orange.admin.starter.security.config.SecurityAutoConfiguration
+com.hzqing.orange.admin.starter.security.config.SecurityWebAutoConfiguration
+com.hzqing.orange.admin.starter.security.config.SecurityAutoConfigurationAdapter
+com.hzqing.orange.admin.starter.security.config.SecurityAuthenticationAutoConfiguration
+

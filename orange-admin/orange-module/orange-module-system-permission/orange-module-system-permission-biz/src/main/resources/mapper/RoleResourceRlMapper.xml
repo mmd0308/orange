@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzqing.orange.admin.module.system.permission.biz.mapper.RoleResourceRlMapper">
+
+
+    <insert id="batchInsert">
+        insert into sys_role_resource_rl (
+        id,tenant_id,role_id,resource_id,resource_type,created_by,created_at,updated_by,updated_at ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id},#{item.tenantId},#{item.roleId},#{item.resourceId},#{item.resourceType},#{item.createdBy},#{item.createdAt},#{item.updatedBy},#{item.updatedAt}
+            )
+        </foreach>
+    </insert>
+</mapper>

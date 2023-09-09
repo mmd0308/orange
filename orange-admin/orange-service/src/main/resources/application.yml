@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: ORANGE-ADMIN-SERVICE-V1
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: dev
+
+mybatis-plus:
+  global-config:
+    banner: false
+
+orange:
+  swagger:
+    enabled: true
+    name: ${spring.application.name}
+  operation:
+    record:
+      enabled: true
+      ignore-urls:
+        - /orange-module-system-service/v1.0/user/query-by-ids
+  amap:
+    enabled: true
+    key: c6229c88943b9920cf30d6c5f09fde29
+
+server:
+  port: 8080
+  servlet:
+    context-path: /orange-admin

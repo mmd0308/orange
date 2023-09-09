@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hzqing.orange.admin.dependencies</groupId>
+    <artifactId>orange-dependencies</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <description>orange-dependencies</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <orange.version>1.0.0-SNAPSHOT</orange.version>
+
+        <spring-framework.version>6.0.11</spring-framework.version>
+        <spring.boot.version>3.0.10</spring.boot.version>
+        <hutool.version>5.8.20</hutool.version>
+        <org.projectlombok.version>1.18.22</org.projectlombok.version>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <org.springdoc.version>2.0.4</org.springdoc.version>
+        <com.github.xiaoymin.version>3.0.3</com.github.xiaoymin.version>
+        <swagger.version>2.2.10</swagger.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
+        <poi.version>5.2.3</poi.version>
+
+        <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--    module start        -->
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.permission.common</groupId>
+                <artifactId>orange-module-system-permission-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.permission.api</groupId>
+                <artifactId>orange-module-system-permission-api</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.permission.biz</groupId>
+                <artifactId>orange-module-system-permission-biz</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+
+            <!--    module end        -->
+
+            <!-- 自定义starter start -->
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.common</groupId>
+                <artifactId>orange-spring-boot-starter-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.context</groupId>
+                <artifactId>orange-spring-boot-starter-context</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.banner</groupId>
+                <artifactId>orange-spring-boot-starter-banner</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.mybatis</groupId>
+                <artifactId>orange-spring-boot-starter-mybatis</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.security</groupId>
+                <artifactId>orange-spring-boot-starter-security</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.springdoc.webmvc</groupId>
+                <artifactId>orange-spring-boot-starter-springdoc-webmvc</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.webmvc</groupId>
+                <artifactId>orange-spring-boot-starter-webmvc</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.starter.biz.log</groupId>
+                <artifactId>orange-spring-boot-starter-biz-log</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <!-- 自定义starter end -->
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${org.projectlombok.version}</version>
+            </dependency>
+
+            <!-- 文档依赖 start -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${org.springdoc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-springdoc-ui</artifactId>
+                <version>${com.github.xiaoymin.version}</version>
+            </dependency>
+            <!-- 文档依赖 end -->
+
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.3.1</version>
+            </dependency>
+
+            <!--阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.4</version>
+            </dependency>
+            <!--    连接mysql    -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.33</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
