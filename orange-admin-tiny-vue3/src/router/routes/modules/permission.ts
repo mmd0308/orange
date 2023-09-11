@@ -5,7 +5,8 @@ export default {
   name: 'SystemPermission',
   id: 'SystemPermission',
   label: 'SystemPermission',
-  component: () => import('@/views/user/index.vue'),
+  redirect: `${import.meta.env.VITE_CONTEXT}system/permission/department`,
+  component: () => import('@/views/index.vue'),
   meta: {
     locale: 'menu.system.permission',
     requiresAuth: true,
@@ -18,9 +19,21 @@ export default {
       name: 'SystemPermissionDepartment',
       id: 'SystemPermissionDepartment',
       label: 'SystemPermissionDepartment',
-      component: () => import('@/views/admin/system/department/index.vue'),
+      component: () => import('@/views/admin/system/permission/department/index.vue'),
       meta: {
         locale: 'menu.system.permission.department',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
+    },
+    {
+      path: 'user',
+      name: 'SystemPermissionUser',
+      id: 'SystemPermissionUser',
+      label: 'SystemPermissionUser',
+      component: () => import('@/views/admin/system/permission/user/index.vue'),
+      meta: {
+        locale: 'menu.system.permission.user',
         requiresAuth: true,
         roles: [RoleType.admin, RoleType.user],
       },
@@ -30,7 +43,7 @@ export default {
       name: 'SystemPermissionRole',
       id: 'SystemPermissionRole',
       label: 'SystemPermissionRole',
-      component: () => import('@/views/admin/system/role/index.vue'),
+      component: () => import('@/views/admin/system/permission/role/index.vue'),
       meta: {
         locale: 'menu.system.permission.role',
         requiresAuth: true,

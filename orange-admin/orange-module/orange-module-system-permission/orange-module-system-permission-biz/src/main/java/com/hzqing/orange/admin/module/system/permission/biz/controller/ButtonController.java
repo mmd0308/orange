@@ -38,21 +38,21 @@ public class ButtonController {
         return ResultWrapper.ok(pageVO);
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:button:add')")
+    @PreAuthorize("@ss.hasPermission('system:permission:button:add')")
     @Operation(summary = "创建按钮", operationId = "system:permission:button:add")
     @PostMapping
     public Result<Long> add(@RequestBody @Validated ButtonAddRequest request) {
         return ResultWrapper.ok(buttonService.add(request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:button:update')")
+    @PreAuthorize("@ss.hasPermission('system:permission:button:update')")
     @Operation(summary = "根据ID修改", operationId = "system:permission:button:update")
     @PutMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody ButtonUpdateRequest request) {
         return ResultWrapper.ok(buttonService.updateById(id, request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:button:delete')")
+    @PreAuthorize("@ss.hasPermission('system:permission:button:delete')")
     @Operation(summary = "根据ID删除", operationId = "system:permission:button:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> removeById(@PathVariable("id") Long id) {

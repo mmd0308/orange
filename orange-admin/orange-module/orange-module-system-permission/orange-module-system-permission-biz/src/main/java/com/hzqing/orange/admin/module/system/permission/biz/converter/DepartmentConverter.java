@@ -2,8 +2,9 @@ package com.hzqing.orange.admin.module.system.permission.biz.converter;
 
 import  com.hzqing.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Department;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 import com.hzqing.orange.admin.starter.common.converter.Converter;
@@ -21,13 +22,13 @@ public interface DepartmentConverter extends Converter {
 
     DepartmentConverter INSTANCE = Mappers.getMapper(DepartmentConverter.class);
 
-    DepartmentEntity toEntity(Department department);
+    DepartmentEntity toEntity(DepartmentVO departmentVO);
 
-    Department toVo(DepartmentEntity entity);
+    DepartmentVO toVo(DepartmentEntity entity);
 
     List<DepartmentTree> toListTreeVo(List<DepartmentEntity> departmentEntityList);
 
-    List<Department> toList(List<DepartmentEntity> entityList);
+    List<DepartmentVO> toList(List<DepartmentEntity> entityList);
 
     default DepartmentEntity updateConvert(DepartmentUpdateRequest request, DepartmentEntity entity) {
         if (Objects.isNull(entity)) {
@@ -39,4 +40,6 @@ public interface DepartmentConverter extends Converter {
     }
 
     DepartmentListQuery toListQuery(DepartmentTreeQuery query);
+    DepartmentListQuery toListQuery(DepartmentAllQuery query);
+
 }

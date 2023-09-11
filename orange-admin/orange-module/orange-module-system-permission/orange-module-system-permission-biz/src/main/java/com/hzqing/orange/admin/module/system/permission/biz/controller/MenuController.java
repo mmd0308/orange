@@ -34,7 +34,7 @@ public class MenuController {
 
     private final MenuManager menuManager;
 
-    @PreAuthorize("@ps.hasPermission('system:permission:menu:add')")
+    @PreAuthorize("@ss.hasPermission('system:permission:menu:add')")
     @Operation(summary = "新建", operationId = "system:permission:menu:add")
     @PostMapping
     public Result<Long> add(@RequestBody @Validated MenuAddRequest request) {
@@ -42,14 +42,14 @@ public class MenuController {
     }
 
 
-    @PreAuthorize("@ps.hasPermission('system:permission:menu:update')")
+    @PreAuthorize("@ss.hasPermission('system:permission:menu:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:menu:update")
     @PutMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody MenuUpdateRequest request) {
         return ResultWrapper.ok(menuService.updateById(id, request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:menu:delete')")
+    @PreAuthorize("@ss.hasPermission('system:permission:menu:delete')")
     @Operation(summary = "根据ID删除", description = "如果存在子集和按钮，不允许删除", operationId = "system:permission:menu:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> removeById(@PathVariable("id") Long id) {

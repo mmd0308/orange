@@ -2,15 +2,16 @@ package com.hzqing.orange.admin.module.system.permission.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import  com.hzqing.orange.admin.module.system.permission.biz.converter.DepartmentConverter;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
-import  com.hzqing.orange.admin.module.system.permission.biz.manager.DepartmentManager;
-import  com.hzqing.orange.admin.module.system.permission.biz.service.DepartmentService;
+import com.hzqing.orange.admin.module.system.permission.biz.converter.DepartmentConverter;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.DepartmentManager;
+import com.hzqing.orange.admin.module.system.permission.biz.service.DepartmentService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.DepartmentErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Department;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
+import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 import com.hzqing.orange.admin.starter.common.constants.CommonConstants;
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Slf4j
 @Service
@@ -76,20 +77,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Long add(Department department) {
-        DepartmentEntity entity = DepartmentConverter.INSTANCE.toEntity(department);
-        if (CommonConstants.Common.DEFAULT_PARENT_ID.equals(department.getParentId())) {
-            entity.setAncestors(String.valueOf(CommonConstants.Common.DEFAULT_PARENT_ID));
-        } else {
-            DepartmentEntity parentEntity = departmentManager.getById(department.getParentId());
-            Assert.nonNull(parentEntity, DepartmentErrorCode.DEPARTMENT_PARENT_DATA_NONEXISTENCE);
-            entity.setAncestors(parentEntity.getAncestors() + StrUtil.UNDERLINE + parentEntity.getId());
+    public Long add(DepartmentVO departmentVO) {
+        DepartmentEntity entity = DepartmentConverter.INSTANCE.toEntity(departmentVO);
+        if (Objects.isNull(departmentVO.getParentId())) {
+            entity.setParentId(CommonConstants.Common.DEFAULT_PARENT_ID);
         }
         return departmentManager.add(entity);
     }
 
     @Override
-    public List<Department> querySelfAndSubsetById(Long id) {
+    public List<DepartmentVO> querySelfAndSubsetById(Long id) {
         DepartmentEntity entity = departmentManager.getById(id);
         if (Objects.isNull(entity)) {
             log.warn("entity is null. id :{}", id);
@@ -109,5 +106,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         Assert.nonNull(entity, DepartmentErrorCode.GLOBAL_DATA_NOT_EXIST);
         entity = DepartmentConverter.INSTANCE.updateConvert(request, entity);
         return departmentManager.updateById(entity);
+    }
+
+    @Override
+    public List<DepartmentVO> queryAll(DepartmentAllQuery query) {
+        DepartmentListQuery listQuery = DepartmentConverter.INSTANCE.toListQuery(query);
+        List<DepartmentEntity> entityList = departmentManager.listByParams(listQuery);
+        return DepartmentConverter.INSTANCE.toList(entityList);
     }
 }

@@ -42,6 +42,8 @@ module.exports = {
     Blob: true,
     document: 'readonly',
     window: 'readonly',
+    "SystemAPI": true,
+    "SystemPermissionAPI": true,
   },
   rules: {
     '@typescript-eslint/no-non-null-assertion': 'off',
@@ -81,5 +83,10 @@ module.exports = {
     'no-param-reassign': 0,
     'prefer-regex-literals': 0,
     'import/no-extraneous-dependencies': 0,
+    "no-console": "off",
+    "vue/first-attribute-linebreak": ["error", {
+      "singleline": "ignore",
+      "multiline": "ignore"
+    }]
   },
 };

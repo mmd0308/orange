@@ -10,7 +10,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.manager.UserManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.DepartmentService;
 import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Department;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
@@ -115,10 +115,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<Long> getDepartmentIds(Long departmentId) {
-        List<Department> departmentList = departmentService.querySelfAndSubsetById(departmentId);
-        if (CollUtil.isEmpty(departmentList)) {
+        List<DepartmentVO> departmentVOList = departmentService.querySelfAndSubsetById(departmentId);
+        if (CollUtil.isEmpty(departmentVOList)) {
             return Collections.emptyList();
         }
-        return CollUtils.convertList(departmentList, Department::getId);
+        return CollUtils.convertList(departmentVOList, DepartmentVO::getId);
     }
 }

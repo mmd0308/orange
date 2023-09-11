@@ -38,12 +38,13 @@ axios.interceptors.request.use(
     //   config.headers.Authorization = `Bearer ${token}`;
     // }
 
-    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQyMjExMzQsImV4cCI6MTY5NDI2NDMzNCwiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.79v9lJ9qbcJsWtdz3GT1mvEOCRpXcwUk9W29jVfYHtU'
+    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQzOTMyODgsImV4cCI6MTY5NDQzNjQ4OCwiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.86hX2B6QwcqhyAeV0lNU-yxsX5kE6MOGiWvcLZ4rlFI'
     config.headers = { ...config.headers };
 
     return config;
   },
   (error) => {
+    console.log(error)
   }
 );
 

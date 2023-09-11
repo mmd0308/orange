@@ -1,5 +1,4 @@
 export default {
-  'menu.user.info': 'User Center',
   'work.mock.employees': 'Transferred employees',
   'work.mock.onboard': 'New employee onboarding',
   'work.mock.Test': 'Test coaching',

@@ -1,14 +1,15 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
-import com.hzqing.orange.admin.module.system.permission.common.vo.Department;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 public interface DepartmentService {
 
@@ -31,19 +32,17 @@ public interface DepartmentService {
     /**
      * 新增数据
      *
-     * @param department 新增数据
+     * @param departmentVO 新增数据
      * @return 新增数据主键
      */
-    Long add(Department department);
+    Long add(DepartmentVO departmentVO);
 
     /**
      * 根据ID 查询自身及子集部门数据
-     *
-     * @param id
-     * @return 返回本部门和子集部门数据
      */
-    List<Department> querySelfAndSubsetById(Long id);
+    List<DepartmentVO> querySelfAndSubsetById(Long id);
 
     Boolean updateById(Long id, DepartmentUpdateRequest request);
 
+    List<DepartmentVO> queryAll(DepartmentAllQuery query);
 }

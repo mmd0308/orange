@@ -1,5 +1,4 @@
 export default {
-  'menu.user.info': '用户中心',
   'work.mock.employees': '转岗员工',
   'work.mock.onboard': '新员工上岗',
   'work.mock.Test': '测试辅导',

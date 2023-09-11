@@ -60,21 +60,21 @@ public class RoleController {
         return ResultWrapper.ok(RoleConverter.INSTANCE.toVo(entity));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:role:add')")
+    @PreAuthorize("@ss.hasPermission('system:permission:role:add')")
     @Operation(summary = "新建", operationId = "system:permission:role:add")
     @PostMapping
     public Result<Long> add(@RequestBody @Validated RoleAddRequest request) {
         return ResultWrapper.ok(roleService.add(request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:role:update')")
+    @PreAuthorize("@ss.hasPermission('system:permission:role:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:role:update")
     @PutMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody RoleUpdateRequest request) {
         return ResultWrapper.ok(roleService.updateById(id, request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:role:delete')")
+    @PreAuthorize("@ss.hasPermission('system:permission:role:delete')")
     @Operation(summary = "根据ID删除", operationId = "system:permission:role:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> removeById(@PathVariable("id") Long id) {

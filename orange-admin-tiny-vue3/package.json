@@ -3,7 +3,7 @@
   "description": "后台管理系统",
   "version": "1.0.0",
   "private": true,
-  "author": "Tiny Team",
+  "author": "程序员橙子",
   "license": "MIT",
   "scripts": {
     "start": "vite --config ./config/vite.config.dev.ts --port 3031",

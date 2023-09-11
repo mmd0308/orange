@@ -66,28 +66,28 @@ public class UserController {
         return ResultWrapper.ok(UserConverter.INSTANCE.toListVo(entityList));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:user:add')")
+    @PreAuthorize("@ss.hasPermission('system:permission:user:add')")
     @Operation(summary = "创建用户", operationId = "system:permission:user:add")
     @PostMapping
     public Result<Long> add(@RequestBody @Validated UserAddRequest request) {
         return ResultWrapper.ok(userService.add(request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:user:update')")
+    @PreAuthorize("@ss.hasPermission('system:permission:user:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:user:update")
     @PutMapping("/{id}")
     public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody UserVO user) {
         return ResultWrapper.ok(userManager.updateById(id, UserConverter.INSTANCE.toEntity(user)));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:user:update-password')")
+    @PreAuthorize("@ss.hasPermission('system:permission:user:update-password')")
     @Operation(summary = "更新密码", operationId = "system:permission:user:update-password")
     @PutMapping("/update-password")
     public Result<Boolean> updatePassword(@RequestBody UpdatePasswordRequest request) {
         return ResultWrapper.ok(userService.updatePassword(request));
     }
 
-    @PreAuthorize("@ps.hasPermission('system:permission:user:delete')")
+    @PreAuthorize("@ss.hasPermission('system:permission:user:delete')")
     @Operation(summary = "根据ID删除", operationId = "system:permission:user:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> deleteById(@PathVariable("id") Long id) {
