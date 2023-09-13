@@ -1,19 +1,19 @@
 <template>
   <div>
-    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose">
+    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
         :model="formData" label-width="100px">
-        <tiny-form-item label="上级部门" prop="parentId">
+        <tiny-form-item :label="$t('system.department.form.parentId')" prop="parentId">
           <tiny-select v-model="formData.parentId" value-field="id" text-field="name" render-type="tree" :tree-op="treeOp"
-            placeholder="请选择上级部门"></tiny-select>
+            :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
         </tiny-form-item>
-        <tiny-form-item label="部门名称" prop="name">
-          <tiny-input v-model="formData.name"></tiny-input>
+        <tiny-form-item :label="$t('system.department.form.name')" prop="name">
+          <tiny-input v-model="formData.name" :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
       </tiny-form>
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
-        <tiny-button @click="visible = false">取消</tiny-button>
+        <tiny-button @click="onClose(false)">取消</tiny-button>
       </template>
     </tiny-drawer>
   </div>
@@ -39,12 +39,13 @@ const title = computed(() => {
   return isModify.value ? '修改部门' : '新增部门'
 })
 
-const formData = ref<SystemPermissionAPI.RoleVO>({
+const formData = ref<SystemPermissionAPI.DepartmentVO>({
+  parentId: '-1',
   name: '',
-  permission: '',
 })
 
 const formDataRules = {
+  parentId: [{ required: true, message: '上级部门不能为空', trigger: 'change' }],
   name: [{ required: true, message: '部门名称不能为空', trigger: 'change' }]
 }
 
@@ -78,10 +79,17 @@ const onClose = (refresh: boolean) => {
   }
 }
 
-const treeOp = reactive({
+const treeOp = reactive<{
+  data: [{
+    id: string,
+    name: string,
+    children: SystemPermissionAPI.DepartmentTreeVO[]
+  }]
+}>({
   data: [{
     id: '-1',
-    name: '根节点'
+    name: '根节点',
+    children: []
   }]
 })
 
@@ -91,8 +99,8 @@ const queryAll = (query: SystemPermissionAPI.DepartmentAllQueryParams) => {
   })
 }
 
-function aggregateTableData(data) {
-  const result = []
+function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
+  const result: SystemPermissionAPI.DepartmentTreeVO[] = []
   data.forEach((item) => {
     if (item.parentId === '-1') {
       result.push(item)

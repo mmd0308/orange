@@ -44,12 +44,6 @@ const tree = ref();
 const expandeArr = ref();
 const routerTitle = [
   {
-    value: 'Board',
-    name: 'menu.board',
-    icon: iconApplication,
-    bold: 'main-title',
-  },
-  {
     value: 'Home',
     name: 'menu.home',
     icon: null,
@@ -58,18 +52,6 @@ const routerTitle = [
   {
     value: 'Work',
     name: 'menu.work',
-    icon: null,
-    bold: 'title',
-  },
-  {
-    value: 'List',
-    name: 'menu.list',
-    icon: iconFiles,
-    bold: 'main-title',
-  },
-  {
-    value: 'Table',
-    name: 'menu.list.searchTable',
     icon: null,
     bold: 'title',
   },
@@ -88,18 +70,6 @@ const routerTitle = [
   {
     value: 'Step',
     name: 'menu.form.step',
-    icon: null,
-    bold: 'title',
-  },
-  {
-    value: 'Profile',
-    name: 'menu.profile',
-    icon: iconFiletext,
-    bold: 'main-title',
-  },
-  {
-    value: 'Detail',
-    name: 'menu.profile.detail',
     icon: null,
     bold: 'title',
   },
@@ -166,6 +136,12 @@ const routerTitle = [
   {
     value: 'SystemPermissionRole',
     name: 'menu.system.permission.role',
+    icon: iconUser,
+    bold: 'main-title',
+  },
+  {
+    value: 'SystemPermissionDict',
+    name: 'menu.system.dict.type',
     icon: iconUser,
     bold: 'main-title',
   },

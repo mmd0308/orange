@@ -18,4 +18,7 @@ public class DepartmentAllQuery implements Serializable {
     @Schema(description = "部门名称,模糊匹配")
     private String nameLike;
 
+    @Schema(description = "父级ID")
+    private Long parentId;
+
 }

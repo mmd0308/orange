@@ -14,4 +14,7 @@ public interface DepartmentErrorCode extends GlobalErrorCodeConstants {
 
     String DEPARTMENT_PARENT_DATA_NONEXISTENCE_KEY = PREFIX + "0002";
     ErrorCode DEPARTMENT_PARENT_DATA_NONEXISTENCE = new ErrorCode(DEPARTMENT_PARENT_DATA_NONEXISTENCE_KEY, "该父级数据不存在,请检查数据");
+
+    String DEPARTMENT_NAME_CANNOT_NULL_KEY = PREFIX + "0003";
+    ErrorCode ROLE_NAME_CANNOT_NULL = new ErrorCode(DEPARTMENT_NAME_CANNOT_NULL_KEY, "部门名称不能为空");
 }

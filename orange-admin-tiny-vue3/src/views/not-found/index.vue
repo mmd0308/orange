@@ -5,13 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-  import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-  const router = useRouter();
-  const back = () => {
-    // warning： Go to the node that has the permission
-    router.push({ name: 'Workplace' });
-  };
+const router = useRouter();
+const back = () => {
+  router.push({ name: 'Workplace' });
+};
 </script>
 
 <style scoped lang="less"></style>

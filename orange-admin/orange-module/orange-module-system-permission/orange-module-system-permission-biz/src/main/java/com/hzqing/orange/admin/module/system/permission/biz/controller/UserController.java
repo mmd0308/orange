@@ -10,6 +10,7 @@ import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQ
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
 import com.hzqing.orange.admin.starter.common.result.Result;
 import com.hzqing.orange.admin.starter.common.result.ResultWrapper;
 import com.hzqing.orange.admin.starter.common.vo.PageVO;
@@ -76,12 +77,12 @@ public class UserController {
     @PreAuthorize("@ss.hasPermission('system:permission:user:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:user:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody UserVO user) {
+    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody UserUpdateRequest user) {
         return ResultWrapper.ok(userManager.updateById(id, UserConverter.INSTANCE.toEntity(user)));
     }
 
     @PreAuthorize("@ss.hasPermission('system:permission:user:update-password')")
-    @Operation(summary = "更新密码", operationId = "system:permission:user:update-password")
+    @Operation(summary = "修改密码", operationId = "system:permission:user:update-password")
     @PutMapping("/update-password")
     public Result<Boolean> updatePassword(@RequestBody UpdatePasswordRequest request) {
         return ResultWrapper.ok(userService.updatePassword(request));

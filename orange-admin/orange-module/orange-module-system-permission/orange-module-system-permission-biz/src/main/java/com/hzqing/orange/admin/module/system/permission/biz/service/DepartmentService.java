@@ -1,9 +1,10 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
-import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface DepartmentService {
      * @param query
      * @return
      */
-    List<DepartmentTree> queryTree(DepartmentTreeQuery query);
+    List<DepartmentTreeVO> queryTree(DepartmentTreeQuery query);
 
     /**
      * 根据ID删除
@@ -31,11 +32,8 @@ public interface DepartmentService {
 
     /**
      * 新增数据
-     *
-     * @param departmentVO 新增数据
-     * @return 新增数据主键
      */
-    Long add(DepartmentVO departmentVO);
+    Long add(DepartmentAddRequest request);
 
     /**
      * 根据ID 查询自身及子集部门数据

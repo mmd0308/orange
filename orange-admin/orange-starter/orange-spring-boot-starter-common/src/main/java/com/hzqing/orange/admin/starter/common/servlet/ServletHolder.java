@@ -51,7 +51,6 @@ public class ServletHolder {
      * @param response 响应
      * @param filename 文件名
      * @param content  附件内容
-     * @throws IOException
      */
     public static void writeAttachment(HttpServletResponse response, String filename, byte[] content) throws IOException {
         // 设置 header 和 contentType

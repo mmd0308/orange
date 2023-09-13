@@ -18,6 +18,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.hzqing.orange.admin.module.system.dict.biz</groupId>
+            <artifactId>orange-module-system-dict-biz</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.hzqing.orange.admin.module.system.permission.biz</groupId>
             <artifactId>orange-module-system-permission-biz</artifactId>
         </dependency>
@@ -37,6 +41,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
     </dependencies>

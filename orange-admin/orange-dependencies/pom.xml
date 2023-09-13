@@ -53,6 +53,22 @@
                 <version>${orange.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.dict.common</groupId>
+                <artifactId>orange-module-system-dict-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.dict.api</groupId>
+                <artifactId>orange-module-system-dict-api</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.dict.biz</groupId>
+                <artifactId>orange-module-system-dict-biz</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+
             <!--    module end        -->
 
             <!-- 自定义starter start -->

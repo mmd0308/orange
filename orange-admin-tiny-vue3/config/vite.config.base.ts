@@ -26,6 +26,7 @@ const config = {
     AutoImport({
       imports: [
         'vue',
+        'vue-router'
       ],
       // eslint报错解决 https://blog.csdn.net/sayUonly/article/details/123482912
       eslintrc: {

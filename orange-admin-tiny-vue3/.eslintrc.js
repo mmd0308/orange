@@ -44,6 +44,7 @@ module.exports = {
     window: 'readonly',
     "SystemAPI": true,
     "SystemPermissionAPI": true,
+    "SystemDictAPI": true,
   },
   rules: {
     '@typescript-eslint/no-non-null-assertion': 'off',

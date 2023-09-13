@@ -1,20 +1,20 @@
 <template>
   <div>
-    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose">
-
+    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
         :model="formData" label-width="100px">
-        <tiny-form-item label="角色名称" prop="name">
-          <tiny-input v-model="formData.name"></tiny-input>
+        <tiny-form-item :label="$t('system.role.form.name')" prop="name">
+          <tiny-input v-model="formData.name" :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item label="权限编码" prop="permission">
-          <tiny-input v-model="formData.permission"></tiny-input>
+        <tiny-form-item :label="$t('system.role.form.permission')" prop="permission">
+          <tiny-input v-model="formData.permission"
+            :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
         </tiny-form-item>
       </tiny-form>
 
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
-        <tiny-button @click="visible = false">取消</tiny-button>
+        <tiny-button @click="onClose(false)">取消</tiny-button>
       </template>
     </tiny-drawer>
   </div>
@@ -72,7 +72,7 @@ const onSubmit = () => {
   })
 }
 
-const onClose = (refresh: boolean) => {
+const onClose = (refresh?: boolean) => {
   visible.value = false
   proxy.$refs.formDataRef.resetFields()
   if (refresh) {

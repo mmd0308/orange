@@ -30,7 +30,7 @@ public class UserVO extends BaseTenantVO {
     @Schema(description = "邮箱")
     private String email;
 
-    @Schema(description = "用户性别")
+    @Schema(description = "用户性别 参考字典:sys_common_user_sex")
     private UserSexEnum sex;
 
     @Schema(description = "手机号")

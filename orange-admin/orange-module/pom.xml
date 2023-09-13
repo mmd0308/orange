@@ -16,6 +16,7 @@
     <description>orange-module</description>
 
     <modules>
+        <module>orange-module-system-dict</module>
         <module>orange-module-system-permission</module>
     </modules>
 

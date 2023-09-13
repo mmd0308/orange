@@ -5,9 +5,10 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hzqing.orange.admin.module.system.permission.biz.converter.UserConverter;
 import com.hzqing.orange.admin.module.system.permission.biz.dto.UserListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.UserEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.DepartmentManager;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.UserManager;
-import com.hzqing.orange.admin.module.system.permission.biz.service.DepartmentService;
 import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
@@ -27,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserManager userManager;
 
-    private final DepartmentService departmentService;
+    private final DepartmentManager departmentManager;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -83,8 +85,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PageVO<UserVO> page(UserPageQuery query) {
         UserListQuery listQuery = UserConverter.INSTANCE.toListQuery(query);
-
-        if (Objects.nonNull(query.getDepartmentId()) && query.isIncludeSubsetDepartmentUsers()) {
+        if (Objects.nonNull(query.getDepartmentId())) {
             List<Long> departmentIds = getDepartmentIds(query.getDepartmentId());
             if (CollUtil.isEmpty(departmentIds)) {
                 return new PageVO<>(query);
@@ -92,7 +93,6 @@ public class UserServiceImpl implements UserService {
             listQuery.setDepartmentIds(departmentIds);
             listQuery.setDepartmentId(null);
         }
-
         Page<UserEntity> page = userManager.page(query.getPageNo(), query.getPageSize(), listQuery);
         return UserConverter.INSTANCE.toPage(page);
     }
@@ -115,10 +115,13 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<Long> getDepartmentIds(Long departmentId) {
-        List<DepartmentVO> departmentVOList = departmentService.querySelfAndSubsetById(departmentId);
-        if (CollUtil.isEmpty(departmentVOList)) {
-            return Collections.emptyList();
+        List<Long> departmentIds = new ArrayList<>();
+        departmentIds.add(departmentId);
+        List<DepartmentEntity> entityList = departmentManager.listSubsetByParentId(departmentId);
+        if (CollUtil.isEmpty(entityList)) {
+            return departmentIds;
         }
-        return CollUtils.convertList(departmentVOList, DepartmentVO::getId);
+        departmentIds.addAll(CollUtils.convertList(entityList, DepartmentEntity::getId));
+        return departmentIds;
     }
 }

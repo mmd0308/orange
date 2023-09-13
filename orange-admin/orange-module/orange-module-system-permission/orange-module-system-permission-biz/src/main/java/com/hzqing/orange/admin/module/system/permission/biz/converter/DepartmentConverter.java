@@ -1,11 +1,12 @@
 package com.hzqing.orange.admin.module.system.permission.biz.converter;
 
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
-import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 import com.hzqing.orange.admin.starter.common.converter.Converter;
 import org.mapstruct.Mapper;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Mapper
 public interface DepartmentConverter extends Converter {
@@ -24,9 +25,11 @@ public interface DepartmentConverter extends Converter {
 
     DepartmentEntity toEntity(DepartmentVO departmentVO);
 
+    DepartmentEntity toEntity(DepartmentAddRequest request);
+
     DepartmentVO toVo(DepartmentEntity entity);
 
-    List<DepartmentTree> toListTreeVo(List<DepartmentEntity> departmentEntityList);
+    List<DepartmentTreeVO> toListTreeVo(List<DepartmentEntity> departmentEntityList);
 
     List<DepartmentVO> toList(List<DepartmentEntity> entityList);
 
@@ -40,6 +43,7 @@ public interface DepartmentConverter extends Converter {
     }
 
     DepartmentListQuery toListQuery(DepartmentTreeQuery query);
+
     DepartmentListQuery toListQuery(DepartmentAllQuery query);
 
 }

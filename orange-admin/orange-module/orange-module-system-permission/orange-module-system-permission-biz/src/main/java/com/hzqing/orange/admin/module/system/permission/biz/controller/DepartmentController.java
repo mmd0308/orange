@@ -6,10 +6,11 @@ import com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEnt
 import com.hzqing.orange.admin.module.system.permission.biz.manager.DepartmentManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.DepartmentService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
 import com.hzqing.orange.admin.starter.common.result.Result;
 import com.hzqing.orange.admin.starter.common.result.ResultWrapper;
@@ -37,8 +38,8 @@ public class DepartmentController {
     @PreAuthorize("@ss.hasPermission('system:permission:department:add')")
     @Operation(summary = "新建", operationId = "system:permission:department:add")
     @PostMapping
-    public Result<Long> add(@RequestBody DepartmentVO departmentVO) {
-        return ResultWrapper.ok(departmentService.add(departmentVO));
+    public Result<Long> add(@RequestBody DepartmentAddRequest request) {
+        return ResultWrapper.ok(departmentService.add(request));
     }
 
     @Operation(summary = "根据ID查询", operationId = "system:permission:department:get")
@@ -64,8 +65,8 @@ public class DepartmentController {
 
     @PostMapping(value = "/query-tree")
     @Operation(summary = "树型结构数据", operationId = "system:permission:department:query-tree", description = "返回所有的数据")
-    public Result<List<DepartmentTree>> queryTree(@RequestBody DepartmentTreeQuery query) {
-        List<DepartmentTree> treeVoList = departmentService.queryTree(query);
+    public Result<List<DepartmentTreeVO>> queryTree(@RequestBody DepartmentTreeQuery query) {
+        List<DepartmentTreeVO> treeVoList = departmentService.queryTree(query);
         return ResultWrapper.ok(treeVoList);
     }
 
@@ -76,8 +77,8 @@ public class DepartmentController {
         return ResultWrapper.ok(list);
     }
 
-    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及子部门数据", operationId = "system:permission:department:query-self-and-subset-by-id")
-    @GetMapping("/query-self-and-subset-by-id/{id}")
+    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及所有子部门数据", operationId = "system:permission:department:query-self-and-all-subset")
+    @GetMapping("/query-self-and-all-subset/{id}")
     public Result<List<DepartmentVO>> querySelfAndSubsetById(@PathVariable("id") Long id) {
         List<DepartmentVO> result = departmentService.querySelfAndSubsetById(id);
         return ResultWrapper.ok(result);

@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.hzqing.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName(value = "sys_department")
 public class DepartmentEntity extends BaseTenantEntity {
@@ -26,8 +28,6 @@ public class DepartmentEntity extends BaseTenantEntity {
      */
     @TableField("parent_id")
     private Long parentId;
-
-    private String ancestors;
 
     /**
      * 部门名称

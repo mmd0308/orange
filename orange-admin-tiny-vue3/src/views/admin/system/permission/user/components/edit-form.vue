@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose">
+    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
 
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
         :model="formData" label-width="100px">
@@ -14,7 +14,7 @@
 
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
-        <tiny-button @click="visible = false">取消</tiny-button>
+        <tiny-button @click="onClose(false)">取消</tiny-button>
       </template>
     </tiny-drawer>
   </div>

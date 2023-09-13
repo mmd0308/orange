@@ -49,6 +49,30 @@ export default {
         requiresAuth: true,
         roles: [RoleType.admin, RoleType.user],
       },
+    },
+    {
+      path: 'dict',
+      name: 'SystemPermissionDict',
+      id: 'SystemPermissionDict',
+      label: 'SystemPermissionDict',
+      component: () => import('@/views/admin/system/dict/type/index.vue'),
+      meta: {
+        locale: 'menu.system.dict.type',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
+    },
+    {
+      path: 'dict-data',
+      name: 'SystemPermissionDictData',
+      id: 'SystemPermissionDictData',
+      label: 'SystemPermissionDictData',
+      component: () => import('@/views/admin/system/dict/data/index.vue'),
+      meta: {
+        locale: 'menu.system.dict.data',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
     }
   ],
 

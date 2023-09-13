@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ResultWrapper {
+
     public static <T> Result<T> result() {
         Result<T> result = new Result<>();
         result.setRequestId(Thread.currentThread().getName());

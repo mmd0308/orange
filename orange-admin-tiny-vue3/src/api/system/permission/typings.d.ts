@@ -3,14 +3,50 @@ declare namespace SystemPermissionAPI {
   interface DepartmentVO {
     tenantId?: string;
     id?: string;
-    parentId?: number;
+    parentId?: string;
     name?: string;
     sort?: number;
+  };
+
+  interface DepartmentTreeVO {
+    tenantId?: string;
+    id?: string;
+    parentId?: string;
+    name?: string;
+    sort?: number;
+    /** 子集 */
+    children?: DepartmentTreeVO[];
   };
 
   interface DepartmentAllQueryParams {
     parentId?: number;
     name?: string;
+  };
+
+  interface UserPageQueryParams extends UserAllQueryParams {
+    pageNo?: number;
+    pageSize?: number;
+  };
+
+  interface UserAllQueryParams {
+    departmentId?: string;
+    name?: string;
+    email?: string;
+    username?: string;
+  };
+
+  interface UserVO {
+    tenantId?: number;
+    id: string;
+    departmentId?: number;
+    avatar?: number;
+    name?: string;
+    email?: string;
+    sex?: 'MALE' | 'FEMALE' | 'UNKNOWN';
+    phone?: string;
+    username?: string;
+    password?: string;
+    remark?: string;
   };
 
   interface RoleVO {
@@ -35,6 +71,68 @@ declare namespace SystemPermissionAPI {
   interface RolePageQueryParams extends RoleAllQueryParams {
     pageNo?: number;
     pageSize?: number;
+  };
+
+
+  interface MenuVO {
+    tenantId?: string;
+    id?: string;
+    parentId?: string;
+    rootId?: string;
+    name?: string;
+    permission?: string;
+    presetFlag?: 'PRESET' | 'CUSTOM';
+    path?: string;
+    icon?: string;
+    component?: string;
+    sort?: number;
+    remark?: string;
+  };
+
+  interface MenuTreeQueryParams {
+    parentId?: number;
+    name?: string;
+    permission?: string;
+    permissionLike?: string;
+    component?: string;
+  };
+
+
+  interface ButtonPageQueryParams extends ButtonAllQueryParams {
+    /** 查询页码，从1开始 默认值:1 */
+    pageNo?: number;
+    /** 每页数量,取值范围[5,100] 默认值:10 */
+    pageSize?: number;
+  };
+
+  interface ButtonAllQueryParams {
+    /** 菜单ID */
+    menuId: string;
+  }
+
+  type ButtonVO = {
+    /** 租户id */
+    tenantId?: number;
+    /** 按钮ID */
+    id: string;
+    /** 菜单ID */
+    menuId: string;
+    /** rootId */
+    rootId?: number;
+    /** 菜单名称 */
+    name: string;
+    /** 权限编码 */
+    permission?: string;
+    /** 预设标记 */
+    presetFlag?: 'PRESET' | 'CUSTOM';
+    /** 请求URL */
+    url?: string;
+    /** 请求方式 */
+    method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    /** 排序 */
+    sort?: number;
+    /** 备注 */
+    remark?: string;
   };
 
 

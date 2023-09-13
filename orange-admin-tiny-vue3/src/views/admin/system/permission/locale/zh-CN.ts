@@ -1,5 +1,6 @@
 export default {
-
+  'system.department.form.parentId': '上级部门',
+  'system.department.form.parentId.placeholder': '请选择上级部门',
   'system.department.form.name': '部门名称',
   'system.department.form.name.placeholder': '请输入部门名称',
 

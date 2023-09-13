@@ -16,7 +16,6 @@ const useAppStore = defineStore('tabBar', {
   state: (): TabBarState => ({
     cacheTabList: new Set(),
     tagList: [
-      // Set the first element dynamically as needed
       {
         title: 'menu.dashboard.workplace',
         name: 'Workplace',

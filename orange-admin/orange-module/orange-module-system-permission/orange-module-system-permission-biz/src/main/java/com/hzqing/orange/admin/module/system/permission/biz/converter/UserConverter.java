@@ -7,6 +7,7 @@ import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
 import com.hzqing.orange.admin.starter.common.converter.Converter;
 import com.hzqing.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
@@ -41,4 +42,6 @@ public interface UserConverter extends Converter {
     UserListQuery toListQuery(UserPageQuery query);
 
     UserListQuery toListQuery(UserAllQuery query);
+
+    UserEntity toEntity(UserUpdateRequest user);
 }

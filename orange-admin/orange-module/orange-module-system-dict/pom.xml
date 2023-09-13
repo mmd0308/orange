@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.hzqing.orange.admin.module</groupId>
+        <artifactId>orange-module</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <groupId>com.hzqing.orange.admin.module.system.dict</groupId>
+    <artifactId>orange-module-system-dict</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <description>
+        orange-module-system-dict
+    </description>
+
+    <modules>
+        <module>orange-module-system-dict-common</module>
+        <module>orange-module-system-dict-biz</module>
+    </modules>
+
+</project>

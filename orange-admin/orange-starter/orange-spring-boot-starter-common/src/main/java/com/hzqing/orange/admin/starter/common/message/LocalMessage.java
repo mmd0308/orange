@@ -22,9 +22,6 @@ public class LocalMessage {
 
     /**
      * 根据错误编码 获取消息详情
-     *
-     * @param code
-     * @return
      */
     public static String getErrMsg(String code) {
         return getMessage(code, null, LocaleContextHolder.getLocale());
@@ -33,10 +30,7 @@ public class LocalMessage {
     /**
      * 获取指定语言的Message
      *
-     * @param code   消息编码
-     * @param params
-     * @param locale
-     * @return
+     * @param code 消息编码
      */
     public static String getMessage(String code, Object[] params, Locale locale) {
         if (locale == null) {
