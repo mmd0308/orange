@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
 import * as echarts4 from 'echarts4';
-import { HwcClient } from '@opentiny/hwc-client';
 import globalComponents from '@/components';
 import dict from '@/utils/dict'
 import DictTag from '@/components/DictTag/index.vue'
@@ -21,13 +20,6 @@ import chinaMap from './assets/chaina.json';
 if (import.meta.env.VITE_USE_MOCK) setupProdMockServer();
 echarts4.registerMap('china', chinaMap);
 const app = createApp(App);
-
-// 增加华为云相关配置
-HwcClient.configure({
-  ...config.hwcConfig,
-  accessKey: '',
-  secretKey: '',
-});
 
 app.use(router);
 app.use(store);

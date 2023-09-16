@@ -19,7 +19,6 @@ if (VITE_API_BASE_URL) {
 
 const ignoreMockApiList = VITE_MOCK_IGNORE?.split(',') || [];
 
-
 // axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -41,7 +40,7 @@ axios.interceptors.request.use(
     if (!config.headers) {
       config.headers = {}
     }
-    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQ3Mzg1MDMsImV4cCI6MTY5NDc4MTcwMywiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.g5H-98YNLIZvTJ2xHDLwLREVgrN4gK3JExvbgj67hjI'
+    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQ4MjQ3ODgsImV4cCI6MTY5NDg2Nzk4OCwiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.gNfQ_zhVycrGq89Oi8uj3_jq3ijl_GlT-9PkMqI8iUo'
     config.headers = { ...config.headers };
 
     return config;

@@ -37,7 +37,7 @@
           </template>
           <tiny-grid-column field="traceId" :title="$t('system.record.operation.table.columns.traceId')" align="center" />
           <tiny-grid-column field="resourceId" :title="$t('system.record.operation.table.columns.resourceId')"
-            align="center" width="200" />
+            width="260" />
           <tiny-grid-column field="requestMethod" :title="$t('system.record.operation.table.columns.requestMethod')"
             align="center" />
           <tiny-grid-column field="userIp" :title="$t('system.record.operation.table.columns.userIp')" align="center" />

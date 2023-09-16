@@ -5,10 +5,6 @@ import locale403 from '@/views/exception/403/locale/en-US';
 import locale404 from '@/views/exception/404/locale/en-US';
 import locale500 from '@/views/exception/500/locale/en-US';
 
-import localeHello from '@/views/cloud/hello/locale/en-US';
-
-import localeContracts from '@/views/cloud/contracts/locale/en-US';
-
 import localeSettings from './en-US/settings';
 
 import localeHttpError from './en-US/httpError';
@@ -32,7 +28,5 @@ export default {
   ...locale403,
   ...locale404,
   ...locale500,
-  ...localeHello,
-  ...localeContracts,
   ...localeHttpError,
 };

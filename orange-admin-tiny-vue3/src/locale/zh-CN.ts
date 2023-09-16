@@ -9,8 +9,6 @@ import locale403 from '@/views/exception/403/locale/zh-CN';
 import locale404 from '@/views/exception/404/locale/zh-CN';
 import locale500 from '@/views/exception/500/locale/zh-CN';
 
-import localeHello from '@/views/cloud/hello/locale/zh-CN';
-import localeContracts from '@/views/cloud/contracts/locale/zh-CN';
 import localeGlobal from './zh-CN/global';
 import localeSettings from './zh-CN/settings';
 import localeHttpError from './zh-CN/httpError';
@@ -41,8 +39,6 @@ export default {
   ...locale403,
   ...locale404,
   ...locale500,
-  ...localeHello,
-  ...localeContracts,
   ...localeHttpError,
   ...systemPermission,
   ...systemDict,
