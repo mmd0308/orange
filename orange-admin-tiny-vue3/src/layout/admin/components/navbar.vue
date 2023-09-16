@@ -2,11 +2,11 @@
   <div class="navbar">
     <div class="left-side">
       <div style="display: flex; align-items: center">
-        <img src="@/assets/images/opentiny-logo.png" alt="logo" @click="jumpUrl" />
-        <h5 @click="jumpUrl">OpenTiny1</h5>
-        <div class="divider"></div>
-        <img class="vue-icon" alt="logo" src="@/assets/images/pro.png" />
-        <h4>TinyPro of Vue1</h4>
+        <img src="/favicon.ico" style="width: 45px;" alt="logo" @click="jumpUrl" />
+        <h5 @click="jumpUrl">橙子管理系统</h5>
+        <!-- <div class="divider"></div> -->
+        <!-- <img class="vue-icon" alt="logo" src="@/assets/images/pro.png" />
+        <h4>橙子管理系统</h4> -->
       </div>
     </div>
     <ul class="right-side">
@@ -14,7 +14,7 @@
         <input id="navbar-search" class="input-icon" :placeholder="$t('setting.input.search')" />
       </li>
       <li>
-        <div class="divider"></div>
+        <div class="divider" />
       </li>
       <li @click="changeLan">
         <span>{{ i18.locale.value }}</span>
@@ -25,10 +25,12 @@
       </li>
   </div>
   </li>
-
   <li>
-    <span @click="setVisible">{{ $t('settings.title') }}</span>
+    <span @click="setVisible">
+      {{ $t('settings.title') }}
+    </span>
   </li>
+
   <li class="navbar-user">
     <tiny-user-head type="icon" round min>
       <div class="user-image">
@@ -175,7 +177,7 @@ const jumpUrl = () => {
   }
 
   h5 {
-    margin: 0 30px 0 12px;
+    margin: 0 30px 0 0;
     color: var(--ti-base-common-title-color);
     font-weight: 700;
     font-size: 22px;

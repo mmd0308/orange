@@ -1,7 +1,7 @@
 <template>
   <div class="container-list">
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
-      <tiny-row :flex="true" justify="center" class="col">
+      <tiny-row :flex="true" justify="center">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.record.operation.form.traceId')">
             <tiny-input v-model="filterOptions.traceId" clearable
@@ -15,21 +15,19 @@
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item>
-            <div class="search-btn">
-              <tiny-button type="primary" @click="handleFormQuery">
-                {{ $t('global.form.search') }}
-              </tiny-button>
-              <tiny-button @click="handleFormReset">
-                {{ $t('global.form.reset') }}
-              </tiny-button>
-            </div>
-          </tiny-form-item>
+          <div class="search-btn">
+            <tiny-button type="primary" @click="handleFormQuery">
+              {{ $t('global.form.search') }}
+            </tiny-button>
+            <tiny-button @click="handleFormReset">
+              {{ $t('global.form.reset') }}
+            </tiny-button>
+          </div>
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="tiny-fullscreen-scroll">
-      <div class="tiny-fullscreen-wrapper">
+    <div class="table-scroll">
+      <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>

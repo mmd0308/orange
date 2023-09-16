@@ -16,7 +16,7 @@
         </tiny-layout>
       </template>
       <tiny-layout class="layout-content">
-        <div>ssssssss</div>
+        <!-- <div>ssssssss</div> -->
         <PageLayout />
       </tiny-layout>
       <template #footer>
@@ -157,7 +157,7 @@ onMounted(() => {
 
 .layout :deep(.layout-content) {
   height: 100%;
-  padding: 0 10px;
+  padding: 0 20px;
   overflow: hidden;
 }
 

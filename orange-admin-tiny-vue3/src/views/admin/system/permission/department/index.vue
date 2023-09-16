@@ -1,7 +1,7 @@
 <template>
   <div class="container-list">
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
-      <tiny-row :flex="true" justify="center" class="col">
+      <tiny-row :flex="true" justify="center">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.department.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
@@ -9,27 +9,26 @@
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item>
-            <div class="search-btn">
-              <tiny-button type="primary" @click="handleFormQuery">
-                {{ $t('global.form.search') }}
-              </tiny-button>
-              <tiny-button @click="handleFormReset">
-                {{ $t('global.form.reset') }}
-              </tiny-button>
-            </div>
-          </tiny-form-item>
+          <div class="search-btn">
+            <tiny-button type="primary" @click="handleFormQuery">
+              {{ $t('global.form.search') }}
+            </tiny-button>
+            <tiny-button @click="handleFormReset">
+              {{ $t('global.form.reset') }}
+            </tiny-button>
+          </div>
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="tiny-fullscreen-scroll">
-      <div class="tiny-fullscreen-wrapper">
+    <div class="table-scroll">
+      <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
           </template>
-          <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" align="center" tree-node />
+          <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
+          <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" width="200" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 

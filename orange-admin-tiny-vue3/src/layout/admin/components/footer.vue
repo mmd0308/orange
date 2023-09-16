@@ -1,11 +1,8 @@
 <template>
   <div class="footer">
-    <a href="/pro/home" class="foot-link">TinyPro</a>
+    <a href="/pro/home" class="foot-link">橙子管理系统</a>
     <div class="divider"></div>
-    <a href="/">{{ $t('setting.foot.title') }}</a>
-    <!-- 还未开源 先注释掉 -->
-    <div class="divider"></div>
-    <a href="https://gitee.com/organizations/opentiny/projects">
+    <a href="https://github.com/mmd0308/orange">
       <img src="@/assets/images/github.png" alt="github" />
     </a>
   </div>

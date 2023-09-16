@@ -1,7 +1,7 @@
 <template>
   <div class="container-list">
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
-      <tiny-row :flex="true" justify="center" class="col">
+      <tiny-row :flex="true" justify="center">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.role.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
@@ -15,21 +15,19 @@
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item>
-            <div class="search-btn">
-              <tiny-button type="primary" @click="handleFormQuery">
-                {{ $t('global.form.search') }}
-              </tiny-button>
-              <tiny-button @click="handleFormReset">
-                {{ $t('global.form.reset') }}
-              </tiny-button>
-            </div>
-          </tiny-form-item>
+          <div class="search-btn">
+            <tiny-button type="primary" @click="handleFormQuery">
+              {{ $t('global.form.search') }}
+            </tiny-button>
+            <tiny-button @click="handleFormReset">
+              {{ $t('global.form.reset') }}
+            </tiny-button>
+          </div>
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="tiny-fullscreen-scroll">
-      <div class="tiny-fullscreen-wrapper">
+    <div class="table-scroll">
+      <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
@@ -38,24 +36,33 @@
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.role.table.columns.name')" align="center" />
           <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+            <template #default="data">
+              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template #default="data">
-              <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="160">
+            <!-- <template> -->
+            <!-- <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
                 $t('global.table.operations.edit')
-              }}</tiny-button>
-              <tiny-popconfirm :title="`确定要删除角色【${data.row.name}】吗?`" type="warning" trigger="click"
+              }}</tiny-button> -->
+            <!-- <tiny-popconfirm :title="`确定要删除角色【${data.row.name}】吗?`" type="warning" trigger="click"
                 @confirm="handleDelete(data.row.id)">
                 <template #reference>
                   <tiny-button type="text" class="table-delete-button"> {{
                     $t('global.table.operations.delete')
                   }}</tiny-button>
                 </template>
-              </tiny-popconfirm>
-            </template>
+              </tiny-popconfirm> -->
+            <tiny-action-menu spacing="10px" :max-show-num="2" :options="options">
+              <template #item="{ data }">
+                <span> {{ $t(data.label) }}</span>
+              </template>
+            </tiny-action-menu>
+            <!-- </template> -->
           </tiny-grid-column>
         </tiny-grid>
       </div>
@@ -71,14 +78,28 @@ import {
   Form as TinyForm, FormItem as TinyFormItem,
   Input as TinyInput, Button as TinyButton,
   Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm
+  Modal, Popconfirm as TinyPopconfirm, ActionMenu as TinyActionMenu
 } from '@opentiny/vue';
 
 import SystemRequest from '@/api/system/index'
 
 import editform from './components/edit-form.vue';
 
+const { proxy } = getCurrentInstance() as any
+
 const editFormRef = ref();
+
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.delete'
+  },
+  {
+    label: '重启'
+  }
+])
 
 const state = reactive<{
   loading: boolean;

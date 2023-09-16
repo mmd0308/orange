@@ -4,7 +4,7 @@
       <tiny-layout>
         <tiny-row :flex="true">
           <tiny-col :span="6">
-            <div class="col">
+            <div>
               <div class="img">
                 <img src="@/assets/images/home-main1.png" class="image" />
               </div>
@@ -25,7 +25,7 @@
             </div>
           </tiny-col>
           <tiny-col :span="6">
-            <div class="col">
+            <div>
               <div class="img">
                 <img src="@/assets/images/home-main2.png" class="image" />
               </div>

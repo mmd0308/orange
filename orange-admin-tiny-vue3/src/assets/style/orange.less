@@ -1,47 +1,23 @@
 .container-list {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: calc(100% - 60px);
   overflow-x: hidden;
   overflow-y: auto;
-  flex: 1 1 auto;
-  margin: 20px 10px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 8px 8px rgba(169, 174, 184, 0.05);
 
   .filter-form {
-    margin: 20px 0;
+    padding: 20px;
+    margin: 15px 0px;
+    background: var(--ti-base-color-bg-1);
   }
 
-  .contain-box {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    min-width: 52px;
+  .table-scroll {
+    overflow-y: auto;
+    background: var(--ti-base-color-bg-1);
   }
 
-  .contain-img {
-    position: relative;
-    display: flex;
-    cursor: pointer;
-
-    img:hover {
-      background: whitesmoke;
-    }
-  }
-
-  .contain-text {
-    padding-left: 10px;
-    color: #4e5969;
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  .table {
-    min-height: 710px;
-    padding: 0 30px;
+  .table-wrapper {
+    min-height: 700px;
+    padding: 20px;
   }
 }
 
@@ -51,11 +27,4 @@
 
 .table-delete-button {
   color: var(--ti-base-color-bg-7) !important
-}
-
-.line {
-  height: 1px;
-  color: rgb(213, 213, 213);
-  background-color: rgb(213, 213, 213);
-  border: 0;
 }

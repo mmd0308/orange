@@ -1,7 +1,7 @@
 <template>
   <div class="container-list">
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
-      <tiny-row :flex="true" justify="center" class="col">
+      <tiny-row :flex="true" justify="center">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.department.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
@@ -9,31 +9,34 @@
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="8" label-width="100px">
-          <tiny-form-item>
-            <div class="search-btn">
-              <tiny-button type="primary" @click="handleFormQuery">
-                {{ $t('global.form.search') }}
-              </tiny-button>
-              <tiny-button @click="handleFormReset">
-                {{ $t('global.form.reset') }}
-              </tiny-button>
-            </div>
-          </tiny-form-item>
+          <div class="search-btn">
+            <tiny-button type="primary" @click="handleFormQuery">
+              {{ $t('global.form.search') }}
+            </tiny-button>
+            <tiny-button @click="handleFormReset">
+              {{ $t('global.form.reset') }}
+            </tiny-button>
+          </div>
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="tiny-fullscreen-scroll">
-      <div class="tiny-fullscreen-wrapper">
+    <div class="table-scroll">
+      <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
           </template>
-          <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" align="center" tree-node />
+          <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
+          <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" />
           <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" />
           <tiny-grid-column field="permission" :title="$t('system.menu.table.columns.permission')" width="260" />
           <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="200" />
-          <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center" />
+          <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center">
+            <template #default="data">
+              <dict-tag :value="data.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="135" />
           <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="135" />
@@ -74,7 +77,7 @@ import SystemRequest from '@/api/system/index'
 
 import editform from './components/edit-form.vue';
 
-
+const { proxy } = getCurrentInstance() as any
 const state = reactive<{
   loading: boolean;
   filterOptions: SystemPermissionAPI.MenuAllQuery;
