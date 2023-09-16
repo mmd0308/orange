@@ -4,13 +4,13 @@
       <tiny-row :flex="true" justify="center" class="col">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.dict-type.form.name')">
-            <tiny-input v-model="filterOptions.nameLike"
+            <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.dict-type.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.dict-type.form.name')">
-            <tiny-input v-model="filterOptions.nameLike"
+            <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.dict-type.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
@@ -28,9 +28,6 @@
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="segmentation-line">
-      <hr />
-    </div>
     <div class="tiny-fullscreen-scroll">
       <div class="tiny-fullscreen-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
@@ -38,6 +35,7 @@
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
           </template>
+          <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="dictLabel" :title="$t('system.dict-data.table.columns.dictLabel')" align="center" />
           <tiny-grid-column field="dictType" :title="$t('system.dict-data.table.columns.dictType')" align="center" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
@@ -45,7 +43,7 @@
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template v-slot="data">
+            <template #default="data">
               <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
                 $t('global.table.operations.edit')
               }}</tiny-button>
@@ -96,7 +94,8 @@ const pagerConfig = reactive({
     currentPage: 1,
     pageSize: 10,
     pageSizes: [10, 20, 30, 50, 100],
-    total: 10,
+    total: 0,
+    align: 'right',
     layout: 'total, prev, pager, next, jumper, sizes',
   },
 });
@@ -168,7 +167,8 @@ const toolbarButtons = reactive([
   }
 ])
 
-const toolbarButtonClickEvent = ({ code }: any) => {
+const toolbarButtonClickEvent = ({ code, $grid }: any) => {
+  const data = $grid.getSelectRecords()
   switch (code) {
     case 'insert': {
       editFormRef.value.open()

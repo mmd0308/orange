@@ -15,7 +15,7 @@ orange:
   swagger:
     enabled: true
     name: ${spring.application.name}
-  operation:
+  system:
     record:
       enabled: true
       ignore-urls:
@@ -28,3 +28,4 @@ server:
   port: 8080
   servlet:
     context-path: /orange-admin
+

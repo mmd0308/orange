@@ -16,9 +16,9 @@ public class PageQuery implements Serializable {
     @Min(value = 1, message = "页码最小值为 1")
     private Integer pageNo = CommonConstants.Page.PAGE_NO;
 
-    @Schema(description = "每页数量,取值范围[5,100] 默认值:10", defaultValue = "10")
+    @Schema(description = "每页数量,取值范围[5,500] 默认值:10", defaultValue = "10")
     @Min(value = 5, message = "每页条数最小值为 5")
-    @Max(value = 100, message = "每页条数最大值为 100")
+    @Max(value = 500, message = "每页条数最大值为 500")
     private Integer pageSize = CommonConstants.Page.PAGE_SIZE;
 
     public Integer getPageNo() {

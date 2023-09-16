@@ -3,6 +3,8 @@ package com.hzqing.orange.admin.starter.mybatis.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.hzqing.orange.admin.starter.context.GlobalContextHelper;
 
+import java.time.LocalDateTime;
+
 /**
  * 基础实体类
  *
@@ -20,7 +22,7 @@ public class BaseEntity extends IDEntity {
      * 创建时间
      */
     @TableField("created_at")
-    private Long createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * 更新者账号
@@ -32,15 +34,15 @@ public class BaseEntity extends IDEntity {
      * 更新时间
      */
     @TableField("updated_at")
-    private Long updatedAt;
+    private LocalDateTime updatedAt;
 
     public void initParams(boolean add) {
         if (add) {
             this.setCreatedBy(GlobalContextHelper.getCurrentUserId());
-            this.setCreatedAt(System.currentTimeMillis());
+            this.setCreatedAt(LocalDateTime.now());
         }
         this.setUpdatedBy(GlobalContextHelper.getCurrentUserId());
-        this.setUpdatedAt(System.currentTimeMillis());
+        this.setUpdatedAt(LocalDateTime.now());
     }
 
     public Long getCreatedBy() {
@@ -51,11 +53,11 @@ public class BaseEntity extends IDEntity {
         this.createdBy = createdBy;
     }
 
-    public Long getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -67,11 +69,11 @@ public class BaseEntity extends IDEntity {
         this.updatedBy = updatedBy;
     }
 
-    public Long getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Long updatedAt) {
+    public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

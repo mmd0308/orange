@@ -22,12 +22,6 @@ public class MapToStringTypeHandler extends BaseTypeHandler<Map<String, Object>>
 
     /**
      * 用于把 java 对象设置到 PreparedStatement 的参数中
-     *
-     * @param ps
-     * @param i
-     * @param parameter
-     * @param jdbcType
-     * @throws SQLException
      */
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Map<String, Object> parameter, JdbcType jdbcType) throws SQLException {
@@ -37,11 +31,6 @@ public class MapToStringTypeHandler extends BaseTypeHandler<Map<String, Object>>
 
     /**
      * 用于从 ResultSet 中根据列名取出数据转换为 java 对象
-     *
-     * @param resultSet
-     * @param columnName
-     * @return
-     * @throws SQLException
      */
     @Override
     public Map<String, Object> getNullableResult(ResultSet resultSet, String columnName) throws SQLException {
@@ -51,11 +40,6 @@ public class MapToStringTypeHandler extends BaseTypeHandler<Map<String, Object>>
 
     /**
      * 用于从 ResultSet 中根据索引位置取出数据转换为 java 对象
-     *
-     * @param resultSet
-     * @param i
-     * @return
-     * @throws SQLException
      */
     @Override
     public Map<String, Object> getNullableResult(ResultSet resultSet, int i) throws SQLException {
@@ -65,11 +49,6 @@ public class MapToStringTypeHandler extends BaseTypeHandler<Map<String, Object>>
 
     /**
      * 用于从 CallableStatement 中根据存储过程取出数据转换为 java 对象
-     *
-     * @param callableStatement
-     * @param i
-     * @return
-     * @throws SQLException
      */
     @Override
     public Map<String, Object> getNullableResult(CallableStatement callableStatement, int i) throws SQLException {

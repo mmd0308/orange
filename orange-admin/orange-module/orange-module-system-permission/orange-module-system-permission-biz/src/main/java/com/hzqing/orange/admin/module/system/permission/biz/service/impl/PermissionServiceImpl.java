@@ -124,21 +124,21 @@ public class PermissionServiceImpl implements PermissionService {
         }
         List<String> permissions = CollUtils.convertList(roleList, Role::getPermission);
         List<Long> roleIds = CollUtils.convertList(roleList, Role::getId);
-        List<Menu> menuList;
+        List<MenuVO> menuVOList;
         // admin 拥有所有的权限
         if (permissions.contains(PermissionConstants.ADMIN_DEFAULT_PERMISSION)) {
-            menuList = menuService.queryByParams(MenuAllQuery.builder().build());
+            menuVOList = menuService.queryByParams(new MenuAllQuery());
         } else {
-            menuList = menuService.queryByRoleIds(roleIds);
+            menuVOList = menuService.queryByRoleIds(roleIds);
         }
-        if (CollUtil.isEmpty(menuList)) {
+        if (CollUtil.isEmpty(menuVOList)) {
             return List.of();
         }
         // 排序
-        menuList = menuList.stream().sorted(Comparator.comparing(Menu::getSort)).collect(Collectors.toList());
+        menuVOList = menuVOList.stream().sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
 
         //组装树型结果
-        List<RouterTree> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuList);
+        List<RouterTree> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuVOList);
         Map<Long, List<RouterTree>> routerMap = routers.stream().collect(Collectors.groupingBy(RouterTree::getParentId));
         routers.forEach(item -> item.setChildren(routerMap.get(item.getId())));
         // 过滤掉非顶级数据

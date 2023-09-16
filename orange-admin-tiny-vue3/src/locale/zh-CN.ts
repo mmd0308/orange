@@ -3,6 +3,7 @@ import localeTheme from '@/components/theme/locale/zh-CN';
 
 import systemPermission from '@/views/admin/system/permission/locale/zh-CN';
 import systemDict from '@/views/admin/system/dict/locale/zh-CN';
+import systemRecord from '@/views/admin/system/record/locale/zh-CN';
 
 import locale403 from '@/views/exception/403/locale/zh-CN';
 import locale404 from '@/views/exception/404/locale/zh-CN';
@@ -28,6 +29,7 @@ export default {
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
   'messageBox.switchRoles': '切换角色',
+  'messageBox.projectConfig': '项目配置',
   'messageBox.userCenter': '用户中心',
   'messageBox.userSettings': '用户设置',
   'messageBox.logout': '退出登录',
@@ -44,4 +46,5 @@ export default {
   ...localeHttpError,
   ...systemPermission,
   ...systemDict,
+  ...systemRecord,
 };

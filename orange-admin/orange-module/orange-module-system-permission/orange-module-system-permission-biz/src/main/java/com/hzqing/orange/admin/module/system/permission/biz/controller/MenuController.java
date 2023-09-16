@@ -4,9 +4,10 @@ import com.hzqing.orange.admin.module.system.permission.biz.converter.MenuConver
 import com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Menu;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
+import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Tag(name = "系统权限-菜单管理")
 @RestController
@@ -56,8 +57,14 @@ public class MenuController {
         return ResultWrapper.ok(menuService.removeById(id));
     }
 
+    @PostMapping("/query-all")
+    @Operation(summary = "查询所有数据-列表", operationId = "system:permission:menu:query-all", description = "返回所有的数据")
+    public Result<List<MenuVO>> queryAll(@RequestBody MenuAllQuery query) {
+        return ResultWrapper.ok(menuService.queryByParams(query));
+    }
+
     @PostMapping("/query-tree")
-    @Operation(summary = "树型结构数据", operationId = "system:permission:menu:query-tree", description = "返回所有的数据")
+    @Operation(summary = "查询所有数据-树型结构", operationId = "system:permission:menu:query-tree", description = "返回所有的数据")
     public Result<List<MenuTree>> queryTree(@RequestBody MenuTreeQuery query) {
         return ResultWrapper.ok(menuService.queryTree(query));
     }
@@ -70,7 +77,7 @@ public class MenuController {
 
     @Operation(summary = "根据ID查询详情", operationId = "system:permission:menu:get")
     @GetMapping("/{id}")
-    public Result<Menu> getById(@PathVariable("id") Long id) {
+    public Result<MenuVO> getById(@PathVariable("id") Long id) {
         return ResultWrapper.ok(MenuConverter.INSTANCE.toVo(menuManager.getById(id)));
     }
 

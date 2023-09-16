@@ -37,6 +37,7 @@ public interface DepartmentConverter extends Converter {
         if (Objects.isNull(entity)) {
             return null;
         }
+        entity.setParentId(request.getParentId());
         entity.setName(request.getName());
         entity.setSort(request.getSort());
         return entity;

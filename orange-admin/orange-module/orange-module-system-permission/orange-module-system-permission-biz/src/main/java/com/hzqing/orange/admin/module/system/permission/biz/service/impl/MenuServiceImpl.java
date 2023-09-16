@@ -2,24 +2,24 @@ package com.hzqing.orange.admin.module.system.permission.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import  com.hzqing.orange.admin.module.system.permission.biz.converter.ButtonConverter;
-import  com.hzqing.orange.admin.module.system.permission.biz.converter.MenuConverter;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.ButtonEntity;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
-import  com.hzqing.orange.admin.module.system.permission.biz.manager.ButtonManager;
-import  com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
-import  com.hzqing.orange.admin.module.system.permission.biz.manager.RoleResourceRlManager;
-import  com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
+import com.hzqing.orange.admin.module.system.permission.biz.converter.ButtonConverter;
+import com.hzqing.orange.admin.module.system.permission.biz.converter.MenuConverter;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.ButtonEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.ButtonManager;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.RoleResourceRlManager;
+import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.MenuErrorCode;
 import com.hzqing.orange.admin.module.system.permission.common.vo.Button;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Menu;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Slf4j
 @Service
@@ -96,14 +96,14 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> queryByParams(MenuAllQuery query) {
+    public List<MenuVO> queryByParams(MenuAllQuery query) {
         MenuListQuery listQuery = MenuConverter.INSTANCE.toListQuery(query);
         List<MenuEntity> entityList = menuManager.listByParams(listQuery);
         return MenuConverter.INSTANCE.toListVo(entityList);
     }
 
     @Override
-    public List<Menu> queryByRoleIds(List<Long> roleIds) {
+    public List<MenuVO> queryByRoleIds(List<Long> roleIds) {
         if (CollUtil.isEmpty(roleIds)) {
             return List.of();
         }

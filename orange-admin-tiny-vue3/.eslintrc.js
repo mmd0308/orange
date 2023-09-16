@@ -45,6 +45,7 @@ module.exports = {
     "SystemAPI": true,
     "SystemPermissionAPI": true,
     "SystemDictAPI": true,
+    "SystemRecordAPI": true,
   },
   rules: {
     '@typescript-eslint/no-non-null-assertion': 'off',

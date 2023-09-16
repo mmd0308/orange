@@ -6,6 +6,7 @@ import com.hzqing.orange.admin.module.system.dict.biz.manager.DictTypeManager;
 import com.hzqing.orange.admin.module.system.dict.biz.service.DictTypeService;
 import com.hzqing.orange.admin.module.system.dict.common.constants.SystemDictConstants;
 import com.hzqing.orange.admin.module.system.dict.common.vo.DictTypeVO;
+import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypeAllQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypePageQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeAddRequest;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeUpdateRequest;
@@ -18,6 +19,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -40,6 +43,14 @@ public class DictTypeController {
         return ResultWrapper.ok(result);
     }
 
+    @Operation(summary = "查询所有数据", operationId = "system:dict:dict-type:query-all")
+    @PostMapping(value = "/query-all")
+    public Result<List<DictTypeVO>> queryAll(@RequestBody DictTypeAllQuery queryVo) {
+        List<DictTypeVO> result = dictTypeService.queryAll(queryVo);
+        return ResultWrapper.ok(result);
+    }
+
+
     @PreAuthorize("@ss.hasPermission('system:dict:dict-type:add')")
     @Operation(summary = "新建", operationId = "system:dict:dict-type:add")
     @PostMapping
@@ -51,7 +62,7 @@ public class DictTypeController {
     @GetMapping("/{id}")
     public Result<DictTypeVO> getById(@PathVariable("id") Long id) {
         DictTypeEntity entity = dictTypeManager.getById(id);
-        return ResultWrapper.ok(DictTypeConverter.INSTANCE.toVo(entity));
+        return ResultWrapper.ok(DictTypeConverter.INSTANCE.toVO(entity));
     }
 
     @PreAuthorize("@ss.hasPermission('system:dict:dict-type:update')")

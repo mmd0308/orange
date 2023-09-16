@@ -1,14 +1,30 @@
 <template>
   <div>
     <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
-
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
         :model="formData" label-width="100px">
-        <tiny-form-item label="角色名称" prop="name">
+        <tiny-form-item label="部门" prop="parentId">
+          <tiny-select v-model="formData.departmentId" value-field="id" text-field="name" render-type="tree"
+            :tree-op="treeOp" :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
+        </tiny-form-item>
+        <tiny-form-item label="用户名称" prop="name">
           <tiny-input v-model="formData.name"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item label="权限编码" prop="permission">
-          <tiny-input v-model="formData.permission"></tiny-input>
+        <tiny-form-item label="邮箱" prop="email">
+          <tiny-input v-model="formData.email"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item label="性别" prop="sex">
+          <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_user_sex')" :key="index"
+            v-model="formData.sex" :label="item.dictValue">{{ item.dictLabel }}</tiny-radio>
+        </tiny-form-item>
+        <tiny-form-item label="手机号" prop="phone">
+          <tiny-input v-model="formData.phone"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item label="登陆账号" prop="username">
+          <tiny-input v-model="formData.username"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item label="备注" prop="remark">
+          <tiny-input v-model="formData.remark"></tiny-input>
         </tiny-form-item>
       </tiny-form>
 
@@ -25,10 +41,11 @@ import {
   Drawer as TinyDrawer,
   Button as TinyButton,
   Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput,
+  Input as TinyInput, Select as TinySelect, Radio as TinyRadio
 } from '@opentiny/vue'
 
 import SystemRequest from '@/api/system/index'
+import { listDepartmentToTree } from '@/utils/department/index'
 
 const emit = defineEmits(['ok'])
 
@@ -37,16 +54,15 @@ const { proxy } = getCurrentInstance() as any
 const visible = ref(false)
 const isModify = ref(false)
 const title = computed(() => {
-  return isModify.value ? '修改角色' : '新增角色'
+  return isModify.value ? '修改用户' : '新增用户'
 })
 
-const formData = ref<SystemPermissionAPI.RoleVO>({
+const formData = ref<SystemPermissionAPI.UserVO>({
   name: '',
-  permission: '',
 })
 
 const formDataRules = {
-  name: [{ required: true, message: '角色名称不能为空', trigger: 'change' }],
+  name: [{ required: true, message: '用户名称不能为空', trigger: 'change' }],
   permission: [{ required: true, message: '权限编码不能为空', trigger: 'change' }]
 }
 
@@ -55,15 +71,15 @@ const onSubmit = () => {
   proxy.$refs.formDataRef.validate((valid: boolean) => {
     if (valid) {
       if (formData.value.id) {
-        SystemRequest.role
-          .updateRoleById(formData.value.id, toRaw(formData.value))
+        SystemRequest.user
+          .updateUserById(formData.value.id, toRaw(formData.value))
           .then((res) => {
             onClose(true)
           })
           .catch((err) => { console.log(err) })
       } else {
-        SystemRequest.role
-          .addRole(toRaw(formData.value))
+        SystemRequest.user
+          .addUser(toRaw(formData.value))
           .then((res) => {
             onClose(true)
           })
@@ -81,14 +97,28 @@ const onClose = (refresh: boolean) => {
   }
 }
 
+const treeOp = reactive<{
+  data: SystemPermissionAPI.DepartmentTreeVO[]
+}>({
+  data: []
+})
+
+const queryAll = (query: SystemPermissionAPI.DepartmentAllQuery) => {
+  SystemRequest.department.queryDepartmentAll(toRaw(query)).then((res) => {
+    treeOp.data = listDepartmentToTree(res.data)
+  })
+}
+
+
 const open = (id: string) => {
   isModify.value = false
   if (id) {
-    SystemRequest.role.getRoleById(id).then((response) => {
+    SystemRequest.user.getUserById(id).then((response) => {
       formData.value = response.data
       isModify.value = true
     })
   }
+  queryAll({})
   visible.value = true
 }
 

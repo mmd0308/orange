@@ -3,15 +3,15 @@
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
       <tiny-row :flex="true" justify="center" class="col">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.role.form.name')">
-            <tiny-input v-model="filterOptions.nameLike"
-              :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
+          <tiny-form-item :label="$t('system.user.form.name')">
+            <tiny-input v-model="filterOptions.nameLike" clearable
+              :placeholder="$t('system.user.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.role.form.permission')" prop="id">
-            <tiny-input v-model="filterOptions.permissionLike"
-              :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
+          <tiny-form-item :label="$t('system.user.form.username')" prop="id">
+            <tiny-input v-model="filterOptions.usernameLike" clearable
+              :placeholder="$t('system.user.form.username.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
@@ -28,25 +28,25 @@
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="segmentation-line">
-      <hr />
-    </div>
     <div class="tiny-fullscreen-scroll">
       <div class="tiny-fullscreen-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
-            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
+            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
-
-          <tiny-grid-column field="name" :title="$t('system.role.table.columns.name')" align="center" />
-          <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
-          <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
-
+          <tiny-grid-column field="avatar" :title="$t('system.user.table.columns.avatar')" align="center" />
+          <tiny-grid-column field="name" :title="$t('system.user.table.columns.name')" align="center" />
+          <tiny-grid-column field="username" :title="$t('system.user.table.columns.username')" align="center" />
+          <tiny-grid-column field="email" :title="$t('system.user.table.columns.email')" align="center" />
+          <tiny-grid-column field="sex" :title="$t('system.user.table.columns.sex')" align="center">
+            <template #default="data">
+              <dict-tag :value="data.row.sex" :options="proxy.$dict.getDict('sys_common_user_sex')" />
+            </template>
+          </tiny-grid-column>
+          <tiny-grid-column field="phone" :title="$t('system.user.table.columns.phone')" align="center" />
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template v-slot="data">
+            <template #default="data">
               <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
                 $t('global.table.operations.edit')
               }}</tiny-button>
@@ -81,14 +81,16 @@ import SystemRequest from '@/api/system/index'
 
 import editform from './components/edit-form.vue';
 
+const { proxy } = getCurrentInstance() as any
+
 const editFormRef = ref();
 
 const state = reactive<{
   loading: boolean;
-  filterOptions: SystemPermissionAPI.RolePageQueryParams;
+  filterOptions: SystemPermissionAPI.UserPageQuery;
 }>({
   loading: false,
-  filterOptions: {} as SystemPermissionAPI.RolePageQueryParams,
+  filterOptions: {} as SystemPermissionAPI.UserPageQuery,
 });
 
 const pagerConfig = reactive({
@@ -97,7 +99,8 @@ const pagerConfig = reactive({
     currentPage: 1,
     pageSize: 10,
     pageSizes: [10, 20, 30, 50, 100],
-    total: 10,
+    total: 0,
+    align: 'right',
     layout: 'total, prev, pager, next, jumper, sizes',
   },
 });
@@ -115,17 +118,17 @@ const fetchTableData = reactive({
   }
 });
 
-async function getPageData(params: SystemPermissionAPI.RolePageQueryParams = {
+async function getPageData(params: SystemPermissionAPI.UserPageQuery = {
   pageNo: 1,
   pageSize: 10
 }) {
-  const queryParmas: SystemPermissionAPI.RolePageQueryParams = {
+  const queryParmas: SystemPermissionAPI.UserPageQuery = {
     ...filterOptions.value,
     ...params,
   };
   state.loading = true;
   try {
-    const { data } = await SystemRequest.role.queryRolePage(queryParmas);
+    const { data } = await SystemRequest.user.queryUserPage(queryParmas);
     const { records, total } = data;
     return {
       result: records,
@@ -141,7 +144,7 @@ const handleEdit = (id: string) => {
 }
 
 const handleDelete = (id: string) => {
-  SystemRequest.role.deleteRoleById(id).then((res) => {
+  SystemRequest.user.deleteUserById(id).then((res) => {
     getPageData()
     Modal.message({
       message: '删除成功',
@@ -154,7 +157,7 @@ const handleFormQuery = () => {
   gridTableRef?.value.handleFetch('reload');
 }
 const handleFormReset = () => {
-  state.filterOptions = {} as SystemPermissionAPI.RolePageQueryParams;
+  state.filterOptions = {} as SystemPermissionAPI.UserPageQuery;
   handleFormQuery();
 }
 

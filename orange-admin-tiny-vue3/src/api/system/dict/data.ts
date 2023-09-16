@@ -10,6 +10,11 @@ export function queryDictDataAll(params: SystemDictAPI.DictDataAllQueryParams) {
   return axios.post(BASE_URL.concat("/query-all"), params);
 }
 
+export function queryDictDataListByType(dictType: string) {
+  return axios.get(BASE_URL.concat(`/query-by-type/${dictType}`));
+}
+
+
 export function deleteDictDataById(id: string) {
   return axios.delete(BASE_URL.concat(`/${id}`));
 }

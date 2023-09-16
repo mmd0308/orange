@@ -4,7 +4,7 @@
       <tiny-row :flex="true" justify="center" class="col">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.department.form.name')">
-            <tiny-input v-model="filterOptions.nameLike"
+            <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
@@ -22,22 +22,19 @@
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="segmentation-line">
-      <hr />
-    </div>
     <div class="tiny-fullscreen-scroll">
       <div class="tiny-fullscreen-wrapper">
         <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
-            <tiny-grid-toolbar :buttons="toolbarButtons" full-screen />
+            <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
           </template>
           <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" align="center" tree-node />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template v-slot="data">
+            <template #default="data">
               <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
                 $t('global.table.operations.edit')
               }}</tiny-button>
@@ -85,7 +82,7 @@ const state = reactive<{
 const gridTableRef = ref();
 const { loading, filterOptions } = toRefs(state);
 
-const tableData = ref([])
+const tableData = ref<SystemPermissionAPI.DepartmentTreeVO[]>([])
 
 async function getAllData() {
   const queryParmas: SystemPermissionAPI.DepartmentAllQueryParams = {
@@ -124,8 +121,8 @@ const handleFormReset = () => {
   handleFormQuery();
 }
 
-function aggregateTableData(data) {
-  const result = []
+function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
+  const result: SystemPermissionAPI.DepartmentTreeVO[] = []
   data.forEach((item) => {
     if (item.parentId === '-1') {
       result.push(item)
@@ -142,15 +139,10 @@ function aggregateTableData(data) {
   return result
 }
 
-
 const toolbarButtons = reactive([
   {
     code: 'insert',
     name: '新增',
-  },
-  {
-    code: 'export',
-    name: '导出'
   }
 ])
 

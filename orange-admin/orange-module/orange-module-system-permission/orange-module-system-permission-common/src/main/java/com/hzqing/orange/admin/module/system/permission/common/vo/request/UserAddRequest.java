@@ -1,7 +1,9 @@
 package com.hzqing.orange.admin.module.system.permission.common.vo.request;
 
 import com.hzqing.orange.admin.module.system.permission.common.constants.enums.UserSexEnum;
+import com.hzqing.orange.admin.module.system.permission.common.constants.exception.UserErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -32,6 +34,7 @@ public class UserAddRequest implements Serializable {
     @Schema(description = "手机号")
     private String phone;
 
+    @NotBlank(message = UserErrorCode.USER_USERNAME_CANNOT_NULL_KEY)
     @Schema(description = "登陆账号")
     private String username;
 

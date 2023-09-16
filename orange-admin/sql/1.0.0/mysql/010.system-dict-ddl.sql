@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS sys_dict_type
     `status`      tinyint(1)   DEFAULT 0 COMMENT '状态',
     `preset_flag` tinyint(1)   DEFAULT 1 COMMENT '预设标志（0:预置 1:自定义）',
     `remark`      varchar(512) DEFAULT NULL COMMENT '备注',
-    `created_by`  bigint(20)   DEFAULT NULL COMMENT '创建人',
-    `created_at`  bigint(20)   DEFAULT NULL COMMENT '创建时间',
+    `created_by`  bigint(20)          NOT NULL COMMENT '创建人',
+    `created_at`  datetime            NOT NULL COMMENT '创建时间',
     `updated_by`  bigint(20)   DEFAULT NULL COMMENT '更新人',
-    `updated_at`  bigint(20)   DEFAULT NULL COMMENT '更新时间',
+    `updated_at`  datetime     DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT ='字典类型表';
 
@@ -40,10 +40,10 @@ CREATE TABLE IF NOT EXISTS sys_dict_data
     `show_style`   varchar(32)  DEFAULT '' COMMENT '回显样式',
     `status`       tinyint      DEFAULT NULL COMMENT '状态',
     `remark`       varchar(512) DEFAULT NULL COMMENT '备注',
-    `created_by`   bigint       DEFAULT NULL COMMENT '创建人',
-    `created_at`   bigint       DEFAULT NULL COMMENT '创建时间',
-    `updated_by`   bigint       DEFAULT NULL COMMENT '更新人',
-    `updated_at`   bigint       DEFAULT NULL COMMENT '更新时间',
+    `created_by`   bigint(20)   NOT NULL COMMENT '创建人',
+    `created_at`   datetime     NOT NULL COMMENT '创建时间',
+    `updated_by`   bigint(20)   DEFAULT NULL COMMENT '更新人',
+    `updated_at`   datetime     DEFAULT NULL COMMENT '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB COMMENT ='字典数据表';
 

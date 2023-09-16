@@ -90,7 +90,8 @@ const pagerConfig = reactive({
     currentPage: 1,
     pageSize: 10,
     pageSizes: [10, 20, 30, 50, 100],
-    total: 10,
+    total: 0,
+    align: 'right',
     layout: 'total, prev, pager, next, jumper, sizes',
   },
 });

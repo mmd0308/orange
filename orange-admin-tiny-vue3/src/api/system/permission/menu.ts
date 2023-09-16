@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/menu"
 
-export function queryMenuPage(params: SystemPermissionAPI.MenuTreeQueryParams) {
+export function queryMenuPage(params: SystemPermissionAPI.MenuTreeQuery) {
   return axios.post(BASE_URL.concat("/page"), params);
 }
 
-export function queryMenuAll(params: SystemPermissionAPI.MenuTreeQueryParams) {
+export function queryMenuAll(params: SystemPermissionAPI.MenuTreeQuery) {
   return axios.post(BASE_URL.concat("/query-all"), params);
 }
 

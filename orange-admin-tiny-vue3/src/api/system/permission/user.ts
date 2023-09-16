@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/user"
 
-export function queryUserPage(params: SystemPermissionAPI.UserPageQueryParams) {
+export function queryUserPage(params: SystemPermissionAPI.UserPageQuery) {
   return axios.post(BASE_URL.concat("/page"), params);
 }
 
-export function queryUserAll(params: SystemPermissionAPI.UserAllQueryParams) {
+export function queryUserAll(params: SystemPermissionAPI.UserAllQuery) {
   return axios.post(BASE_URL.concat("/query-all"), params);
 }
 

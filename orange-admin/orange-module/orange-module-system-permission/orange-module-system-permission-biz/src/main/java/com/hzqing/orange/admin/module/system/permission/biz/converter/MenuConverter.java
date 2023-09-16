@@ -2,7 +2,7 @@ package com.hzqing.orange.admin.module.system.permission.biz.converter;
 
 import  com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Menu;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
@@ -25,11 +25,11 @@ public interface MenuConverter extends Converter {
 
     MenuEntity toEntity(MenuAddRequest request);
 
-    MenuEntity toEntity(Menu menu);
+    MenuEntity toEntity(MenuVO menuVO);
 
-    Menu toVo(MenuEntity entity);
+    MenuVO toVo(MenuEntity entity);
 
-    List<Menu> toListVo(List<MenuEntity> entityList);
+    List<MenuVO> toListVo(List<MenuEntity> entityList);
 
     MenuListQuery toListQuery(MenuTreeQuery query);
 

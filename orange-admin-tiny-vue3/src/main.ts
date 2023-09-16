@@ -2,6 +2,8 @@ import { createApp } from 'vue';
 import * as echarts4 from 'echarts4';
 import { HwcClient } from '@opentiny/hwc-client';
 import globalComponents from '@/components';
+import dict from '@/utils/dict'
+import DictTag from '@/components/DictTag/index.vue'
 import router from './router';
 import store from './store';
 import i18n from './locale';
@@ -34,3 +36,10 @@ app.use(globalComponents);
 app.use(directive);
 
 app.mount('#app');
+
+
+// 挂在全局组件
+app.component('DictTag', DictTag)
+
+
+app.config.globalProperties.$dict = dict

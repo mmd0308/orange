@@ -4,13 +4,13 @@
       <tiny-row :flex="true" justify="center" class="col">
         <tiny-col :span="4" label-width="100px">
           <tiny-form-item :label="$t('system.role.form.name')">
-            <tiny-input v-model="filterOptions.nameLike"
+            <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.role.form.permission')" prop="id">
-            <tiny-input v-model="filterOptions.permissionLike"
+          <tiny-form-item :label="$t('system.role.form.permission')">
+            <tiny-input v-model="filterOptions.permissionLike" clearable
               :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
@@ -28,17 +28,14 @@
         </tiny-col>
       </tiny-row>
     </tiny-form>
-    <div class="segmentation-line">
-      <hr />
-    </div>
     <div class="tiny-fullscreen-scroll">
       <div class="tiny-fullscreen-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
-            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
+            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
-
+          <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.role.table.columns.name')" align="center" />
           <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
@@ -46,7 +43,7 @@
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template v-slot="data">
+            <template #default="data">
               <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
                 $t('global.table.operations.edit')
               }}</tiny-button>
@@ -85,10 +82,10 @@ const editFormRef = ref();
 
 const state = reactive<{
   loading: boolean;
-  filterOptions: SystemPermissionAPI.RolePageQueryParams;
+  filterOptions: SystemPermissionAPI.RolePageQuery;
 }>({
   loading: false,
-  filterOptions: {} as SystemPermissionAPI.RolePageQueryParams,
+  filterOptions: {} as SystemPermissionAPI.RolePageQuery,
 });
 
 const pagerConfig = reactive({
@@ -97,7 +94,8 @@ const pagerConfig = reactive({
     currentPage: 1,
     pageSize: 10,
     pageSizes: [10, 20, 30, 50, 100],
-    total: 10,
+    total: 0,
+    align: 'right',
     layout: 'total, prev, pager, next, jumper, sizes',
   },
 });
@@ -115,11 +113,11 @@ const fetchTableData = reactive({
   }
 });
 
-async function getPageData(params: SystemPermissionAPI.RolePageQueryParams = {
+async function getPageData(params: SystemPermissionAPI.RolePageQuery = {
   pageNo: 1,
   pageSize: 10
 }) {
-  const queryParmas: SystemPermissionAPI.RolePageQueryParams = {
+  const queryParmas: SystemPermissionAPI.RolePageQuery = {
     ...filterOptions.value,
     ...params,
   };
@@ -154,7 +152,7 @@ const handleFormQuery = () => {
   gridTableRef?.value.handleFetch('reload');
 }
 const handleFormReset = () => {
-  state.filterOptions = {} as SystemPermissionAPI.RolePageQueryParams;
+  state.filterOptions = {} as SystemPermissionAPI.RolePageQuery;
   handleFormQuery();
 }
 
@@ -169,14 +167,15 @@ const toolbarButtons = reactive([
   }
 ])
 
-const toolbarButtonClickEvent = ({ code }: any) => {
+const toolbarButtonClickEvent = ({ code, $grid }: any) => {
+  const data = $grid.getSelectRecords()
   switch (code) {
     case 'insert': {
       editFormRef.value.open()
       break
     }
     case 'batchDelete': {
-      editFormRef.value.open()
+      debugger
       break
     }
     default:

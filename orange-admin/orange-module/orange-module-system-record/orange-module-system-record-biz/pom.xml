@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hzqing.orange.admin.module.system.record</groupId>
+		<artifactId>orange-module-system-record</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.hzqing.orange.admin.module.system.record.biz</groupId>
+	<artifactId>orange-module-system-record-biz</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>jar</packaging>
+
+	<description>
+		orange-module-system-record-biz
+	</description>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hzqing.orange.admin.module.system.record.common</groupId>
+			<artifactId>orange-module-system-record-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hzqing.orange.admin.module.system.record.api</groupId>
+			<artifactId>orange-module-system-record-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hzqing.orange.admin.starter.mybatis</groupId>
+			<artifactId>orange-spring-boot-starter-mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hzqing.orange.admin.starter.security</groupId>
+			<artifactId>orange-spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-crypto</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

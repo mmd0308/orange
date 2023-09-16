@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author 程序员橙子
  */
 @Data
-@Schema(description = "用户-新增")
+@Schema(description = "用户-修改参数")
 public class UserUpdateRequest implements Serializable {
 
     @Schema(description = "部门ID")

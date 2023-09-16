@@ -11,6 +11,7 @@ import com.hzqing.orange.admin.module.system.dict.biz.manager.DictTypeManager;
 import com.hzqing.orange.admin.module.system.dict.biz.service.DictTypeService;
 import com.hzqing.orange.admin.module.system.dict.common.constants.SystemDictErrorCode;
 import com.hzqing.orange.admin.module.system.dict.common.vo.DictTypeVO;
+import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypeAllQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypePageQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeAddRequest;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeUpdateRequest;
@@ -66,5 +67,12 @@ public class DictTypeServiceImpl implements DictTypeService {
         List<DictDataEntity> entityList = dictDataManager.listByParams(DictDataListQuery.builder().dictType(entity.getDictType()).build());
         Assert.isEmpty(entityList, SystemDictErrorCode.DICT_TYPE_DELETE_ERROR_EXIST_DATA);
         return dictTypeManager.removeById(id);
+    }
+
+    @Override
+    public List<DictTypeVO> queryAll(DictTypeAllQuery queryVo) {
+        DictTypeListQuery listQuery = DictTypeConverter.INSTANCE.toListQuery(queryVo);
+        List<DictTypeEntity> entityList = dictTypeManager.listByParams(listQuery);
+        return DictTypeConverter.INSTANCE.toListVO(entityList);
     }
 }

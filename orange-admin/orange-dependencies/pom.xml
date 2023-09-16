@@ -36,7 +36,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--    module start        -->
+            <!--    module start      -->
             <dependency>
                 <groupId>com.hzqing.orange.admin.module.system.permission.common</groupId>
                 <artifactId>orange-module-system-permission-common</artifactId>
@@ -66,6 +66,22 @@
             <dependency>
                 <groupId>com.hzqing.orange.admin.module.system.dict.biz</groupId>
                 <artifactId>orange-module-system-dict-biz</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.record.common</groupId>
+                <artifactId>orange-module-system-record-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.record.api</groupId>
+                <artifactId>orange-module-system-record-api</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hzqing.orange.admin.module.system.record.biz</groupId>
+                <artifactId>orange-module-system-record-biz</artifactId>
                 <version>${orange.version}</version>
             </dependency>
 
@@ -108,8 +124,8 @@
                 <version>${orange.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.hzqing.orange.admin.starter.biz.log</groupId>
-                <artifactId>orange-spring-boot-starter-biz-log</artifactId>
+                <groupId>com.hzqing.orange.admin.starter.biz.record</groupId>
+                <artifactId>orange-spring-boot-starter-biz-record</artifactId>
                 <version>${orange.version}</version>
             </dependency>
             <!-- 自定义starter end -->

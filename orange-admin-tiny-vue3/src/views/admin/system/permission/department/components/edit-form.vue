@@ -10,6 +10,9 @@
         <tiny-form-item :label="$t('system.department.form.name')" prop="name">
           <tiny-input v-model="formData.name" :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.sort')" prop="sort">
+          <tiny-numeric v-model="formData.sort"></tiny-numeric>
+        </tiny-form-item>
       </tiny-form>
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
@@ -24,7 +27,7 @@ import {
   Drawer as TinyDrawer,
   Button as TinyButton,
   Form as TinyForm, FormItem as TinyFormItem, Select as TinySelect,
-  Input as TinyInput,
+  Input as TinyInput, Numeric as TinyNumeric
 } from '@opentiny/vue'
 
 import SystemRequest from '@/api/system/index'
@@ -42,6 +45,7 @@ const title = computed(() => {
 const formData = ref<SystemPermissionAPI.DepartmentVO>({
   parentId: '-1',
   name: '',
+  sort: 1,
 })
 
 const formDataRules = {
@@ -93,7 +97,7 @@ const treeOp = reactive<{
   }]
 })
 
-const queryAll = (query: SystemPermissionAPI.DepartmentAllQueryParams) => {
+const queryAll = (query: SystemPermissionAPI.DepartmentAllQuery) => {
   SystemRequest.department.queryDepartmentAll(toRaw(query)).then((res) => {
     treeOp.data[0].children = aggregateTableData(res.data)
   })

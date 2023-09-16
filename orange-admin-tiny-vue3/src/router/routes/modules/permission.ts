@@ -51,6 +51,18 @@ export default {
       },
     },
     {
+      path: 'menu',
+      name: 'SystemPermissionMenu',
+      id: 'SystemPermissionMenu',
+      label: '菜单管理',
+      component: () => import('@/views/admin/system/permission/menu/index.vue'),
+      meta: {
+        locale: 'menu.system.permission.menu',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
+    },
+    {
       path: 'dict',
       name: 'SystemPermissionDict',
       id: 'SystemPermissionDict',
@@ -70,6 +82,30 @@ export default {
       component: () => import('@/views/admin/system/dict/data/index.vue'),
       meta: {
         locale: 'menu.system.dict.data',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
+    },
+    {
+      path: 'login-log',
+      name: 'SystemPermissionLoginLog',
+      id: 'SystemPermissionLoginLog',
+      label: 'SystemPermissionLoginLog',
+      component: () => import('@/views/admin/system/record/login/index.vue'),
+      meta: {
+        locale: 'menu.system.record.login',
+        requiresAuth: true,
+        roles: [RoleType.admin, RoleType.user],
+      },
+    },
+    {
+      path: 'operation-log',
+      name: 'SystemPermissionOperationLog',
+      id: 'SystemPermissionOperationLog',
+      label: 'SystemPermissionOperationLog',
+      component: () => import('@/views/admin/system/record/operation/index.vue'),
+      meta: {
+        locale: 'menu.system.record.operation',
         requiresAuth: true,
         roles: [RoleType.admin, RoleType.user],
       },

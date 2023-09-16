@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hzqing.orange.admin.module.system.dict.biz.dto.DictTypeListQuery;
 import com.hzqing.orange.admin.module.system.dict.biz.entity.DictTypeEntity;
 import com.hzqing.orange.admin.module.system.dict.common.vo.DictTypeVO;
+import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypeAllQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.query.DictTypePageQuery;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeAddRequest;
 import com.hzqing.orange.admin.module.system.dict.common.vo.request.DictTypeUpdateRequest;
@@ -15,6 +16,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,11 +32,14 @@ public interface DictTypeConverter extends Converter {
     })
     PageVO<DictTypeVO> toPage(Page<DictTypeEntity> page);
 
-    DictTypeVO toVo(DictTypeEntity entity);
+    DictTypeVO toVO(DictTypeEntity entity);
 
     DictTypeEntity toEntity(DictTypeVO dictTypeVO);
 
     DictTypeListQuery toListQuery(DictTypePageQuery queryVo);
+
+    DictTypeListQuery toListQuery(DictTypeAllQuery queryVo);
+
 
     DictTypeEntity toEntity(DictTypeAddRequest request);
 
@@ -53,4 +58,7 @@ public interface DictTypeConverter extends Converter {
         }
         return entity;
     }
+
+    List<DictTypeVO> toListVO(List<DictTypeEntity> entityList);
+
 }

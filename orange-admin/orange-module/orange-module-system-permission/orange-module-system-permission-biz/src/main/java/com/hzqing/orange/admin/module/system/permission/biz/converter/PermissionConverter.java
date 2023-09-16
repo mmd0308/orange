@@ -1,6 +1,6 @@
 package com.hzqing.orange.admin.module.system.permission.biz.converter;
 
-import com.hzqing.orange.admin.module.system.permission.common.vo.Menu;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.RouterMeta;
 import com.hzqing.orange.admin.module.system.permission.common.vo.RouterTree;
 import org.mapstruct.Mapper;
@@ -16,25 +16,25 @@ public interface PermissionConverter {
 
     PermissionConverter INSTANCE = Mappers.getMapper(PermissionConverter.class);
 
-    List<RouterTree> listMenusToRouters(List<Menu> menuList);
+    List<RouterTree> listMenusToRouters(List<MenuVO> menuVOList);
 
 
-    default RouterTree toRoutersTreeVo(Menu menu) {
-        if (menu == null) {
+    default RouterTree toRoutersTreeVo(MenuVO menuVO) {
+        if (menuVO == null) {
             return null;
         }
 
         RouterTree routerTree = new RouterTree();
-        routerTree.setId(menu.getId());
-        routerTree.setParentId(menu.getParentId());
-        routerTree.setPath(menu.getPath());
-        routerTree.setPermission(menu.getPermission());
-        routerTree.setComponent(menu.getComponent());
+        routerTree.setId(menuVO.getId());
+        routerTree.setParentId(menuVO.getParentId());
+        routerTree.setPath(menuVO.getPath());
+        routerTree.setPermission(menuVO.getPermission());
+        routerTree.setComponent(menuVO.getComponent());
 
         RouterMeta meta = new RouterMeta();
-        meta.setTitle(menu.getName());
-        meta.setIcon(menu.getIcon());
-        meta.setHidden(menu.getHidden());
+        meta.setTitle(menuVO.getName());
+        meta.setIcon(menuVO.getIcon());
+        meta.setHidden(menuVO.getHidden());
         routerTree.setMeta(meta);
         return routerTree;
     }

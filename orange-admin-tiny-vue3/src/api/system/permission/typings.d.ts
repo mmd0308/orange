@@ -18,26 +18,29 @@ declare namespace SystemPermissionAPI {
     children?: DepartmentTreeVO[];
   };
 
-  interface DepartmentAllQueryParams {
+  interface DepartmentAllQuery {
     parentId?: number;
     name?: string;
+    nameLike?: string
   };
 
-  interface UserPageQueryParams extends UserAllQueryParams {
+  interface UserPageQuery extends UserAllQuery {
     pageNo?: number;
     pageSize?: number;
   };
 
-  interface UserAllQueryParams {
+  interface UserAllQuery {
     departmentId?: string;
     name?: string;
+    nameLike?: string;
     email?: string;
     username?: string;
+    usernameLike?: string;
   };
 
   interface UserVO {
     tenantId?: number;
-    id: string;
+    id?: string;
     departmentId?: number;
     avatar?: number;
     name?: string;
@@ -60,7 +63,7 @@ declare namespace SystemPermissionAPI {
     remark?: string;
   };
 
-  interface RoleAllQueryParams {
+  interface RoleAllQuery {
     name?: string;
     nameLike?: string;
     permission?: string;
@@ -68,7 +71,7 @@ declare namespace SystemPermissionAPI {
     status?: 'NORMAL' | 'DISABLE';
   };
 
-  interface RolePageQueryParams extends RoleAllQueryParams {
+  interface RolePageQuery extends RoleAllQuery {
     pageNo?: number;
     pageSize?: number;
   };
@@ -89,7 +92,23 @@ declare namespace SystemPermissionAPI {
     remark?: string;
   };
 
-  interface MenuTreeQueryParams {
+  interface MenuTreeVO {
+    tenantId?: string;
+    id?: string;
+    parentId?: string;
+    rootId?: string;
+    name?: string;
+    permission?: string;
+    presetFlag?: 'PRESET' | 'CUSTOM';
+    path?: string;
+    icon?: string;
+    component?: string;
+    sort?: number;
+    remark?: string;
+    children?: MenuTreeVO[];
+  };
+
+  interface MenuTreeQuery {
     parentId?: number;
     name?: string;
     permission?: string;
@@ -98,14 +117,22 @@ declare namespace SystemPermissionAPI {
   };
 
 
-  interface ButtonPageQueryParams extends ButtonAllQueryParams {
+  interface MenuAllQuery {
+    parentId?: number;
+    name?: string;
+    permission?: string;
+    permissionLike?: string;
+    component?: string;
+  };
+
+  interface ButtonPageQuery extends ButtonAllQuery {
     /** 查询页码，从1开始 默认值:1 */
     pageNo?: number;
     /** 每页数量,取值范围[5,100] 默认值:10 */
     pageSize?: number;
   };
 
-  interface ButtonAllQueryParams {
+  interface ButtonAllQuery {
     /** 菜单ID */
     menuId: string;
   }
