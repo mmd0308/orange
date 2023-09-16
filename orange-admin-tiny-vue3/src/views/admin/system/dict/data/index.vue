@@ -40,7 +40,7 @@
           <tiny-grid-column field="dictType" :title="$t('system.dict-data.table.columns.dictType')" align="center" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
           <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
             <template #default="data">

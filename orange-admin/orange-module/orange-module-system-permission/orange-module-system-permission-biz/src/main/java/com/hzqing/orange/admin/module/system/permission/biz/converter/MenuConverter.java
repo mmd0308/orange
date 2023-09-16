@@ -56,9 +56,6 @@ public interface MenuConverter extends Converter {
         if (Objects.nonNull(request.getIcon())) {
             entity.setIcon(request.getIcon());
         }
-        if (Objects.nonNull(request.getComponent())) {
-            entity.setComponent(request.getComponent());
-        }
         if (Objects.nonNull(request.getHidden())) {
             entity.setHidden(request.getHidden());
         }

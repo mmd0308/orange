@@ -7,8 +7,15 @@
           <tiny-select v-model="formData.parentId" value-field="id" text-field="name" render-type="tree" :tree-op="treeOp"
             :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.department.form.name')" prop="name">
-          <tiny-input v-model="formData.name" :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
+        <tiny-form-item :label="$t('system.menu.form.name')" prop="name">
+          <tiny-input v-model="formData.name" :placeholder="$t('system.menu.form.name.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('system.menu.form.permission')" prop="name">
+          <tiny-input v-model="formData.permission"
+            :placeholder="$t('system.menu.form.permission.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('system.menu.form.path')" prop="name">
+          <tiny-input v-model="formData.path" :placeholder="$t('system.menu.form.path.placeholder')"></tiny-input>
         </tiny-form-item>
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
@@ -42,10 +49,7 @@ const title = computed(() => {
   return isModify.value ? '修改菜单' : '新增菜单'
 })
 
-const formData = ref<SystemPermissionAPI.DepartmentVO>({
-  parentId: '-1',
-  name: '',
-  sort: 1,
+const formData = ref<SystemPermissionAPI.MenuVO>({
 })
 
 const formDataRules = {

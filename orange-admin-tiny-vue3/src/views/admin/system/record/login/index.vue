@@ -40,7 +40,7 @@
           <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
             <template #default="data">

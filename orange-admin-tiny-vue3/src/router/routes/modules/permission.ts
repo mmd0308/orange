@@ -5,8 +5,6 @@ export default {
   name: 'SystemPermission',
   id: 'SystemPermission',
   label: 'SystemPermission',
-  redirect: `${import.meta.env.VITE_CONTEXT}system/permission/department`,
-  component: () => import('@/views/index.vue'),
   meta: {
     locale: 'menu.system.permission',
     requiresAuth: true,

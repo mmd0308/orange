@@ -23,7 +23,7 @@ public interface PermissionService {
      *
      * @return
      */
-    List<RouterTree> queryCurrentUserRoutersTree();
+    List<RouterTreeVO> queryCurrentUserRoutersTree();
 
     /**
      * 查询当前资源的权限标识

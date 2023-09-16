@@ -16,12 +16,12 @@ SET @t_id := -100;
 -- ----------------------------------------------------------------------------------------------------------------------------------------------------
 BEGIN;
 -- 日志管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (120, @t_id, -1, '日志管理', 'system:record', 0, '', 'log', 'BasicLayout', 0, 2, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (120, @t_id, -1, '日志管理', 'system:record', 0, '', 'log', 0, 2, null, @u_id, NOW(), @u_id, NOW());
 
 -- 登录日志
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (121, @t_id, 150, '登陆日志', 'system:record:login:view', 0, '/log/login', 'log', 'module/system/log/Login', 0, 20, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (121, @t_id, 120, '登陆日志', 'system:record:login:view', 0, 'system/permission/login-log', 'log', 0, 20, null, @u_id, NOW(), @u_id, NOW());
 
 # insert into sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 # values (201, -100, @n_id, -1, '新增', 'system:department:add', 0, 0, '部门管理-新增', @u_id, NOW(), @u_id, NOW()),
@@ -31,6 +31,6 @@ VALUES (121, @t_id, 150, '登陆日志', 'system:record:login:view', 0, '/log/lo
 #        (205, -100, @n_id, -1, '查询树', 'system:department:tree', 0, 0, '用户管理-查询树', @u_id, NOW(), @u_id, NOW());
 
 -- 操作日志
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (122, @t_id, 150, '操作日志', 'system:record:operation:view', 0, '/log/operation', 'log', 'module/system/log/Operation', 0, 18, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon,   hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (122, @t_id, 120, '操作日志', 'system:record:operation:view', 0, 'system/permission/operation-log', 'log',   0, 18, null, @u_id, NOW(), @u_id, NOW());
 COMMIT;

@@ -35,11 +35,12 @@
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" refresh />
           </template>
-          <tiny-grid-column field="traceId" :title="$t('system.record.operation.table.columns.traceId')" align="center" />
+          <tiny-grid-column field="traceId" :title="$t('system.record.operation.table.columns.traceId')" align="center"
+            width="150" />
           <tiny-grid-column field="resourceId" :title="$t('system.record.operation.table.columns.resourceId')"
-            width="260" />
+            width="380" />
           <tiny-grid-column field="requestMethod" :title="$t('system.record.operation.table.columns.requestMethod')"
-            align="center" />
+            align="center" width="80" />
           <tiny-grid-column field="userIp" :title="$t('system.record.operation.table.columns.userIp')" align="center" />
           <tiny-grid-column field="userId" :title="$t('system.record.operation.table.columns.userId')" align="center" />
           <tiny-grid-column field="status" :title="$t('system.record.operation.table.columns.status')" align="center">
@@ -48,14 +49,15 @@
             </template>
           </tiny-grid-column>
           <tiny-grid-column field="startTime" :title="$t('system.record.operation.table.columns.startTime')"
-            align="center" />
+            align="center" width="155" />
           <tiny-grid-column field="executeTime" :title="$t('system.record.operation.table.columns.executeTime')"
-            align="center">
+            align="center" width="80">
             <template #default="data">
-              {{ data.row.executeTime }} ms</template>
+              {{ data.row.executeTime }} ms
+            </template>
           </tiny-grid-column>
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="data">
               <tiny-button type="text" @click="handleDetail(data.row.id)"> {{
                 $t('global.table.operations.detail')

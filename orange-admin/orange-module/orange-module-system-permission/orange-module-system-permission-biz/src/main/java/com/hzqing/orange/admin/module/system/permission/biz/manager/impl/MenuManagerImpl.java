@@ -37,7 +37,6 @@ public class MenuManagerImpl extends BaseManagerImpl<MenuMapper, MenuEntity> imp
                 .eq(Objects.nonNull(query.getPermission()), MenuEntity::getPermission, query.getPermission())
                 .like(StrUtil.isNotBlank(query.getName()), MenuEntity::getName, query.getName())
                 .like(StrUtil.isNotBlank(query.getPermissionLike()), MenuEntity::getPermission, query.getPermissionLike())
-                .like(StrUtil.isNotBlank(query.getComponent()), MenuEntity::getComponent, query.getComponent())
                 .orderByDesc(MenuEntity::getSort)
         );
     }

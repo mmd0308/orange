@@ -4,6 +4,7 @@ import com.hzqing.orange.admin.starter.common.constants.enums.support.DataPreset
 import com.hzqing.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * @author 程序员橙子
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "菜单树型结构")
 public class MenuTree extends BaseTenantVO {
@@ -35,9 +37,6 @@ public class MenuTree extends BaseTenantVO {
 
     @Schema(description = "菜单图标")
     private String icon;
-
-    @Schema(description = "组件路径")
-    private String component;
 
     @Schema(description = "排序")
     private Integer sort;

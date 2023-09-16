@@ -31,12 +31,12 @@
           </template>
           <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" align="center" tree-node />
           <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" />
-          <tiny-grid-column field="permission" :title="$t('system.menu.table.columns.permission')" align="center" />
-          <tiny-grid-column field="component" :title="$t('system.menu.table.columns.component')" align="center" />
-          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" align="center" />
+          <tiny-grid-column field="permission" :title="$t('system.menu.table.columns.permission')" width="260" />
+          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="200" />
           <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="135" />
+          <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="135" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
             <template #default="data">

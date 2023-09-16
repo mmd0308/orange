@@ -64,14 +64,6 @@ public class MenuEntity extends BaseTenantEntity {
     @TableField("icon")
     private String icon;
 
-
-    /**
-     * 组件路径
-     */
-    @TableField("component")
-    private String component;
-
-
     @TableField("hidden")
     private Boolean hidden;
 

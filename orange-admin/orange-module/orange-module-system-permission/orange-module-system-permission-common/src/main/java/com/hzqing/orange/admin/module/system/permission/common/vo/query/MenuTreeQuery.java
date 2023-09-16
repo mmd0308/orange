@@ -24,6 +24,4 @@ public class MenuTreeQuery implements Serializable {
     @Schema(description = "权限编码,模糊匹配")
     private String permissionLike;
 
-    @Schema(description = "组件路径")
-    private String component;
 }

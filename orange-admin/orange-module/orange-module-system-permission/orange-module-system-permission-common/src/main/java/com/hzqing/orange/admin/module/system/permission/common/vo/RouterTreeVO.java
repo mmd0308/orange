@@ -10,8 +10,8 @@ import java.util.List;
  * @author 程序员橙子
  */
 @Data
-@Schema(description = "路由树型结构")
-public class RouterTree implements Serializable {
+@Schema(description = "路由-树型结构")
+public class RouterTreeVO implements Serializable {
 
     @Schema(description = "主键")
     private Long id;
@@ -19,18 +19,21 @@ public class RouterTree implements Serializable {
     @Schema(description = "parentId")
     private Long parentId;
 
-    @Schema(description = "组件名称")
-    private String component;
+    @Schema(description = "菜单名称")
+    private String name;
+
+    @Schema(description = "菜单图标")
+    private String icon;
 
     @Schema(description = "请求路径")
     private String path;
 
-    @Schema(description = "路由元数据")
-    private RouterMeta meta;
+    @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
+    private Boolean hidden;
 
     @Schema(description = "权限编码")
     private String permission;
 
     @Schema(description = "路由子集")
-    private List<RouterTree> children;
+    private List<RouterTreeVO> children;
 }

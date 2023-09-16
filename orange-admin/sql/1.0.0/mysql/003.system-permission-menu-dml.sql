@@ -20,12 +20,12 @@ SET @t_id := -100;
 -- ----------------------------
 BEGIN;
 -- 系统管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (1, @t_id, -1, '系统管理', 'system:permission', 0, '', 'system', 'BasicLayout', 0, 2, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (1, @t_id, -1, '系统管理', 'system:permission', 0, '', 'system', 0, 2, null, @u_id, NOW(), @u_id, NOW());
 
 -- 部门管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (2, -100, 1, '部门管理', 'system:permission:department:view', 0, '/system/department', 'tree', 'module/system/department/Index', 0, 20, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (2, -100, 1, '部门管理', 'system:permission:department:view', 0, 'system/permission/department', 'tree', 0, 20, null, @u_id, NOW(), @u_id, NOW());
 
 insert into sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (200, -100, 2, -1, '新增', 'system:permission:department:add', 0, 0, '部门管理-新增', @u_id, NOW(), @u_id, NOW()),
@@ -36,8 +36,8 @@ values (200, -100, 2, -1, '新增', 'system:permission:department:add', 0, 0, '�
 ;
 
 -- 用户管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (3, @t_id, 1, '用户管理', 'system:permission:user:page', 0, '/system/user', 'user', 'module/system/user/Index', 0, 18, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (3, @t_id, 1, '用户管理', 'system:permission:user:page', 0, 'system/permission/user', 'user', 0, 18, null, @u_id, NOW(), @u_id, NOW());
 
 INSERT INTO sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (300, @t_id, 3, -1, '分页查询', 'system:permission:user:page', 0, 0, '用户管理-分页查询', @u_id, NOW(), @u_id, NOW()),
@@ -50,8 +50,8 @@ values (300, @t_id, 3, -1, '分页查询', 'system:permission:user:page', 0, 0, 
 ;
 
 -- 菜单管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (4, -100, 1, '菜单管理', 'system:permission:menuVO:view', 0, '/permission/menuVO', 'menuVO', 'module/system/menuVO/Index', 0, 2, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (4, -100, 1, '菜单管理', 'system:permission:menuVO:view', 0, 'system/permission/menu', 'menuVO', 0, 2, null, @u_id, NOW(), @u_id, NOW());
 
 INSERT INTO sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (400, @t_id, 4, -1, '查询所有数据-树型结构', 'system:permission:menuVO:query-tree', 0, 0, '菜单管理-查询所有数据(树型结构)', @u_id, NOW(), @u_id, NOW()),
@@ -63,8 +63,8 @@ values (400, @t_id, 4, -1, '查询所有数据-树型结构', 'system:permission
 ;
 
 -- 角色管理
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (5, -100, 1, '角色管理', 'system:permission:role:view', 0, '/permission/role', 'user', 'module/system/role/Index', 0, 12, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (5, -100, 1, '角色管理', 'system:permission:role:view', 0, 'system/permission/role', 'user', 0, 12, null, @u_id, NOW(), @u_id, NOW());
 
 INSERT INTO sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (500, @t_id, 4, -1, '分页查询', 'system:permission:role:page', 0, 0, '角色管理-分页查询', @u_id, NOW(), @u_id, NOW()),

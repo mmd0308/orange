@@ -4,10 +4,12 @@ import com.hzqing.orange.admin.starter.common.constants.enums.support.DataPreset
 import com.hzqing.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author 程序员橙子
  */
+@EqualsAndHashCode(callSuper = true)
 @Schema(description = "菜单")
 @Data
 public class MenuVO extends BaseTenantVO {
@@ -35,9 +37,6 @@ public class MenuVO extends BaseTenantVO {
 
     @Schema(description = "菜单图标")
     private String icon;
-
-    @Schema(description = "组件路径")
-    private String component;
 
     @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
     private Boolean hidden;

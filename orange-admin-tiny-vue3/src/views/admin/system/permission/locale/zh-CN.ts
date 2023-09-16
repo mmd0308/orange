@@ -31,6 +31,8 @@ export default {
   'system.menu.form.name.placeholder': '请输入菜单名称',
   'system.menu.form.permission': '权限编码',
   'system.menu.form.permission.placeholder': '请输入权限编码',
+  'system.menu.form.path': '菜单路径',
+  'system.menu.form.path.placeholder': '请输入菜单路径',
   'system.menu.table.columns.name': '菜单名称',
   'system.menu.table.columns.icon': '图标',
   'system.menu.table.columns.permission': '权限编码',

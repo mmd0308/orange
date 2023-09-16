@@ -27,9 +27,6 @@ public class MenuUpdateRequest implements Serializable {
     @Schema(description = "菜单图标")
     private String icon;
 
-    @Schema(description = "组件路径")
-    private String component;
-
     @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
     private Boolean hidden;
 

@@ -29,11 +29,12 @@
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
           </template>
-          <tiny-grid-column field="name" :title="$t('system.dict-type.table.columns.name')" align="center" />
-          <tiny-grid-column field="dictType" :title="$t('system.dict-type.table.columns.dictType')" align="center" />
+          <tiny-grid-column field="name" :title="$t('system.dict-type.table.columns.name')" />
+          <tiny-grid-column field="dictType" :title="$t('system.dict-type.table.columns.dictType')" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
           <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
+          <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" align="center" width="135" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center">
             <template #default="data">

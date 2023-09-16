@@ -18,6 +18,4 @@ public class MenuListQuery {
 
     private String permissionLike;
 
-    private String component;
-
 }

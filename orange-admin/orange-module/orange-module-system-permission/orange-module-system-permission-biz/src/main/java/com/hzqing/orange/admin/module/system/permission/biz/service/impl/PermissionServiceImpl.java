@@ -110,7 +110,7 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<RouterTree> queryCurrentUserRoutersTree() {
+    public List<RouterTreeVO> queryCurrentUserRoutersTree() {
         Long userId = GlobalContextHelper.getCurrentUserId();
         UserVO user = userService.getById(userId);
         if (Objects.isNull(user)) {
@@ -138,8 +138,8 @@ public class PermissionServiceImpl implements PermissionService {
         menuVOList = menuVOList.stream().sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
 
         //组装树型结果
-        List<RouterTree> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuVOList);
-        Map<Long, List<RouterTree>> routerMap = routers.stream().collect(Collectors.groupingBy(RouterTree::getParentId));
+        List<RouterTreeVO> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuVOList);
+        Map<Long, List<RouterTreeVO>> routerMap = routers.stream().collect(Collectors.groupingBy(RouterTreeVO::getParentId));
         routers.forEach(item -> item.setChildren(routerMap.get(item.getId())));
         // 过滤掉非顶级数据
         return routers.stream().filter(item -> CommonConstants.Common.DEFAULT_PARENT_ID.equals(item.getParentId())).collect(Collectors.toList());

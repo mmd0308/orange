@@ -4,7 +4,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.service.PermissionSe
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
 import com.hzqing.orange.admin.module.system.permission.common.vo.ResourceIds;
 import com.hzqing.orange.admin.module.system.permission.common.vo.ResourcePermissions;
-import com.hzqing.orange.admin.module.system.permission.common.vo.RouterTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RouterTreeVO;
 import com.hzqing.orange.admin.starter.common.result.Result;
 import com.hzqing.orange.admin.starter.common.result.ResultWrapper;
 import com.hzqing.orange.admin.starter.context.GlobalContextHelper;
@@ -44,7 +44,7 @@ public class PermissionQueryController {
 
     @Operation(summary = "查询用户路由", operationId = "system:permission:permission:query-current-user-routers-tree", description = "只返回当前登录用户拥有的路由")
     @GetMapping("/query-current-user-routers-tree")
-    public Result<List<RouterTree>> queryCurrentUserRoutersTree() {
+    public Result<List<RouterTreeVO>> queryCurrentUserRoutersTree() {
         return ResultWrapper.ok(permissionService.queryCurrentUserRoutersTree());
     }
 

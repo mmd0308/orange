@@ -53,12 +53,13 @@ import {
 import TinyThemeTool from '@opentiny/vue-theme/theme-tool.js';
 import { useAppStore } from '@/store';
 // eslint-disable-next-line import/extensions
-import Footer from '@/components/footer/index.vue';
-import NavBar from '@/components/navbar/index.vue';
 import Theme from '@/components/theme/index.vue';
-import Menu from '@/components/menu/index.vue';
 import { DefaultTheme } from '@/components/theme/type';
-import PageLayout from './page-layout.vue';
+import PageLayout from './components/page-layout.vue';
+import Menu from './components/menu.vue';
+import NavBar from './components/navbar.vue';
+import Footer from './components/footer.vue';
+
 // 动态切换
 const appStore = useAppStore();
 const changefooter = ref('#fff');
