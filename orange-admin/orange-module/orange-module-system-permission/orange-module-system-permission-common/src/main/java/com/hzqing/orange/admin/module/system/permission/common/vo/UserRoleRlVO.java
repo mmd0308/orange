@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Schema(description = "用户和角色关系")
-public class UserRoleRl extends BaseTenantVO {
+public class UserRoleRlVO extends BaseTenantVO {
 
-    public UserRoleRl(Long userId, Long roleId) {
+    public UserRoleRlVO(Long userId, Long roleId) {
         this.userId = userId;
         this.roleId = roleId;
     }

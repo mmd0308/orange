@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author 程序员橙子
  */
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Token响应信息")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Token {
+public class Token implements Serializable {
 
     @Schema(description = "Token")
     private String token;
