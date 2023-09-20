@@ -4,10 +4,9 @@
       <div class="login">
         <div class="login-header">
           <div class="login-logo">
-            <img class="login-logo-img" alt="Tiny Design" src="@/assets/images/pro.png" />
-            <span class="login-logo-text">TinyPro of Vue</span>
+            <img class="login-logo-img" src="/favicon.ico" />
+            <span class="login-logo-text">{{ $t('login.main.title') }}</span>
           </div>
-          <div class="login-desc">{{ $t('login.main.text') }}</div>
         </div>
         <LoginForm />
       </div>
@@ -19,7 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-// import Footer from '@/components/footer/index.vue';
 import LoginForm from './components/login-form.vue';
 </script>
 
@@ -29,7 +27,7 @@ import LoginForm from './components/login-form.vue';
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  background-image: url('@/assets/images/img_log.png');
+  background-image: url('@/assets/images/login_bg.jpg');
   background-size: 100% 100%;
 }
 
@@ -60,10 +58,13 @@ import LoginForm from './components/login-form.vue';
 
   &-logo {
     margin-right: 20px;
+    margin-bottom: 40px;
 
     &-img {
       margin-right: 10px;
       vertical-align: middle;
+      width: 48px;
+      height: 48px;
     }
 
     &-text {
@@ -73,13 +74,6 @@ import LoginForm from './components/login-form.vue';
       font-size: 30px;
       vertical-align: middle;
     }
-  }
-
-  &-desc {
-    margin-top: 12px;
-    margin-bottom: 40px;
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 14px;
   }
 }
 

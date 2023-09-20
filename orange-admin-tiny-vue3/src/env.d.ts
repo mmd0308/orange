@@ -24,3 +24,5 @@ declare module '@opentiny/vue-theme/theme-tool.js';
 declare module '@opentiny/vue-theme/theme';
 declare module 'echarts4';
 declare module 'query-string';
+
+declare module 'jsencrypt/bin/jsencrypt'

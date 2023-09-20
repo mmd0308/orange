@@ -17,7 +17,7 @@ export default {
   'login.form.registerPassword.placeholder': '注册密码：',
   'login.form.registerConfirmPassword.placeholder': '确认密码：',
   'login.form.rememberPassword': '记住密码',
-  'login.form.forgetPassword': '忘记密码',
+  'login.form.forgetPassword': '忘记密码？',
   'login.form.registration': '注册账户',
   'login.form.login': '登录',
   'login.form.register': '注册',
@@ -42,5 +42,5 @@ export default {
   'login.tip.info': '用户名：admin，密码 admin',
   'login.tip.mail': "用户名：admin{'@'}example.com，密码 admin",
   'login.tip.right': '请输入正确的用户名密码',
-  'login.main.text': 'TinyPro 中后台前端解决方案',
+  'login.main.title': '橙子后台管理系统',
 };

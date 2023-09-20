@@ -66,7 +66,7 @@ const useUserStore = defineStore('user', {
       this.filterType = [];
     },
 
-    // Get user's information
+    // 获取用户信息
     async info() {
       const res = await getUserInfo();
       this.setInfo(res.data);
@@ -77,19 +77,19 @@ const useUserStore = defineStore('user', {
       this.setInfo(res.data);
     },
 
-    // Login
-    async login(loginForm: LoginData) {
+    // 登录
+    async login(loginForm: SystemPermissionAPI.LoginParams) {
       try {
         const res = await userLogin(loginForm);
-        const { token, userInfo } = res.data;
+        const { token } = res.data;
         setToken(token);
-        this.setInfo(userInfo);
       } catch (err) {
         clearToken();
         throw err;
       }
     },
 
+    // 邮箱登录
     async loginMail(loginForm: LoginDataMail) {
       try {
         const res = await userLoginMail(loginForm);
@@ -100,10 +100,12 @@ const useUserStore = defineStore('user', {
       }
     },
 
-    // Logout
+    // 推出登录
     async logout() {
       this.resetInfo();
       clearToken();
+      // 清空缓存
+      sessionStorage.clear()
       removeRouteListener();
     },
   },

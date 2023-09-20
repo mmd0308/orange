@@ -11,6 +11,8 @@ import com.hzqing.orange.admin.starter.mybatis.handlers.EnumCodeTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+
 /**
  * @author 程序员橙子
  */
@@ -46,7 +48,7 @@ public class RecordLoginEntity extends BaseTenantEntity {
     private String userAgent;
 
     @TableField("login_time")
-    private Long loginTime;
+    private LocalDateTime loginTime;
 
     /**
      * 请求状态（0成功 1失败）

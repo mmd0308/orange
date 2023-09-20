@@ -56,13 +56,10 @@ import {
 
 import SystemRequest from '@/api/system/index'
 
-const emit = defineEmits(['ok'])
-
 const { proxy } = getCurrentInstance() as any
 
 const visible = ref(false)
 const title = '详情'
-
 const formData = ref<SystemRecordAPI.RecordOperationVO>({})
 
 const onClose = () => {

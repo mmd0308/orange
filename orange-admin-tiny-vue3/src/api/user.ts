@@ -3,8 +3,6 @@ import { UserInfo } from '@/store/modules/user/types';
 
 const BASE_URL = "/system/permission/v1.0/user"
 
-
-
 export interface LoginData {
   username: string;
   password: string;
@@ -22,13 +20,6 @@ export interface LoginRes {
 export interface UserRes {
   chartData: [];
   tableData: [];
-}
-export interface UserData {
-  sort?: number | undefined;
-  startTime?: string;
-  endTime?: string;
-  filterStatus?: [];
-  filterType?: [];
 }
 
 export function login(data: LoginData) {
@@ -48,10 +39,6 @@ export function getUserInfo() {
 
 export function updateUserInfo(data: UserInfo) {
   return axios.put<UserInfo>(`/api/user/userInfo`, data);
-}
-
-export function getUserData(data?: UserData) {
-  return axios.post<UserRes>('/api/user/data', data);
 }
 
 export function registerUser(data: LoginData) {

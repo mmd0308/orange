@@ -25,7 +25,6 @@
           </tiny-link>
         </div>
       </div>
-
       <tiny-form-item size="medium">
         <tiny-button type="primary" class="login-form-btn" :loading="loading" @click="handleSubmit">{{
           $t('login.form.login') }}</tiny-button>
@@ -35,142 +34,130 @@
 </template>
 
 <script lang="ts" setup>
-  import { inject, ref, reactive, computed } from 'vue';
-  import { useRouter } from 'vue-router';
-  import {
-    Form as TinyForm,
-    FormItem as TinyFormItem,
-    Input as TinyInput,
-    Button as TinyButton,
-    Checkbox as TinyCheckbox,
-    Link as TinyLink,
-    Modal,
-    Notify,
-  } from '@opentiny/vue';
-  import { useI18n } from 'vue-i18n';
-  import { useUserStore } from '@/store';
-  import useLoading from '@/hooks/loading';
+import { inject, ref, reactive, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import {
+  Form as TinyForm, FormItem as TinyFormItem,
+  Input as TinyInput, Button as TinyButton, Checkbox as TinyCheckbox,
+  Link as TinyLink, Modal, Notify,
+} from '@opentiny/vue';
+import { useI18n } from 'vue-i18n';
+import { useUserStore } from '@/store';
+import useLoading from '@/hooks/loading';
 
-  const router = useRouter();
-  const { t } = useI18n();
-  const { loading, setLoading } = useLoading();
-  const userStore = useUserStore();
-  const loginFormMail = ref();
+const router = useRouter();
+const { t } = useI18n();
+const { loading, setLoading } = useLoading();
+const userStore = useUserStore();
+const loginFormMail = ref();
 
-  const rules = computed(() => {
-    return {
-      mailname: [
-        {
-          required: true,
-          message: t('login.form.mailName.errMsg'),
-          trigger: 'change',
-        },
-      ],
-      mailpassword: [
-        {
-          required: true,
-          message: t('login.form.mailpassword.errMsg'),
-          trigger: 'change',
-        },
-      ],
-    };
-  });
-
-  const loginMail = reactive({
-    mailname: 'admin',
-    mailpassword: 'eeX00Wzl3zXFB+4QsmpgYX7zChzxqde/M8w21o3PKifqmMzjIiG8fH+j34iJcGoCt3iZS/aJ5l2q9QztIwVhKRDz3VhQEP0NClbT7sKECg5DPK98gxGlnTUYJ3w8fMF91gXdSA6BrwEdRtlNfSiNeL9OXiyua964ITohLzFMMzE=',
-    rememberPassword: true,
-  });
-
-  // 切换模式
-  const handle: any = inject('handle');
-  const typeChange = () => {
-    handle(true);
+const rules = computed(() => {
+  return {
+    mailname: [
+      {
+        required: true,
+        message: t('login.form.mailName.errMsg'),
+        trigger: 'change',
+      },
+    ],
+    mailpassword: [
+      {
+        required: true,
+        message: t('login.form.mailpassword.errMsg'),
+        trigger: 'change',
+      },
+    ],
   };
+});
 
-  function handleSubmit () {
-    loginFormMail.value?.validate(async (valid: boolean) => {
-      if (!valid) {
-        return;
-      }
+const loginMail = reactive({
+  mailname: 'admin',
+  mailpassword: 'eeX00Wzl3zXFB+4QsmpgYX7zChzxqde/M8w21o3PKifqmMzjIiG8fH+j34iJcGoCt3iZS/aJ5l2q9QztIwVhKRDz3VhQEP0NClbT7sKECg5DPK98gxGlnTUYJ3w8fMF91gXdSA6BrwEdRtlNfSiNeL9OXiyua964ITohLzFMMzE=',
+  rememberPassword: true,
+});
 
-      setLoading(true);
+// 切换模式
+const handle: any = inject('handle');
+const typeChange = () => {
+  handle(true);
+};
 
-      try {
-        await userStore.login({
-          username: loginMail.mailname,
-          password: loginMail.mailpassword,
-        });
-        Modal.message({
-          message: t('login.form.login.success'),
-          status: 'success',
-        });
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
-        router.push({
-          name: (redirect as string) || 'Home',
-          query: {
-            ...othersQuery,
-          },
-        });
-      } catch (err) {
-        Notify({
-          type: 'error',
-          title: t('login.tip.right'),
-          message: t('login.tip.mail'),
-          position: 'top-right',
-          duration: 2000,
-          customClass: 'my-custom-cls',
-        });
-      } finally {
-        setLoading(false);
-      }
-    });
-  }
+function handleSubmit() {
+  loginFormMail.value?.validate(async (valid: boolean) => {
+    if (!valid) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await userStore.login({
+        username: loginMail.mailname,
+        password: loginMail.mailpassword,
+      });
+      Modal.message({
+        message: t('login.form.login.success'),
+        status: 'success',
+      });
+      // const { redirect, ...othersQuery } = router.currentRoute.value.query;
+      router.push({ path: `${import.meta.env.VITE_CONTEXT}dashboard`, });
+    } catch (err) {
+      Notify({
+        type: 'error',
+        title: t('login.tip.right'),
+        message: t('login.tip.mail'),
+        position: 'top-right',
+        duration: 2000,
+        customClass: 'my-custom-cls',
+      });
+    } finally {
+      setLoading(false);
+    }
+  });
+}
 </script>
 
 <style lang="less" scoped>
-  .login-form-container {
-    margin-top: 5%;
+.login-form-container {
+  margin-top: 5%;
+}
+
+.login-form {
+  margin-left: 6%;
+
+  .tiny-form-item {
+    margin-bottom: 20px;
   }
 
-  .login-form {
-    margin-left: 6%;
+  &-container {
+    width: 320px;
+  }
 
-    .tiny-form-item {
-      margin-bottom: 20px;
-    }
+  &-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  &-btn {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.divide-line {
+  margin: 0 5px;
+}
+
+// responsive
+@media (max-width: @screen-ms) {
+  .login-form {
+    margin-left: 5%;
 
     &-container {
-      width: 320px;
-    }
-
-    &-options {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      font-size: 12px;
-    }
-
-    &-btn {
-      display: block;
-      width: 100%;
-      max-width: 100%;
+      width: 240px;
     }
   }
-
-  .divide-line {
-    margin: 0 5px;
-  }
-
-  // responsive
-  @media (max-width: @screen-ms) {
-    .login-form {
-      margin-left: 5%;
-
-      &-container {
-        width: 240px;
-      }
-    }
-  }
+}
 </style>

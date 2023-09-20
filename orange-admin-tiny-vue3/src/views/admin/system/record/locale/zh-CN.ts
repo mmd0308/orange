@@ -23,4 +23,10 @@ export default {
   'system.record.operation.table.columns.status': '操作状态',
   'system.record.operation.table.columns.startTime': '请求时间',
   'system.record.operation.table.columns.executeTime': '请求耗时',
+
+
+
+  'system.record.login.table.columns.traceId': 'RequestId',
+  'system.record.login.table.columns.account': '登录账号',
+  'system.record.login.table.columns.userId': '操作人员',
 };

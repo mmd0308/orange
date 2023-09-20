@@ -1,4 +1,12 @@
 declare namespace SystemPermissionAPI {
+  type LoginParams = {
+    /** 登陆账号 */
+    username: string;
+    /** 登陆密码 */
+    password: string;
+    /** 租户账号 */
+    tenantId?: string;
+  };
 
   interface DepartmentVO {
     tenantId?: string;

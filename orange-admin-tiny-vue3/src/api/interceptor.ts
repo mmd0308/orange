@@ -10,39 +10,23 @@ export interface HttpResponse<T = unknown> {
   data: T;
 }
 
-const { VITE_API_BASE_URL, VITE_BASE_API, VITE_MOCK_IGNORE } =
-  import.meta.env || {};
-
+const { VITE_API_BASE_URL } = import.meta.env || {};
 if (VITE_API_BASE_URL) {
   axios.defaults.baseURL = VITE_API_BASE_URL;
 }
 
-const ignoreMockApiList = VITE_MOCK_IGNORE?.split(',') || [];
-
-// axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8'
-
 
 axios.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    // const isProxy = ignoreMockApiList.includes(config.url);
-    // debugger
-    // if (isProxy) {
-    //   config.url = config.url?.replace(VITE_BASE_API, '/api/v1');
-    // }
-    // const token = getToken();
-    // if (token) {
-    //   if (!config.headers) {
-    //     config.headers = {};
-    //   }
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
-    if (!config.headers) {
-      config.headers = {}
+    const token = getToken();
+    if (token) {
+      if (!config.headers) {
+        config.headers = {};
+      }
+      config.headers["orange-token"] = token
     }
-    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTUwODY3NzMsImV4cCI6MTY5NTEyOTk3MywiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.4v7AEO5bPv7hi9DYSF2nSqZMC6NOPf0YPNMc6s2Xgms'
     config.headers = { ...config.headers };
-
     return config;
   },
   (error) => {
@@ -60,11 +44,10 @@ axios.interceptors.response.use(
       // 返回整个response
       return result
     }
-    result.msg &&
-      Modal.message({
-        message: result.msg,
-        status: 'error',
-      });
+    result.msg && Modal.message({
+      message: result.msg,
+      status: 'error',
+    });
     return Promise.reject(new Error(result.msg || 'Error'));
   },
   (error) => {
@@ -77,13 +60,11 @@ axios.interceptors.response.use(
         status: 'error',
       });
     } else {
-      data.errMsg &&
-        Modal.message({
-          message: locale.t(`http.error.${data.errMsg}`),
-          status: 'error',
-        });
+      data.errMsg && Modal.message({
+        message: locale.t(`http.error.${data.errMsg}`),
+        status: 'error',
+      });
     }
-
     return Promise.reject(error);
   }
 );

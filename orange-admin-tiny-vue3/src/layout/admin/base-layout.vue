@@ -176,7 +176,7 @@ onMounted(() => {
 // 路由子菜单选中后的样式
 :deep(.tiny-tree-node__children .tiny-tree-node__content) {
   .tree-node-name {
-    margin-left: 60px !important;
+    margin-left: 30px !important;
     padding-left: 6px !important;
   }
 }

@@ -1,13 +1,13 @@
 /* eslint-disable prefer-template */
 import { createRouter, createWebHistory } from 'vue-router';
-import NProgress from 'nprogress'; // progress bar
+import NProgress from 'nprogress';
 import { AdminBaseLayout } from '@/layout'
 
 import appRoutes from './routes';
 import createRouteGuard from './guard';
 
 
-NProgress.configure({ showSpinner: false }); // NProgress Configuration
+NProgress.configure({ showSpinner: false });
 
 const router = createRouter({
   history: createWebHistory(),
@@ -31,6 +31,18 @@ const router = createRouter({
       meta: {
         requiresAuth: false,
       },
+    },
+    {
+      path: import.meta.env.VITE_CONTEXT,
+      component: AdminBaseLayout,
+      redirect: `${import.meta.env.VITE_CONTEXT}dashboard`,
+      children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: () => import('@/views/admin/dashboard/index.vue'),
+        }
+      ]
     },
     {
       name: 'root',

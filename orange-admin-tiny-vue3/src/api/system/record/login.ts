@@ -2,26 +2,10 @@ import axios from 'axios';
 
 const BASE_URL = "/system/record/v1.0/record-login"
 
-export function queryRolePage(params: SystemPermissionAPI.RolePageQueryParams) {
+export function queryRecordLoginPage(params: SystemRecordAPI.RecordLoginPageQuery) {
   return axios.post(BASE_URL.concat("/page"), params);
 }
 
-export function queryRoleAll(params: SystemPermissionAPI.RoleAllQueryParams) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
-}
-
-export function deleteRoleById(id: string) {
-  return axios.delete(BASE_URL.concat(`/${id}`));
-}
-
-export function addRole(params: SystemPermissionAPI.RoleVO) {
-  return axios.post(BASE_URL, params);
-}
-
-export function getRoleById(id: string) {
-  return axios.get(BASE_URL.concat(`/${id}`));
-}
-
-export function updateRoleById(id: string, params: SystemPermissionAPI.RoleVO) {
-  return axios.put(BASE_URL.concat(`/${id}`), params);
+export function getRecordLoginById(id: string) {
+  return axios.get<SystemRecordAPI.RecordLoginVO>(BASE_URL.concat(`/${id}`));
 }

@@ -38,6 +38,7 @@
     "echarts": "^5.3.3",
     "echarts4": "npm:echarts@4.9.0",
     "fp-ts": "2.11.4",
+    "jsencrypt": "^3.3.2",
     "mitt": "^3.0.0",
     "moment": "^2.29.4",
     "nprogress": "^1.0.0-1",
