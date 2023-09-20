@@ -4,7 +4,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.converter.ButtonConv
 import com.hzqing.orange.admin.module.system.permission.biz.manager.ButtonManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.ButtonService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Button;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ButtonVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
@@ -33,8 +33,8 @@ public class ButtonController {
 
     @Operation(summary = "分页查询", operationId = "system:permission:button:page")
     @PostMapping(value = "/page")
-    public Result<PageVO<Button>> page(@RequestBody ButtonPageQuery queryVo) {
-        PageVO<Button> pageVO = buttonService.page(queryVo);
+    public Result<PageVO<ButtonVO>> page(@RequestBody ButtonPageQuery queryVo) {
+        PageVO<ButtonVO> pageVO = buttonService.page(queryVo);
         return ResultWrapper.ok(pageVO);
     }
 
@@ -61,7 +61,7 @@ public class ButtonController {
 
     @Operation(summary = "根据ID查询详情", operationId = "system:permission:button:get")
     @GetMapping("/{id}")
-    public Result<Button> getById(@PathVariable("id") Long id) {
+    public Result<ButtonVO> getById(@PathVariable("id") Long id) {
         return ResultWrapper.ok(ButtonConverter.INSTANCE.toVo(buttonManager.getById(id)));
     }
 

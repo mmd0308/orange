@@ -8,13 +8,16 @@ import com.hzqing.orange.admin.module.system.permission.biz.dto.UserListQuery;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.UserEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.DepartmentManager;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.RoleManager;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.UserManager;
+import com.hzqing.orange.admin.module.system.permission.biz.service.RoleService;
 import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.DepartmentVO;
+import com.hzqing.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
 import com.hzqing.orange.admin.starter.common.constants.CommonConstants;
@@ -47,6 +50,8 @@ public class UserServiceImpl implements UserService {
     private final DepartmentManager departmentManager;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final RoleService roleService;
 
     @Override
     public UserVO getByUsername(String username) {
@@ -83,6 +88,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean resetPassword(ResetPasswordRequest request) {
+        request.check();
+        UserEntity entity = userManager.getById(request.getUserId());
+        Assert.nonNull(entity, SystemPermissionErrorCode.GLOBAL_DATA_NOT_EXIST);
+        entity.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        return userManager.updateById(entity);
+    }
+
+    @Override
     public PageVO<UserVO> page(UserPageQuery query) {
         UserListQuery listQuery = UserConverter.INSTANCE.toListQuery(query);
         if (Objects.nonNull(query.getDepartmentId())) {
@@ -101,7 +115,7 @@ public class UserServiceImpl implements UserService {
     public List<UserVO> queryAll(UserAllQuery query) {
         UserListQuery listQuery = UserConverter.INSTANCE.toListQuery(query);
 
-        if (Objects.nonNull(query.getDepartmentId()) && query.isIncludeSubsetDepartmentUsers()) {
+        if (Objects.nonNull(query.getDepartmentId())) {
             List<Long> departmentIds = getDepartmentIds(query.getDepartmentId());
             if (CollUtil.isEmpty(departmentIds)) {
                 return Collections.emptyList();
@@ -112,6 +126,17 @@ public class UserServiceImpl implements UserService {
 
         List<UserEntity> entityList = userManager.listByParams(listQuery);
         return UserConverter.INSTANCE.toListVo(entityList);
+    }
+
+    @Override
+    public UserDetailsVO getDetailsById(Long id) {
+        UserVO userVO = getById(id);
+        UserDetailsVO detailsVO = UserConverter.INSTANCE.toDetailsVO(userVO);
+        if (Objects.isNull(detailsVO)) {
+            return null;
+        }
+        detailsVO.setRoleVOList(roleService.queryByUserId(id));
+        return detailsVO;
     }
 
     private List<Long> getDepartmentIds(Long departmentId) {

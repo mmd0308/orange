@@ -2,10 +2,10 @@ package com.hzqing.orange.admin.module.system.permission.biz.manager.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
-import  com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
-import  com.hzqing.orange.admin.module.system.permission.biz.mapper.MenuMapper;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
+import com.hzqing.orange.admin.module.system.permission.biz.mapper.MenuMapper;
 import com.hzqing.orange.admin.starter.mybatis.manager.impl.BaseManagerImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.Objects;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Slf4j
 @Component
@@ -35,7 +35,8 @@ public class MenuManagerImpl extends BaseManagerImpl<MenuMapper, MenuEntity> imp
         return mapper.selectList(Wrappers.<MenuEntity>lambdaQuery()
                 .eq(Objects.nonNull(query.getParentId()), MenuEntity::getParentId, query.getParentId())
                 .eq(Objects.nonNull(query.getPermission()), MenuEntity::getPermission, query.getPermission())
-                .like(StrUtil.isNotBlank(query.getName()), MenuEntity::getName, query.getName())
+                .eq(StrUtil.isNotBlank(query.getName()), MenuEntity::getName, query.getName())
+                .like(StrUtil.isNotBlank(query.getNameLike()), MenuEntity::getName, query.getNameLike())
                 .like(StrUtil.isNotBlank(query.getPermissionLike()), MenuEntity::getPermission, query.getPermissionLike())
                 .orderByAsc(MenuEntity::getSort)
         );

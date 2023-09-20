@@ -6,6 +6,11 @@ export function queryRoutersTree() {
   return axios.get(BASE_URL.concat("/query-current-user-routers-tree"));
 }
 
+
+export function allotUserRole(params: SystemPermissionAPI.AllotUserRoleVO) {
+  return axios.post(BASE_URL.concat("/allot-user-role"), params);
+}
+
 // export function queryRoleAll(params: SystemPermissionAPI.RoleAllQueryParams) {
 //   return axios.post(BASE_URL.concat("/query-all"), params);
 // }

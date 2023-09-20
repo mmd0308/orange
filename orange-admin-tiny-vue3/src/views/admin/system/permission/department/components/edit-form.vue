@@ -60,6 +60,7 @@ const onSubmit = () => {
         SystemRequest.department
           .updateDepartmentById(formData.value.id, toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '修改成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })
@@ -67,6 +68,7 @@ const onSubmit = () => {
         SystemRequest.department
           .addDepartment(toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '创建成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })

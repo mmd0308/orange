@@ -7,7 +7,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.service.AuthService;
 import com.hzqing.orange.admin.module.system.permission.biz.service.RoleService;
 import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Role;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RoleVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.Token;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserInfo;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
@@ -67,9 +67,9 @@ public class AuthServiceImpl implements AuthService {
     public UserInfo getInfo() {
         Long currentUserId = GlobalContextHelper.getCurrentUserId();
         UserVO user = userService.getById(currentUserId);
-        List<Role> roleList = roleService.queryByUserId(currentUserId);
+        List<RoleVO> roleVOList = roleService.queryByUserId(currentUserId);
         return UserInfo.builder().user(user)
-                .rolePermissionList(CollUtils.convertList(roleList, Role::getPermission))
+                .rolePermissionList(CollUtils.convertList(roleVOList, RoleVO::getPermission))
                 .build();
     }
 

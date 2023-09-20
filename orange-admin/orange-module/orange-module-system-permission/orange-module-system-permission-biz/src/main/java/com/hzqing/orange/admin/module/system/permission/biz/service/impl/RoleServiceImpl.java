@@ -8,7 +8,7 @@ import  com.hzqing.orange.admin.module.system.permission.biz.entity.RoleEntity;
 import  com.hzqing.orange.admin.module.system.permission.biz.manager.RoleManager;
 import  com.hzqing.orange.admin.module.system.permission.biz.service.RoleService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.RoleErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Role;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RoleVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleUpdateRequest;
@@ -34,13 +34,13 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public List<Role> queryByUserId(Long userId) {
+    public List<RoleVO> queryByUserId(Long userId) {
         List<RoleEntity> entityList = roleManager.listByUserId(userId);
         return RoleConverter.INSTANCE.toListVo(entityList);
     }
 
     @Override
-    public PageVO<Role> page(RolePageQuery query) {
+    public PageVO<RoleVO> page(RolePageQuery query) {
         RoleListQuery listQuery = RoleConverter.INSTANCE.toListQuery(query);
         Page<RoleEntity> page = roleManager.page(query.getPageNo(), query.getPageSize(), listQuery);
         return RoleConverter.INSTANCE.toPage(page);

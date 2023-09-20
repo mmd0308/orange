@@ -16,7 +16,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.manager.RoleResource
 import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.MenuErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Button;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ButtonVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
@@ -80,15 +80,15 @@ public class MenuServiceImpl implements MenuService {
         List<MenuButtonTree> menuButtonTree = MenuConverter.INSTANCE.toListMenuButtonTree(menuEntityList);
         // 组装按钮
         List<ButtonEntity> buttonEntityList = buttonManager.listByParams(ButtonListQuery.builder().build());
-        List<Button> buttonVoList = ButtonConverter.INSTANCE.toListVo(buttonEntityList);
-        Map<Long, List<Button>> buttonMap = CollUtil.isEmpty(buttonVoList) ? null : buttonVoList.stream().collect(Collectors.groupingBy(Button::getMenuId));
+        List<ButtonVO> buttonVOVoList = ButtonConverter.INSTANCE.toListVo(buttonEntityList);
+        Map<Long, List<ButtonVO>> buttonMap = CollUtil.isEmpty(buttonVOVoList) ? null : buttonVOVoList.stream().collect(Collectors.groupingBy(ButtonVO::getMenuId));
 
         Map<Long, List<MenuButtonTree>> menuMap = menuButtonTree.stream().collect(Collectors.groupingBy(MenuButtonTree::getParentId));
         // 组装子集
         menuButtonTree.forEach(item -> {
             item.setChildren(menuMap.get(item.getId()));
             if (Objects.nonNull(buttonMap) && buttonMap.containsKey(item.getId())) {
-                item.setButtonList(buttonMap.get(item.getId()));
+                item.setButtonVOList(buttonMap.get(item.getId()));
             }
         });
         // 过滤掉非顶级数据

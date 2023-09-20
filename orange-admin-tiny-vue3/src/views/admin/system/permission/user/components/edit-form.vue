@@ -2,7 +2,7 @@
   <div>
     <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-        :model="formData" label-width="100px">
+        :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
         <tiny-form-item label="部门" prop="parentId">
           <tiny-select v-model="formData.departmentId" value-field="id" text-field="name" render-type="tree"
             :tree-op="treeOp" :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
@@ -74,6 +74,7 @@ const onSubmit = () => {
         SystemRequest.user
           .updateUserById(formData.value.id, toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '修改成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })
@@ -81,6 +82,7 @@ const onSubmit = () => {
         SystemRequest.user
           .addUser(toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '创建成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })

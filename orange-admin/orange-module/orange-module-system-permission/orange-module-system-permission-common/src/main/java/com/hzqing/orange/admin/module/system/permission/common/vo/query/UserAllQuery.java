@@ -16,9 +16,6 @@ public class UserAllQuery implements Serializable {
     @Schema(description = "部门ID")
     private Long departmentId;
 
-    @Schema(description = "是否包含子集部门用户数据[只有departmentId不为空时,生效],true: 查询该部门及子部门所有的用户数据.默认:false")
-    private boolean includeSubsetDepartmentUsers;
-
     @Schema(description = "用户名称")
     private String name;
 

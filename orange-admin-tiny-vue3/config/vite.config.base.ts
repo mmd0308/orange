@@ -5,6 +5,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import svgLoader from 'vite-svg-loader';
 import { viteMockServe } from 'vite-plugin-mock';
 import AutoImport from 'unplugin-auto-import/vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 
 const useMock = !!process.env.VITE_USE_MOCK
 
@@ -36,7 +38,13 @@ const config = {
       },
       // 生成auto-import.d.ts声明文件
       dts: './auto-import.d.ts'
-    })
+    }),
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons/svg')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+    }),
   ],
   build: {
     outDir: resolve(__dirname, '../dist'),

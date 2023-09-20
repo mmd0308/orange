@@ -10,11 +10,14 @@
         <tiny-form-item :label="$t('system.menu.form.name')" prop="name">
           <tiny-input v-model="formData.name" :placeholder="$t('system.menu.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.permission')" prop="name">
+        <tiny-form-item :label="$t('system.menu.form.permission')" prop="permission">
           <tiny-input v-model="formData.permission"
             :placeholder="$t('system.menu.form.permission.placeholder')"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.path')" prop="name">
+        <tiny-form-item :label="$t('system.menu.form.icon')" prop="icon">
+          <tiny-input v-model="formData.icon" :placeholder="$t('system.menu.form.icon.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('system.menu.form.path')" prop="path">
           <tiny-input v-model="formData.path" :placeholder="$t('system.menu.form.path.placeholder')"></tiny-input>
         </tiny-form-item>
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
@@ -50,6 +53,7 @@ const title = computed(() => {
 })
 
 const formData = ref<SystemPermissionAPI.MenuVO>({
+  sort: 1
 })
 
 const formDataRules = {
@@ -64,6 +68,7 @@ const onSubmit = () => {
         SystemRequest.menu
           .updateMenuById(formData.value.id, toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '修改成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })
@@ -71,6 +76,7 @@ const onSubmit = () => {
         SystemRequest.menu
           .addMenu(toRaw(formData.value))
           .then((res) => {
+            proxy.$modal.message({ message: '创建成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })

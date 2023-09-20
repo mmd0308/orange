@@ -19,8 +19,8 @@ SET @s_id := 1;
 -- ---------------------------------------------------------------------------------------------------------------------------------------------------
 BEGIN;
 
-INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, component, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (100, @t_id, @s_id, '字典管理', 'system:dict:view', 0, '/basic/dict', 'user', 'module/system/dict/Index', 0, 14, null, @u_id, NOW(), @u_id, NOW());
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (100, @t_id, @s_id, '字典管理', 'system:dict:view', 0, 'system/permission/dict', 'user', 0, 14, null, @u_id, NOW(), @u_id, NOW());
 
 insert into sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (10000, @t_id, 100, -1, '分页查询', 'system:dict:dict-type:page', 0, 0, '字典管理类型-分页查询', @u_id, NOW(), @u_id, NOW()),

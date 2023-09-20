@@ -6,6 +6,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import cn.hutool.json.JSONUtil;
+import com.hzqing.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
 import com.hzqing.orange.admin.starter.biz.record.dto.RecordDTO;
 import com.hzqing.orange.admin.starter.biz.record.event.RecordLoginEvent;
 import com.hzqing.orange.admin.starter.biz.record.event.RecordOperationEvent;
@@ -92,14 +93,13 @@ public class RecordAspect {
             return;
         }
         RecordDTO record = generateRecord(point, request, operation, startTime, result, exception);
-        if (isLoginAuthUrl(requestURI)) {
-            //        record.setType(LoginRecordTypeEnum.LOGIN);
+        if (isMatch(requestURI, LOGIN_URL_LIST)) {
+            record.setType(RecordLoginTypeEnum.LOGIN);
             applicationContext.publishEvent(new RecordLoginEvent(record));
         } else if (isMatch(requestURI, LOGOUT_URL_LIST)) {
-            //        record.setType(LoginRecordTypeEnum.LOGIN);
+            record.setType(RecordLoginTypeEnum.LOGOUT);
             applicationContext.publishEvent(new RecordLoginEvent(record));
         } else {
-            // 发布事件
             applicationContext.publishEvent(new RecordOperationEvent(record));
         }
     }
@@ -150,18 +150,6 @@ public class RecordAspect {
             }
         }
         return resourceId;
-    }
-
-    private boolean isLoginAuthUrl(String requestUri) {
-        if (CollUtil.isEmpty(LOGIN_URL_LIST) || StrUtil.isBlank(requestUri)) {
-            return false;
-        }
-        for (String pattern : LOGIN_URL_LIST) {
-            if (pathMatcher.match(pattern, requestUri)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

@@ -40,7 +40,7 @@ axios.interceptors.request.use(
     if (!config.headers) {
       config.headers = {}
     }
-    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTQ4MjQ3ODgsImV4cCI6MTY5NDg2Nzk4OCwiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.gNfQ_zhVycrGq89Oi8uj3_jq3ijl_GlT-9PkMqI8iUo'
+    config.headers["orange-token"] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJoZW5nenEiLCJpYXQiOjE2OTUwODY3NzMsImV4cCI6MTY5NTEyOTk3MywiaWQiOi0xMDAsInVzZXJuYW1lIjoiYWRtaW4iLCJ0ZW5hbnRJZCI6LTEwMH0.4v7AEO5bPv7hi9DYSF2nSqZMC6NOPf0YPNMc6s2Xgms'
     config.headers = { ...config.headers };
 
     return config;

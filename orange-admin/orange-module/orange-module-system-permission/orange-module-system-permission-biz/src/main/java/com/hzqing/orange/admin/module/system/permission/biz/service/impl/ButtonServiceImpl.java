@@ -8,7 +8,7 @@ import  com.hzqing.orange.admin.module.system.permission.biz.entity.ButtonEntity
 import  com.hzqing.orange.admin.module.system.permission.biz.manager.ButtonManager;
 import  com.hzqing.orange.admin.module.system.permission.biz.service.ButtonService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.ButtonErrorCode;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Button;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ButtonVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
@@ -32,7 +32,7 @@ public class ButtonServiceImpl implements ButtonService {
     private final ButtonManager buttonManager;
 
     @Override
-    public PageVO<Button> page(ButtonPageQuery queryVo) {
+    public PageVO<ButtonVO> page(ButtonPageQuery queryVo) {
         ButtonListQuery listQuery = ButtonConverter.INSTANCE.toListQuery(queryVo);
         Page<ButtonEntity> page = buttonManager.page(queryVo.getPageNo(), queryVo.getPageSize(), listQuery);
         return ButtonConverter.INSTANCE.toPage(page);

@@ -33,7 +33,10 @@
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
-          <tiny-grid-column field="avatar" :title="$t('system.user.table.columns.avatar')" align="center" />
+          <tiny-grid-column type="selection" width="50"></tiny-grid-column>
+          <tiny-grid-column field="avatar" :title="$t('system.user.table.columns.avatar')" align="center" width="100">
+            <tiny-user-head type="icon" round min></tiny-user-head>
+          </tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.user.table.columns.name')" align="center" />
           <tiny-grid-column field="username" :title="$t('system.user.table.columns.username')" align="center" />
           <tiny-grid-column field="email" :title="$t('system.user.table.columns.email')" align="center" />
@@ -43,19 +46,14 @@
             </template>
           </tiny-grid-column>
           <tiny-grid-column field="phone" :title="$t('system.user.table.columns.phone')" align="center" />
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template #default="data">
-              <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
-                $t('global.table.operations.edit')
-              }}</tiny-button>
-              <tiny-popconfirm :title="`确定要删除角色【${data.row.name}】吗?`" type="warning" trigger="click"
-                @confirm="handleDelete(data.row.id)">
-                <template #reference>
-                  <tiny-button type="text" class="table-delete-button"> {{
-                    $t('global.table.operations.delete')
-                  }}</tiny-button>
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="180">
+            <template #default="scope">
+              <tiny-action-menu :max-show-num="2" :spacing="8" :options="options"
+                @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+                <template #item="{ data }">
+                  <span> {{ $t(data.label) }}</span>
                 </template>
-              </tiny-popconfirm>
+              </tiny-action-menu>
             </template>
           </tiny-grid-column>
         </tiny-grid>
@@ -64,6 +62,8 @@
   </div>
 
   <editform ref="editFormRef" @ok="handleFormQuery"></editform>
+  <allot-role ref="allotRoleRef"></allot-role>
+  <reset-password ref="resetPasswordRef"></reset-password>
 </template>
 
 <script lang="ts" setup>
@@ -72,16 +72,16 @@ import {
   Form as TinyForm, FormItem as TinyFormItem,
   Input as TinyInput, Button as TinyButton,
   Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm
+  Modal, ActionMenu as TinyActionMenu, UserHead as TinyUserHead
 } from '@opentiny/vue';
 
 import SystemRequest from '@/api/system/index'
 
 import editform from './components/edit-form.vue';
+import allotRole from './components/allot-role.vue'
+import resetPassword from './components/reset-password.vue';
 
 const { proxy } = getCurrentInstance() as any
-
-const editFormRef = ref();
 
 const state = reactive<{
   loading: boolean;
@@ -105,6 +105,7 @@ const pagerConfig = reactive({
 
 const gridTableRef = ref();
 const { loading, filterOptions } = toRefs(state);
+
 
 const fetchTableData = reactive({
   api: ({ page }: any) => {
@@ -137,17 +138,59 @@ async function getPageData(params: SystemPermissionAPI.UserPageQuery = {
   }
 }
 
-const handleEdit = (id: string) => {
-  editFormRef.value.open(id)
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.allotUserRole'
+  },
+  {
+    label: 'global.table.operations.resetPassword'
+  },
+  {
+    label: 'global.table.operations.delete'
+  }
+])
+
+const editFormRef = ref();
+const allotRoleRef = ref();
+const resetPasswordRef = ref();
+
+const optionsClick = (label: string, data: SystemPermissionAPI.UserVO) => {
+  switch (label) {
+    case 'global.table.operations.edit': {
+      editFormRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.allotUserRole': {
+      allotRoleRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.resetPassword': {
+      resetPasswordRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.delete': {
+      handleDelete(data)
+      break
+    }
+    default:
+      console.log("code is error.")
+  }
 }
 
-const handleDelete = (id: string) => {
-  SystemRequest.user.deleteUserById(id).then((res) => {
-    getPageData()
-    Modal.message({
-      message: '删除成功',
-      status: 'success',
-    });
+const handleDelete = (data: SystemPermissionAPI.UserVO) => {
+  Modal.confirm({ message: `确定要删除用户【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (data.id && res === 'confirm') {
+      SystemRequest.user.deleteUserById(data.id).then(() => {
+        handleFormQuery()
+        Modal.message({
+          message: '删除成功',
+          status: 'success',
+        });
+      })
+    }
   })
 }
 
@@ -170,19 +213,42 @@ const toolbarButtons = reactive([
   }
 ])
 
-const toolbarButtonClickEvent = ({ code }: any) => {
+const toolbarButtonClickEvent = ({ code, $grid }: any) => {
+  const data = $grid.getSelectRecords()
   switch (code) {
     case 'insert': {
       editFormRef.value.open()
       break
     }
     case 'batchDelete': {
-      editFormRef.value.open()
+      handleBatchDelete(data)
       break
     }
     default:
       console.log("code is error.")
   }
+}
+
+const handleBatchDelete = (data: SystemPermissionAPI.UserVO[]) => {
+  let ids: string[] = data.map(item => item.id) as string[]
+  if (ids.length === 0) {
+    Modal.message({
+      message: '请选择需要删除的用户',
+      status: 'warning',
+    });
+    return
+  }
+  Modal.confirm({ message: `确定要批量删除用户吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (res === 'confirm') {
+      SystemRequest.user.deleteUserByIds(ids).then(() => {
+        handleFormQuery()
+        Modal.message({
+          message: '批量删除成功',
+          status: 'success',
+        });
+      })
+    }
+  })
 }
 
 </script>

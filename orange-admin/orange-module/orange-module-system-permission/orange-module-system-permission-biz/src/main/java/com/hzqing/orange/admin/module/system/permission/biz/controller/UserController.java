@@ -5,9 +5,11 @@ import com.hzqing.orange.admin.module.system.permission.biz.entity.UserEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.UserManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import com.hzqing.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
@@ -60,6 +62,12 @@ public class UserController {
         return ResultWrapper.ok(UserConverter.INSTANCE.toVo(entity));
     }
 
+    @Operation(summary = "根据ID查询详情", operationId = "system:permission:user:get-details")
+    @GetMapping("/details/{id}")
+    public Result<UserDetailsVO> getDetailsById(@PathVariable("id") Long id) {
+        return ResultWrapper.ok(userService.getDetailsById(id));
+    }
+
     @Operation(summary = "根据多个ID查询", operationId = "system:permission:user:query-by-ids")
     @PostMapping("/query-by-ids")
     public Result<List<UserVO>> queryByIds(@RequestBody IdsRequest request) {
@@ -88,10 +96,26 @@ public class UserController {
         return ResultWrapper.ok(userService.updatePassword(request));
     }
 
+    @PreAuthorize("@ss.hasPermission('system:permission:user:reset-password')")
+    @Operation(summary = "重置密码", operationId = "system:permission:user:reset-password")
+    @PutMapping("/reset-password")
+    public Result<Boolean> resetPassword(@RequestBody ResetPasswordRequest request) {
+        return ResultWrapper.ok(userService.resetPassword(request));
+    }
+
+
     @PreAuthorize("@ss.hasPermission('system:permission:user:delete')")
     @Operation(summary = "根据ID删除", operationId = "system:permission:user:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> deleteById(@PathVariable("id") Long id) {
         return ResultWrapper.ok(userManager.removeById(id));
     }
+
+    @PreAuthorize("@ss.hasPermission('system:permission:user:batch-delete')")
+    @Operation(summary = "根据ID批量删除", operationId = "system:permission:user:batch-delete")
+    @PostMapping("/batch-delete")
+    public Result<Boolean> batchDelete(@RequestBody IdsRequest request) {
+        return ResultWrapper.ok(userManager.removeByIds(request.getIds()));
+    }
+
 }

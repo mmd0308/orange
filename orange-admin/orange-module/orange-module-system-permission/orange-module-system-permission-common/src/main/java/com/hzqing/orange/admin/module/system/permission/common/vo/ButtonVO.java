@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "按钮")
 @Data
-public class Button extends BaseTenantVO {
+public class ButtonVO extends BaseTenantVO {
 
     @Schema(description = "按钮ID", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;

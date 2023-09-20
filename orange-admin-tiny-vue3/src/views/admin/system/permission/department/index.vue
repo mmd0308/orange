@@ -20,6 +20,7 @@
         </tiny-col>
       </tiny-row>
     </tiny-form>
+
     <div class="table-scroll">
       <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
@@ -32,19 +33,14 @@
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template #default="data">
-              <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
-                $t('global.table.operations.edit')
-              }}</tiny-button>
-              <tiny-popconfirm :title="`确定要删除部门【${data.row.name}】吗?`" type="warning" trigger="click"
-                @confirm="handleDelete(data.row.id)">
-                <template #reference>
-                  <tiny-button type="text" class="table-delete-button"> {{
-                    $t('global.table.operations.delete')
-                  }}</tiny-button>
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
+            <template #default="scope">
+              <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+                @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+                <template #item="{ data }">
+                  <span> {{ $t(data.label) }}</span>
                 </template>
-              </tiny-popconfirm>
+              </tiny-action-menu>
             </template>
           </tiny-grid-column>
         </tiny-grid>
@@ -60,21 +56,20 @@ import {
   Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
   Form as TinyForm, FormItem as TinyFormItem,
   Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm
+  Row as TinyRow, Col as TinyCol,
+  Modal, ActionMenu as TinyActionMenu
 } from '@opentiny/vue';
 
+
 import SystemRequest from '@/api/system/index'
-
 import editform from './components/edit-form.vue';
-
 
 const state = reactive<{
   loading: boolean;
-  filterOptions: SystemPermissionAPI.DepartmentAllQueryParams;
+  filterOptions: SystemPermissionAPI.DepartmentAllQuery;
 }>({
   loading: false,
-  filterOptions: {} as SystemPermissionAPI.DepartmentAllQueryParams,
+  filterOptions: {} as SystemPermissionAPI.DepartmentAllQuery,
 });
 
 
@@ -84,7 +79,7 @@ const { loading, filterOptions } = toRefs(state);
 const tableData = ref<SystemPermissionAPI.DepartmentTreeVO[]>([])
 
 async function getAllData() {
-  const queryParmas: SystemPermissionAPI.DepartmentAllQueryParams = {
+  const queryParmas: SystemPermissionAPI.DepartmentAllQuery = {
     ...filterOptions.value,
   };
   state.loading = true;
@@ -97,18 +92,44 @@ async function getAllData() {
 }
 getAllData()
 
+
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.delete'
+  }
+])
+
 const editFormRef = ref();
-const handleEdit = (id: string) => {
-  editFormRef.value.open(id)
+
+const optionsClick = (label: string, data: SystemPermissionAPI.DepartmentVO) => {
+  switch (label) {
+    case 'global.table.operations.edit': {
+      editFormRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.delete': {
+      handleDelete(data)
+      break
+    }
+    default:
+      console.log("code is error.")
+  }
 }
 
-const handleDelete = (id: string) => {
-  SystemRequest.department.deleteDepartmentById(id).then((res) => {
-    getAllData()
-    Modal.message({
-      message: '删除成功',
-      status: 'success',
-    });
+const handleDelete = (data: SystemPermissionAPI.DepartmentVO) => {
+  Modal.confirm({ message: `确定要删除部门【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (data.id && res === 'confirm') {
+      SystemRequest.department.deleteDepartmentById(data.id).then(() => {
+        getAllData()
+        Modal.message({
+          message: '删除成功',
+          status: 'success',
+        });
+      })
+    }
   })
 }
 
@@ -116,7 +137,7 @@ const handleFormQuery = () => {
   getAllData()
 }
 const handleFormReset = () => {
-  state.filterOptions = {} as SystemPermissionAPI.DepartmentAllQueryParams;
+  state.filterOptions = {} as SystemPermissionAPI.DepartmentAllQuery;
   handleFormQuery();
 }
 

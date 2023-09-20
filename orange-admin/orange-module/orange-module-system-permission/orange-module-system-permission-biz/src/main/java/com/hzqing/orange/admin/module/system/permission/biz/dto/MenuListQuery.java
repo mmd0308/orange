@@ -14,6 +14,8 @@ public class MenuListQuery {
 
     private String name;
 
+    private String nameLike;
+
     private String permission;
 
     private String permissionLike;

@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import  com.hzqing.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.ButtonEntity;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Button;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ButtonVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
@@ -26,11 +26,11 @@ public interface ButtonConverter extends Converter {
 
     ButtonConverter INSTANCE = Mappers.getMapper(ButtonConverter.class);
 
-    ButtonEntity toEntity(Button button);
+    ButtonEntity toEntity(ButtonVO buttonVO);
 
     ButtonEntity toEntity(ButtonAddRequest request);
 
-    Button toVo(ButtonEntity entity);
+    ButtonVO toVo(ButtonEntity entity);
 
     ButtonListQuery toListQuery(ButtonPageQuery queryVo);
 
@@ -38,7 +38,7 @@ public interface ButtonConverter extends Converter {
             @Mapping(source = "size", target = "pageSize"),
             @Mapping(source = "current", target = "pageNo")
     })
-    PageVO<Button> toPage(Page<ButtonEntity> page);
+    PageVO<ButtonVO> toPage(Page<ButtonEntity> page);
 
 
     default ButtonEntity updateConvert(ButtonEntity entity, ButtonUpdateRequest request) {
@@ -60,6 +60,6 @@ public interface ButtonConverter extends Converter {
         return entity;
     }
 
-    List<Button> toListVo(List<ButtonEntity> buttonEntityList);
+    List<ButtonVO> toListVo(List<ButtonEntity> buttonEntityList);
 
 }

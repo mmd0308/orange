@@ -16,9 +16,6 @@ public interface UserRoleRlMapper extends BaseMapper<UserRoleRlEntity> {
 
     /**
      * 批量插入数据
-     *
-     * @param userRoles
-     * @return
      */
     Integer batchInsert(List<UserRoleRlEntity> userRoles);
 
@@ -26,8 +23,6 @@ public interface UserRoleRlMapper extends BaseMapper<UserRoleRlEntity> {
     /**
      * 根据用户ID查询
      *
-     * @param userId
-     * @return
      */
     default List<UserRoleRlEntity> selectByUserId(Long userId) {
         return this.selectList(Wrappers.<UserRoleRlEntity>lambdaQuery().eq(UserRoleRlEntity::getUserId, userId));

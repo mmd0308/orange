@@ -63,7 +63,7 @@ public class PermissionServiceImpl implements PermissionService {
         userRoleRlManager.removeByUserId(allotUserRole.getUserId());
         List<UserRoleRlEntity> rlEntityList = new ArrayList<>(allotUserRole.getRoleIds().size());
         for (Long roleId : allotUserRole.getRoleIds()) {
-            rlEntityList.add(new UserRoleRlEntity(allotUserRole.getUserId(), roleId));
+            rlEntityList.add(new UserRoleRlEntity(allotUserRole.getUserId(), roleId, Boolean.TRUE));
         }
         userRoleRlManager.batchAdd(rlEntityList);
         return Boolean.TRUE;
@@ -118,12 +118,12 @@ public class PermissionServiceImpl implements PermissionService {
             return List.of();
         }
 
-        List<Role> roleList = roleService.queryByUserId(userId);
-        if (CollUtil.isEmpty(roleList)) {
+        List<RoleVO> roleVOList = roleService.queryByUserId(userId);
+        if (CollUtil.isEmpty(roleVOList)) {
             return List.of();
         }
-        List<String> permissions = CollUtils.convertList(roleList, Role::getPermission);
-        List<Long> roleIds = CollUtils.convertList(roleList, Role::getId);
+        List<String> permissions = CollUtils.convertList(roleVOList, RoleVO::getPermission);
+        List<Long> roleIds = CollUtils.convertList(roleVOList, RoleVO::getId);
         List<MenuVO> menuVOList;
         // admin 拥有所有的权限
         if (permissions.contains(PermissionConstants.ADMIN_DEFAULT_PERMISSION)) {

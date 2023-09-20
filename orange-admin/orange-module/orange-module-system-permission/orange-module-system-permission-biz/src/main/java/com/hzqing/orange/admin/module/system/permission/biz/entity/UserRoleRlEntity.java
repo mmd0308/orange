@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -19,10 +19,12 @@ import lombok.NoArgsConstructor;
 @TableName("sys_user_role_rl")
 public class UserRoleRlEntity extends BaseTenantEntity {
 
-    public UserRoleRlEntity(Long userId, Long roleId) {
+    public UserRoleRlEntity(Long userId, Long roleId, Boolean add) {
         this.userId = userId;
         this.roleId = roleId;
+        this.initParams(add);
     }
+
 
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;

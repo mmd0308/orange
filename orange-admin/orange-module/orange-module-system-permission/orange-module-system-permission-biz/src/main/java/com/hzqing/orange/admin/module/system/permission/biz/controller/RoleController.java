@@ -7,7 +7,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.entity.RoleEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.RoleManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.RoleService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Role;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RoleVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.RoleAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
@@ -40,14 +40,14 @@ public class RoleController {
 
     @Operation(summary = "分页查询", operationId = "system:permission:role:page")
     @PostMapping(value = "/page")
-    public Result<PageVO<Role>> page(@RequestBody RolePageQuery query) {
-        PageVO<Role> result = roleService.page(query);
+    public Result<PageVO<RoleVO>> page(@RequestBody RolePageQuery query) {
+        PageVO<RoleVO> result = roleService.page(query);
         return ResultWrapper.ok(result);
     }
 
     @Operation(summary = "根据参数查询所有数据", operationId = "system:permission:role:query-all")
     @PostMapping(value = "/query-all")
-    public Result<List<Role>> queryAll(@RequestBody RoleAllQuery query) {
+    public Result<List<RoleVO>> queryAll(@RequestBody RoleAllQuery query) {
         RoleListQuery listQuery = RoleListQuery.builder().name(query.getName()).build();
         List<RoleEntity> entityList = roleManager.listByParams(listQuery);
         return ResultWrapper.ok(RoleConverter.INSTANCE.toListVo(entityList));
@@ -55,7 +55,7 @@ public class RoleController {
 
     @Operation(summary = "根据ID查询详情", operationId = "system:permission:role:get")
     @GetMapping("/{id}")
-    public Result<Role> getById(@PathVariable("id") Long id) {
+    public Result<RoleVO> getById(@PathVariable("id") Long id) {
         RoleEntity entity = roleManager.getById(id);
         return ResultWrapper.ok(RoleConverter.INSTANCE.toVo(entity));
     }

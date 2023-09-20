@@ -38,6 +38,12 @@ declare namespace SystemPermissionAPI {
     usernameLike?: string;
   };
 
+  interface ResetPasswordRequest {
+    userId: string;
+    newPassword: string;
+    confirmPassword: string;
+  }
+
   interface UserVO {
     tenantId?: number;
     id?: string;
@@ -51,6 +57,10 @@ declare namespace SystemPermissionAPI {
     password?: string;
     remark?: string;
   };
+
+  interface UserDetailsVO extends UserVO {
+    roleVOList?: RoleVO[]
+  }
 
   interface RoleVO {
     tenantId?: string;
@@ -120,6 +130,7 @@ declare namespace SystemPermissionAPI {
   interface MenuAllQuery {
     parentId?: number;
     name?: string;
+    nameLike?: string;
     permission?: string;
     permissionLike?: string;
     component?: string;
@@ -162,5 +173,12 @@ declare namespace SystemPermissionAPI {
     remark?: string;
   };
 
+
+  type AllotUserRoleVO = {
+    /** 用户ID */
+    userId: string;
+    /** 角色Id */
+    roleIds: string[];
+  };
 
 }

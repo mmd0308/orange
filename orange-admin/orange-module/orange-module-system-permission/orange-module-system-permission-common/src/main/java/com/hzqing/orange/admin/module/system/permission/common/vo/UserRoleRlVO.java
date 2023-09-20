@@ -1,14 +1,16 @@
 package com.hzqing.orange.admin.module.system.permission.common.vo;
 
- import com.hzqing.orange.admin.starter.common.vo.BaseTenantVO;
+import com.hzqing.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
 /**
  * @author 程序员橙子
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @Schema(description = "用户和角色关系")

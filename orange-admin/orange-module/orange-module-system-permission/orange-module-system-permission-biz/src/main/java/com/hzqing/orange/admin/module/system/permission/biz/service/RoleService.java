@@ -1,6 +1,6 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
-import com.hzqing.orange.admin.module.system.permission.common.vo.Role;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RoleVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleUpdateRequest;
@@ -19,7 +19,7 @@ public interface RoleService {
      * @param userId 用户ID
      * @return 用户拥有的角色
      */
-    List<Role> queryByUserId(Long userId);
+    List<RoleVO> queryByUserId(Long userId);
 
     /**
      * 分页查询
@@ -27,7 +27,7 @@ public interface RoleService {
      * @param query 查询条件
      * @return 返回满足条件的结果集
      */
-    PageVO<Role> page(RolePageQuery query);
+    PageVO<RoleVO> page(RolePageQuery query);
 
     /**
      * 新增角色

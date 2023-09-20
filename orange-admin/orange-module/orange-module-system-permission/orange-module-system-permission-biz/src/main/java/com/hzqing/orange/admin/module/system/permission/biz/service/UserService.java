@@ -1,8 +1,10 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
+import com.hzqing.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
 import com.hzqing.orange.admin.starter.common.vo.PageVO;
@@ -35,19 +37,21 @@ public interface UserService {
 
     /**
      * 更新密码
-     *
-     * @param request
-     * @return
      */
     Boolean updatePassword(UpdatePasswordRequest request);
 
     /**
+     * 重置密码
+     */
+    Boolean resetPassword(ResetPasswordRequest request);
+
+    /**
      * 分页查询
-     *
-     * @param query
-     * @return
      */
     PageVO<UserVO> page(UserPageQuery query);
 
     List<UserVO> queryAll(UserAllQuery query);
+
+
+    UserDetailsVO getDetailsById(Long id);
 }

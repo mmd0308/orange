@@ -21,7 +21,7 @@
 
 
     <select id="selectListByUserId" parameterType="long" resultMap="roleResultMap">
-        select r.id,
+        select distinct r.id,
                r.tenant_id,
                r.name,
                r.permission,

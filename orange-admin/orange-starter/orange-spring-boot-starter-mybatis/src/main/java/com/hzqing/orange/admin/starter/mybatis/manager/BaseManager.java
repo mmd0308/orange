@@ -111,7 +111,7 @@ public interface BaseManager<T extends BaseEntity> {
      * @param ids ID集合
      * @return 返回是否删除成功
      */
-    default Boolean removeByIds(Collection<Long> ids) {
+    default Boolean removeByIds(Collection<Serializable> ids) {
         if (CollUtil.isEmpty(ids)) {
             throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_REQUEST_MISSING_PARAMETER);
         }

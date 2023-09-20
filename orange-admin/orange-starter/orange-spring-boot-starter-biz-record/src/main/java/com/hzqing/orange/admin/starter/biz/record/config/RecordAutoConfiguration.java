@@ -1,8 +1,10 @@
 package com.hzqing.orange.admin.starter.biz.record.config;
 
+import com.hzqing.orange.admin.module.system.record.api.RecordLoginApi;
 import com.hzqing.orange.admin.module.system.record.api.RecordOperationApi;
 import com.hzqing.orange.admin.starter.biz.record.aspect.RecordAspect;
 import com.hzqing.orange.admin.starter.biz.record.constants.RecordConstants;
+import com.hzqing.orange.admin.starter.biz.record.listener.RecordLoginBizListener;
 import com.hzqing.orange.admin.starter.biz.record.listener.RecordOperationListener;
 import com.hzqing.orange.admin.starter.biz.record.properties.RecordProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -50,15 +52,15 @@ public class RecordAutoConfiguration {
         return new RecordOperationListener(recordOperationApi);
     }
 
-//    @Bean
-//    @ConditionalOnMissingBean
-//    @ConditionalOnClass(value = LoginRecordService.class)
-//    public LoginRecordBizListener loginRecordListener(LoginRecordService loginRecordService) {
-//        if (log.isDebugEnabled()) {
-//            log.debug("init {} complete.", this.getClass().getSimpleName());
-//        }
-//        return new LoginRecordBizListener(loginRecordService);
-//    }
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnClass(value = RecordLoginApi.class)
+    public RecordLoginBizListener loginRecordListener(RecordLoginApi recordLoginApi) {
+        if (log.isDebugEnabled()) {
+            log.debug("init {} complete.", this.getClass().getSimpleName());
+        }
+        return new RecordLoginBizListener(recordLoginApi);
+    }
 
     @Bean
     public RecordAspect logAspect(ApplicationContext applicationContext) {

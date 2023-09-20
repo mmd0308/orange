@@ -3,9 +3,9 @@
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
       <tiny-row :flex="true" justify="center">
         <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.department.form.name')">
+          <tiny-form-item :label="$t('system.menu.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
-              :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
+              :placeholder="$t('system.menu.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="8" label-width="100px">
@@ -29,31 +29,26 @@
           </template>
           <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" />
-          <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" />
+          <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" width="100" />
           <tiny-grid-column field="permission" :title="$t('system.menu.table.columns.permission')" width="260" />
-          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="200" />
+          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="200" show-overflow />
           <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center">
             <template #default="data">
               <dict-tag :value="data.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
+          <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="135" />
           <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="135" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template #default="data">
-              <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
-                $t('global.table.operations.edit')
-              }}</tiny-button>
-              <tiny-popconfirm :title="`确定要删除部门【${data.row.name}】吗?`" type="warning" trigger="click"
-                @confirm="handleDelete(data.row.id)">
-                <template #reference>
-                  <tiny-button type="text" class="table-delete-button"> {{
-                    $t('global.table.operations.delete')
-                  }}</tiny-button>
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
+            <template #default="scope">
+              <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+                @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+                <template #item="{ data }">
+                  <span> {{ $t(data.label) }}</span>
                 </template>
-              </tiny-popconfirm>
+              </tiny-action-menu>
             </template>
           </tiny-grid-column>
         </tiny-grid>
@@ -69,8 +64,8 @@ import {
   Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
   Form as TinyForm, FormItem as TinyFormItem,
   Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm
+  Row as TinyRow, Col as TinyCol,
+  Modal, ActionMenu as TinyActionMenu
 } from '@opentiny/vue';
 
 import SystemRequest from '@/api/system/index'
@@ -106,18 +101,44 @@ async function getAllData() {
 }
 getAllData()
 
+
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.delete'
+  }
+])
+
 const editFormRef = ref();
-const handleEdit = (id: string) => {
-  editFormRef.value.open(id)
+
+const optionsClick = (label: string, data: SystemPermissionAPI.MenuVO) => {
+  switch (label) {
+    case 'global.table.operations.edit': {
+      editFormRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.delete': {
+      handleDelete(data)
+      break
+    }
+    default:
+      console.log("code is error.")
+  }
 }
 
-const handleDelete = (id: string) => {
-  SystemRequest.menu.deleteMenuById(id).then((res) => {
-    getAllData()
-    Modal.message({
-      message: '删除成功',
-      status: 'success',
-    });
+const handleDelete = (data: SystemPermissionAPI.MenuVO) => {
+  Modal.confirm({ message: `确定要删除菜单【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (data.id && res === 'confirm') {
+      SystemRequest.menu.deleteMenuById(data.id).then(() => {
+        getAllData()
+        Modal.message({
+          message: '删除成功',
+          status: 'success',
+        });
+      })
+    }
   })
 }
 

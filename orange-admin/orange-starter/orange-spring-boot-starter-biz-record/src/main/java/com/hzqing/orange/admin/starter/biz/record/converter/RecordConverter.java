@@ -1,5 +1,6 @@
 package com.hzqing.orange.admin.starter.biz.record.converter;
 
+import com.hzqing.orange.admin.module.system.record.common.vo.RecordLoginVO;
 import com.hzqing.orange.admin.module.system.record.common.vo.RecordOperationVO;
 import com.hzqing.orange.admin.starter.biz.record.dto.RecordDTO;
 import com.hzqing.orange.admin.starter.common.converter.Converter;
@@ -16,4 +17,6 @@ public interface RecordConverter extends Converter {
     RecordConverter INSTANCE = Mappers.getMapper(RecordConverter.class);
 
     RecordOperationVO toRecordOperation(RecordDTO record);
+
+    RecordLoginVO toRecordLogin(RecordDTO record);
 }

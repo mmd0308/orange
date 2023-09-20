@@ -3,6 +3,7 @@ package com.hzqing.orange.admin.module.system.permission.biz.converter;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hzqing.orange.admin.module.system.permission.biz.dto.UserListQuery;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.UserEntity;
+import com.hzqing.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.UserVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
@@ -44,4 +45,6 @@ public interface UserConverter extends Converter {
     UserListQuery toListQuery(UserAllQuery query);
 
     UserEntity toEntity(UserUpdateRequest user);
+
+    UserDetailsVO toDetailsVO(UserVO userVO);
 }

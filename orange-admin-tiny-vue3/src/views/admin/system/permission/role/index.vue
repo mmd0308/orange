@@ -44,25 +44,15 @@
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="160">
-            <!-- <template> -->
-            <!-- <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
-                $t('global.table.operations.edit')
-              }}</tiny-button> -->
-            <!-- <tiny-popconfirm :title="`确定要删除角色【${data.row.name}】吗?`" type="warning" trigger="click"
-                @confirm="handleDelete(data.row.id)">
-                <template #reference>
-                  <tiny-button type="text" class="table-delete-button"> {{
-                    $t('global.table.operations.delete')
-                  }}</tiny-button>
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="170">
+            <template #default="scope">
+              <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+                @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+                <template #item="{ data }">
+                  <span> {{ $t(data.label) }}</span>
                 </template>
-              </tiny-popconfirm> -->
-            <tiny-action-menu spacing="10px" :max-show-num="2" :options="options">
-              <template #item="{ data }">
-                <span> {{ $t(data.label) }}</span>
-              </template>
-            </tiny-action-menu>
-            <!-- </template> -->
+              </tiny-action-menu>
+            </template>
           </tiny-grid-column>
         </tiny-grid>
       </div>
@@ -78,7 +68,7 @@ import {
   Form as TinyForm, FormItem as TinyFormItem,
   Input as TinyInput, Button as TinyButton,
   Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm, ActionMenu as TinyActionMenu
+  Modal, ActionMenu as TinyActionMenu
 } from '@opentiny/vue';
 
 import SystemRequest from '@/api/system/index'
@@ -89,17 +79,6 @@ const { proxy } = getCurrentInstance() as any
 
 const editFormRef = ref();
 
-const options = ref([
-  {
-    label: 'global.table.operations.edit'
-  },
-  {
-    label: 'global.table.operations.delete'
-  },
-  {
-    label: '重启'
-  }
-])
 
 const state = reactive<{
   loading: boolean;
@@ -154,18 +133,49 @@ async function getPageData(params: SystemPermissionAPI.RolePageQuery = {
     state.loading = false
   }
 }
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.menuPermission'
+  },
+  {
+    label: 'global.table.operations.delete'
+  }
+])
 
-const handleEdit = (id: string) => {
-  editFormRef.value.open(id)
+
+const optionsClick = (label: string, data: SystemPermissionAPI.RoleVO) => {
+  switch (label) {
+    case 'global.table.operations.edit': {
+      editFormRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.menuPermission': {
+      debugger
+      break
+    }
+    case 'global.table.operations.delete': {
+      handleDelete(data)
+      break
+    }
+    default:
+      console.log("code is error.")
+  }
 }
 
-const handleDelete = (id: string) => {
-  SystemRequest.role.deleteRoleById(id).then((res) => {
-    getPageData()
-    Modal.message({
-      message: '删除成功',
-      status: 'success',
-    });
+const handleDelete = (data: SystemPermissionAPI.RoleVO) => {
+  Modal.confirm({ message: `确定要删除角色【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (data.id && res === 'confirm') {
+      SystemRequest.role.deleteRoleById(data.id).then(() => {
+        handleFormQuery()
+        Modal.message({
+          message: '删除成功',
+          status: 'success',
+        });
+      })
+    }
   })
 }
 

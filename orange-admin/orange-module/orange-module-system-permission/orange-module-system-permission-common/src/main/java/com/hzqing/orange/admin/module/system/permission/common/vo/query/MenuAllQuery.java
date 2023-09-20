@@ -15,4 +15,7 @@ public class MenuAllQuery implements Serializable {
 
     @Schema(description = "菜单名称")
     private String name;
+
+    @Schema(description = "菜单名称,模糊查询")
+    private String nameLike;
 }

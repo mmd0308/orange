@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Schema(description = "角色")
 @Data
-public class Role extends BaseTenantVO {
+public class RoleVO extends BaseTenantVO {
 
     @Schema(description = "角色id", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;

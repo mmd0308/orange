@@ -89,6 +89,8 @@ module.exports = {
     "vue/first-attribute-linebreak": ["error", {
       "singleline": "ignore",
       "multiline": "ignore"
-    }]
+    }],
+    'eqeqeq': ["off"],
+    'import/no-unresolved': 'off',
   },
 };

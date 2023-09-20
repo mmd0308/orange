@@ -20,7 +20,8 @@
     ],
     "skipLibCheck": true, /* 跳过类型检查所有.d.ts文件 */
     "types": [
-      "vite/client"
+      "vite/client",
+      "vite-plugin-svg-icons/client"
     ] /* vite ts支持 */
   },
   "include": [

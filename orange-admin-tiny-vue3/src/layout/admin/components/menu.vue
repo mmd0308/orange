@@ -2,7 +2,8 @@
   <div class="menu-router">
     <tiny-tree-menu :data="treeData" :show-filter="false" @current-change="currentChange">
       <template #default="scope">
-        <a :target="scope.data.path">
+        <svg-icon :name="scope.data.icon" class="svg-icon" />
+        <a>
           {{ scope.data.name }}
         </a>
       </template>
@@ -14,17 +15,17 @@
 import { TreeMenu as tinyTreeMenu, TabItem } from '@opentiny/vue';
 import router from '@/router';
 // import { useUserStore } from '@/store';
-
+import { isExternal } from '@/utils/validate'
 import SystemRequest from '@/api/system/index'
-
-// icon图标
-const tree = ref();
-const expandeArr = ref();
-
 
 const currentChange = (data: any) => {
   if (data.path) {
-    router.push(`${import.meta.env.VITE_CONTEXT}${data.path}`);
+    if (isExternal(data.path)) {
+      window.open(data.path, "_blank");
+    } else {
+      router.push(`${import.meta.env.VITE_CONTEXT}${data.path}`);
+
+    }
   }
 }
 const treeData = ref([])
@@ -36,3 +37,10 @@ const getMenuDataSync = async () => {
 
 getMenuDataSync()
 </script>
+
+<style>
+.svg-icon {
+  margin-right: 12px;
+  vertical-align: -0.15em;
+}
+</style>

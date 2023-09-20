@@ -9,6 +9,9 @@ export default {
   'global.table.operations.detail': '详情',
   'global.table.operations.edit': '编辑',
   'global.table.operations.delete': '删除',
+  'global.table.operations.allotUserRole': '分配角色',
+  'global.table.operations.resetPassword': '重置密码',
+  'global.table.operations.menuPermission': '菜单权限',
 
 
   'global.table.columns.status': '状态',

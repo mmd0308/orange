@@ -43,5 +43,5 @@ public class MenuButtonTree extends BaseTenantVO {
     private List<MenuButtonTree> children;
 
     @Schema(description = "菜单关联按钮")
-    private List<Button> buttonList;
+    private List<ButtonVO> buttonVOList;
 }

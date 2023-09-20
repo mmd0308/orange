@@ -27,7 +27,6 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-
     @PreAuthorize("@ss.hasPermission('system:permission:permission:allot-user-role')")
     @Operation(summary = "用户分配角色", operationId = "system:permission:permission:allot-user-role", description = "先删除旧关系，然后绑定新的关联关系")
     @PostMapping("/allot-user-role")

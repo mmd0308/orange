@@ -1,8 +1,8 @@
 package com.hzqing.orange.admin.starter.biz.record.dto;
 
+import com.hzqing.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
 import com.hzqing.orange.admin.starter.common.constants.enums.support.CommonOperationStatusEnum;
 import com.hzqing.orange.admin.starter.common.constants.enums.support.RequestMethodEnum;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
@@ -22,6 +22,11 @@ public class RecordDTO implements Serializable {
      * 操作资源ID
      */
     private String resourceId;
+
+    /**
+     * 登录类型
+     */
+    private RecordLoginTypeEnum type;
 
     /**
      * 请求URL

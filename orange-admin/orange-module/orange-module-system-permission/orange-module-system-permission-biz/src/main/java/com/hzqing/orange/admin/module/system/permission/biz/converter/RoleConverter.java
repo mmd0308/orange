@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import  com.hzqing.orange.admin.module.system.permission.biz.dto.RoleListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.RoleEntity;
-import com.hzqing.orange.admin.module.system.permission.common.vo.Role;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RoleVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.RoleUpdateRequest;
@@ -26,17 +26,17 @@ public interface RoleConverter extends Converter {
 
     RoleConverter INSTANCE = Mappers.getMapper(RoleConverter.class);
 
-    List<Role> toListVo(List<RoleEntity> roleList);
+    List<RoleVO> toListVo(List<RoleEntity> roleList);
 
-    RoleEntity toEntity(Role role);
+    RoleEntity toEntity(RoleVO roleVO);
 
-    Role toVo(RoleEntity entity);
+    RoleVO toVo(RoleEntity entity);
 
     @Mappings({
             @Mapping(source = "size", target = "pageSize"),
             @Mapping(source = "current", target = "pageNo")
     })
-    PageVO<Role> toPage(Page<RoleEntity> page);
+    PageVO<RoleVO> toPage(Page<RoleEntity> page);
 
     RoleListQuery toListQuery(RolePageQuery query);
 
