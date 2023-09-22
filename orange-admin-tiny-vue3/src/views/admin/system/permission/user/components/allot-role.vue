@@ -23,17 +23,9 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Drawer as TinyDrawer,
-  Button as TinyButton,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Select as TinySelect, Loading
-} from '@opentiny/vue'
-
 import SystemRequest from '@/api/system/index'
 
 const { proxy } = getCurrentInstance() as any
-
 const visible = ref(false)
 const title = '分配角色'
 

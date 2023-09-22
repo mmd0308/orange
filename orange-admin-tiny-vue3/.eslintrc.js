@@ -92,5 +92,6 @@ module.exports = {
     }],
     'eqeqeq': ["off"],
     'import/no-unresolved': 'off',
+    'no-lonely-if': 'off'
   },
 };

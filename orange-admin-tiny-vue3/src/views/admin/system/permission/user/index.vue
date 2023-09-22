@@ -1,28 +1,22 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.user.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.user.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.user.form.username')" prop="id">
             <tiny-input v-model="filterOptions.usernameLike" clearable
               :placeholder="$t('system.user.form.username.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="4">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
@@ -67,16 +61,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, ActionMenu as TinyActionMenu, UserHead as TinyUserHead
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
-
 import editform from './components/edit-form.vue';
 import allotRole from './components/allot-role.vue'
 import resetPassword from './components/reset-password.vue';
@@ -92,7 +77,6 @@ const state = reactive<{
 });
 
 const pagerConfig = reactive({
-  component: TinyPager,
   attrs: {
     currentPage: 1,
     pageSize: 10,
@@ -181,11 +165,11 @@ const optionsClick = (label: string, data: SystemPermissionAPI.UserVO) => {
 }
 
 const handleDelete = (data: SystemPermissionAPI.UserVO) => {
-  Modal.confirm({ message: `确定要删除用户【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+  proxy.$modal.confirm({ message: `确定要删除用户【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
     if (data.id && res === 'confirm') {
       SystemRequest.user.deleteUserById(data.id).then(() => {
         handleFormQuery()
-        Modal.message({
+        proxy.$modal.message({
           message: '删除成功',
           status: 'success',
         });
@@ -232,17 +216,17 @@ const toolbarButtonClickEvent = ({ code, $grid }: any) => {
 const handleBatchDelete = (data: SystemPermissionAPI.UserVO[]) => {
   let ids: string[] = data.map(item => item.id) as string[]
   if (ids.length === 0) {
-    Modal.message({
+    proxy.$modal.message({
       message: '请选择需要删除的用户',
       status: 'warning',
     });
     return
   }
-  Modal.confirm({ message: `确定要批量删除用户吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+  proxy.$modal.confirm({ message: `确定要批量删除用户吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
     if (res === 'confirm') {
       SystemRequest.user.deleteUserByIds(ids).then(() => {
         handleFormQuery()
-        Modal.message({
+        proxy.$modal.message({
           message: '批量删除成功',
           status: 'success',
         });

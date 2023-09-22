@@ -1,5 +1,4 @@
 declare namespace API {
-
   interface Result<T> {
     /** 编码 200表示成功，其他值表示失败 */
     code?: number;
@@ -10,5 +9,4 @@ declare namespace API {
     /** 响应的数据 */
     data?: T;
   };
-
 }

@@ -2,13 +2,19 @@
   <div>
     <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-        :model="formData" label-width="100px">
+        :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
         <tiny-form-item :label="$t('system.role.form.name')" prop="name">
           <tiny-input v-model="formData.name" :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
         <tiny-form-item :label="$t('system.role.form.permission')" prop="permission">
           <tiny-input v-model="formData.permission"
             :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.sort')" prop="sort">
+          <tiny-numeric v-model="formData.sort"></tiny-numeric>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.remark')" prop="remark">
+          <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
         </tiny-form-item>
       </tiny-form>
 
@@ -21,19 +27,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Drawer as TinyDrawer,
-  Button as TinyButton,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput,
-} from '@opentiny/vue'
-
 import SystemRequest from '@/api/system/index'
 
 const emit = defineEmits(['ok'])
-
 const { proxy } = getCurrentInstance() as any
-
 const visible = ref(false)
 const isModify = ref(false)
 const title = computed(() => {
@@ -43,6 +40,7 @@ const title = computed(() => {
 const formData = ref<SystemPermissionAPI.RoleVO>({
   name: '',
   permission: '',
+  sort: 1
 })
 
 const formDataRules = {

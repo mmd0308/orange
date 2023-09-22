@@ -1,5 +1,3 @@
-import { RoleType } from '@/types/roleType';
-
 export default {
   path: 'system/permission',
   name: 'SystemPermission',
@@ -9,7 +7,6 @@ export default {
     locale: 'menu.system.permission',
     requiresAuth: true,
     order: 7,
-    roles: [RoleType.admin, RoleType.user],
   },
   children: [
     {
@@ -21,7 +18,6 @@ export default {
       meta: {
         locale: 'menu.system.permission.department',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -33,7 +29,6 @@ export default {
       meta: {
         locale: 'menu.system.permission.user',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -45,7 +40,6 @@ export default {
       meta: {
         locale: 'menu.system.permission.role',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -57,7 +51,6 @@ export default {
       meta: {
         locale: 'menu.system.permission.menu',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -69,7 +62,6 @@ export default {
       meta: {
         locale: 'menu.system.dict.type',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -81,7 +73,6 @@ export default {
       meta: {
         locale: 'menu.system.dict.data',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -93,7 +84,6 @@ export default {
       meta: {
         locale: 'menu.system.record.login',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     },
     {
@@ -105,7 +95,6 @@ export default {
       meta: {
         locale: 'menu.system.record.operation',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     }
   ],

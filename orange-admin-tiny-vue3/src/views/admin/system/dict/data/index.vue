@@ -1,31 +1,29 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.dict-type.form.name')">
-            <tiny-input v-model="filterOptions.nameLike" clearable
-              :placeholder="$t('system.dict-type.form.name.placeholder')"></tiny-input>
+        <tiny-col :span="4">
+          <tiny-form-item :label="$t('system.dict-data.form.dictType')">
+            <tiny-select v-model="filterOptions.dictType" :placeholder="$t('system.dict-data.form.dictType.placeholder')"
+              clearable>
+              <tiny-option v-for="item in dictTypeOptions" :key="item.dictType" :label="item.name" :value="item.dictType">
+              </tiny-option>
+            </tiny-select>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
-          <tiny-form-item :label="$t('system.dict-type.form.name')">
-            <tiny-input v-model="filterOptions.nameLike" clearable
-              :placeholder="$t('system.dict-type.form.name.placeholder')"></tiny-input>
+        <tiny-col :span="4">
+          <tiny-form-item :label="$t('system.dict-data.form.dictLabel')">
+            <tiny-input v-model="filterOptions.dictLabel" clearable
+              :placeholder="$t('system.dict-data.form.dictLabel.placeholder')" />
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="4">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
+
     <div class="table-scroll">
       <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
@@ -35,24 +33,32 @@
           </template>
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="dictLabel" :title="$t('system.dict-data.table.columns.dictLabel')" align="center" />
-          <tiny-grid-column field="dictType" :title="$t('system.dict-data.table.columns.dictType')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
-          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" />
+          <tiny-grid-column field="dictValue" :title="$t('system.dict-data.table.columns.dictValue')" align="center" />
+          <tiny-grid-column field="dictType" :title="$t('system.dict-data.table.columns.dictType')" align="center">
+            <template #default="scope">
+              {{ scope.row.dictType }}
+            </template>
+          </tiny-grid-column>
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+            <template #default="scope">
+              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+            </template>
+          </tiny-grid-column>
+          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center">
+            <template #default="scope">
+              <dict-tag :value="scope.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center">
-            <template #default="data">
-              <tiny-button type="text" @click="handleEdit(data.row.id)"> {{
-                $t('global.table.operations.edit')
-              }}</tiny-button>
-              <tiny-popconfirm :title="`确定要删除字典数据【${data.row.dictLabel}】吗?`" type="warning" trigger="click"
-                @confirm="handleDelete(data.row.id)">
-                <template #reference>
-                  <tiny-button type="text" class="table-delete-button"> {{
-                    $t('global.table.operations.delete')
-                  }}</tiny-button>
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
+            <template #default="scope">
+              <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+                @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+                <template #item="{ data }">
+                  <span> {{ $t(data.label) }}</span>
                 </template>
-              </tiny-popconfirm>
+              </tiny-action-menu>
             </template>
           </tiny-grid-column>
         </tiny-grid>
@@ -64,30 +70,31 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, Popconfirm as TinyPopconfirm
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
-
 import editform from './components/edit-form.vue';
 
-const editFormRef = ref();
+const { proxy } = getCurrentInstance() as any
+
+
+const dictTypeOptions: Ref<SystemDictAPI.DictTypeVO[]> = ref([])
+const queryAll = (query: SystemDictAPI.DictTypeAllQuery) => {
+  SystemRequest.dictType.queryDictTypeAll(toRaw(query)).then((res) => {
+    dictTypeOptions.value = res.data
+  })
+}
+queryAll({})
 
 const state = reactive<{
   loading: boolean;
-  filterOptions: SystemDictAPI.DictDataPageQueryParams;
+  filterOptions: SystemDictAPI.DictDataPageQuery;
 }>({
   loading: false,
-  filterOptions: {} as SystemDictAPI.DictDataPageQueryParams,
+  filterOptions: {
+    dictType: proxy.$route.query.dictType || ''
+  },
 });
 
 const pagerConfig = reactive({
-  component: TinyPager,
   attrs: {
     currentPage: 1,
     pageSize: 10,
@@ -111,11 +118,11 @@ const fetchTableData = reactive({
   }
 });
 
-async function getPageData(params: SystemDictAPI.DictDataPageQueryParams = {
+async function getPageData(params: SystemDictAPI.DictDataPageQuery = {
   pageNo: 1,
   pageSize: 10
 }) {
-  const queryParmas: SystemDictAPI.DictDataPageQueryParams = {
+  const queryParmas: SystemDictAPI.DictDataPageQuery = {
     ...filterOptions.value,
     ...params,
   };
@@ -132,17 +139,41 @@ async function getPageData(params: SystemDictAPI.DictDataPageQueryParams = {
   }
 }
 
-const handleEdit = (id: string) => {
-  editFormRef.value.open(id)
+
+const options = ref([
+  {
+    label: 'global.table.operations.edit'
+  },
+  {
+    label: 'global.table.operations.delete'
+  }
+])
+
+const editFormRef = ref();
+
+const optionsClick = (label: string, data: SystemDictAPI.DictDataVO) => {
+  switch (label) {
+    case 'global.table.operations.edit': {
+      editFormRef.value.open(data.id)
+      break
+    }
+    case 'global.table.operations.delete': {
+      handleDelete(data)
+      break
+    }
+    default:
+      console.log("code is error.")
+  }
 }
 
-const handleDelete = (id: string) => {
-  SystemRequest.dictData.deleteDictDataById(id).then((res) => {
-    getPageData()
-    Modal.message({
-      message: '删除成功',
-      status: 'success',
-    });
+const handleDelete = (data: SystemDictAPI.DictDataVO) => {
+  proxy.$modal.confirm({ message: `确定要删除字典【${data.dictLabel}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+    if (data.id && res === 'confirm') {
+      SystemRequest.dictData.deleteDictDataById(data.id).then(() => {
+        handleFormQuery()
+        proxy.$modal.message({ message: '删除成功', status: 'success' });
+      })
+    }
   })
 }
 
@@ -150,7 +181,7 @@ const handleFormQuery = () => {
   gridTableRef?.value.handleFetch('reload');
 }
 const handleFormReset = () => {
-  state.filterOptions = {} as SystemDictAPI.DictDataPageQueryParams;
+  state.filterOptions = {} as SystemDictAPI.DictDataPageQuery;
   handleFormQuery();
 }
 

@@ -1,22 +1,16 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.department.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.department.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="8" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="8">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
@@ -28,6 +22,7 @@
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
           </template>
+
           <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" width="200" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
@@ -52,17 +47,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol,
-  Modal, ActionMenu as TinyActionMenu
-} from '@opentiny/vue';
-
-
 import SystemRequest from '@/api/system/index'
 import editform from './components/edit-form.vue';
+
+const { proxy } = getCurrentInstance() as any
 
 const state = reactive<{
   loading: boolean;
@@ -72,10 +60,8 @@ const state = reactive<{
   filterOptions: {} as SystemPermissionAPI.DepartmentAllQuery,
 });
 
-
 const gridTableRef = ref();
 const { loading, filterOptions } = toRefs(state);
-
 const tableData = ref<SystemPermissionAPI.DepartmentTreeVO[]>([])
 
 async function getAllData() {
@@ -120,11 +106,11 @@ const optionsClick = (label: string, data: SystemPermissionAPI.DepartmentVO) => 
 }
 
 const handleDelete = (data: SystemPermissionAPI.DepartmentVO) => {
-  Modal.confirm({ message: `确定要删除部门【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+  proxy.$modal.confirm({ message: `确定要删除部门【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
     if (data.id && res === 'confirm') {
       SystemRequest.department.deleteDepartmentById(data.id).then(() => {
         getAllData()
-        Modal.message({
+        proxy.$modal.message({
           message: '删除成功',
           status: 'success',
         });

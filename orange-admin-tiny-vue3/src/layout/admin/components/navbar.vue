@@ -53,7 +53,6 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
-import { UserHead as TinyUserHead, Modal } from '@opentiny/vue';
 import {
   IconReplace,
   IconUser,
@@ -63,10 +62,12 @@ import {
 import { useAppStore, useUserStore } from '@/store';
 import router from '@/router';
 import { LOCALE_OPTIONS } from '@/locale';
-import useLocale from '@/hooks/locale';
-import useUser from '@/hooks/user';
+import useLocale from '@/plugins/locale';
+
+const { proxy } = getCurrentInstance() as any
 
 const i18 = useI18n();
+const { t } = useI18n();
 const iconReplace = IconReplace();
 const iconUser = IconUser();
 const iconCheckOut = IconCheckOut();
@@ -75,7 +76,6 @@ const lan = ref(false);
 
 const appStore = useAppStore();
 const userStore = useUserStore();
-const { logout } = useUser();
 const { changeLocale } = useLocale();
 const locales = [...LOCALE_OPTIONS];
 
@@ -97,19 +97,10 @@ const userlist = [
   { label: 'messageBox.logout', value: 4 },
 ];
 
-const switchRoles = async () => {
-  const res = await userStore.switchRoles();
-  Modal.message({
-    message: res as string,
-    status: 'success',
-  });
-};
+
 
 const switchUser = (e: number) => {
   switch (e) {
-    case 1:
-      switchRoles();
-      break;
     case 2:
       router.push({ name: 'Info' });
       break;
@@ -117,12 +108,24 @@ const switchUser = (e: number) => {
       router.push({ name: 'Setting' });
       break;
     case 4:
-      logout();
+      logout()
       break;
     default:
     // eslint-disable-next-line no-console
   }
 };
+const logout = async () => {
+  await userStore.logout()
+  const currentRoute = router.currentRoute.value;
+  proxy.$modal.message({ message: t('setting.loginout'), status: 'success', });
+  router.push({
+    path: `${import.meta.env.VITE_CONTEXT}login`,
+    query: {
+      ...router.currentRoute.value.query,
+      redirect: currentRoute.fullPath as string,
+    },
+  });
+}
 
 // 点击图标跳转首页
 const jumpUrl = () => {

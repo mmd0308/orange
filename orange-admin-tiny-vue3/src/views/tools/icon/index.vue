@@ -5,9 +5,9 @@
         <tiny-popover v-for="item in systemIds" :key="item" placement="top-start" width="200" trigger="hover"
           append-to-body :content='`<svg-icon name="${item}"/>`'>
           <template #reference>
-            <div class="icon-item" @click="copyIcon(item.substr(5))">
-              <svg-icon :name="item.substr(5)" width="30" height="30" />
-              <span>{{ item.substr(5) }}</span>
+            <div class="icon-item" @click="copyIcon(item.substring(5))">
+              <svg-icon :name="item.substring(5)" width="30" height="30" />
+              <span>{{ item.substring(5) }}</span>
             </div>
           </template>
         </tiny-popover>
@@ -16,9 +16,9 @@
         <tiny-popover v-for="item in logoIds" :key="item" placement="top-start" width="200" trigger="hover" append-to-body
           :content='`<svg-icon name="${item}"/>`'>
           <template #reference>
-            <div class="icon-item" @click="copyIcon(item.substr(5))">
-              <svg-icon :name="item.substr(5)" width="30" height="30" />
-              <span>{{ item.substr(5) }}</span>
+            <div class="icon-item" @click="copyIcon(item.substring(5))">
+              <svg-icon :name="item.substring(5)" width="30" height="30" />
+              <span>{{ item.substring(5) }}</span>
             </div>
           </template>
         </tiny-popover>
@@ -29,32 +29,20 @@
 
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol,
-  Modal, ActionMenu as TinyActionMenu, Tabs as TinyTabs,
-  TabItem as TinyTabItem, Popover as TinyPopover,
-} from '@opentiny/vue';
 import { useClipboard } from '@vueuse/core';
-
 import ids from 'virtual:svg-icons-names'
 
 const activeName = ref("system")
-
 const { copy } = useClipboard();
+const { proxy } = getCurrentInstance() as any
 
 const systemIds = computed(() => ids.filter((item) => item.includes("system")))
 const logoIds = computed(() => ids.filter((item) => item.includes("logo")))
 
 const copyIcon = (id: string) => {
-  const text = `<svg-icon name="${id}"/>`
+  const text = `<svg-icon name="${id}" />`
   copy(text)
-  Modal.message({
-    message: '复制成功',
-    status: 'success',
-  });
+  proxy.$modal.message({ message: '复制成功', status: 'success' });
 }
 
 </script>

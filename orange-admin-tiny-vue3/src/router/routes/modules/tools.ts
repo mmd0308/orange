@@ -1,5 +1,3 @@
-import { RoleType } from '@/types/roleType';
-
 export default {
   path: 'tools',
   name: 'Tools',
@@ -9,7 +7,6 @@ export default {
     locale: 'menu.system.permission',
     requiresAuth: true,
     order: 7,
-    roles: [RoleType.admin, RoleType.user],
   },
   children: [
     {
@@ -21,7 +18,6 @@ export default {
       meta: {
         locale: 'menu.system.permission.department',
         requiresAuth: true,
-        roles: [RoleType.admin, RoleType.user],
       },
     }
   ],

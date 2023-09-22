@@ -1,31 +1,26 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.role.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.role.form.permission')">
             <tiny-input v-model="filterOptions.permissionLike" clearable
               :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="4">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
+
     <div class="table-scroll">
       <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
@@ -63,20 +58,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, ActionMenu as TinyActionMenu
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
-
 import editform from './components/edit-form.vue';
 
 const { proxy } = getCurrentInstance() as any
-
 const editFormRef = ref();
 
 
@@ -89,7 +74,6 @@ const state = reactive<{
 });
 
 const pagerConfig = reactive({
-  component: TinyPager,
   attrs: {
     currentPage: 1,
     pageSize: 10,
@@ -166,14 +150,11 @@ const optionsClick = (label: string, data: SystemPermissionAPI.RoleVO) => {
 }
 
 const handleDelete = (data: SystemPermissionAPI.RoleVO) => {
-  Modal.confirm({ message: `确定要删除角色【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+  proxy.$modal.confirm({ message: `确定要删除角色【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
     if (data.id && res === 'confirm') {
       SystemRequest.role.deleteRoleById(data.id).then(() => {
         handleFormQuery()
-        Modal.message({
-          message: '删除成功',
-          status: 'success',
-        });
+        proxy.$modal.message({ message: '删除成功', status: 'success', });
       })
     }
   })

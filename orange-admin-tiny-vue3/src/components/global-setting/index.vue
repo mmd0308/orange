@@ -53,13 +53,10 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useClipboard } from '@vueuse/core';
-import {
-  Button as TinyButton,
-  Switch as TinySwitch,
-  Modal,
-} from '@opentiny/vue';
 import { IconClose } from '@opentiny/vue-icon';
 import { useAppStore } from '@/store';
+
+const { proxy } = getCurrentInstance() as any
 
 const iconClose = IconClose();
 const { copy } = useClipboard();
@@ -79,7 +76,7 @@ const copySettings = () => {
   data: { 'ti-base-color': '#f2f2f3' } //  主题数据
 }`);
   copy(text);
-  Modal.message({
+  proxy.$modal.message({
     message: t('setting.copy'),
     status: 'success',
   });

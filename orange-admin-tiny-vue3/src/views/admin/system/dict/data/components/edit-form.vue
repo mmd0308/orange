@@ -1,34 +1,35 @@
 <template>
   <div>
-    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose">
+    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-        :model="formData" label-width="100px">
-        <tiny-form-item :label="$t('system.dict-data.form.dictLabel')" prop="name">
+        :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
+        <tiny-form-item :label="$t('system.dict-data.form.dictLabel')" prop="dictLabel">
           <tiny-input v-model="formData.dictLabel"
             :placeholder="$t('system.dict-data.form.dictLabel.placeholder')"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.dict-data.form.dictType')" prop="dictType">
-          <tiny-input v-model="formData.dictType"
-            :placeholder="$t('system.dict-data.form.dictType.placeholder')"></tiny-input>
+        <tiny-form-item :label="$t('system.dict-data.form.dictValue')" prop="dictValue">
+          <tiny-input v-model="formData.dictValue"
+            :placeholder="$t('system.dict-data.form.dictValue.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('system.dict-data.form.showStyle')" prop="showStyle">
+          <tiny-input v-model="formData.showStyle" type="color"
+            :placeholder="$t('system.dict-data.form.showStyle.placeholder')"></tiny-input>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.remark')" prop="remark">
+          <tiny-input v-model="formData.remark" type="textarea"
+            :placeholder="$t('global.form.remark.placeholder')"></tiny-input>
         </tiny-form-item>
       </tiny-form>
 
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
-        <tiny-button @click="visible = false">取消</tiny-button>
+        <tiny-button @click="onClose(false)">取消</tiny-button>
       </template>
     </tiny-drawer>
   </div>
 </template>
 
 <script lang="ts" setup>
-import {
-  Drawer as TinyDrawer,
-  Button as TinyButton,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput,
-} from '@opentiny/vue'
-
 import SystemRequest from '@/api/system/index'
 
 const emit = defineEmits(['ok'])
@@ -41,15 +42,11 @@ const title = computed(() => {
   return isModify.value ? '修改字典类型' : '新增字典类型'
 })
 
-const formData = ref<SystemDictAPI.DictDataVO>({
-  dictType: '',
-  dictLabel: '',
-  dictValue: '',
-})
+const formData = ref<SystemDictAPI.DictDataVO>({})
 
 const formDataRules = {
-  name: [{ required: true, message: '字典类型名称不能为空', trigger: 'change' }],
-  dictType: [{ required: true, message: '字典类型不能为空', trigger: 'change' }]
+  dictLabel: [{ required: true, message: '字典名称不能为空', trigger: 'change' }],
+  dictValue: [{ required: true, message: '字典值不能为空', trigger: 'change' }]
 }
 
 const onSubmit = () => {
@@ -87,7 +84,7 @@ const onClose = (refresh: boolean) => {
 const open = (id: string) => {
   isModify.value = false
   if (id) {
-    SystemRequest.dictType.getDictTypeById(id).then((response) => {
+    SystemRequest.dictData.getDictDataById(id).then((response) => {
       formData.value = response.data
       isModify.value = true
     })

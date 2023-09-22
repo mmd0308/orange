@@ -2,7 +2,8 @@
   <div>
     <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-        :model="formData" label-width="100px">
+        :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
+
         <tiny-form-item :label="$t('system.department.form.parentId')" prop="parentId">
           <tiny-select v-model="formData.parentId" value-field="id" text-field="name" render-type="tree" :tree-op="treeOp"
             :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
@@ -24,6 +25,7 @@
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
         </tiny-form-item>
       </tiny-form>
+
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
         <tiny-button @click="onClose(false)">取消</tiny-button>
@@ -33,18 +35,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Drawer as TinyDrawer,
-  Button as TinyButton,
-  Form as TinyForm, FormItem as TinyFormItem, Select as TinySelect,
-  Input as TinyInput, Numeric as TinyNumeric
-} from '@opentiny/vue'
-
 import SystemRequest from '@/api/system/index'
 
-const emit = defineEmits(['ok'])
-
 const { proxy } = getCurrentInstance() as any
+const emit = defineEmits(['ok'])
 
 const visible = ref(false)
 const isModify = ref(false)
@@ -58,7 +52,8 @@ const formData = ref<SystemPermissionAPI.MenuVO>({
 
 const formDataRules = {
   parentId: [{ required: true, message: '上级菜单不能为空', trigger: 'change' }],
-  name: [{ required: true, message: '菜单名称不能为空', trigger: 'change' }]
+  name: [{ required: true, message: '菜单名称不能为空', trigger: 'change' }],
+  permission: [{ required: true, message: '权限编码不能为空', trigger: 'change' }]
 }
 
 const onSubmit = () => {

@@ -3,6 +3,8 @@ export default {
   'global.form.reset': '重置',
 
   'global.form.sort': '显示顺序',
+  'global.form.remark': '备注',
+  'global.form.remark.placeholder': '请输入备注',
 
   'global.table.operations': '操作',
   'global.table.operations.view': '查看',

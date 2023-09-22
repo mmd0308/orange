@@ -24,7 +24,7 @@
           <tiny-input v-model="formData.username"></tiny-input>
         </tiny-form-item>
         <tiny-form-item label="备注" prop="remark">
-          <tiny-input v-model="formData.remark"></tiny-input>
+          <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
         </tiny-form-item>
       </tiny-form>
 
@@ -37,13 +37,6 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Drawer as TinyDrawer,
-  Button as TinyButton,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Select as TinySelect, Radio as TinyRadio
-} from '@opentiny/vue'
-
 import SystemRequest from '@/api/system/index'
 import { listDepartmentToTree } from '@/utils/department/index'
 

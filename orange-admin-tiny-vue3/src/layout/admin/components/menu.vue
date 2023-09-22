@@ -12,7 +12,6 @@
 </template>
 
 <script lang="ts" setup>
-import { TreeMenu as tinyTreeMenu, TabItem } from '@opentiny/vue';
 import router from '@/router';
 // import { useUserStore } from '@/store';
 import { isExternal } from '@/utils/validate'

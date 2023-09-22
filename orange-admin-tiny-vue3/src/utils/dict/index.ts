@@ -8,9 +8,7 @@ function getDict(key: string) {
   const res = ref([]);
   return (() => {
     SystemRequest.dictData.queryDictDataListByType(key).then((response) => {
-      const data = JSON.stringify(
-        response.data
-      )
+      const data = JSON.stringify(response.data)
       sessionStorage.setItem(key, data)
       res.value = response.data
     })

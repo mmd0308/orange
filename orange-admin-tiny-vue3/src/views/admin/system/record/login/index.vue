@@ -1,25 +1,20 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.role.form.name')">
             <tiny-input v-model="filterOptions.account"
               :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="8">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
+
     <div class="table-scroll">
       <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
@@ -33,14 +28,18 @@
           <tiny-grid-column field="account" :title="$t('system.record.login.table.columns.account')" align="center" />
           <tiny-grid-column field="userId" :title="$t('system.record.login.table.columns.userId')" align="center" />
 
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" />
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+            <template #default="data">
+              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="data">
-              <tiny-button type="text" @click="handleDetail(data.row.id)"> {{
-                $t('global.table.operations.detail')
-              }}</tiny-button>
+              <tiny-button type="text" @click="handleDetail(data.row.id)">
+                {{ $t('global.table.operations.detail') }}
+              </tiny-button>
             </template>
           </tiny-grid-column>
         </tiny-grid>
@@ -52,16 +51,10 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
 import detail from './components/detail.vue';
 
+const { proxy } = getCurrentInstance() as any
 const detailsRef = ref();
 
 const state = reactive<{
@@ -73,7 +66,6 @@ const state = reactive<{
 });
 
 const pagerConfig = reactive({
-  component: TinyPager,
   attrs: {
     currentPage: 1,
     pageSize: 10,
@@ -122,7 +114,6 @@ const handleDetail = (id: string) => {
   detailsRef.value.open(id)
 }
 
-
 const handleFormQuery = () => {
   gridTableRef?.value.handleFetch('reload');
 }
@@ -133,15 +124,15 @@ const handleFormReset = () => {
 
 const toolbarButtons = reactive([
   {
-    code: 'batchDelete',
-    name: '批量删除'
+    code: 'export',
+    name: '导出'
   }
 ])
 
 const toolbarButtonClickEvent = ({ code }: any) => {
   switch (code) {
-    case 'batchDelete': {
-      // editFormRef.value.open()
+    case 'export': {
+      proxy.$modal.message("开发中...")
       break
     }
     default:

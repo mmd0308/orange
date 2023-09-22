@@ -1,15 +1,15 @@
 declare namespace SystemDictAPI {
-  interface DictTypePageQueryParams extends DictTypeAllQueryParams {
+  interface DictTypePageQuery extends DictTypeAllQuery {
     /** 查询页码 */
     pageNo?: number;
     /** 每页数量 */
     pageSize?: number;
-
   };
 
-  interface DictTypeAllQueryParams {
+  interface DictTypeAllQuery {
     /** 字典名称 */
     name?: string;
+    nameLike?: string;
     /** 字典类型 */
     dictType?: string;
   }
@@ -31,14 +31,14 @@ declare namespace SystemDictAPI {
     remark?: string;
   };
 
-  interface DictDataPageQueryParams extends DictDataAllQueryParams {
+  interface DictDataPageQuery extends DictDataAllQuery {
     /** 查询页码 */
     pageNo?: number;
     /** 每页数量 */
     pageSize?: number;
   };
 
-  interface DictDataAllQueryParams {
+  interface DictDataAllQuery {
     dictType?: string;
     presetFlag?: number;
     dictLabel?: string;
@@ -52,11 +52,11 @@ declare namespace SystemDictAPI {
     /** 排序 */
     sort?: number;
     /** 字典数据标签 */
-    dictLabel: string;
+    dictLabel?: string;
     /** 字典数据键值 */
-    dictValue: string;
+    dictValue?: string;
     /** 字典类型 */
-    dictType: string;
+    dictType?: string;
     /** 状态 */
     status?: 'SUCCESS' | 'FAIL';
     /** 预设标记 */

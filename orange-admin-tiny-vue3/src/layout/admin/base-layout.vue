@@ -45,11 +45,6 @@
 
 <script lang="ts" setup>
 import { ref, watch, onMounted } from 'vue';
-import {
-  Container as TinyContainer,
-  Layout as TinyLayout,
-  Modal as tinyModal,
-} from '@opentiny/vue';
 import TinyThemeTool from '@opentiny/vue-theme/theme-tool.js';
 import { useAppStore } from '@/store';
 // eslint-disable-next-line import/extensions

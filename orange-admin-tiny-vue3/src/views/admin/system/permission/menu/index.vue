@@ -1,22 +1,16 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.menu.form.name')">
             <tiny-input v-model="filterOptions.nameLike" clearable
               :placeholder="$t('system.menu.form.name.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="8" label-width="100px">
-          <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
-          </div>
+        <tiny-col :span="8">
+          <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+          <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
         </tiny-col>
       </tiny-row>
     </tiny-form>
@@ -29,10 +23,15 @@
           </template>
           <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" />
-          <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" width="100" />
+          <tiny-grid-column field="icon" :title="$t('system.menu.table.columns.icon')" align="center" width="80">
+            <template #default="data">
+              <svg-icon :name="data.row.icon" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="permission" :title="$t('system.menu.table.columns.permission')" width="260" />
-          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="200" show-overflow />
-          <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center">
+          <tiny-grid-column field="path" :title="$t('system.menu.table.columns.path')" width="280" show-overflow />
+          <tiny-grid-column field="presetFlag" :title="$t('system.menu.table.columns.presetFlag')" align="center"
+            width="100">
             <template #default="data">
               <dict-tag :value="data.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
@@ -60,16 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol,
-  Modal, ActionMenu as TinyActionMenu
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
-
 import editform from './components/edit-form.vue';
 
 const { proxy } = getCurrentInstance() as any
@@ -101,7 +91,6 @@ async function getAllData() {
 }
 getAllData()
 
-
 const options = ref([
   {
     label: 'global.table.operations.edit'
@@ -129,14 +118,11 @@ const optionsClick = (label: string, data: SystemPermissionAPI.MenuVO) => {
 }
 
 const handleDelete = (data: SystemPermissionAPI.MenuVO) => {
-  Modal.confirm({ message: `确定要删除菜单【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
+  proxy.$modal.confirm({ message: `确定要删除菜单【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
     if (data.id && res === 'confirm') {
       SystemRequest.menu.deleteMenuById(data.id).then(() => {
         getAllData()
-        Modal.message({
-          message: '删除成功',
-          status: 'success',
-        });
+        proxy.$modal.message({ message: '删除成功', status: 'success', });
       })
     }
   })

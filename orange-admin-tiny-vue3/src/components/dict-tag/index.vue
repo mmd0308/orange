@@ -8,7 +8,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { Tag as TinyTag } from '@opentiny/vue'
 
 const props = defineProps({
   // 数据

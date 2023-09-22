@@ -1,31 +1,28 @@
 <template>
   <div class="container-list">
-    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form" size="small">
-      <tiny-row :flex="true" justify="center">
-        <tiny-col :span="4" label-width="100px">
+    <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
+      <tiny-row>
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.record.operation.form.traceId')">
             <tiny-input v-model="filterOptions.traceId" clearable
               :placeholder="$t('system.record.operation.form.traceId.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <tiny-form-item :label="$t('system.record.operation.form.operationTime')">
             <tiny-date-picker v-model="operationTime" :default-time="['00:00:00', '23:59:59']" type="datetimerange"
               clearable value-format="yyyy-MM-dd HH:mm:ss" @change="handleChange"></tiny-date-picker>
           </tiny-form-item>
         </tiny-col>
-        <tiny-col :span="4" label-width="100px">
+        <tiny-col :span="4">
           <div class="search-btn">
-            <tiny-button type="primary" @click="handleFormQuery">
-              {{ $t('global.form.search') }}
-            </tiny-button>
-            <tiny-button @click="handleFormReset">
-              {{ $t('global.form.reset') }}
-            </tiny-button>
+            <tiny-button type="primary" @click="handleFormQuery"> {{ $t('global.form.search') }} </tiny-button>
+            <tiny-button @click="handleFormReset"> {{ $t('global.form.reset') }} </tiny-button>
           </div>
         </tiny-col>
       </tiny-row>
     </tiny-form>
+
     <div class="table-scroll">
       <div class="table-wrapper">
         <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
@@ -71,16 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Grid as TinyGrid, GridColumn as TinyGridColumn, GridToolbar as TinyGridToolbar,
-  Form as TinyForm, FormItem as TinyFormItem,
-  Input as TinyInput, Button as TinyButton,
-  Row as TinyRow, Col as TinyCol, Pager as TinyPager,
-  Modal, DatePicker as TinyDatePicker
-} from '@opentiny/vue';
-
 import SystemRequest from '@/api/system/index'
-
 import detail from './components/detail.vue';
 
 const { proxy } = getCurrentInstance() as any
@@ -95,7 +83,6 @@ const state = reactive<{
 });
 
 const pagerConfig = reactive({
-  component: TinyPager,
   attrs: {
     currentPage: 1,
     pageSize: 10,
@@ -167,15 +154,15 @@ const handleFormReset = () => {
 
 const toolbarButtons = reactive([
   {
-    code: 'batchDelete',
-    name: '批量删除'
+    code: 'export',
+    name: '导出'
   }
 ])
 
 const toolbarButtonClickEvent = ({ code }: any) => {
   switch (code) {
-    case 'batchDelete': {
-      detailsRef.value.open()
+    case 'export': {
+      proxy.$modal.message("开发中...")
       break
     }
     default:

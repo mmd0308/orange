@@ -51,21 +51,16 @@
 <script lang="ts" setup>
 import { inject, ref, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import {
-  Form as TinyForm, FormItem as TinyFormItem, Input as TinyInput,
-  Button as TinyButton, Checkbox as TinyCheckbox, Link as TinyLink,
-  Notify, Modal, Row as TinyRow,
-  Col as TinyCol
-} from '@opentiny/vue';
 import { useI18n } from 'vue-i18n';
 import { useUserStore } from '@/store';
 import { encrypt } from '@/utils/jsencrypt'
 
-import useLoading from '@/hooks/loading';
+const { proxy } = getCurrentInstance() as any
 
 const router = useRouter();
 const { t } = useI18n();
-const { loading, setLoading } = useLoading();
+
+const loading = ref(false)
 const userStore = useUserStore();
 const loginFormInfo = ref();
 
@@ -105,14 +100,14 @@ function handleSubmit() {
     if (!valid) {
       return;
     }
-    setLoading(true);
+    loading.value = true
     try {
       await userStore.login({
         username: loginInfo.username,
         password: encrypt(loginInfo.password),
       });
 
-      Modal.message({
+      proxy.$modal.message({
         message: t('login.form.login.success'),
         status: 'success',
       });
@@ -125,7 +120,7 @@ function handleSubmit() {
         },
       });
     } catch (err) {
-      Notify({
+      proxy.$notify({
         type: 'error',
         title: t('login.tip.right'),
         message: t('login.tip.info'),
@@ -134,7 +129,7 @@ function handleSubmit() {
         customClass: 'my-custom-cls',
       });
     } finally {
-      setLoading(false);
+      loading.value = false
     }
   });
 }
@@ -147,10 +142,6 @@ function handleSubmit() {
 
 .login-form {
   margin-left: 6%;
-
-  .tiny-form-item {
-    margin-bottom: 20px;
-  }
 
   &-container {
     width: 320px;
