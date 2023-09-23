@@ -19,6 +19,7 @@
 
         <orange.version>1.0.0-SNAPSHOT</orange.version>
 
+        <spring.boot.version>3.0.10</spring.boot.version>
         <org.projectlombok.version>1.18.22</org.projectlombok.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
