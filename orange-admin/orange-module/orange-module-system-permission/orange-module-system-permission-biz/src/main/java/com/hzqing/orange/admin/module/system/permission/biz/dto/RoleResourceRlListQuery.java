@@ -7,11 +7,11 @@ import lombok.Data;
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Data
 @Builder
-public class RoleResourceRlQueryDTO {
+public class RoleResourceRlListQuery {
 
     private Long roleId;
 

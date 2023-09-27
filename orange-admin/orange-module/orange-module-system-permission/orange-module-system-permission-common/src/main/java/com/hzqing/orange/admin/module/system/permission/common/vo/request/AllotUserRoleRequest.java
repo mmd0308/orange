@@ -1,4 +1,4 @@
-package com.hzqing.orange.admin.module.system.permission.common.vo;
+package com.hzqing.orange.admin.module.system.permission.common.vo.request;
 
 import com.hzqing.orange.admin.starter.common.vo.BaseVO;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author 程序员橙子
  */
 @Data
-public class AllotUserRole extends BaseVO {
+public class AllotUserRoleRequest extends BaseVO {
 
     @Schema(description = "用户ID", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "用户ID不能为空.")

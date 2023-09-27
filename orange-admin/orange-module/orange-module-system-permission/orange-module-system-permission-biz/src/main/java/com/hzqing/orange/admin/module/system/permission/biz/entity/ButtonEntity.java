@@ -7,12 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.hzqing.orange.admin.starter.common.constants.enums.support.DataPresetFlagEnum;
 import com.hzqing.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 按钮管理表
  *
  * @author 程序员橙子
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName(value = "sys_button")
 public class ButtonEntity extends BaseTenantEntity {

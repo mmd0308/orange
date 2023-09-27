@@ -1,10 +1,9 @@
 package com.hzqing.orange.admin.module.system.permission.biz.converter;
 
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
-import  com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
+import com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Mapper
 public interface MenuConverter extends Converter {
@@ -33,7 +32,7 @@ public interface MenuConverter extends Converter {
 
     MenuListQuery toListQuery(MenuTreeQuery query);
 
-    List<MenuTree> toListTree(List<MenuEntity> entityList);
+    List<MenuTreeVO> toListTree(List<MenuEntity> entityList);
 
     MenuListQuery toListQuery(MenuAllQuery query);
 
@@ -68,5 +67,4 @@ public interface MenuConverter extends Converter {
         return entity;
     }
 
-    List<MenuButtonTree> toListMenuButtonTree(List<MenuEntity> menuEntityList);
 }

@@ -43,8 +43,8 @@ public class DictTypeController {
         return ResultWrapper.ok(result);
     }
 
-    @Operation(summary = "查询所有数据", operationId = "system:dict:dict-type:query-all")
-    @PostMapping(value = "/query-all")
+    @Operation(summary = "查询所有数据", operationId = "system:dict:dict-type:all")
+    @PostMapping(value = "/all")
     public Result<List<DictTypeVO>> queryAll(@RequestBody DictTypeAllQuery queryVo) {
         List<DictTypeVO> result = dictTypeService.queryAll(queryVo);
         return ResultWrapper.ok(result);

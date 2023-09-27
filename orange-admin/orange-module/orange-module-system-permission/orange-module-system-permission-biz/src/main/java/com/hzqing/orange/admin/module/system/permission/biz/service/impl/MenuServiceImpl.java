@@ -6,7 +6,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.converter.ButtonConv
 import com.hzqing.orange.admin.module.system.permission.biz.converter.MenuConverter;
 import com.hzqing.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
 import com.hzqing.orange.admin.module.system.permission.biz.dto.MenuListQuery;
-import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlListQuery;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.ButtonEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.MenuEntity;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
@@ -17,8 +17,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
 import com.hzqing.orange.admin.module.system.permission.common.constants.exception.MenuErrorCode;
 import com.hzqing.orange.admin.module.system.permission.common.vo.ButtonVO;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
@@ -56,18 +55,16 @@ public class MenuServiceImpl implements MenuService {
     private final RoleResourceRlManager roleResourceRlManager;
 
     @Override
-    public List<MenuTree> queryTree(MenuTreeQuery query) {
-        MenuListQuery listQuery = MenuConverter.INSTANCE.toListQuery(query);
-        List<MenuEntity> entityList = menuManager.listByParams(listQuery);
-
-        List<MenuTree> listTreeVo = MenuConverter.INSTANCE.toListTree(entityList);
-        Map<Long, List<MenuTree>> menuMap = listTreeVo.stream().collect(Collectors.groupingBy(MenuTree::getParentId));
+    public List<MenuTreeVO> queryTree(MenuTreeQuery query) {
+        List<MenuEntity> entityList = menuManager.listByParams(MenuConverter.INSTANCE.toListQuery(query));
+        List<MenuTreeVO> listTreeVo = MenuConverter.INSTANCE.toListTree(entityList);
+        Map<Long, List<MenuTreeVO>> menuMap = listTreeVo.stream().collect(Collectors.groupingBy(MenuTreeVO::getParentId));
         List<Long> deleteSubIds = new ArrayList<>();
         // 组装子集
         listTreeVo.forEach(item -> {
-            List<MenuTree> subList = menuMap.get(item.getId());
+            List<MenuTreeVO> subList = menuMap.get(item.getId());
             if (CollUtil.isNotEmpty(subList)) {
-                deleteSubIds.addAll(CollUtils.convertList(subList, MenuTree::getId));
+                deleteSubIds.addAll(CollUtils.convertList(subList, MenuTreeVO::getId));
             }
             item.setChildren(subList);
         });
@@ -75,31 +72,32 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<MenuButtonTree> queryAllMenuAndButtonTree() {
-        List<MenuEntity> menuEntityList = menuManager.listByParams(MenuListQuery.builder().build());
-        List<MenuButtonTree> menuButtonTree = MenuConverter.INSTANCE.toListMenuButtonTree(menuEntityList);
-        // 组装按钮
-        List<ButtonEntity> buttonEntityList = buttonManager.listByParams(ButtonListQuery.builder().build());
-        List<ButtonVO> buttonVOVoList = ButtonConverter.INSTANCE.toListVo(buttonEntityList);
-        Map<Long, List<ButtonVO>> buttonMap = CollUtil.isEmpty(buttonVOVoList) ? null : buttonVOVoList.stream().collect(Collectors.groupingBy(ButtonVO::getMenuId));
+    public List<MenuVO> queryByParams(MenuAllQuery query) {
+        List<MenuEntity> entityList = menuManager.listByParams(MenuConverter.INSTANCE.toListQuery(query));
+        List<MenuVO> menuVOS = MenuConverter.INSTANCE.toListVo(entityList);
+        if (query.isIncludeButton()) {
+            assemblyButton(menuVOS);
+        }
+        return menuVOS;
+    }
 
-        Map<Long, List<MenuButtonTree>> menuMap = menuButtonTree.stream().collect(Collectors.groupingBy(MenuButtonTree::getParentId));
-        // 组装子集
-        menuButtonTree.forEach(item -> {
-            item.setChildren(menuMap.get(item.getId()));
-            if (Objects.nonNull(buttonMap) && buttonMap.containsKey(item.getId())) {
+    private void assemblyButton(List<MenuVO> menuVOS) {
+        if (CollUtil.isEmpty(menuVOS)) {
+            return;
+        }
+        List<Long> menuIds = menuVOS.stream().map(MenuVO::getId).distinct().collect(Collectors.toList());
+        List<ButtonEntity> buttonEntityList = buttonManager.listByParams(ButtonListQuery.builder().menuIds(menuIds).build());
+        List<ButtonVO> buttonVOVoList = ButtonConverter.INSTANCE.toListVo(buttonEntityList);
+        if (CollUtil.isEmpty(buttonVOVoList)) {
+            return;
+        }
+        Map<Long, List<ButtonVO>> buttonMap = buttonVOVoList.stream().collect(Collectors.groupingBy(ButtonVO::getMenuId));
+        // 组装按钮
+        menuVOS.forEach(item -> {
+            if (buttonMap.containsKey(item.getId())) {
                 item.setButtonVOList(buttonMap.get(item.getId()));
             }
         });
-        // 过滤掉非顶级数据
-        return menuButtonTree.stream().filter(item -> CommonConstants.Common.DEFAULT_PARENT_ID.equals(item.getParentId())).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MenuVO> queryByParams(MenuAllQuery query) {
-        MenuListQuery listQuery = MenuConverter.INSTANCE.toListQuery(query);
-        List<MenuEntity> entityList = menuManager.listByParams(listQuery);
-        return MenuConverter.INSTANCE.toListVo(entityList);
     }
 
     @Override
@@ -107,7 +105,7 @@ public class MenuServiceImpl implements MenuService {
         if (CollUtil.isEmpty(roleIds)) {
             return List.of();
         }
-        RoleResourceRlQueryDTO resourceRlQueryDTO = RoleResourceRlQueryDTO.builder()
+        RoleResourceRlListQuery resourceRlQueryDTO = RoleResourceRlListQuery.builder()
                 .resourceType(ResourceTypeEnum.MENU).roleIds(roleIds).build();
         List<RoleResourceRlEntity> resourceRlEntityList = roleResourceRlManager.listByParams(resourceRlQueryDTO);
         if (CollUtil.isEmpty(resourceRlEntityList)) {
@@ -140,29 +138,6 @@ public class MenuServiceImpl implements MenuService {
         return menuManager.updateById(entity);
     }
 
-
-    //    @Override
-//    public List<MenuButtonTree> queryMenuTreeAndButton() {
-//        List<MenuEntity> menuEntityList = mapper.selectList(Wrappers.<MenuEntity>lambdaQuery().orderByDesc(MenuEntity::getSort));
-//        List<MenuButtonTree> listTreeVo = converter.toListMenuButtonTreeVo(menuEntityList);
-//        // 组装按钮
-//        List<ButtonEntity> buttonEntityList = buttonMapper.selectList(Wrappers.emptyWrapper());
-//        List<Button> buttonVoList = buttonConverter.toListVo(buttonEntityList);
-//        Map<Long, List<Button>> buttonMap = CollUtil.isEmpty(buttonVoList) ? null :
-//                buttonVoList.stream().collect(Collectors.groupingBy(Button::getMenuId));
-//
-//        Map<Long, List<MenuButtonTree>> menuMap = listTreeVo.stream().collect(Collectors.groupingBy(MenuButtonTree::getParentId));
-//        // 组装子集
-//        listTreeVo.forEach(item -> {
-//            item.setChildren(menuMap.get(item.getId()));
-//            if (Objects.nonNull(buttonMap) && buttonMap.containsKey(item.getId())) {
-//                item.setButtonList(buttonMap.get(item.getId()));
-//            }
-//        });
-//        // 过滤掉非顶级数据
-//        return listTreeVo.stream().filter(item -> CommonConstant.Common.DEFAULT_PARENT_ID.equals(item.getParentId())).collect(Collectors.toList());
-//    }
-//
     @Override
     public Boolean removeById(Long id) {
         MenuEntity entity = menuManager.getById(id);
@@ -183,5 +158,4 @@ public class MenuServiceImpl implements MenuService {
         }
         return menuManager.removeById(id);
     }
-
 }

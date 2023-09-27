@@ -48,8 +48,8 @@ public class UserController {
         return ResultWrapper.ok(result);
     }
 
-    @Operation(summary = "查询所有数据", operationId = "system:permission:user:query-all")
-    @PostMapping(value = "/query-all")
+    @Operation(summary = "查询所有数据", operationId = "system:permission:user:all")
+    @PostMapping(value = "/all")
     public Result<List<UserVO>> queryAll(@RequestBody UserAllQuery query) {
         List<UserVO> result = userService.queryAll(query);
         return ResultWrapper.ok(result);

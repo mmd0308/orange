@@ -7,7 +7,7 @@ export function queryDictTypePage(params: SystemDictAPI.DictTypePageQueryParams)
 }
 
 export function queryDictTypeAll(params: SystemDictAPI.DictTypeAllQueryParams) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function deleteDictTypeById(id: string) {

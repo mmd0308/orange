@@ -45,8 +45,8 @@ public class RoleController {
         return ResultWrapper.ok(result);
     }
 
-    @Operation(summary = "根据参数查询所有数据", operationId = "system:permission:role:query-all")
-    @PostMapping(value = "/query-all")
+    @Operation(summary = "根据参数查询所有数据", operationId = "system:permission:role:all")
+    @PostMapping(value = "/all")
     public Result<List<RoleVO>> queryAll(@RequestBody RoleAllQuery query) {
         RoleListQuery listQuery = RoleListQuery.builder().name(query.getName()).build();
         List<RoleEntity> entityList = roleManager.listByParams(listQuery);

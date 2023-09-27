@@ -1,6 +1,6 @@
 package com.hzqing.orange.admin.module.system.permission.biz.manager;
 
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
 import com.hzqing.orange.admin.starter.mybatis.manager.BaseManager;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface RoleResourceRlManager extends BaseManager<RoleResourceRlEntity> {
 
-    List<RoleResourceRlEntity> listByParams(RoleResourceRlQueryDTO query);
+    List<RoleResourceRlEntity> listByParams(RoleResourceRlListQuery query);
 
 
     List<RoleResourceRlEntity> listByRoleIds(List<Long> roleIds);

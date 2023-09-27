@@ -4,8 +4,7 @@ import com.hzqing.orange.admin.module.system.permission.biz.converter.MenuConver
 import com.hzqing.orange.admin.module.system.permission.biz.manager.MenuManager;
 import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
@@ -42,7 +41,6 @@ public class MenuController {
         return ResultWrapper.ok(menuService.add(request));
     }
 
-
     @PreAuthorize("@ss.hasPermission('system:permission:menu:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:menu:update")
     @PutMapping("/{id}")
@@ -57,22 +55,16 @@ public class MenuController {
         return ResultWrapper.ok(menuService.removeById(id));
     }
 
-    @PostMapping("/query-all")
-    @Operation(summary = "查询所有数据-列表", operationId = "system:permission:menu:query-all", description = "返回所有的数据")
+    @PostMapping("/all")
+    @Operation(summary = "查询所有数据-列表", operationId = "system:permission:menu:all", description = "返回所有的数据")
     public Result<List<MenuVO>> queryAll(@RequestBody MenuAllQuery query) {
         return ResultWrapper.ok(menuService.queryByParams(query));
     }
 
-    @PostMapping("/query-tree")
-    @Operation(summary = "查询所有数据-树型结构", operationId = "system:permission:menu:query-tree", description = "返回所有的数据")
-    public Result<List<MenuTree>> queryTree(@RequestBody MenuTreeQuery query) {
+    @PostMapping("/tree")
+    @Operation(summary = "查询所有数据-树型结构", operationId = "system:permission:menu:tree", description = "返回所有的数据")
+    public Result<List<MenuTreeVO>> queryTree(@RequestBody MenuTreeQuery query) {
         return ResultWrapper.ok(menuService.queryTree(query));
-    }
-
-    @GetMapping("/query-all-menu-and-button-tree")
-    @Operation(summary = "查询全部菜单和按钮数据", operationId = "system:permission:menu:query-all-menu-and-button-tree", description = "返回菜单和按钮组合的树型结构全部数据")
-    public Result<List<MenuButtonTree>> queryAllMenuAndButtonTree() {
-        return ResultWrapper.ok(menuService.queryAllMenuAndButtonTree());
     }
 
     @Operation(summary = "根据ID查询详情", operationId = "system:permission:menu:get")

@@ -1,8 +1,7 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
 
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuButtonTree;
-import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTree;
+import com.hzqing.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.MenuVO;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
@@ -17,9 +16,7 @@ import java.util.List;
  */
 public interface MenuService {
 
-    List<MenuTree> queryTree(MenuTreeQuery query);
-
-    List<MenuButtonTree> queryAllMenuAndButtonTree();
+    List<MenuTreeVO> queryTree(MenuTreeQuery query);
 
     /**
      * 根据条件查询菜单数据

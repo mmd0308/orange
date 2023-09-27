@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 菜单管理表
  *
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

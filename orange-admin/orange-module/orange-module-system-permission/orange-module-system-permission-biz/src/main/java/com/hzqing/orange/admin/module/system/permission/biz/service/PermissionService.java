@@ -1,27 +1,29 @@
 package com.hzqing.orange.admin.module.system.permission.biz.service;
 
-import com.hzqing.orange.admin.module.system.permission.common.vo.*;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotUserRoleRequest;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ResourceIds;
+import com.hzqing.orange.admin.module.system.permission.common.vo.ResourcePermissions;
+import com.hzqing.orange.admin.module.system.permission.common.vo.RouterTreeVO;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
 
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 public interface PermissionService {
 
     List<Long> queryRoleIdByUserId(Long userId);
 
-    Boolean allotUserRole(AllotUserRole allotUserRole);
+    Boolean allotUserRole(AllotUserRoleRequest allotUserRoleRequest);
 
-    Boolean allotRoleResource(AllotRoleResource allotUserRoleVo);
+    Boolean allotRoleResource(AllotRoleResourceRequest allotUserRoleVo);
 
     ResourceIds queryResourceIdsByRoleId(Long roleId);
 
 
     /**
      * 查询当前
-     *
-     * @return
      */
     List<RouterTreeVO> queryCurrentUserRoutersTree();
 

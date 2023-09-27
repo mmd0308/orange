@@ -31,7 +31,7 @@ const components = [
   TinyUserHead,
   TinyButton, TinyActionMenu, TinySwitch,
   TinyTag, TinyLink,
-  TinyTabs, TinyTabItem
+  TinyTabs, TinyTabItem,
 ]
 
 export const setupOpentiny = (app: App) => {

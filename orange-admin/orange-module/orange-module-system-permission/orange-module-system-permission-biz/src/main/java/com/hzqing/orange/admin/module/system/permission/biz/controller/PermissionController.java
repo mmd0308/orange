@@ -1,9 +1,9 @@
 package com.hzqing.orange.admin.module.system.permission.biz.controller;
 
-import  com.hzqing.orange.admin.module.system.permission.biz.service.PermissionService;
+import com.hzqing.orange.admin.module.system.permission.biz.service.PermissionService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
-import com.hzqing.orange.admin.module.system.permission.common.vo.AllotRoleResource;
-import com.hzqing.orange.admin.module.system.permission.common.vo.AllotUserRole;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotUserRoleRequest;
 import com.hzqing.orange.admin.starter.common.result.Result;
 import com.hzqing.orange.admin.starter.common.result.ResultWrapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Tag(name = "系统权限-权限变更相关接口")
 @RestController
@@ -27,19 +27,19 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot-user-role')")
-    @Operation(summary = "用户分配角色", operationId = "system:permission:permission:allot-user-role", description = "先删除旧关系，然后绑定新的关联关系")
-    @PostMapping("/allot-user-role")
-    public Result<Boolean> allotUserRole(@RequestBody @Validated AllotUserRole allotUserRole) {
-        return ResultWrapper.ok(permissionService.allotUserRole(allotUserRole));
+    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot_user_role')")
+    @Operation(summary = "用户分配角色", operationId = "system:permission:permission:allot_user_role", description = "先删除旧关系，然后绑定新的关联关系")
+    @PostMapping("/allot_user_role")
+    public Result<Boolean> allotUserRole(@RequestBody @Validated AllotUserRoleRequest request) {
+        return ResultWrapper.ok(permissionService.allotUserRole(request));
     }
 
 
-    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot-role-resource')")
-    @Operation(summary = "角色赋予资源", operationId = "system:permission:permission:allot-role-resource", description = "注意：会删除掉旧的绑定关系！！！ 会删除掉旧的绑定关系！！！从新绑定")
-    @PostMapping("/allot-role-resource")
-    public Result<Boolean> allotRoleResource(@RequestBody @Validated AllotRoleResource allotUserRoleVo) {
-        Boolean b = permissionService.allotRoleResource(allotUserRoleVo);
+    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot_role_resource')")
+    @Operation(summary = "角色赋予资源", operationId = "system:permission:permission:allot_role_resource", description = "注意：会删除掉旧的绑定关系！！！ 会删除掉旧的绑定关系！！！从新绑定")
+    @PostMapping("/allot_role_resource")
+    public Result<Boolean> allotRoleResource(@RequestBody @Validated AllotRoleResourceRequest request) {
+        Boolean b = permissionService.allotRoleResource(request);
         return ResultWrapper.ok(Boolean.TRUE);
     }
 

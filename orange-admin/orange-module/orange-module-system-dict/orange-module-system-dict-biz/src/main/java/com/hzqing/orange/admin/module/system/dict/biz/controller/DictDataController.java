@@ -76,8 +76,8 @@ public class DictDataController {
         return ResultWrapper.ok(DictDataConverter.INSTANCE.toListVo(entityList));
     }
 
-    @Operation(summary = "根据参数查询所有数据", operationId = "system:dict:dict-data:query-all")
-    @PostMapping(value = "/query-all")
+    @Operation(summary = "根据参数查询所有数据", operationId = "system:dict:dict-data:all")
+    @PostMapping(value = "/all")
     public Result<List<DictDataVO>> queryAll(@RequestBody DictDataAllQuery query) {
         DictDataListQuery listQuery = DictDataConverter.INSTANCE.toListQuery(query);
         List<DictDataEntity> entityList = dictDataManager.listByParams(listQuery);

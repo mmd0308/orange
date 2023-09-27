@@ -63,22 +63,22 @@ public class DepartmentController {
         return ResultWrapper.ok(departmentService.removeById(id));
     }
 
-    @PostMapping(value = "/query-tree")
-    @Operation(summary = "树型结构数据", operationId = "system:permission:department:query-tree", description = "返回所有的数据")
+    @PostMapping(value = "/tree")
+    @Operation(summary = "树型结构数据", operationId = "system:permission:department:tree", description = "返回所有的数据")
     public Result<List<DepartmentTreeVO>> queryTree(@RequestBody DepartmentTreeQuery query) {
         List<DepartmentTreeVO> treeVoList = departmentService.queryTree(query);
         return ResultWrapper.ok(treeVoList);
     }
 
-    @PostMapping(value = "/query-all")
-    @Operation(summary = "查询所有的数据", operationId = "system:permission:department:query-all", description = "返回所有的数据")
+    @PostMapping(value = "/all")
+    @Operation(summary = "查询所有的数据", operationId = "system:permission:department:all", description = "返回所有的数据")
     public Result<List<DepartmentVO>> queryAll(@RequestBody DepartmentAllQuery query) {
         List<DepartmentVO> list = departmentService.queryAll(query);
         return ResultWrapper.ok(list);
     }
 
-    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及所有子部门数据", operationId = "system:permission:department:query-self-and-all-subset")
-    @GetMapping("/query-self-and-all-subset/{id}")
+    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及所有子部门数据", operationId = "system:permission:department:query_self_and_subset")
+    @GetMapping("/query_self_and_subset/{id}")
     public Result<List<DepartmentVO>> querySelfAndSubsetById(@PathVariable("id") Long id) {
         List<DepartmentVO> result = departmentService.querySelfAndSubsetById(id);
         return ResultWrapper.ok(result);

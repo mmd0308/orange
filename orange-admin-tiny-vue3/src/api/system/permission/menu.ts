@@ -2,12 +2,8 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/menu"
 
-export function queryMenuPage(params: SystemPermissionAPI.MenuTreeQuery) {
-  return axios.post(BASE_URL.concat("/page"), params);
-}
-
-export function queryMenuAll(params: SystemPermissionAPI.MenuTreeQuery) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+export function queryMenuAll(params: SystemPermissionAPI.MenuAllQuery) {
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function deleteMenuById(id: string) {
@@ -22,6 +18,10 @@ export function getMenuById(id: string) {
   return axios.get(BASE_URL.concat(`/${id}`));
 }
 
+
+
 export function updateMenuById(id: string, params: SystemPermissionAPI.MenuVO) {
   return axios.put(BASE_URL.concat(`/${id}`), params);
 }
+
+

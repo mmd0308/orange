@@ -21,7 +21,7 @@ public interface SecurityConstants {
     /**
      * 发行人
      */
-    String ISSUER = "hengzq";
+    String ISSUER = "orange";
 
 
     /**
@@ -42,6 +42,6 @@ public interface SecurityConstants {
     /**
      * 秘钥key
      */
-    String DEFAULT_SECRET_KEY = "Orange-Cloud*2023.";
+    String DEFAULT_SECRET_KEY = "Orange*2023.";
 
 }

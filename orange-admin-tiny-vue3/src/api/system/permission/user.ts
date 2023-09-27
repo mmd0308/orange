@@ -7,7 +7,7 @@ export function queryUserPage(params: SystemPermissionAPI.UserPageQuery) {
 }
 
 export function queryUserAll(params: SystemPermissionAPI.UserAllQuery) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function deleteUserById(id: string) {

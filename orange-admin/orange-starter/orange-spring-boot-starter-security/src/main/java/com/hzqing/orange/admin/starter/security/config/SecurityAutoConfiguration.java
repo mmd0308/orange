@@ -7,6 +7,7 @@ import com.hzqing.orange.admin.starter.security.service.PermissionAuthentication
 import com.hzqing.orange.admin.starter.security.service.impl.PermissionAuthenticationMonomerServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -40,7 +41,7 @@ public class SecurityAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnClass(value = UserApi.class)
+    @ConditionalOnBean(value = UserApi.class)
     public PermissionAuthenticationService permissionAuthenticationService(UserApi userApi, PermissionApi permissionApi) {
         return new PermissionAuthenticationMonomerServiceImpl(userApi, permissionApi);
     }

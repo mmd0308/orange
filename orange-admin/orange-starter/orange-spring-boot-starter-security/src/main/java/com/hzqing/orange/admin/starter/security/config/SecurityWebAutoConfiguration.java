@@ -49,8 +49,6 @@ public class SecurityWebAutoConfiguration {
 
     /**
      * 调用loadUserByUsername获得UserDetail信息，在AbstractUserDetailsAuthenticationProvider里执行用户状态检查
-     *
-     * @return
      */
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {

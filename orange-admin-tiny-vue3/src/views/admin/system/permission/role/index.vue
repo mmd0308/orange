@@ -55,14 +55,17 @@
   </div>
 
   <editform ref="editFormRef" @ok="handleFormQuery"></editform>
+  <allotResource ref="allotResourceRef"></allotResource>
 </template>
 
 <script lang="ts" setup>
 import SystemRequest from '@/api/system/index'
 import editform from './components/edit-form.vue';
+import allotResource from './components/allot-resource.vue';
 
 const { proxy } = getCurrentInstance() as any
 const editFormRef = ref();
+const allotResourceRef = ref();
 
 
 const state = reactive<{
@@ -137,7 +140,7 @@ const optionsClick = (label: string, data: SystemPermissionAPI.RoleVO) => {
       break
     }
     case 'global.table.operations.menuPermission': {
-      debugger
+      allotResourceRef.value.open(data)
       break
     }
     case 'global.table.operations.delete': {

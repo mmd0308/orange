@@ -1,41 +1,41 @@
 <template>
-  <div>
-    <tiny-drawer :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
-      <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-        :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
-        <tiny-form-item :label="$t('system.role.form.name')" prop="name">
-          <tiny-input v-model="formData.name" :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
-        </tiny-form-item>
-        <tiny-form-item :label="$t('system.role.form.permission')" prop="permission">
-          <tiny-input v-model="formData.permission"
-            :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
-        </tiny-form-item>
-        <tiny-form-item :label="$t('global.form.sort')" prop="sort">
-          <tiny-numeric v-model="formData.sort"></tiny-numeric>
-        </tiny-form-item>
-        <tiny-form-item :label="$t('global.form.remark')" prop="remark">
-          <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
-        </tiny-form-item>
-      </tiny-form>
+  <tiny-drawer id="tinyDrawer" :title="title" :visible="visible" :show-footer="true" @close="onClose(false)">
+    <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
+      :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
+      <tiny-form-item :label="$t('system.role.form.name')" prop="name">
+        <tiny-input v-model="formData.name" :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
+      </tiny-form-item>
+      <tiny-form-item :label="$t('system.role.form.permission')" prop="permission">
+        <tiny-input v-model="formData.permission"
+          :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
+      </tiny-form-item>
+      <tiny-form-item :label="$t('global.form.sort')" prop="sort">
+        <tiny-numeric v-model="formData.sort"></tiny-numeric>
+      </tiny-form-item>
+      <tiny-form-item :label="$t('global.form.remark')" prop="remark">
+        <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
+      </tiny-form-item>
+    </tiny-form>
 
-      <template #footer>
-        <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
-        <tiny-button @click="onClose(false)">取消</tiny-button>
-      </template>
-    </tiny-drawer>
-  </div>
+    <template #footer>
+      <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
+      <tiny-button @click="onClose(false)">取消</tiny-button>
+    </template>
+  </tiny-drawer>
 </template>
 
 <script lang="ts" setup>
 import SystemRequest from '@/api/system/index'
 
-const emit = defineEmits(['ok'])
 const { proxy } = getCurrentInstance() as any
+
+const emit = defineEmits(['ok'])
 const visible = ref(false)
 const isModify = ref(false)
 const title = computed(() => {
   return isModify.value ? '修改角色' : '新增角色'
 })
+
 
 const formData = ref<SystemPermissionAPI.RoleVO>({
   name: '',

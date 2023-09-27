@@ -110,28 +110,8 @@ declare namespace SystemPermissionAPI {
     remark?: string;
   };
 
-  interface MenuTreeVO {
-    tenantId?: string;
-    id?: string;
-    parentId?: string;
-    rootId?: string;
-    name?: string;
-    permission?: string;
-    presetFlag?: 'PRESET' | 'CUSTOM';
-    path?: string;
-    icon?: string;
-    component?: string;
-    sort?: number;
-    remark?: string;
+  interface MenuTreeVO extends MenuVO {
     children?: MenuTreeVO[];
-  };
-
-  interface MenuTreeQuery {
-    parentId?: number;
-    name?: string;
-    permission?: string;
-    permissionLike?: string;
-    component?: string;
   };
 
 
@@ -142,6 +122,7 @@ declare namespace SystemPermissionAPI {
     permission?: string;
     permissionLike?: string;
     component?: string;
+    includeButton?: boolean
   };
 
   interface ButtonPageQuery extends ButtonAllQuery {
@@ -189,4 +170,20 @@ declare namespace SystemPermissionAPI {
     roleIds: string[];
   };
 
+
+  interface AllotRoleResourceRequest {
+    /** 角色ID */
+    roleId: string;
+    /** 菜单ID */
+    menuIds?: string[];
+    /** 按钮ID */
+    buttonIds?: string[];
+  };
+
+  interface ResourceIds {
+    /** 菜单ID */
+    menuIds?: string[];
+    /** 按钮ID */
+    buttonIds?: string[];
+  }
 }

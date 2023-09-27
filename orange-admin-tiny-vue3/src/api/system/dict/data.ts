@@ -7,7 +7,7 @@ export function queryDictDataPage(params: SystemDictAPI.DictDataPageQueryParams)
 }
 
 export function queryDictDataAll(params: SystemDictAPI.DictDataAllQueryParams) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function queryDictDataListByType(dictType: string) {

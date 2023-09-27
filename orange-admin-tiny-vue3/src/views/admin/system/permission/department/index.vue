@@ -93,7 +93,7 @@ const editFormRef = ref();
 const optionsClick = (label: string, data: SystemPermissionAPI.DepartmentVO) => {
   switch (label) {
     case 'global.table.operations.edit': {
-      editFormRef.value.open(data.id)
+      editFormRef.value.open(data)
       break
     }
     case 'global.table.operations.delete': {
@@ -140,7 +140,6 @@ function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
       }
       parent.children.push(item)
     }
-    delete item.parentId
   })
   return result
 }

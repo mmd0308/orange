@@ -2,7 +2,7 @@ package com.hzqing.orange.admin.module.system.permission.biz.manager.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import  com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlListQuery;
 import  com.hzqing.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
 import  com.hzqing.orange.admin.module.system.permission.biz.manager.RoleResourceRlManager;
 import  com.hzqing.orange.admin.module.system.permission.biz.mapper.RoleResourceRlMapper;
@@ -31,7 +31,7 @@ public class RoleResourceRlManagerImpl extends BaseManagerImpl<RoleResourceRlMap
     }
 
     @Override
-    public List<RoleResourceRlEntity> listByParams(RoleResourceRlQueryDTO query) {
+    public List<RoleResourceRlEntity> listByParams(RoleResourceRlListQuery query) {
         if (Objects.isNull(query)) {
             return List.of();
         }

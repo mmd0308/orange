@@ -2,17 +2,26 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/permission"
 
+
+export function allotUserRole(params: SystemPermissionAPI.AllotUserRoleVO) {
+  return axios.post(BASE_URL.concat("/allot_user_role"), params);
+}
+
+export function allotRoleResource(params: SystemPermissionAPI.AllotRoleResourceRequest) {
+  return axios.post(BASE_URL.concat("/allot_role_resource"), params);
+}
+
+
 export function queryRoutersTree() {
   return axios.get(BASE_URL.concat("/query-current-user-routers-tree"));
 }
 
-
-export function allotUserRole(params: SystemPermissionAPI.AllotUserRoleVO) {
-  return axios.post(BASE_URL.concat("/allot-user-role"), params);
+export function queryResourceIdsByRoleId(roleId: string) {
+  return axios.get(BASE_URL.concat(`/query_resource_ids/${roleId}`));
 }
 
 // export function queryRoleAll(params: SystemPermissionAPI.RoleAllQueryParams) {
-//   return axios.post(BASE_URL.concat("/query-all"), params);
+//   return axios.post(BASE_URL.concat("/all"), params);
 // }
 
 // export function deleteRoleById(id: string) {

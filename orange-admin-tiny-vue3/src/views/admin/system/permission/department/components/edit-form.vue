@@ -70,7 +70,7 @@ const onSubmit = () => {
 
 const onClose = (refresh: boolean) => {
   visible.value = false
-  proxy.$refs.formDataRef.resetFields()
+  formData.value = {}
   if (refresh) {
     emit('ok')
   }
@@ -109,18 +109,15 @@ function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
       }
       parent.children.push(item)
     }
-    delete item.parentId
   })
   return result
 }
 
-const open = (id: string) => {
+const open = (data: SystemPermissionAPI.DepartmentVO) => {
   isModify.value = false
-  if (id) {
-    SystemRequest.department.getDepartmentById(id).then((response) => {
-      formData.value = response.data
-      isModify.value = true
-    })
+  if (data) {
+    formData.value = data
+    isModify.value = true
   }
   queryAll({})
   visible.value = true

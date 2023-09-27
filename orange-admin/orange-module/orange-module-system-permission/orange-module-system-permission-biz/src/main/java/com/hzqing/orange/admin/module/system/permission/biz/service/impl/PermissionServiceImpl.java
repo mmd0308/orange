@@ -2,7 +2,7 @@ package com.hzqing.orange.admin.module.system.permission.biz.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.hzqing.orange.admin.module.system.permission.biz.converter.PermissionConverter;
-import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlQueryDTO;
+import com.hzqing.orange.admin.module.system.permission.biz.dto.RoleResourceRlListQuery;
 import com.hzqing.orange.admin.module.system.permission.biz.entity.*;
 import com.hzqing.orange.admin.module.system.permission.biz.manager.*;
 import com.hzqing.orange.admin.module.system.permission.biz.service.MenuService;
@@ -12,6 +12,8 @@ import com.hzqing.orange.admin.module.system.permission.biz.service.UserService;
 import com.hzqing.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
 import com.hzqing.orange.admin.module.system.permission.common.vo.*;
 import com.hzqing.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
+import com.hzqing.orange.admin.module.system.permission.common.vo.request.AllotUserRoleRequest;
 import com.hzqing.orange.admin.starter.common.constants.CommonConstants;
 import com.hzqing.orange.admin.starter.common.constants.PermissionConstants;
 import com.hzqing.orange.admin.starter.common.util.CollUtils;
@@ -59,11 +61,11 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
-    public Boolean allotUserRole(AllotUserRole allotUserRole) {
-        userRoleRlManager.removeByUserId(allotUserRole.getUserId());
-        List<UserRoleRlEntity> rlEntityList = new ArrayList<>(allotUserRole.getRoleIds().size());
-        for (Long roleId : allotUserRole.getRoleIds()) {
-            rlEntityList.add(new UserRoleRlEntity(allotUserRole.getUserId(), roleId, Boolean.TRUE));
+    public Boolean allotUserRole(AllotUserRoleRequest allotUserRoleRequest) {
+        userRoleRlManager.removeByUserId(allotUserRoleRequest.getUserId());
+        List<UserRoleRlEntity> rlEntityList = new ArrayList<>(allotUserRoleRequest.getRoleIds().size());
+        for (Long roleId : allotUserRoleRequest.getRoleIds()) {
+            rlEntityList.add(new UserRoleRlEntity(allotUserRoleRequest.getUserId(), roleId, Boolean.TRUE));
         }
         userRoleRlManager.batchAdd(rlEntityList);
         return Boolean.TRUE;
@@ -71,7 +73,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
-    public Boolean allotRoleResource(AllotRoleResource allotUserRoleVo) {
+    public Boolean allotRoleResource(AllotRoleResourceRequest allotUserRoleVo) {
         Long roleId = allotUserRoleVo.getRoleId();
         roleResourceRlManager.removeByRoleId(roleId);
         log.info("clean up. roleId:{}", roleId);
@@ -82,11 +84,16 @@ public class PermissionServiceImpl implements PermissionService {
         log.info("roleId:{},menuIds:{},buttonIds:{}", roleId, menuIds, buttonIds);
         List<RoleResourceRlEntity> roleResourceRlEntityList = new ArrayList<>();
         menuIds.forEach(i -> {
-            roleResourceRlEntityList.add(RoleResourceRlEntity.builder().roleId(roleId).resourceId(i).resourceType(ResourceTypeEnum.MENU).build());
+            RoleResourceRlEntity menu = new RoleResourceRlEntity(roleId, i, ResourceTypeEnum.MENU);
+            menu.initParams(true);
+            roleResourceRlEntityList.add(menu);
         });
+
         if (CollUtil.isNotEmpty(buttonIds)) {
             buttonIds.forEach(i -> {
-                roleResourceRlEntityList.add(RoleResourceRlEntity.builder().roleId(roleId).resourceId(i).resourceType(ResourceTypeEnum.BUTTON).build());
+                RoleResourceRlEntity button = new RoleResourceRlEntity(roleId, i, ResourceTypeEnum.BUTTON);
+                button.initParams(true);
+                roleResourceRlEntityList.add(button);
             });
         }
         roleResourceRlManager.batchAdd(roleResourceRlEntityList);
@@ -95,18 +102,19 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public ResourceIds queryResourceIdsByRoleId(Long roleId) {
-        RoleResourceRlQueryDTO queryDTO = RoleResourceRlQueryDTO.builder().roleId(roleId).build();
+        RoleResourceRlListQuery queryDTO = RoleResourceRlListQuery.builder().roleId(roleId).build();
         List<RoleResourceRlEntity> resourceRlEntityList = roleResourceRlManager.listByParams(queryDTO);
-        ResourceIds resourceIdsVo = new ResourceIds();
+        ResourceIds resourceIds = new ResourceIds();
         if (CollUtil.isEmpty(resourceRlEntityList)) {
-            return resourceIdsVo;
+            return resourceIds;
         }
-        List<Long> menuIds = resourceRlEntityList.stream().filter(i -> ResourceTypeEnum.MENU.equals(i.getResourceType())).map(RoleResourceRlEntity::getResourceId).toList();
-        List<Long> buttonIds =
-                resourceRlEntityList.stream().filter(i -> ResourceTypeEnum.BUTTON.equals(i.getResourceType())).map(RoleResourceRlEntity::getResourceId).toList();
-        resourceIdsVo.setMenuIds(menuIds);
-        resourceIdsVo.setButtonIds(buttonIds);
-        return resourceIdsVo;
+        List<Long> menuIds = resourceRlEntityList.stream().filter(i -> ResourceTypeEnum.MENU.equals(i.getResourceType()))
+                .map(RoleResourceRlEntity::getResourceId).toList();
+        List<Long> buttonIds = resourceRlEntityList.stream().filter(i -> ResourceTypeEnum.BUTTON.equals(i.getResourceType()))
+                .map(RoleResourceRlEntity::getResourceId).toList();
+        resourceIds.setMenuIds(menuIds);
+        resourceIds.setButtonIds(buttonIds);
+        return resourceIds;
     }
 
     @Override

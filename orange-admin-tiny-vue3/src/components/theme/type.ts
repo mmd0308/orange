@@ -1,3 +1,4 @@
+// https://github.com/opentiny/tiny-vue/blob/dev/packages/theme/src/base/basic-var.less
 const DefaultTheme = {
   id: 'tiny-default-theme',
   name: 'DefaultTheme',
@@ -12,7 +13,10 @@ const DefaultTheme = {
     'ti-base-color-brand-1': '#f2f5fc',
     'ti-tree-menu-node-current-text-color': '#fff',
     'ti-tree-menu-square-left-border-color': '#fff',
+    // 菜单选中的背景颜色
     'ti-tree-menu-node-hover-bg-color': '#526ecc',
+    // 菜单Hover背景颜色
+    'ti-tree-node-content-hover-bg-color': '#526ecc',
     'ti-base-common-title-color': '#272727',
     'ti-base-icon-color': '#fff'
   },

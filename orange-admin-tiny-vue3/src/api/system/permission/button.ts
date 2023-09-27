@@ -7,7 +7,7 @@ export function queryButtonPage(params: SystemPermissionAPI.ButtonPageQueryParam
 }
 
 export function queryButtonAll(params: SystemPermissionAPI.ButtonAllQueryParams) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function deleteButtonById(id: string) {

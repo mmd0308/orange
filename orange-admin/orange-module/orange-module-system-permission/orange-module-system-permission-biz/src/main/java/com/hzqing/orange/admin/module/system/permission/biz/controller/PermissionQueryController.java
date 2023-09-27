@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Tag(name = "系统权限-权限查询相关接口")
 @RestController
@@ -29,15 +29,15 @@ public class PermissionQueryController {
 
     private final PermissionService permissionService;
 
-    @Operation(summary = "查询用户角色ID", operationId = "system:permission:permission:query-role-id-by-user-id", description = "根据用户ID获取该用户拥有的角色")
-    @GetMapping("/query-role-id-by-user-id/{userId}")
+    @Operation(summary = "查询用户角色ID", operationId = "system:permission:permission:queryRoleIdByUserId", description = "根据用户ID获取该用户拥有的角色")
+    @GetMapping("/queryRoleIdByUserId/{userId}")
     public Result<List<Long>> queryRoleIdByUserId(@PathVariable("userId") Long userId) {
         List<Long> list = permissionService.queryRoleIdByUserId(userId);
         return ResultWrapper.ok(list);
     }
 
-    @Operation(summary = "根据角色ID查询资源", operationId = "system:permission:permission:query-resource-ids-by-role-id")
-    @GetMapping("/query-resource-ids-by-role-id/{roleId}")
+    @Operation(summary = "根据角色ID查询资源ID", operationId = "system:permission:permission:query_resource_ids")
+    @GetMapping("/query_resource_ids/{roleId}")
     public Result<ResourceIds> queryResourceIdsByRoleId(@PathVariable("roleId") Long roleId) {
         return ResultWrapper.ok(permissionService.queryResourceIdsByRoleId(roleId));
     }

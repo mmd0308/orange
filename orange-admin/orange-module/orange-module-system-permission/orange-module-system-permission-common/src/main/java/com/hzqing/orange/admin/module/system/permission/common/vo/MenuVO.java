@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
  * @author 程序员橙子
  */
@@ -46,4 +48,7 @@ public class MenuVO extends BaseTenantVO {
 
     @Schema(description = "备注")
     private String remark;
+
+    @Schema(description = "菜单关联按钮")
+    private List<ButtonVO> buttonVOList;
 }

@@ -1,9 +1,11 @@
 package com.hzqing.orange.admin.starter.security.filter;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.interfaces.Claim;
 import com.hzqing.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
 import com.hzqing.orange.admin.starter.common.exception.ServiceException;
+import com.hzqing.orange.admin.starter.common.result.ResultWrapper;
 import com.hzqing.orange.admin.starter.context.GlobalContextHelper;
 import com.hzqing.orange.admin.starter.security.constants.SecurityConstants;
 import com.hzqing.orange.admin.starter.security.dto.LoginUser;
@@ -13,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +48,11 @@ public class JWTTokenAuthenticationFilter extends OncePerRequestFilter {
             Map<String, Claim> claimMap = JWTUtil.parseToken(token);
             if (Objects.isNull(claimMap) || claimMap.isEmpty() || !JWTUtil.isTokenValid(token)) {
                 log.error("token is illegal.");
-                throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_INTERNAL_SERVER_ERROR);
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json;charset=UTF-8");
+                response.getWriter().write(JSONUtil.toJsonStr(ResultWrapper.fail(GlobalErrorCodeConstants.GLOBAL_UNAUTHORIZED)));
+                return;
+
             }
             LoginUser loginUser = buildLoginUser(claimMap);
             // 重新将用户信息封装到UsernamePasswordAuthenticationToken
@@ -58,6 +65,7 @@ public class JWTTokenAuthenticationFilter extends OncePerRequestFilter {
 
         chain.doFilter(request, response);
     }
+
 
     /**
      * 构建UsernamePasswordAuthenticationToken

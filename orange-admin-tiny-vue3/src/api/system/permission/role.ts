@@ -7,7 +7,7 @@ export function queryRolePage(params: SystemPermissionAPI.RolePageQueryParams) {
 }
 
 export function queryRoleAll(params: SystemPermissionAPI.RoleAllQueryParams) {
-  return axios.post(BASE_URL.concat("/query-all"), params);
+  return axios.post(BASE_URL.concat("/all"), params);
 }
 
 export function deleteRoleById(id: string) {
