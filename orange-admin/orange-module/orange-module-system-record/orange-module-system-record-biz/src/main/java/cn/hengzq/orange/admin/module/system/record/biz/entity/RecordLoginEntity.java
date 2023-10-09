@@ -1,13 +1,13 @@
 package cn.hengzq.orange.admin.module.system.record.biz.entity;
 
+import cn.hengzq.orange.admin.module.system.record.common.constant.RecordLoginTypeEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.mybatis.entity.AbstractEntity;
+import cn.hengzq.orange.admin.starter.mybatis.handler.EnumCodeTypeHandler;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
-import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
-import cn.hengzq.orange.admin.starter.mybatis.handler.EnumCodeTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("sys_record_login")
-public class RecordLoginEntity extends BaseTenantEntity {
+public class RecordLoginEntity extends AbstractEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;

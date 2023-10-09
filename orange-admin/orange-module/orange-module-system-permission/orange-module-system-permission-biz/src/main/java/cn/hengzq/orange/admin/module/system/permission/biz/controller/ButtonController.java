@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.module.system.permission.biz.controller;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.ButtonConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.ButtonService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "系统权限-按钮管理")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/button")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/button")
 public class ButtonController {
 
     private final ButtonService buttonService;

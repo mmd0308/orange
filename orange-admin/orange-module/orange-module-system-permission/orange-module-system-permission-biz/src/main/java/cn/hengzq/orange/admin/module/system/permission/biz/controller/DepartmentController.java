@@ -5,7 +5,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.converter.DepartmentC
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.DepartmentManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.DepartmentService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
@@ -28,7 +28,7 @@ import java.util.List;
 @Tag(name = "系统权限-部门管理")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/department")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/department")
 public class DepartmentController {
 
     private final DepartmentService departmentService;

@@ -7,7 +7,7 @@ import  cn.hengzq.orange.admin.module.system.permission.biz.dto.RoleListQuery;
 import  cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleEntity;
 import  cn.hengzq.orange.admin.module.system.permission.biz.manager.RoleManager;
 import  cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.RoleErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.RoleErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;

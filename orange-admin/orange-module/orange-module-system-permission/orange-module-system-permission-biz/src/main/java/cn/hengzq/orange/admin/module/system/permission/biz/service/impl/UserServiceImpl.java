@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.manager.DepartmentMan
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.UserManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.SystemPermissionErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserAllQuery;

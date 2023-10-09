@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.RoleErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.RoleErrorCode;
 import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;

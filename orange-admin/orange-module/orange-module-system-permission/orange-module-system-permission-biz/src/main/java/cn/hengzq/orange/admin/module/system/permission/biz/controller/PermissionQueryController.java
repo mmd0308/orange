@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.controller;
 
 import cn.hengzq.orange.admin.module.system.permission.biz.service.PermissionService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ResourceIds;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ResourcePermissions;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.RouterTreeVO;
@@ -24,7 +24,7 @@ import java.util.List;
 @Tag(name = "系统权限-权限查询相关接口")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/permission")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/permission")
 public class PermissionQueryController {
 
     private final PermissionService permissionService;

@@ -2,13 +2,11 @@ package cn.hengzq.orange.admin.starter.mybatis.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 
-import java.io.Serializable;
-
 
 /**
  * @author 程序员橙子
  */
-public class IDEntity implements Serializable {
+public class IDEntity extends AbstractEntity {
 
     /**
      * 主键

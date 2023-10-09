@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.module.system.permission.biz.controller;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.MenuConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.MenuManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.MenuService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
@@ -27,7 +27,7 @@ import java.util.List;
 @Tag(name = "系统权限-菜单管理")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/menu")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/menu")
 public class MenuController {
 
     private final MenuService menuService;

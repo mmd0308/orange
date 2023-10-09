@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.UserSexEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.UserSexEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

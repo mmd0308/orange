@@ -9,7 +9,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import cn.hutool.json.JSONUtil;
-import cn.hengzq.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
+import cn.hengzq.orange.admin.module.system.record.common.constant.RecordLoginTypeEnum;
 import cn.hengzq.orange.admin.starter.biz.record.event.RecordLoginEvent;
 import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
 import cn.hengzq.orange.admin.starter.common.enums.support.RequestMethodEnum;

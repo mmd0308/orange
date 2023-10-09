@@ -2,7 +2,7 @@ package cn.hengzq.orange.admin.module.system.permission.biz.mapper;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import  cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.ResourceTypeEnum;
 import cn.hengzq.orange.admin.starter.mybatis.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 

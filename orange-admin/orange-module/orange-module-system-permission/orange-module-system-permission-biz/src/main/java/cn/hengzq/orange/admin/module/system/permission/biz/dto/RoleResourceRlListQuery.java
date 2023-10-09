@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.dto;
 
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.ResourceTypeEnum;
 import lombok.Builder;
 import lombok.Data;
 

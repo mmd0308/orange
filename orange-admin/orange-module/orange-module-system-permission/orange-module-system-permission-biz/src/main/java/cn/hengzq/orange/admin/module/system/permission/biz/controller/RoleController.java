@@ -6,7 +6,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.dto.RoleListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleEntity;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.RoleManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RoleAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
@@ -30,7 +30,7 @@ import java.util.List;
 @Tag(name = "系统权限-角色管理")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/role")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/role")
 public class RoleController {
 
     private final RoleService roleService;

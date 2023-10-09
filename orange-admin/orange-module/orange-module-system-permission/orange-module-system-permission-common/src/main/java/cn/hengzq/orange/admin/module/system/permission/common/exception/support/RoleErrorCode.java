@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.module.system.permission.common.constants.exception;
+package cn.hengzq.orange.admin.module.system.permission.common.exception.support;
 
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
 import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;

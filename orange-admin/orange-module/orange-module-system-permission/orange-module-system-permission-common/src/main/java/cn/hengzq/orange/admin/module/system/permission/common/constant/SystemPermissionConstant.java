@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.module.system.permission.common.constants;
+package cn.hengzq.orange.admin.module.system.permission.common.constant;
 
 
 import cn.hengzq.orange.admin.starter.common.constant.VersionConstant;
@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.starter.common.constant.VersionConstant;
  *
  * @author 程序员橙子
  */
-public interface SystemPermissionConstants {
+public interface SystemPermissionConstant {
 
     /**
      * V1.0 URL 前缀

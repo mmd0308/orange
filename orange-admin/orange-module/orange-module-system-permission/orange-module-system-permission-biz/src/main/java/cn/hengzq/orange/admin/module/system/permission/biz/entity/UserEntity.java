@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.UserSexEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.UserSexEnum;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import cn.hengzq.orange.admin.starter.mybatis.handler.EnumCodeTypeHandler;
 import lombok.Data;

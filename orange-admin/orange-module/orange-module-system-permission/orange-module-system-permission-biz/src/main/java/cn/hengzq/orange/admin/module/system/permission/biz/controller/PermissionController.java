@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.controller;
 
 import cn.hengzq.orange.admin.module.system.permission.biz.service.PermissionService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.AllotUserRoleRequest;
 import cn.hengzq.orange.admin.starter.common.result.Result;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "系统权限-权限变更相关接口")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/permission")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/permission")
 public class PermissionController {
 
     private final PermissionService permissionService;

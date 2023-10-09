@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.module.system.record.common.constants;
+package cn.hengzq.orange.admin.module.system.record.common.constant;
 
 
 import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;

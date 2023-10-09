@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.controller;
 
 import cn.hengzq.orange.admin.module.system.permission.biz.service.AuthService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.Token;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserInfo;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.LoginRequest;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "系统权限-认证管理管理")
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/auth")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/auth")
 public class AuthController {
 
     private final AuthService authService;

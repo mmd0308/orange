@@ -12,8 +12,8 @@ import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.MenuManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.RoleResourceRlManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.MenuService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.MenuErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.ResourceTypeEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.MenuErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;

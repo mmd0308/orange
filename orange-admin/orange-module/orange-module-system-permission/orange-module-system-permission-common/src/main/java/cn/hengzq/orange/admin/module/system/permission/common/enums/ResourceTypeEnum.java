@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.module.system.permission.common.constants.enums;
+package cn.hengzq.orange.admin.module.system.permission.common.enums;
 
 
 import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;

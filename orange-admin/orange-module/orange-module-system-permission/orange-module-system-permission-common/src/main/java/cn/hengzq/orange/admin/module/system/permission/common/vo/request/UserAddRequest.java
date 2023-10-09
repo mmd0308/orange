@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.UserSexEnum;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.UserErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.UserSexEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.UserErrorCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

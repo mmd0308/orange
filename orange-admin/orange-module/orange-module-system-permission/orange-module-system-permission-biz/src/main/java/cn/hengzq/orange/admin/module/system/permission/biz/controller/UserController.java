@@ -4,7 +4,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.converter.UserConvert
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.UserEntity;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.UserManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionConstants;
+import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
@@ -34,7 +34,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping(SystemPermissionConstants.V1_0_URL_PREFIX + "/user")
+@RequestMapping(SystemPermissionConstant.V1_0_URL_PREFIX + "/user")
 public class UserController {
 
     private final UserService userService;

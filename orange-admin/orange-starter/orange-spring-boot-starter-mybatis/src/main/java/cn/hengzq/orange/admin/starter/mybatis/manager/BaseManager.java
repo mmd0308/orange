@@ -4,6 +4,7 @@ package cn.hengzq.orange.admin.starter.mybatis.manager;
 import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.util.Assert;
+import cn.hengzq.orange.admin.starter.mybatis.entity.AbstractEntity;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseEntity;
 import cn.hengzq.orange.admin.starter.mybatis.mapper.BaseMapper;
 import cn.hutool.core.collection.CollUtil;
@@ -16,7 +17,7 @@ import java.util.Objects;
 /**
  * @author 程序员橙子
  */
-public interface BaseManager<T extends BaseEntity> {
+public interface BaseManager<T extends AbstractEntity> {
 
     /**
      * Mapper

@@ -6,7 +6,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.dto.DepartmentListQue
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
 import cn.hengzq.orange.admin.module.system.permission.biz.manager.DepartmentManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.DepartmentService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.DepartmentErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.DepartmentErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;

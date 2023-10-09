@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.SystemPermissionErrorCode;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

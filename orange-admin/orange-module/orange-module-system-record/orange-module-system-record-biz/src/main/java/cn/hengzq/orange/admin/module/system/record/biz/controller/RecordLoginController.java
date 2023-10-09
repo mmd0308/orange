@@ -4,7 +4,7 @@ import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordLoginEntity;
 import cn.hengzq.orange.admin.module.system.record.biz.manager.RecordLoginManager;
 import cn.hengzq.orange.admin.module.system.record.biz.converter.RecordLoginConverter;
 import cn.hengzq.orange.admin.module.system.record.biz.service.RecordLoginService;
-import cn.hengzq.orange.admin.module.system.record.common.constants.SystemRecordConstants;
+import cn.hengzq.orange.admin.module.system.record.common.constant.SystemRecordConstants;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordLoginVO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.RecordLoginPageQuery;
 import cn.hengzq.orange.admin.starter.common.result.Result;

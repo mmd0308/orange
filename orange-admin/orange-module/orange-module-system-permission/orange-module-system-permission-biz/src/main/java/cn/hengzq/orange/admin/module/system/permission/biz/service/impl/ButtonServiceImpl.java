@@ -7,7 +7,7 @@ import  cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
 import  cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
 import  cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
 import  cn.hengzq.orange.admin.module.system.permission.biz.service.ButtonService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.exception.ButtonErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.ButtonErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;

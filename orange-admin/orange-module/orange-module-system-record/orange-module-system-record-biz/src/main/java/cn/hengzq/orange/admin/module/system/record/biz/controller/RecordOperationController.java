@@ -5,7 +5,7 @@ import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEnt
 import cn.hengzq.orange.admin.module.system.record.biz.manager.RecordOperationManager;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.record.biz.service.RecordOperationService;
-import cn.hengzq.orange.admin.module.system.record.common.constants.SystemRecordConstants;
+import cn.hengzq.orange.admin.module.system.record.common.constant.SystemRecordConstants;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordOperationVO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordExportQuery;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordPageQuery;

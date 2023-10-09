@@ -6,7 +6,7 @@ import cn.hutool.crypto.asymmetric.RSA;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.AuthService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.SystemPermissionErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.SystemPermissionErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.Token;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserInfo;

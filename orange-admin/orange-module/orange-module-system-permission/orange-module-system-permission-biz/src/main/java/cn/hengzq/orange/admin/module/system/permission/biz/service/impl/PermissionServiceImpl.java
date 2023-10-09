@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.service.MenuService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.PermissionService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
-import cn.hengzq.orange.admin.module.system.permission.common.constants.enums.ResourceTypeEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.ResourceTypeEnum;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.*;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
