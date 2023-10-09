@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.hzqing.orange.admin.starter.biz.record</groupId>
+    <groupId>cn.hengzq.orange.admin.starter.biz.record</groupId>
     <artifactId>orange-spring-boot-starter-biz-record</artifactId>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
@@ -19,15 +19,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hzqing.orange.admin.starter.common</groupId>
+            <groupId>cn.hengzq.orange.admin.starter.common</groupId>
             <artifactId>orange-spring-boot-starter-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hzqing.orange.admin.starter.context</groupId>
+            <groupId>cn.hengzq.orange.admin.starter.context</groupId>
             <artifactId>orange-spring-boot-starter-context</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hzqing.orange.admin.module.system.record.api</groupId>
+            <groupId>cn.hengzq.orange.admin.module.system.record.api</groupId>
             <artifactId>orange-module-system-record-api</artifactId>
         </dependency>
         <dependency>

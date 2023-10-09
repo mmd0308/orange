@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>cn.hengzq.orange.admin</groupId>
+        <artifactId>orange-admin</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>cn.hengzq.orange.admin.server</groupId>
+    <artifactId>orange-server</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <description>orange-server</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.module.system.dict.biz</groupId>
+            <artifactId>orange-module-system-dict-biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.module.system.permission.biz</groupId>
+            <artifactId>orange-module-system-permission-biz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.module.system.record.biz</groupId>
+            <artifactId>orange-module-system-record-biz</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.starter.webmvc</groupId>
+            <artifactId>orange-spring-boot-starter-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.starter.security</groupId>
+            <artifactId>orange-spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.starter.common</groupId>
+            <artifactId>orange-spring-boot-starter-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.starter.biz.record</groupId>
+            <artifactId>orange-spring-boot-starter-biz-record</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

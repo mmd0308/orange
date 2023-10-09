@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.hzqing.orange.admin.module.system.record</groupId>
+		<groupId>cn.hengzq.orange.admin.module.system.record</groupId>
 		<artifactId>orange-module-system-record</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.hzqing.orange.admin.module.system.record.biz</groupId>
+	<groupId>cn.hengzq.orange.admin.module.system.record.biz</groupId>
 	<artifactId>orange-module-system-record-biz</artifactId>
 	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
@@ -20,11 +20,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.hzqing.orange.admin.module.system.record.common</groupId>
+			<groupId>cn.hengzq.orange.admin.module.system.record.common</groupId>
 			<artifactId>orange-module-system-record-common</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.hzqing.orange.admin.module.system.record.api</groupId>
+			<groupId>cn.hengzq.orange.admin.module.system.record.api</groupId>
 			<artifactId>orange-module-system-record-api</artifactId>
 		</dependency>
 
@@ -33,11 +33,11 @@
 			<artifactId>spring-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.hzqing.orange.admin.starter.mybatis</groupId>
+			<groupId>cn.hengzq.orange.admin.starter.mybatis</groupId>
 			<artifactId>orange-spring-boot-starter-mybatis</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.hzqing.orange.admin.starter.security</groupId>
+			<groupId>cn.hengzq.orange.admin.starter.security</groupId>
 			<artifactId>orange-spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>

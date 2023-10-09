@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hzqing.orange.admin</groupId>
+    <groupId>cn.hengzq.orange.admin</groupId>
     <artifactId>orange-admin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
@@ -29,13 +29,13 @@
         <module>orange-dependencies</module>
         <module>orange-starter</module>
         <module>orange-module</module>
-        <module>orange-service</module>
+        <module>orange-server</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.hzqing.orange.admin.dependencies</groupId>
+                <groupId>cn.hengzq.orange.admin.dependencies</groupId>
                 <artifactId>orange-dependencies</artifactId>
                 <version>${orange.version}</version>
                 <type>pom</type>

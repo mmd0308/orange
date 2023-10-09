@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.hzqing.orange.admin.starter.banner</groupId>
+    <groupId>cn.hengzq.orange.admin.starter.banner</groupId>
     <artifactId>orange-spring-boot-starter-banner</artifactId>
     <name>orange-spring-boot-starter-banner</name>
     <packaging>jar</packaging>

@@ -8,7 +8,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.hzqing.orange.admin.starter.common</groupId>
+    <groupId>cn.hengzq.orange.admin.starter.common</groupId>
     <artifactId>orange-spring-boot-starter-common</artifactId>
     <name>orange-spring-boot-starter-common</name>
     <packaging>jar</packaging>

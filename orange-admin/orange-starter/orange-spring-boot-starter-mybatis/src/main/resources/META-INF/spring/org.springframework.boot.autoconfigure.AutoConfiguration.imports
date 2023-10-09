@@ -1,2 +1,2 @@
-com.hzqing.orange.admin.starter.mybatis.config.OrangeMybatisPlusAutoConfiguration
-com.hzqing.orange.admin.starter.mybatis.config.OrangeSqlSessionFactoryAutoConfiguration
+cn.hengzq.orange.admin.starter.mybatis.config.OrangeMybatisPlusAutoConfiguration
+cn.hengzq.orange.admin.starter.mybatis.config.OrangeSqlSessionFactoryAutoConfiguration

@@ -1,4 +1,4 @@
-com.hzqing.orange.admin.starter.webmvc.exception.GlobalExceptionHandler
-com.hzqing.orange.admin.starter.webmvc.config.WebmvcAutoConfiguration
-com.hzqing.orange.admin.starter.webmvc.config.JacksonAutoConfiguration
-com.hzqing.orange.admin.starter.webmvc.config.FilterAutoConfiguration
+cn.hengzq.orange.admin.starter.webmvc.exception.GlobalExceptionHandler
+cn.hengzq.orange.admin.starter.webmvc.config.WebmvcAutoConfiguration
+cn.hengzq.orange.admin.starter.webmvc.config.JacksonAutoConfiguration
+cn.hengzq.orange.admin.starter.webmvc.config.FilterAutoConfiguration
