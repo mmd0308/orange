@@ -15,6 +15,7 @@ import {
   Button as TinyButton, ActionMenu as TinyActionMenu, Switch as TinySwitch,
   Tag as TinyTag, Link as TinyLink,
   Tabs as TinyTabs, TabItem as TinyTabItem,
+  Collapse as TinyCollapse, CollapseItem as TinyCollapseItem
 } from '@opentiny/vue';
 
 const components = [
@@ -32,6 +33,7 @@ const components = [
   TinyButton, TinyActionMenu, TinySwitch,
   TinyTag, TinyLink,
   TinyTabs, TinyTabItem,
+  TinyCollapse, TinyCollapseItem
 ]
 
 export const setupOpentiny = (app: App) => {

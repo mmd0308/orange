@@ -1,5 +1,3 @@
-import { number } from 'fp-ts';
-
 export interface AppState {
   theme: string;
   colorWeek: boolean;

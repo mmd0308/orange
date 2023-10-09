@@ -19,11 +19,9 @@ const useAppStore = defineStore('app', {
       // @ts-ignore-next-line
       this.$patch(partial);
     },
-
     updateStep(step: number) {
       this.step = step;
     },
-
     toggleDevice(device: string) {
       this.device = device;
     },

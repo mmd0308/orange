@@ -23,7 +23,6 @@ const currentChange = (data: any) => {
       window.open(data.path, "_blank");
     } else {
       router.push(`${import.meta.env.VITE_CONTEXT}${data.path}`);
-
     }
   }
 }

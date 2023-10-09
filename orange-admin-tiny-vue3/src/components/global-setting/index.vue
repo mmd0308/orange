@@ -124,7 +124,7 @@ const changefooter = (item: boolean) => {
     right: 0;
     display: flex;
     flex-direction: column;
-    width: 290px;
+    width: 300px;
     height: 100%;
     background-color: #fff;
 

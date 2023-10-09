@@ -5,7 +5,7 @@
   "menu": true,
   "hideMenu": false,
   "menuCollapse": false,
-  "footer": true,
+  "footer": false,
   "themelist": "default",
   "themeColor": "1",
   "themeValue": 0,
