@@ -2,7 +2,7 @@ package cn.hengzq.orange.admin.starter.webmvc.interceptor;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hengzq.orange.admin.starter.common.constants.RequestConstants;
+import cn.hengzq.orange.admin.starter.common.constant.RequestConstant;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class RequestIdInterceptor implements AsyncHandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String traceId = request.getHeader(RequestConstants.InnerHeader.ORANGE_INNER_REQUEST_ID);
+        String traceId = request.getHeader(RequestConstant.InnerHeader.ORANGE_INNER_REQUEST_ID);
         GlobalContextHelper.removeContext();
         GlobalContextHelper.setContext(StrUtil.isBlank(traceId) ? IdUtil.getSnowflakeNextIdStr() : traceId);
         return true;

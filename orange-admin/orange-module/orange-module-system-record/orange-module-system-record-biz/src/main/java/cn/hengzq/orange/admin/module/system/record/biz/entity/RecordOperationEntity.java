@@ -4,10 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonOperationStatusEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.RequestMethodEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.RequestMethodEnum;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
-import cn.hengzq.orange.admin.starter.mybatis.handlers.EnumCodeTypeHandler;
+import cn.hengzq.orange.admin.starter.mybatis.handler.EnumCodeTypeHandler;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

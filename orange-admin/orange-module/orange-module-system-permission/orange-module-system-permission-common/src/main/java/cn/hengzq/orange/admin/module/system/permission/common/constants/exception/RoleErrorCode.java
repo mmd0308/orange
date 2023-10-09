@@ -1,12 +1,12 @@
 package cn.hengzq.orange.admin.module.system.permission.common.constants.exception;
 
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 
 /**
  * @author 程序员橙子
  */
-public interface RoleErrorCode extends GlobalErrorCodeConstants {
+public interface RoleErrorCode extends GlobalErrorCodeConstant {
 
     String PREFIX = "SystemPermissionRole.";
 

@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.starter.common.constants.enums;
+package cn.hengzq.orange.admin.starter.common.enums;
 
 import java.io.Serializable;
 

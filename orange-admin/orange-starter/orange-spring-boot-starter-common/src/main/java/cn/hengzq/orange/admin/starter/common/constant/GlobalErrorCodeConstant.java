@@ -1,4 +1,6 @@
-package cn.hengzq.orange.admin.starter.common.exception;
+package cn.hengzq.orange.admin.starter.common.constant;
+
+import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
 
 /**
  * 全局错误码
@@ -6,7 +8,7 @@ package cn.hengzq.orange.admin.starter.common.exception;
  *
  * @author 程序员橙子
  */
-public interface GlobalErrorCodeConstants {
+public interface GlobalErrorCodeConstant {
 
     String PREFIX = "Global.";
 

@@ -1,9 +1,9 @@
-package cn.hengzq.orange.admin.starter.common.validator;
+package cn.hengzq.orange.admin.starter.common.util;
 
-import cn.hutool.core.collection.CollUtil;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
+import cn.hutool.core.collection.CollUtil;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class Assert {
      * @param object 参数
      */
     public static void nonNull(Object object) {
-        nonNull(object, GlobalErrorCodeConstants.GLOBAL_PARAMETER_CANNOT_NULL);
+        nonNull(object, GlobalErrorCodeConstant.GLOBAL_PARAMETER_CANNOT_NULL);
     }
 
     /**
@@ -32,7 +32,7 @@ public class Assert {
      */
     public static void nonNull(Object object, ErrorCode errorCode) {
         if (Objects.isNull(object)) {
-            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstants.GLOBAL_PARAMETER_CANNOT_NULL : errorCode);
+            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstant.GLOBAL_PARAMETER_CANNOT_NULL : errorCode);
         }
     }
 
@@ -46,7 +46,7 @@ public class Assert {
      */
     public static void notEmpty(Collection collection, ErrorCode errorCode) {
         if (CollUtil.isEmpty(collection)) {
-            throw new ServiceException(Objects.isNull(errorCode) ? GlobalErrorCodeConstants.GLOBAL_PARAMETER_CANNOT_NULL : errorCode);
+            throw new ServiceException(Objects.isNull(errorCode) ? GlobalErrorCodeConstant.GLOBAL_PARAMETER_CANNOT_NULL : errorCode);
         }
     }
 
@@ -59,7 +59,7 @@ public class Assert {
      */
     public static void isEmpty(Collection collection, ErrorCode errorCode) {
         if (CollUtil.isNotEmpty(collection)) {
-            throw new ServiceException(Objects.isNull(errorCode) ? GlobalErrorCodeConstants.GLOBAL_PARAMETER_IS_NULL : errorCode);
+            throw new ServiceException(Objects.isNull(errorCode) ? GlobalErrorCodeConstant.GLOBAL_PARAMETER_IS_NULL : errorCode);
         }
     }
 
@@ -70,7 +70,7 @@ public class Assert {
      * @param object 参数
      */
     public static void isNull(Object object) {
-        isNull(object, GlobalErrorCodeConstants.GLOBAL_REQUEST_MISSING_PARAMETER);
+        isNull(object, GlobalErrorCodeConstant.GLOBAL_REQUEST_MISSING_PARAMETER);
     }
 
     /**
@@ -81,7 +81,7 @@ public class Assert {
      */
     public static void isNull(Object object, ErrorCode errorCode) {
         if (Objects.nonNull(object)) {
-            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstants.GLOBAL_PARAMETER_IS_NULL : errorCode);
+            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstant.GLOBAL_PARAMETER_IS_NULL : errorCode);
         }
     }
 
@@ -94,7 +94,7 @@ public class Assert {
      */
     public static void isTrue(boolean bool, ErrorCode errorCode) {
         if (!bool) {
-            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstants.GLOBAL_PARAMETER_IS_FALSE : errorCode);
+            throw new ServiceException(errorCode == null ? GlobalErrorCodeConstant.GLOBAL_PARAMETER_IS_FALSE : errorCode);
         }
     }
 }

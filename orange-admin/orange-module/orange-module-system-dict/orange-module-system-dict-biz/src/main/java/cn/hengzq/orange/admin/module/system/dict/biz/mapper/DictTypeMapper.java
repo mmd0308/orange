@@ -1,8 +1,8 @@
 package cn.hengzq.orange.admin.module.system.dict.biz.mapper;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import cn.hengzq.orange.admin.module.system.dict.biz.entity.DictTypeEntity;
 import cn.hengzq.orange.admin.starter.mybatis.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

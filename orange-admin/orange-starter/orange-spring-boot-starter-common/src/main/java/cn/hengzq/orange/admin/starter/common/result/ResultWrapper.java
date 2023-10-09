@@ -1,10 +1,10 @@
 package cn.hengzq.orange.admin.starter.common.result;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
 import cn.hengzq.orange.admin.starter.common.message.GlobalMessageSource;
 import cn.hengzq.orange.admin.starter.common.message.LocalMessage;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -45,7 +45,7 @@ public class ResultWrapper {
     }
 
     public static <T> Result<T> fail() {
-        return fail(GlobalErrorCodeConstants.GLOBAL_REQUEST_FAILED);
+        return fail(GlobalErrorCodeConstant.GLOBAL_REQUEST_FAILED);
     }
 
     public static <T> Result<T> fail(ErrorCode errorCode) {

@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.RoleUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

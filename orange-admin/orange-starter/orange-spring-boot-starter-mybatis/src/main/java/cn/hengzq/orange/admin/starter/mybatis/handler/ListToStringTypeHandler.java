@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.starter.mybatis.handlers;
+package cn.hengzq.orange.admin.starter.mybatis.handler;
 
 import cn.hutool.core.util.StrUtil;
 import org.apache.ibatis.type.BaseTypeHandler;

@@ -2,7 +2,7 @@ package cn.hengzq.orange.admin.starter.context;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.ttl.TransmittableThreadLocal;
-import cn.hengzq.orange.admin.starter.common.constants.TenantConstants;
+import cn.hengzq.orange.admin.starter.common.constant.TenantConstant;
 import cn.hengzq.orange.admin.starter.context.dto.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +33,7 @@ public class GlobalContext {
     /**
      * 租户ID的列名
      */
-    private String tenantIdColumn = TenantConstants.DEFAULT_TENANT_ID_COLUMN;
+    private String tenantIdColumn = TenantConstant.DEFAULT_TENANT_ID_COLUMN;
 
     /**
      * 日志追踪ID

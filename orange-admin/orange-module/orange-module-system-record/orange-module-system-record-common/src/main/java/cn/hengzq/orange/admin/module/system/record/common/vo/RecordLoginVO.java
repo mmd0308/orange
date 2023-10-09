@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.record.common.vo;
 
 import cn.hengzq.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
 import cn.hengzq.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

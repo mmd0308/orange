@@ -13,10 +13,10 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.Departmen
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.constants.CommonConstants;
+import cn.hengzq.orange.admin.starter.common.constant.CommonConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.util.CollUtils;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -80,7 +80,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Long add(DepartmentAddRequest request) {
         DepartmentEntity entity = DepartmentConverter.INSTANCE.toEntity(request);
         if (Objects.isNull(request.getParentId())) {
-            entity.setParentId(CommonConstants.Common.DEFAULT_PARENT_ID);
+            entity.setParentId(CommonConstant.DEFAULT_PARENT_ID);
         }
         return departmentManager.add(entity);
     }

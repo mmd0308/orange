@@ -1,11 +1,11 @@
-package cn.hengzq.orange.admin.starter.context.constants;
+package cn.hengzq.orange.admin.starter.context.constant;
 
 /**
  * 全局上下文常量
  *
  * @author 程序员橙子
  */
-public class GlobalContextConstants {
+public class GlobalContextConstant {
 
     /**
      * 默认系统用户id

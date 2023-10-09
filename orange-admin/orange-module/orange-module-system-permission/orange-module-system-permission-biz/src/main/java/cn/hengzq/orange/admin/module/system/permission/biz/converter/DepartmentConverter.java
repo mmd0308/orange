@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.Departmen
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

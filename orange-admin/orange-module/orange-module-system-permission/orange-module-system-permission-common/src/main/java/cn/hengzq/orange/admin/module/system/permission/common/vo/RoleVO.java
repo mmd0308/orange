@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo;
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonDataStatusEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.DataPresetFlagEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

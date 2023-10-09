@@ -1,7 +1,5 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.ButtonConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.MenuConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
@@ -23,12 +21,14 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQu
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.constants.CommonConstants;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.DataPresetFlagEnum;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.CommonConstant;
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.util.CollUtils;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -121,7 +121,7 @@ public class MenuServiceImpl implements MenuService {
         Assert.nonNull(request.getPermission(), MenuErrorCode.MENU_PERMISSION_CANNOT_NULL);
         List<MenuEntity> entityList = menuManager.listByParams(MenuListQuery.builder().permission(request.getPermission()).build());
         Assert.isEmpty(entityList, MenuErrorCode.MENU_PERMISSION_CANNOT_REPEAT);
-        request.setParentId(Objects.isNull(request.getParentId()) ? CommonConstants.Common.DEFAULT_PARENT_ID : request.getParentId());
+        request.setParentId(Objects.isNull(request.getParentId()) ? CommonConstant.DEFAULT_PARENT_ID : request.getParentId());
         MenuEntity entity = MenuConverter.INSTANCE.toEntity(request);
         return menuManager.add(entity);
     }
@@ -129,7 +129,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Boolean updateById(Long id, MenuUpdateRequest request) {
         MenuEntity entity = menuManager.getById(id);
-        Assert.nonNull(entity.getId(), GlobalErrorCodeConstants.GLOBAL_DATA_NOT_EXIST);
+        Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(request.getPermission()) && !request.getPermission().equals(entity.getPermission())) {
             List<MenuEntity> entityList = menuManager.listByParams(MenuListQuery.builder().permission(request.getPermission()).build());
             Assert.isEmpty(entityList, MenuErrorCode.MENU_PERMISSION_CANNOT_REPEAT);
@@ -141,10 +141,10 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Boolean removeById(Long id) {
         MenuEntity entity = menuManager.getById(id);
-        Assert.nonNull(entity, GlobalErrorCodeConstants.GLOBAL_DATA_NOT_EXIST);
+        Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         // 预置数据 不允许删除
         if (DataPresetFlagEnum.PRESET.equals(entity.getPresetFlag())) {
-            throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_DATA_PRESET_CANNOT_DELETE);
+            throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_DATA_PRESET_CANNOT_DELETE);
         }
         // 存在子集菜单 不允许删除
         List<MenuEntity> entityList = menuManager.listByParams(MenuListQuery.builder().parentId(id).build());

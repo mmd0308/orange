@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.record.common.constants;
 
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.BaseEnum;
+import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;
 
 /**
  * 登陆日志操作类型

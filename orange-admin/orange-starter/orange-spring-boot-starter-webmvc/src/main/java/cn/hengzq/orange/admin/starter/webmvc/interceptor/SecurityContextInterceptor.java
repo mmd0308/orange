@@ -1,9 +1,9 @@
 package cn.hengzq.orange.admin.starter.webmvc.interceptor;
 
+import cn.hengzq.orange.admin.starter.common.constant.RequestConstant;
+import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hengzq.orange.admin.starter.common.constants.RequestConstants;
-import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +47,8 @@ public class SecurityContextInterceptor implements AsyncHandlerInterceptor {
             return true;
         }
 
-        String userId = request.getHeader(RequestConstants.InnerHeader.ORANGE_INNER_USER_ID);
-        String tenantId = request.getHeader(RequestConstants.InnerHeader.ORANGE_INNER_TENANT_ID);
+        String userId = request.getHeader(RequestConstant.InnerHeader.ORANGE_INNER_USER_ID);
+        String tenantId = request.getHeader(RequestConstant.InnerHeader.ORANGE_INNER_TENANT_ID);
         if (StrUtil.isBlank(tenantId)) {
             log.warn("request header miss orange-inner-tenant-id url:{}", path);
             return false;

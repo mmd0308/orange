@@ -9,7 +9,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserAllQu
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

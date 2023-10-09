@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.starter.security.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hengzq.orange.admin.starter.common.constants.PermissionConstants;
+import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
 import cn.hengzq.orange.admin.starter.security.service.PermissionAuthenticationService;
 import cn.hengzq.orange.admin.starter.security.service.SecurityAuthenticationService;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class SecurityAuthenticationServiceImpl implements SecurityAuthentication
             return false;
         }
         // 管理员admin角色 拥有所有的权限
-        if (permissions.contains(PermissionConstants.ADMIN_DEFAULT_PERMISSION)) {
+        if (permissions.contains(PermissionConstant.ADMIN_DEFAULT_PERMISSION)) {
             return true;
         }
         if (permissions.contains(permission)) {

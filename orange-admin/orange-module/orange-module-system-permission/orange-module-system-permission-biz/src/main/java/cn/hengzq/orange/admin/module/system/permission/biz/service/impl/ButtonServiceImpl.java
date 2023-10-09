@@ -12,8 +12,8 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,7 +50,7 @@ public class ButtonServiceImpl implements ButtonService {
     @Override
     public Boolean updateById(Long id, ButtonUpdateRequest request) {
         ButtonEntity entity = buttonManager.getById(id);
-        Assert.nonNull(entity.getId(), GlobalErrorCodeConstants.GLOBAL_DATA_NOT_EXIST);
+        Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(request.getPermission()) && !request.getPermission().equals(entity.getPermission())) {
             List<ButtonEntity> entityList = buttonManager.listByParams(ButtonListQuery.builder().permission(request.getPermission()).build());
             Assert.isEmpty(entityList, ButtonErrorCode.BUTTON_PERMISSION_CANNOT_REPEAT);

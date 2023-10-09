@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.starter.mybatis.handlers;
+package cn.hengzq.orange.admin.starter.mybatis.handler;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Map<String, Object>转 String 存储 以","分隔
+ * Map<String, Object>转 String 存储
  *
  * @author 程序员橙子
  */

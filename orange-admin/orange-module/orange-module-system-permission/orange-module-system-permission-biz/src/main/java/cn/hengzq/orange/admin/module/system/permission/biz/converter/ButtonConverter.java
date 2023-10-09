@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.starter.common.vo;
 
-import cn.hengzq.orange.admin.starter.common.constants.CommonConstants;
+import cn.hengzq.orange.admin.starter.common.constant.PageConstant;
 import cn.hengzq.orange.admin.starter.common.vo.query.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -44,15 +44,15 @@ public class PageVO<T> implements Serializable {
     }
 
     public Integer getTotal() {
-        return total == null ? CommonConstants.Page.TOTAL : total;
+        return total == null ? PageConstant.TOTAL : total;
     }
 
     public Integer getPageSize() {
-        return pageSize == null ? CommonConstants.Page.PAGE_SIZE : pageSize;
+        return pageSize == null ? PageConstant.PAGE_SIZE : pageSize;
     }
 
     public Integer getPageNo() {
-        return pageNo == null ? CommonConstants.Page.PAGE_NO : pageNo;
+        return pageNo == null ? PageConstant.PAGE_NO : pageNo;
     }
 
     public void setRecords(List<T> records) {

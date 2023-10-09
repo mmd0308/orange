@@ -2,7 +2,7 @@ package cn.hengzq.orange.admin.starter.security.service.impl;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import cn.hutool.json.JSONUtil;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.result.Result;
 import cn.hengzq.orange.admin.starter.common.result.ResultWrapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         if (log.isDebugEnabled()) {
             log.debug("No permission to access. URL:{}", request.getRequestURI());
         }
-        Result<Object> result = ResultWrapper.fail(GlobalErrorCodeConstants.GLOBAL_FORBIDDEN);
+        Result<Object> result = ResultWrapper.fail(GlobalErrorCodeConstant.GLOBAL_FORBIDDEN);
         String content = JSONUtil.toJsonStr(result);
         JakartaServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }

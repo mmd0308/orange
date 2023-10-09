@@ -1,6 +1,5 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.PermissionConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.RoleResourceRlListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.*;
@@ -14,10 +13,11 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.*;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.AllotRoleResourceRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.AllotUserRoleRequest;
-import cn.hengzq.orange.admin.starter.common.constants.CommonConstants;
-import cn.hengzq.orange.admin.starter.common.constants.PermissionConstants;
+import cn.hengzq.orange.admin.starter.common.constant.CommonConstant;
+import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
 import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
+import cn.hutool.core.collection.CollUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -134,7 +134,7 @@ public class PermissionServiceImpl implements PermissionService {
         List<Long> roleIds = CollUtils.convertList(roleVOList, RoleVO::getId);
         List<MenuVO> menuVOList;
         // admin 拥有所有的权限
-        if (permissions.contains(PermissionConstants.ADMIN_DEFAULT_PERMISSION)) {
+        if (permissions.contains(PermissionConstant.ADMIN_DEFAULT_PERMISSION)) {
             menuVOList = menuService.queryByParams(new MenuAllQuery());
         } else {
             menuVOList = menuService.queryByRoleIds(roleIds);
@@ -150,7 +150,7 @@ public class PermissionServiceImpl implements PermissionService {
         Map<Long, List<RouterTreeVO>> routerMap = routers.stream().collect(Collectors.groupingBy(RouterTreeVO::getParentId));
         routers.forEach(item -> item.setChildren(routerMap.get(item.getId())));
         // 过滤掉非顶级数据
-        return routers.stream().filter(item -> CommonConstants.Common.DEFAULT_PARENT_ID.equals(item.getParentId())).collect(Collectors.toList());
+        return routers.stream().filter(item -> CommonConstant.DEFAULT_PARENT_ID.equals(item.getParentId())).collect(Collectors.toList());
     }
 
     @Override

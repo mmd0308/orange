@@ -1,8 +1,5 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.UserConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.UserListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
@@ -19,12 +16,15 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserPageQ
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
-import cn.hengzq.orange.admin.starter.common.constants.CommonConstants;
+import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.util.CollUtils;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long add(UserAddRequest request) {
         // 密码加密
-        String password = StrUtil.isBlank(request.getPassword()) ? CommonConstants.Common.DEFAULT_ADMIN_PASSWORD : request.getPassword();
+        String password = StrUtil.isBlank(request.getPassword()) ? PermissionConstant.DEFAULT_USER_PASSWORD : request.getPassword();
         request.setPassword(passwordEncoder.encode(password));
         return userManager.add(UserConverter.INSTANCE.toEntity(request));
     }

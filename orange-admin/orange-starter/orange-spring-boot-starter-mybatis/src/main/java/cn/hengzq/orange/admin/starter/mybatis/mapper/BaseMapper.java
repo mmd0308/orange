@@ -12,13 +12,13 @@ public interface BaseMapper<T extends BaseEntity> extends com.baomidou.mybatispl
 
 
     /**
-     * 保存数据
-     * 自动添加createdBy,createdAt,updateBy,updateAt
+     * 插入一条数据
+     * 初始化 createdBy,createdAt,updateBy,updateAt
      *
      * @param entity 保存对象
      * @return 返回保存数据ID
      */
-    default Long save(T entity) {
+    default Long insertOne(T entity) {
         entity.initParams(Boolean.TRUE);
         this.insert(entity);
         return entity.getId();

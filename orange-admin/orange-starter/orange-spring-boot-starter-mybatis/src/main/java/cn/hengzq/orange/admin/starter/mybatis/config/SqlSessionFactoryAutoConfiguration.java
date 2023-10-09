@@ -14,9 +14,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 @Slf4j
 @AutoConfiguration
 @ConditionalOnBean(SqlSessionFactory.class)
-public class OrangeSqlSessionFactoryAutoConfiguration {
+public class SqlSessionFactoryAutoConfiguration {
 
-    public OrangeSqlSessionFactoryAutoConfiguration(SqlSessionFactory sqlSessionFactory) {
+    public SqlSessionFactoryAutoConfiguration(SqlSessionFactory sqlSessionFactory) {
         sqlSessionFactory.getConfiguration().setLogImpl(StdOutImpl.class);
         // 注册自定TypeHandler
         sqlSessionFactory.getConfiguration().getTypeHandlerRegistry().register("cn.hengzq.orange.admin.starter.mybatis.handlers");

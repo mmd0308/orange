@@ -1,11 +1,11 @@
-package cn.hengzq.orange.admin.starter.common.constants;
+package cn.hengzq.orange.admin.starter.common.constant;
 
 /**
  * 版本常量
  *
  * @author 程序员橙子
  */
-public interface VersionConstants {
+public interface VersionConstant {
 
     /**
      * v1.0 版本

@@ -7,7 +7,7 @@ import cn.hengzq.orange.admin.module.system.dict.biz.entity.DictDataEntity;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.DictDataVO;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictDataAllQuery;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictDataPageQuery;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

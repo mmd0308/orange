@@ -2,12 +2,12 @@ package cn.hengzq.orange.admin.module.system.dict.common.constants;
 
 
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 
 /**
  * @author 程序员橙子
  */
-public interface SystemDictErrorCode extends GlobalErrorCodeConstants {
+public interface SystemDictErrorCode extends GlobalErrorCodeConstant {
 
     String PREFIX = "SystemDict.";
 

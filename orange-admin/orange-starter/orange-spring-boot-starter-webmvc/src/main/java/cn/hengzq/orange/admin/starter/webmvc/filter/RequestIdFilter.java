@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hengzq.orange.admin.starter.common.constants.RequestConstants;
+import cn.hengzq.orange.admin.starter.common.constant.RequestConstant;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import cn.hengzq.orange.admin.starter.webmvc.constants.WebmvcConstants;
 import jakarta.servlet.FilterChain;
@@ -32,7 +32,7 @@ public class RequestIdFilter extends HttpFilter implements Ordered {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         TimeInterval timer = DateUtil.timer();
-        String traceId = request.getHeader(RequestConstants.InnerHeader.ORANGE_INNER_REQUEST_ID);
+        String traceId = request.getHeader(RequestConstant.InnerHeader.ORANGE_INNER_REQUEST_ID);
         traceId = StrUtil.isBlank(traceId) ? IdUtil.getSnowflakeNextIdStr() : traceId;
         log.info("request start traceId:{},URL:{}", traceId, request.getRequestURI());
         GlobalContextHelper.removeContext();

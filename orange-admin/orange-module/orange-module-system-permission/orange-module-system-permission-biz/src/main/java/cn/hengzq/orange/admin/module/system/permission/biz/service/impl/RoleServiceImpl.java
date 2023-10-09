@@ -12,8 +12,8 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.RoleAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.RoleUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,7 +58,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Boolean updateById(Long id, RoleUpdateRequest request) {
         RoleEntity entity = roleManager.getById(id);
-        Assert.nonNull(entity.getId(), GlobalErrorCodeConstants.GLOBAL_DATA_NOT_EXIST);
+        Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(request.getPermission()) && !request.getPermission().equals(entity.getPermission())) {
             List<RoleEntity> entityList = roleManager.listByParams(RoleListQuery.builder().permission(request.getPermission()).build());
             Assert.isEmpty(entityList, RoleErrorCode.ROLE_PERMISSION_CANNOT_REPEAT);

@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.starter.security.filter;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.auth0.jwt.interfaces.Claim;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.result.ResultWrapper;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import cn.hengzq.orange.admin.starter.security.constants.SecurityConstants;
@@ -49,7 +49,7 @@ public class JWTTokenAuthenticationFilter extends OncePerRequestFilter {
                 log.error("token is illegal.");
                 response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 response.setContentType("application/json;charset=UTF-8");
-                response.getWriter().write(JSONUtil.toJsonStr(ResultWrapper.fail(GlobalErrorCodeConstants.GLOBAL_UNAUTHORIZED)));
+                response.getWriter().write(JSONUtil.toJsonStr(ResultWrapper.fail(GlobalErrorCodeConstant.GLOBAL_UNAUTHORIZED)));
                 return;
 
             }

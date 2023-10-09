@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.dict.biz.dto;
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.DataPresetFlagEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import lombok.Builder;
 import lombok.Data;
 

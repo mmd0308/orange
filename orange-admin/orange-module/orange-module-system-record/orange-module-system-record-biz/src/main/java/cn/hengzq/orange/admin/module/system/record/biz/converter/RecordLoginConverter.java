@@ -5,7 +5,7 @@ import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordLoginEntity;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordLoginVO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.RecordLoginPageQuery;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

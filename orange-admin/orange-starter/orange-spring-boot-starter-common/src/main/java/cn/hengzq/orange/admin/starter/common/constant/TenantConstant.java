@@ -1,9 +1,11 @@
-package cn.hengzq.orange.admin.starter.common.constants;
+package cn.hengzq.orange.admin.starter.common.constant;
 
 /**
+ * 租户常量
+ *
  * @author 程序员橙子
  */
-public interface TenantConstants {
+public interface TenantConstant {
 
     /**
      * 默认租户ID列名

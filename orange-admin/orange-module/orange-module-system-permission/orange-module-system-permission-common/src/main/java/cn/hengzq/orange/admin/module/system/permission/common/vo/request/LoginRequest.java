@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
 
-import cn.hengzq.orange.admin.starter.common.constants.TenantConstants;
+import cn.hengzq.orange.admin.starter.common.constant.TenantConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -22,6 +22,6 @@ public class LoginRequest {
     private String password;
 
     @Schema(description = "租户ID, 默认:-100", defaultValue = "-100")
-    private Long tenantId = TenantConstants.DEFAULT_TENANT_ID;
+    private Long tenantId = TenantConstant.DEFAULT_TENANT_ID;
 
 }

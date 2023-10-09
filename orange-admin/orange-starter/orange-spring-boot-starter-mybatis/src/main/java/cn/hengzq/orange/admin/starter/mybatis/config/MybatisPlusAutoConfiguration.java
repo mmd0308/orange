@@ -6,9 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import cn.hengzq.orange.admin.starter.common.constants.TenantConstants;
+import cn.hengzq.orange.admin.starter.common.constant.TenantConstant;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
-import cn.hengzq.orange.admin.starter.context.constants.GlobalContextConstants;
+import cn.hengzq.orange.admin.starter.context.constant.GlobalContextConstant;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
@@ -24,9 +24,9 @@ import java.util.List;
 @Slf4j
 @AutoConfiguration
 @MapperScan("cn.hengzq.orange.admin.module.**.mapper")
-public class OrangeMybatisPlusAutoConfiguration {
+public class MybatisPlusAutoConfiguration {
 
-    public OrangeMybatisPlusAutoConfiguration() {
+    public MybatisPlusAutoConfiguration() {
         if (log.isDebugEnabled()) {
             log.debug("init {} complete.", this.getClass().getSimpleName());
         }
@@ -52,13 +52,13 @@ public class OrangeMybatisPlusAutoConfiguration {
                     log.debug("mybatis get tenant. tenantId: [{}]", GlobalContextHelper.getTenantId());
                 }
                 // @TODO 处理租户ID
-                return new LongValue(GlobalContextHelper.getTenantId() == null ? GlobalContextConstants.DEFAULT_TENANT_ID : GlobalContextHelper.getTenantId());
+                return new LongValue(GlobalContextHelper.getTenantId() == null ? GlobalContextConstant.DEFAULT_TENANT_ID : GlobalContextHelper.getTenantId());
             }
 
             @Override
             public String getTenantIdColumn() {
                 return StrUtil.isBlank(GlobalContextHelper.getTenantIdColumn()) ?
-                        TenantConstants.DEFAULT_TENANT_ID_COLUMN : GlobalContextHelper.getTenantIdColumn();
+                        TenantConstant.DEFAULT_TENANT_ID_COLUMN : GlobalContextHelper.getTenantIdColumn();
             }
 
             // 这是 default 方法,默认返回 false 表示所有表需要拼租户条件

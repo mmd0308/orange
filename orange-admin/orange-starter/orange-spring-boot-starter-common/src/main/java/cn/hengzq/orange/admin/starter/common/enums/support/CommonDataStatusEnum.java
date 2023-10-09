@@ -1,7 +1,7 @@
-package cn.hengzq.orange.admin.starter.common.constants.enums.support;
+package cn.hengzq.orange.admin.starter.common.enums.support;
 
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.BaseEnum;
+import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;
 
 /**
  * 数据状态

@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.constants.enums;
 
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.BaseEnum;
+import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;
 
 /**
  * @author 程序员橙子

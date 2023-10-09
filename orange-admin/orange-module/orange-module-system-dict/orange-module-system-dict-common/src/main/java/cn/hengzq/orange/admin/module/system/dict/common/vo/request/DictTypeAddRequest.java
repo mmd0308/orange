@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.dict.common.vo.request;
 
 import cn.hengzq.orange.admin.module.system.dict.common.constants.SystemDictErrorCode;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

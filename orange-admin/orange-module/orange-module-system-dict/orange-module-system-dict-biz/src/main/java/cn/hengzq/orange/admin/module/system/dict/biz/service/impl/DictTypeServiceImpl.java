@@ -15,8 +15,8 @@ import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictTypeAllQuer
 import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictTypePageQuery;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.request.DictTypeAddRequest;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.request.DictTypeUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class DictTypeServiceImpl implements DictTypeService {
     @Override
     public Boolean updateById(Long id, DictTypeUpdateRequest request) {
         DictTypeEntity entity = dictTypeManager.getById(id);
-        Assert.nonNull(entity, GlobalErrorCodeConstants.GLOBAL_DATA_NOT_EXIST);
+        Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         entity = DictTypeConverter.INSTANCE.updateConvert(entity, request);
         return dictTypeManager.updateById(entity);
     }

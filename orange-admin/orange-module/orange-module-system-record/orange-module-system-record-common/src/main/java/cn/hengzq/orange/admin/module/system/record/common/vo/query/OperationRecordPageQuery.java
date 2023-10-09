@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.record.common.vo.query;
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
 import cn.hengzq.orange.admin.starter.common.vo.query.PageQuery;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

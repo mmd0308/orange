@@ -1,12 +1,12 @@
 package cn.hengzq.orange.admin.starter.mybatis.manager;
 
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
-import cn.hengzq.orange.admin.starter.common.validator.Assert;
+import cn.hengzq.orange.admin.starter.common.util.Assert;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseEntity;
 import cn.hengzq.orange.admin.starter.mybatis.mapper.BaseMapper;
+import cn.hutool.core.collection.CollUtil;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -34,7 +34,7 @@ public interface BaseManager<T extends BaseEntity> {
      */
     default Long add(T entity) {
         if (Objects.isNull(entity)) {
-            throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_REQUEST_MISSING_PARAMETER);
+            throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_REQUEST_MISSING_PARAMETER);
         }
         entity.initParams(true);
         getMapper().insert(entity);
@@ -61,8 +61,8 @@ public interface BaseManager<T extends BaseEntity> {
      * @return
      */
     default Boolean updateById(T entity) {
-        Assert.nonNull(entity, GlobalErrorCodeConstants.GLOBAL_PARAMETER_IS_NULL);
-        Assert.nonNull(entity.getId(), GlobalErrorCodeConstants.GLOBAL_PARAMETER_ID_IS_NULL);
+        Assert.nonNull(entity, GlobalErrorCodeConstant.GLOBAL_PARAMETER_IS_NULL);
+        Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_NULL);
         entity.initParams(false);
         int i = getMapper().updateById(entity);
         return i >= 1 ? Boolean.TRUE : Boolean.FALSE;
@@ -99,7 +99,7 @@ public interface BaseManager<T extends BaseEntity> {
      */
     default Boolean removeById(Long id) {
         if (Objects.isNull(id)) {
-            throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_PARAMETER_ID_IS_NULL);
+            throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_PARAMETER_ID_IS_NULL);
         }
         int i = getMapper().deleteById(id);
         return i >= 1 ? Boolean.TRUE : Boolean.FALSE;
@@ -113,7 +113,7 @@ public interface BaseManager<T extends BaseEntity> {
      */
     default Boolean removeByIds(Collection<Serializable> ids) {
         if (CollUtil.isEmpty(ids)) {
-            throw new ServiceException(GlobalErrorCodeConstants.GLOBAL_REQUEST_MISSING_PARAMETER);
+            throw new ServiceException(GlobalErrorCodeConstant.GLOBAL_REQUEST_MISSING_PARAMETER);
         }
         int i = getMapper().deleteBatchIds(ids);
         return i >= 1 ? Boolean.TRUE : Boolean.FALSE;

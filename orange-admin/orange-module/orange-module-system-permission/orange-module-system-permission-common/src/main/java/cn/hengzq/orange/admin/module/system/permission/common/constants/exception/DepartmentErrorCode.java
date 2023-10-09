@@ -1,12 +1,12 @@
 package cn.hengzq.orange.admin.module.system.permission.common.constants.exception;
 
 import cn.hengzq.orange.admin.starter.common.exception.ErrorCode;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 
 /**
  * @author 程序员橙子
  */
-public interface DepartmentErrorCode extends GlobalErrorCodeConstants {
+public interface DepartmentErrorCode extends GlobalErrorCodeConstant {
     String PREFIX = "SystemPermissionDepartment.";
 
     String DEPARTMENT_DELETE_ERROR_EXIST_SUBSET_KEY = PREFIX + "0001";

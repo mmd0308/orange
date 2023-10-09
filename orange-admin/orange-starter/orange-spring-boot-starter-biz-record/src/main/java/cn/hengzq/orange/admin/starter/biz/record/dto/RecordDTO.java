@@ -1,8 +1,8 @@
 package cn.hengzq.orange.admin.starter.biz.record.dto;
 
 import cn.hengzq.orange.admin.module.system.record.common.constants.RecordLoginTypeEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonOperationStatusEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.RequestMethodEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.RequestMethodEnum;
 import lombok.Builder;
 import lombok.Data;
 

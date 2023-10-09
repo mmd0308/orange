@@ -9,7 +9,7 @@ import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictTypeAllQuer
 import cn.hengzq.orange.admin.module.system.dict.common.vo.query.DictTypePageQuery;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.request.DictTypeAddRequest;
 import cn.hengzq.orange.admin.module.system.dict.common.vo.request.DictTypeUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

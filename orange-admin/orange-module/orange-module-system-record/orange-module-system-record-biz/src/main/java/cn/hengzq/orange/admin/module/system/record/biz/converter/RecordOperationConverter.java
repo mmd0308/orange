@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.module.system.record.biz.converter;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordOperationVO;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

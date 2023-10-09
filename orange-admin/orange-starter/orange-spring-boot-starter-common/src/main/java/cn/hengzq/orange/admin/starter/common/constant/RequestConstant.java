@@ -1,11 +1,11 @@
-package cn.hengzq.orange.admin.starter.common.constants;
+package cn.hengzq.orange.admin.starter.common.constant;
 
 /**
  * 请求常量
  *
  * @author 程序员橙子
  */
-public interface RequestConstants {
+public interface RequestConstant {
 
     /**
      * 内部请求头Key

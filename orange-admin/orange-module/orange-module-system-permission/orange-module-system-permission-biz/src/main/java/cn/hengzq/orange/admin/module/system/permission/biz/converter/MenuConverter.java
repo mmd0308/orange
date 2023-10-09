@@ -8,7 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQu
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.starter.common.converter;
+package cn.hengzq.orange.admin.starter.common.convert;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
 

@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.starter.webmvc.exception;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hengzq.orange.admin.starter.common.exception.GlobalErrorCodeConstants;
+import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.message.GlobalMessageSource;
 import cn.hengzq.orange.admin.starter.common.message.LocalMessage;
@@ -101,7 +101,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public Result<?> handleException(AccessDeniedException e) {
         log.error("handleException msg:{} ", e.getMessage(), e);
-        return ResultWrapper.fail(GlobalErrorCodeConstants.GLOBAL_FORBIDDEN);
+        return ResultWrapper.fail(GlobalErrorCodeConstant.GLOBAL_FORBIDDEN);
     }
 
     /**

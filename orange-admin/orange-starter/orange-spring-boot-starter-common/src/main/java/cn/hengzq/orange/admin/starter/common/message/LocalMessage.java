@@ -16,7 +16,7 @@ public class LocalMessage {
         bundleMessageSource.setDefaultEncoding("UTF-8");
         bundleMessageSource.setUseCodeAsDefaultMessage(true);
         bundleMessageSource.setCacheSeconds(3600);
-        bundleMessageSource.setBasenames(new String[]{"classpath:i18n/messages"});
+        bundleMessageSource.setBasenames("classpath:i18n/messages");
         messageSource = bundleMessageSource;
     }
 

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.CommonDataStatusEnum;
-import cn.hengzq.orange.admin.starter.common.constants.enums.support.DataPresetFlagEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import lombok.Data;
 

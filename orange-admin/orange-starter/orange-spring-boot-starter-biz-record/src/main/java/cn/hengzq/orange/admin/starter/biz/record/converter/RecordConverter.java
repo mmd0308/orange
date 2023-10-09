@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.starter.biz.record.converter;
 import cn.hengzq.orange.admin.starter.biz.record.dto.RecordDTO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordLoginVO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordOperationVO;
-import cn.hengzq.orange.admin.starter.common.converter.Converter;
+import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

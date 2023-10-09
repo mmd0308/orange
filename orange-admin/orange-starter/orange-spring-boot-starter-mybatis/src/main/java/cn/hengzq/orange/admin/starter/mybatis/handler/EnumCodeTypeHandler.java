@@ -1,7 +1,7 @@
-package cn.hengzq.orange.admin.starter.mybatis.handlers;
+package cn.hengzq.orange.admin.starter.mybatis.handler;
 
 
-import cn.hengzq.orange.admin.starter.common.constants.enums.BaseEnum;
+import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;

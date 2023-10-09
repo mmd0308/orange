@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author 程序员橙子
  */
 @Data
-public class BaseUser implements Serializable {
+public class BaseUserVO implements Serializable {
 
     @Schema(description = "用户ID")
     private Long id;
