@@ -12,7 +12,7 @@ import java.util.List;
  * @author 程序员橙子
  */
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "菜单")
+@Schema(description = "菜单管理")
 @Data
 public class MenuVO extends BaseTenantVO {
 
@@ -41,7 +41,7 @@ public class MenuVO extends BaseTenantVO {
     private String icon;
 
     @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
-    private Boolean hidden;
+    private boolean hidden;
 
     @Schema(description = "排序")
     private Integer sort;

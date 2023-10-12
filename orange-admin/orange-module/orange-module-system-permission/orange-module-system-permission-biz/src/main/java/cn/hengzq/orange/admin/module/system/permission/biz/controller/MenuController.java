@@ -8,8 +8,8 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddOrUpdateRequest;
+import cn.hengzq.orange.admin.starter.common.constant.ValidatedGroupConstant;
 import cn.hengzq.orange.admin.starter.common.result.Result;
 import cn.hengzq.orange.admin.starter.common.result.ResultWrapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,14 +37,14 @@ public class MenuController {
     @PreAuthorize("@ss.hasPermission('system:permission:menu:add')")
     @Operation(summary = "新建", operationId = "system:permission:menu:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated MenuAddRequest request) {
+    public Result<Long> add(@RequestBody @Validated(value = ValidatedGroupConstant.ADD.class) MenuAddOrUpdateRequest request) {
         return ResultWrapper.ok(menuService.add(request));
     }
 
     @PreAuthorize("@ss.hasPermission('system:permission:menu:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:menu:update")
     @PutMapping("/{id}")
-    public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody MenuUpdateRequest request) {
+    public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody MenuAddOrUpdateRequest request) {
         return ResultWrapper.ok(menuService.updateById(id, request));
     }
 

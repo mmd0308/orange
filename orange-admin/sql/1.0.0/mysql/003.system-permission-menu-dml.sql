@@ -15,7 +15,7 @@ SET @u_id := -100;
 SET @t_id := -100;
 
 -- ----------------------------
--- 菜单和按钮数据预置
+-- 系统管理-菜单和按钮数据预置
 -- ----------------------------
 BEGIN;
 -- 系统管理
@@ -62,4 +62,33 @@ values (501, @t_id, 5, -1, '修改', 'system:permission:role:update', 0, 0, '角
        (502, @t_id, 5, -1, '新增', 'system:permission:role:add', 0, 0, '角色管理-新增', @u_id, NOW(), @u_id, NOW()),
        (503, @t_id, 5, -1, '删除', 'system:permission:role:delete', 0, 0, '角色管理-删除', @u_id, NOW(), @u_id, NOW())
 ;
+COMMIT;
+
+
+-- ----------------------------
+-- 看板-菜单
+-- ----------------------------
+BEGIN;
+-- 角色管理
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (20, @t_id, -1, '首页', 'dashboard', 0, 'dashboard', 'system-settings', 0, 1, null, @u_id, NOW(), @u_id, NOW());
+
+COMMIT;
+
+
+-- ----------------------------
+-- 系统工具-菜单
+-- ----------------------------
+BEGIN;
+-- 系统工具
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (30, @t_id, -1, '系统工具', 'system:tools', 0, '', 'system-apps', 0, 30, null, @u_id, NOW(), @u_id, NOW());
+
+-- API文档
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (31, @t_id, 30, 'API后台文档', 'system:tools:api', 0, 'http://hengzq.cn:38080/orange-admin/doc.html', 'tree', 0, 20, null, @u_id, NOW(), @u_id, NOW());
+
+-- 图标
+INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
+VALUES (32, @t_id, 30, '图标', 'system:tools:icon', 0, 'tools/icon', 'tree', 0, 1, null, @u_id, NOW(), @u_id, NOW());
 COMMIT;

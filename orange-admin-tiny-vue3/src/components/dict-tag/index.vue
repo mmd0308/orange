@@ -24,7 +24,6 @@ const values = computed(() => {
     return Array.isArray(props.value) ? props.value : [String(props.value)]
   }
   return []
-
 })
 </script>
 

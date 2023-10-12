@@ -36,6 +36,12 @@
               <dict-tag :value="data.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
           </tiny-grid-column>
+          <tiny-grid-column field="hidden" :title="$t('system.menu.table.columns.hidden')" align="center" width="100">
+            <template #default="data">
+              <dict-tag :value="data.row.hidden" :options="proxy.$dict.getDict('sys_common_data_hidden_flag')" />
+            </template>
+          </tiny-grid-column>
+
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="135" />
           <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="135" />

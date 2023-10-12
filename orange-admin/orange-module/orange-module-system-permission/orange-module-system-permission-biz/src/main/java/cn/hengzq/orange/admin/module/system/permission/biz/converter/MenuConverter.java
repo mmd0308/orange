@@ -6,8 +6,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -22,7 +21,7 @@ import java.util.Objects;
 public interface MenuConverter extends Converter {
     MenuConverter INSTANCE = Mappers.getMapper(MenuConverter.class);
 
-    MenuEntity toEntity(MenuAddRequest request);
+    MenuEntity toEntity(MenuAddOrUpdateRequest request);
 
     MenuEntity toEntity(MenuVO menuVO);
 
@@ -36,10 +35,11 @@ public interface MenuConverter extends Converter {
 
     MenuListQuery toListQuery(MenuAllQuery query);
 
-    default MenuEntity updateConvert(MenuEntity entity, MenuUpdateRequest request) {
+    default MenuEntity updateConvert(MenuEntity entity, MenuAddOrUpdateRequest request) {
         if (Objects.isNull(request) || Objects.isNull(entity)) {
             return null;
         }
+        entity.setHidden(request.isHidden());
         if (Objects.nonNull(request.getParentId())) {
             entity.setParentId(request.getParentId());
         }
@@ -54,9 +54,6 @@ public interface MenuConverter extends Converter {
         }
         if (Objects.nonNull(request.getIcon())) {
             entity.setIcon(request.getIcon());
-        }
-        if (Objects.nonNull(request.getHidden())) {
-            entity.setHidden(request.getHidden());
         }
         if (Objects.nonNull(request.getSort())) {
             entity.setSort(request.getSort());

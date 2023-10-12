@@ -19,14 +19,13 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.constant.CommonConstant;
-import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.common.constant.GlobalErrorCodeConstant;
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
-import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hengzq.orange.admin.starter.common.util.Assert;
+import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
@@ -117,7 +116,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Long add(MenuAddRequest request) {
+    public Long add(MenuAddOrUpdateRequest request) {
         Assert.nonNull(request.getPermission(), MenuErrorCode.MENU_PERMISSION_CANNOT_NULL);
         List<MenuEntity> entityList = menuManager.listByParams(MenuListQuery.builder().permission(request.getPermission()).build());
         Assert.isEmpty(entityList, MenuErrorCode.MENU_PERMISSION_CANNOT_REPEAT);
@@ -127,7 +126,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public Boolean updateById(Long id, MenuUpdateRequest request) {
+    public Boolean updateById(Long id, MenuAddOrUpdateRequest request) {
         MenuEntity entity = menuManager.getById(id);
         Assert.nonNull(entity.getId(), GlobalErrorCodeConstant.GLOBAL_DATA_NOT_EXIST);
         if (StrUtil.isNotBlank(request.getPermission()) && !request.getPermission().equals(entity.getPermission())) {

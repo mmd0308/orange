@@ -5,8 +5,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuTreeVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.MenuVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.MenuAddOrUpdateRequest;
 
 import java.util.List;
 
@@ -31,12 +30,12 @@ public interface MenuService {
     /**
      * 新增菜单
      */
-    Long add(MenuAddRequest request);
+    Long add(MenuAddOrUpdateRequest request);
 
     /**
      * 根据ID更新
      */
-    Boolean updateById(Long id, MenuUpdateRequest request);
+    Boolean updateById(Long id, MenuAddOrUpdateRequest request);
 
     /**
      * 根据ID删除数据

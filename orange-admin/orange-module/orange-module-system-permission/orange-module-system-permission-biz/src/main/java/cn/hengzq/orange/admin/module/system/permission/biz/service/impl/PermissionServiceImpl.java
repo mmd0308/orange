@@ -143,7 +143,7 @@ public class PermissionServiceImpl implements PermissionService {
             return List.of();
         }
         // 排序
-        menuVOList = menuVOList.stream().sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
+        menuVOList = menuVOList.stream().filter(item -> !item.isHidden()).sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
 
         //组装树型结果
         List<RouterTreeVO> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuVOList);

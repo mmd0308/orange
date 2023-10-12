@@ -1,11 +1,11 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.entity;
 
+import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
+import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
-import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -65,7 +65,7 @@ public class MenuEntity extends BaseTenantEntity {
     private String icon;
 
     @TableField("hidden")
-    private Boolean hidden;
+    private boolean hidden;
 
     /**
      * 排序

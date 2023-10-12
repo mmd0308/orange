@@ -76,7 +76,7 @@ VALUES (400, @t_id, 1, '预置', 'PRESET', 'sys_common_data_preset_flag', 0, 0, 
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- 请求方式  系统操作状态 type ID范围 [5]  data ID范围 [500 - 600）
+-- 请求方式  sys_common_request_method type ID范围 [5]  data ID范围 [500 - 600）
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BEGIN;
 -- 新增字典类型
@@ -97,3 +97,18 @@ VALUES (500, @t_id, 1, 'GET', 'GET', 'sys_common_request_method', 0, 0, '#87d068
 COMMIT;
 
 
+
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--   数据可见标记-sys_common_data_hidden_flag type ID范围 [6]  data ID范围 [600 - 700）
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+BEGIN;
+-- 新增字典类型
+INSERT INTO sys_dict_type (id, tenant_id, name, dict_type, status, preset_flag, remark, created_by, created_at, updated_by, updated_at)
+VALUES (6, @t_id, '数据可见标记', 'sys_common_data_hidden_flag', 0, 0, '数据可见标记', @u_id, NOW(), @u_id, NOW());
+
+-- 新增字典数据
+INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
+                           show_style, status, remark, created_by, created_at, updated_by, updated_at)
+VALUES (600, @t_id, 1, '隐藏', 1, 'sys_common_data_hidden_flag', 0, 0, '#83888f', 0, '隐藏', @u_id, NOW(), @u_id, NOW()),
+       (601, @t_id, 2, '不隐藏', 0, 'sys_common_data_hidden_flag', 0, 0, '#87d068', 0, '不隐藏', @u_id, NOW(), @u_id, NOW());
+COMMIT;

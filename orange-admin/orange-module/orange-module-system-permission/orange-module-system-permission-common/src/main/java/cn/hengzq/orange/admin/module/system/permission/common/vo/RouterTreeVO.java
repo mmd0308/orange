@@ -29,7 +29,7 @@ public class RouterTreeVO implements Serializable {
     private String path;
 
     @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
-    private Boolean hidden;
+    private boolean hidden;
 
     @Schema(description = "权限编码")
     private String permission;

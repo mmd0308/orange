@@ -102,6 +102,7 @@ declare namespace SystemPermissionAPI {
     rootId?: string;
     name?: string;
     permission?: string;
+    hidden?: string;
     presetFlag?: 'PRESET' | 'CUSTOM';
     path?: string;
     icon?: string;

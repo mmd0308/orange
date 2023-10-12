@@ -15,6 +15,12 @@
           <tiny-input v-model="formData.permission"
             :placeholder="$t('system.menu.form.permission.placeholder')"></tiny-input>
         </tiny-form-item>
+        <tiny-form-item label="可见状态" prop="sex">
+          <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_data_hidden_flag')" :key="index"
+            v-model="formData.hidden" :label="item.dictValue">
+            {{ item.dictLabel }}
+          </tiny-radio>
+        </tiny-form-item>
         <tiny-form-item :label="$t('system.menu.form.icon')" prop="icon">
           <tiny-input v-model="formData.icon" :placeholder="$t('system.menu.form.icon.placeholder')"></tiny-input>
         </tiny-form-item>
@@ -23,6 +29,11 @@
         </tiny-form-item>
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
+        </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.remark')" prop="sort">
+          <tiny-input v-model="formData.remark" :placeholder="$t('global.form.remark.placeholder')" type="textarea"
+            :maxlength="500" :rows="5" show-word-limit>
+          </tiny-input>
         </tiny-form-item>
       </tiny-form>
 
@@ -47,6 +58,7 @@ const title = computed(() => {
 })
 
 const formData = ref<SystemPermissionAPI.MenuVO>({
+  hidden: 'true',
   sort: 1
 })
 
@@ -131,6 +143,7 @@ const open = (id: string) => {
   if (id) {
     SystemRequest.menu.getMenuById(id).then((response) => {
       formData.value = response.data
+      formData.value.hidden = String(formData.value.hidden)
       isModify.value = true
     })
   }
