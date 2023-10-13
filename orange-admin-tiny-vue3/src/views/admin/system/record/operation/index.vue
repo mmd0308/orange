@@ -51,6 +51,8 @@
               {{ data.row.executeTime }} ms
             </template>
           </tiny-grid-column>
+          <tiny-grid-column field="userAgent" show-overflow :title="$t('system.record.operation.table.columns.userAgent')"
+            width="260" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="data">

@@ -13,6 +13,11 @@
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
         </tiny-form-item>
+        <tiny-form-item :label="$t('global.form.remark')" prop="remark">
+          <tiny-input v-model="formData.remark" :placeholder="$t('global.form.remark.placeholder')" type="textarea"
+            :maxlength="500" :rows="5" show-word-limit>
+          </tiny-input>
+        </tiny-form-item>
       </tiny-form>
       <template #footer>
         <tiny-button type="primary" @click="onSubmit">保存</tiny-button>
@@ -33,11 +38,15 @@ const title = computed(() => {
   return isModify.value ? '修改部门' : '新增部门'
 })
 
-const formData = ref<SystemPermissionAPI.DepartmentVO>({
-  parentId: '-1',
-  name: '',
-  sort: 1,
-})
+const formData = ref<SystemPermissionAPI.DepartmentVO>({})
+
+const initFromData = () => {
+  formData.value = {
+    parentId: '-1',
+    name: '',
+    sort: 1,
+  }
+}
 
 const formDataRules = {
   parentId: [{ required: true, message: '上级部门不能为空', trigger: 'change' }],
@@ -70,7 +79,7 @@ const onSubmit = () => {
 
 const onClose = (refresh: boolean) => {
   visible.value = false
-  formData.value = {}
+  proxy.$refs.formDataRef.resetFields()
   if (refresh) {
     emit('ok')
   }
@@ -115,6 +124,7 @@ function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
 
 const open = (data: SystemPermissionAPI.DepartmentVO) => {
   isModify.value = false
+  initFromData()
   if (data) {
     formData.value = data
     isModify.value = true

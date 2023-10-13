@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/department"
 
-export function queryDepartmentAll(params: SystemPermissionAPI.DepartmentAllQueryParams) {
+export function queryDepartmentAll(params: SystemPermissionAPI.DepartmentAllQuery) {
   return axios.post(BASE_URL.concat("/all"), params);
 }
 

@@ -24,4 +24,7 @@ public class DepartmentVO extends BaseTenantVO {
 
     @Schema(description = "排序")
     private Integer sort;
+
+    @Schema(description = "备注")
+    private String remark;
 }

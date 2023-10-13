@@ -24,7 +24,7 @@ VALUES (1, @t_id, -1, '系统管理', 'system:permission', 0, '', 'system-settin
 
 -- 部门管理
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (2, @t_id, 1, '部门管理', 'system:permission:department:view', 0, 'system/permission/department', 'tree', 0, 20, null, @u_id, NOW(), @u_id, NOW());
+VALUES (2, @t_id, 1, '部门管理', 'system:permission:department:view', 0, 'system/permission/department', 'system-people-circle', 0, 20, null, @u_id, NOW(), @u_id, NOW());
 
 insert into sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
 values (200, @t_id, 2, -1, '新增', 'system:permission:department:add', 0, 0, '部门管理-新增', @u_id, NOW(), @u_id, NOW()),
@@ -71,7 +71,7 @@ COMMIT;
 BEGIN;
 -- 角色管理
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (20, @t_id, -1, '首页', 'dashboard', 0, 'dashboard', 'system-settings', 0, 1, null, @u_id, NOW(), @u_id, NOW());
+VALUES (20, @t_id, -1, '首页', 'dashboard', 0, 'dashboard', 'system-home', 0, 1, null, @u_id, NOW(), @u_id, NOW());
 
 COMMIT;
 
@@ -86,9 +86,9 @@ VALUES (30, @t_id, -1, '系统工具', 'system:tools', 0, '', 'system-apps', 0, 
 
 -- API文档
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (31, @t_id, 30, 'API后台文档', 'system:tools:api', 0, 'http://hengzq.cn:38080/orange-admin/doc.html', 'tree', 0, 20, null, @u_id, NOW(), @u_id, NOW());
+VALUES (31, @t_id, 30, 'API后台文档', 'system:tools:api', 0, 'http://hengzq.cn:38080/orange-admin/doc.html', 'system-document', 0, 20, null, @u_id, NOW(), @u_id, NOW());
 
 -- 图标
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (32, @t_id, 30, '图标', 'system:tools:icon', 0, 'tools/icon', 'tree', 0, 1, null, @u_id, NOW(), @u_id, NOW());
+VALUES (32, @t_id, 30, '图标', 'system:tools:icon', 0, 'tools/icon', 'system-images', 0, 1, null, @u_id, NOW(), @u_id, NOW());
 COMMIT;

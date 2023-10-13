@@ -2,11 +2,10 @@ package cn.hengzq.orange.admin.module.system.record.common.vo;
 
 import cn.hengzq.orange.admin.module.system.record.common.constant.RecordLoginTypeEnum;
 import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
-import cn.hengzq.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -14,13 +13,15 @@ import java.time.LocalDateTime;
  *
  * @author 程序员橙子
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "登录记录")
-public class RecordLoginVO extends BaseTenantVO {
+public class RecordLoginVO implements Serializable {
 
     @Schema(description = "主键", accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
+
+    @Schema(description = "租户id")
+    private Long tenantId;
 
     @Schema(description = "请求ID")
     private String traceId;

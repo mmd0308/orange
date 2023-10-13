@@ -30,7 +30,7 @@
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
         </tiny-form-item>
-        <tiny-form-item :label="$t('global.form.remark')" prop="sort">
+        <tiny-form-item :label="$t('global.form.remark')" prop="remark">
           <tiny-input v-model="formData.remark" :placeholder="$t('global.form.remark.placeholder')" type="textarea"
             :maxlength="500" :rows="5" show-word-limit>
           </tiny-input>
@@ -94,6 +94,7 @@ const onSubmit = () => {
 
 const onClose = (refresh: boolean) => {
   visible.value = false
+  formData.value = {}
   proxy.$refs.formDataRef.resetFields()
   if (refresh) {
     emit('ok')

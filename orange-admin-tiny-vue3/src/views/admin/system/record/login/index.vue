@@ -27,13 +27,21 @@
             width="150" />
           <tiny-grid-column field="account" :title="$t('system.record.login.table.columns.account')" align="center" />
           <tiny-grid-column field="userId" :title="$t('system.record.login.table.columns.userId')" align="center" />
-
+          <tiny-grid-column field="userIp" :title="$t('system.record.login.table.columns.userIp')" align="center" />
           <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
             <template #default="data">
               <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
+          <tiny-grid-column field="type" :title="$t('system.record.login.table.columns.type')" align="center">
+            <template #default="data">
+              <dict-tag :value="data.row.type" :options="proxy.$dict.getDict('sys_record_login_type')" />
+            </template>
+          </tiny-grid-column>
+          <tiny-grid-column field="loginTime" :title="$t('system.record.login.table.columns.loginTime')" align="center"
+            width="150" />
+          <tiny-grid-column field="userAgent" show-overflow :title="$t('system.record.login.table.columns.userAgent')"
+            width="260" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="data">

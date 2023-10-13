@@ -26,7 +26,8 @@
           <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" width="200" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
+          <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')" width="260" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="150" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="scope">

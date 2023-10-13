@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `sys_department`
     `name`       varchar(128) NOT NULL DEFAULT '' COMMENT '名称',
     `parent_id`  bigint(20)   NOT NULL DEFAULT '-1' COMMENT '父级id,根节点的id为-1',
     `sort`       int                   DEFAULT 0 COMMENT '显示顺序',
+    `remark`     varchar(512)          DEFAULT NULL COMMENT '备注',
     `created_by` bigint(20)   NOT NULL COMMENT '创建人',
     `created_at` datetime     NOT NULL COMMENT '创建时间',
     `updated_by` bigint(20)            DEFAULT NULL COMMENT '更新人',

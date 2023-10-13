@@ -14,6 +14,7 @@ declare namespace SystemPermissionAPI {
     parentId?: string;
     name?: string;
     sort?: number;
+    remark?: string;
   };
 
   interface DepartmentTreeVO {
@@ -73,7 +74,7 @@ declare namespace SystemPermissionAPI {
   interface RoleVO {
     tenantId?: string;
     id?: string;
-    name: string;
+    name?: string;
     permission?: string;
     sort?: number;
     status?: 'NORMAL' | 'DISABLE';

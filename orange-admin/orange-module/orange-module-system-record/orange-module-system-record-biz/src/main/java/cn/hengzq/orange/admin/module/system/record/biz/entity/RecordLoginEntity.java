@@ -2,6 +2,7 @@ package cn.hengzq.orange.admin.module.system.record.biz.entity;
 
 import cn.hengzq.orange.admin.module.system.record.common.constant.RecordLoginTypeEnum;
 import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
+import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import cn.hengzq.orange.admin.starter.mybatis.entity.AbstractEntity;
 import cn.hengzq.orange.admin.starter.mybatis.handler.EnumCodeTypeHandler;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -23,6 +24,12 @@ public class RecordLoginEntity extends AbstractEntity {
 
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
+
+    /**
+     * 租户id
+     */
+    @TableField("tenant_id")
+    private Long tenantId;
 
     @TableField("trace_id")
     private String traceId;
@@ -55,4 +62,9 @@ public class RecordLoginEntity extends AbstractEntity {
      */
     @TableField(typeHandler = EnumCodeTypeHandler.class)
     private CommonOperationStatusEnum status;
+
+
+    public Long getTenantId() {
+        return tenantId == null ? GlobalContextHelper.getTenantId() : tenantId;
+    }
 }

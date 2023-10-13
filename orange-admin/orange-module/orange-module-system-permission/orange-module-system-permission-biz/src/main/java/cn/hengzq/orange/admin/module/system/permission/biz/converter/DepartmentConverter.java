@@ -6,8 +6,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeV
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -25,7 +24,7 @@ public interface DepartmentConverter extends Converter {
 
     DepartmentEntity toEntity(DepartmentVO departmentVO);
 
-    DepartmentEntity toEntity(DepartmentAddRequest request);
+    DepartmentEntity toEntity(DepartmentAddOrUpdateRequest request);
 
     DepartmentVO toVo(DepartmentEntity entity);
 
@@ -33,7 +32,7 @@ public interface DepartmentConverter extends Converter {
 
     List<DepartmentVO> toList(List<DepartmentEntity> entityList);
 
-    default DepartmentEntity updateConvert(DepartmentUpdateRequest request, DepartmentEntity entity) {
+    default DepartmentEntity updateConvert(DepartmentEntity entity, DepartmentAddOrUpdateRequest request) {
         if (Objects.isNull(entity)) {
             return null;
         }

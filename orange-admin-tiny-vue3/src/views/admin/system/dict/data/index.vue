@@ -49,7 +49,7 @@
               <dict-tag :value="scope.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="135" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="150" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="scope">

@@ -24,7 +24,9 @@
           <tiny-input v-model="formData.username"></tiny-input>
         </tiny-form-item>
         <tiny-form-item label="备注" prop="remark">
-          <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
+          <tiny-input v-model="formData.remark" :placeholder="$t('global.form.remark.placeholder')" type="textarea"
+            :maxlength="500" :rows="5" show-word-limit>
+          </tiny-input>
         </tiny-form-item>
       </tiny-form>
 
@@ -86,6 +88,7 @@ const onSubmit = () => {
 
 const onClose = (refresh: boolean) => {
   visible.value = false
+  formData.value = {}
   proxy.$refs.formDataRef.resetFields()
   if (refresh) {
     emit('ok')

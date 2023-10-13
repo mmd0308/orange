@@ -9,11 +9,19 @@
         <tiny-input v-model="formData.permission"
           :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
       </tiny-form-item>
+      <tiny-form-item label="可见状态" prop="sex">
+        <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_data_status')" :key="index"
+          v-model="formData.status" :label="item.dictValue">
+          {{ item.dictLabel }}
+        </tiny-radio>
+      </tiny-form-item>
       <tiny-form-item :label="$t('global.form.sort')" prop="sort">
         <tiny-numeric v-model="formData.sort"></tiny-numeric>
       </tiny-form-item>
       <tiny-form-item :label="$t('global.form.remark')" prop="remark">
-        <tiny-input v-model="formData.remark" type="textarea"></tiny-input>
+        <tiny-input v-model="formData.remark" :placeholder="$t('global.form.remark.placeholder')" type="textarea"
+          :maxlength="500" :rows="5" show-word-limit>
+        </tiny-input>
       </tiny-form-item>
     </tiny-form>
 
@@ -36,12 +44,13 @@ const title = computed(() => {
   return isModify.value ? '修改角色' : '新增角色'
 })
 
+const formData = ref<SystemPermissionAPI.RoleVO>({})
 
-const formData = ref<SystemPermissionAPI.RoleVO>({
-  name: '',
-  permission: '',
-  sort: 1
-})
+const initFromData = () => {
+  formData.value = {
+    sort: 1
+  }
+}
 
 const formDataRules = {
   name: [{ required: true, message: '角色名称不能为空', trigger: 'change' }],
@@ -82,6 +91,7 @@ const onClose = (refresh?: boolean) => {
 
 const open = (id: string) => {
   isModify.value = false
+  initFromData()
   if (id) {
     SystemRequest.role.getRoleById(id).then((response) => {
       formData.value = response.data

@@ -43,8 +43,8 @@
           </tiny-grid-column>
 
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80" />
-          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="135" />
-          <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="135" />
+          <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="150" />
+          <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="150" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="scope">

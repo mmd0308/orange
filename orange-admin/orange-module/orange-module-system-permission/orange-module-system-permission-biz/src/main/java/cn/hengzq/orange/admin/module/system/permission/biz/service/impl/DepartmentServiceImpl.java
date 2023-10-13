@@ -1,6 +1,5 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.DepartmentConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.DepartmentListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
@@ -11,12 +10,12 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeV
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.constant.CommonConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
-import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hengzq.orange.admin.starter.common.util.Assert;
+import cn.hengzq.orange.admin.starter.common.util.CollUtils;
+import cn.hutool.core.collection.CollUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -77,7 +76,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Long add(DepartmentAddRequest request) {
+    public Long add(DepartmentAddOrUpdateRequest request) {
         DepartmentEntity entity = DepartmentConverter.INSTANCE.toEntity(request);
         if (Objects.isNull(request.getParentId())) {
             entity.setParentId(CommonConstant.DEFAULT_PARENT_ID);
@@ -100,10 +99,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     @Override
-    public Boolean updateById(Long id, DepartmentUpdateRequest request) {
+    public Boolean updateById(Long id, DepartmentAddOrUpdateRequest request) {
         DepartmentEntity entity = departmentManager.getById(id);
         Assert.nonNull(entity, DepartmentErrorCode.GLOBAL_DATA_NOT_EXIST);
-        entity = DepartmentConverter.INSTANCE.updateConvert(request, entity);
+        entity = DepartmentConverter.INSTANCE.updateConvert(entity, request);
         return departmentManager.updateById(entity);
     }
 

@@ -38,4 +38,7 @@ public class DepartmentEntity extends BaseTenantEntity {
      * 排序
      */
     private Integer sort;
+
+
+    private String remark;
 }

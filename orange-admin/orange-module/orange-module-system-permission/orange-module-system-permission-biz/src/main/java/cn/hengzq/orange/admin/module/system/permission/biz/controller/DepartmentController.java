@@ -10,8 +10,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeV
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.result.Result;
 import cn.hengzq.orange.admin.starter.common.result.ResultWrapper;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +37,7 @@ public class DepartmentController {
     @PreAuthorize("@ss.hasPermission('system:permission:department:add')")
     @Operation(summary = "新建", operationId = "system:permission:department:add")
     @PostMapping
-    public Result<Long> add(@RequestBody DepartmentAddRequest request) {
+    public Result<Long> add(@RequestBody DepartmentAddOrUpdateRequest request) {
         return ResultWrapper.ok(departmentService.add(request));
     }
 
@@ -52,7 +51,7 @@ public class DepartmentController {
     @PreAuthorize("@ss.hasPermission('system:permission:department:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:department:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody DepartmentUpdateRequest request) {
+    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody DepartmentAddOrUpdateRequest request) {
         return ResultWrapper.ok(departmentService.updateById(id, request));
     }
 

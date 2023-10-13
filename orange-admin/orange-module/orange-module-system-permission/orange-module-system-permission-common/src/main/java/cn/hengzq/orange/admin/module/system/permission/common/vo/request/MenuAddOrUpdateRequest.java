@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * @author 程序员橙子
  */
-@Schema(description = "菜单管理-新增参数")
+@Schema(description = "菜单管理-新增或更新参数")
 @Data
 public class MenuAddOrUpdateRequest implements Serializable {
 

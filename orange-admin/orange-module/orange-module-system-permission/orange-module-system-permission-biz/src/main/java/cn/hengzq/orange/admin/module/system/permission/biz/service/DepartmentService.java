@@ -4,8 +4,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentTreeV
 import cn.hengzq.orange.admin.module.system.permission.common.vo.DepartmentVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddRequest;
-import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentUpdateRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddOrUpdateRequest;
 
 import java.util.List;
 
@@ -33,14 +32,14 @@ public interface DepartmentService {
     /**
      * 新增数据
      */
-    Long add(DepartmentAddRequest request);
+    Long add(DepartmentAddOrUpdateRequest request);
 
     /**
      * 根据ID 查询自身及子集部门数据
      */
     List<DepartmentVO> querySelfAndSubsetById(Long id);
 
-    Boolean updateById(Long id, DepartmentUpdateRequest request);
+    Boolean updateById(Long id, DepartmentAddOrUpdateRequest request);
 
     List<DepartmentVO> queryAll(DepartmentAllQuery query);
 }
