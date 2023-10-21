@@ -84,6 +84,19 @@
                 <artifactId>orange-module-system-record-biz</artifactId>
                 <version>${orange.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>cn.hengzq.orange.admin.module.system.info.common</groupId>
+                <artifactId>orange-module-system-info-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange.admin.module.system.info.biz</groupId>
+                <artifactId>orange-module-system-info-biz</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+
             <!--    module end        -->
 
             <!-- 自定义starter start -->

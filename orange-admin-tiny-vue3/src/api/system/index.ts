@@ -9,6 +9,7 @@ import * as dictType from './dict/type'
 import * as dictData from './dict/data'
 import * as recordOperation from './record/operation'
 import * as recordLogin from './record/login'
+import * as infoType from './info/type'
 
 export default {
   auth,
@@ -21,5 +22,6 @@ export default {
   dictType,
   dictData,
   recordOperation,
-  recordLogin
+  recordLogin,
+  infoType
 }

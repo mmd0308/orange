@@ -19,6 +19,7 @@
         <module>orange-module-system-dict</module>
         <module>orange-module-system-permission</module>
         <module>orange-module-system-record</module>
+        <module>orange-module-system-info</module>
     </modules>
 
 </project>
