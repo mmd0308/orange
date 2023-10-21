@@ -1,5 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.biz.converter.DepartmentConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.UserConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.UserListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
@@ -9,6 +10,8 @@ import cn.hengzq.orange.admin.module.system.permission.biz.manager.UserManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.SystemPermissionErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.DepartmentErrorCode;
+import cn.hengzq.orange.admin.module.system.permission.common.exception.support.UserErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserAllQuery;
@@ -16,6 +19,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserPageQ
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
 import cn.hengzq.orange.admin.starter.common.util.CollUtils;
@@ -29,6 +33,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,6 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = {Exception.class})
     public Boolean updatePassword(UpdatePasswordRequest request) {
         Long userId = Objects.isNull(request.getUserId()) ? GlobalContextHelper.getCurrentUserId() : request.getUserId();
         UserEntity entity = userManager.getById(userId);
@@ -136,6 +142,14 @@ public class UserServiceImpl implements UserService {
         }
         detailsVO.setRoleVOList(roleService.queryByUserId(id));
         return detailsVO;
+    }
+
+    @Override
+    public Boolean updateById(Long id, UserUpdateRequest request) {
+        UserEntity entity = userManager.getById(id);
+        Assert.nonNull(entity, UserErrorCode.GLOBAL_DATA_NOT_EXIST);
+        entity = UserConverter.INSTANCE.updateConvert(entity, request);
+        return userManager.updateById(entity);
     }
 
     private List<Long> getDepartmentIds(Long departmentId) {

@@ -53,6 +53,13 @@ public class RoleController {
         return ResultWrapper.ok(RoleConverter.INSTANCE.toListVo(entityList));
     }
 
+    @Operation(summary = "查询指定用户角色", operationId = "system:permission:role:query-roles-by-user-id", description = "根据用户ID获取该用户拥有的角色")
+    @GetMapping("/query-roles-by-user-id/{userId}")
+    public Result<List<RoleVO>> queryRolesByUserId(@PathVariable("userId") Long userId) {
+        List<RoleVO> list = roleService.queryRolesByUserId(userId);
+        return ResultWrapper.ok(list);
+    }
+
     @Operation(summary = "根据ID查询详情", operationId = "system:permission:role:get")
     @GetMapping("/{id}")
     public Result<RoleVO> getById(@PathVariable("id") Long id) {

@@ -7,14 +7,18 @@ import { removeRouteListener } from '@/utils/route-listener';
 interface UserInfo {
   token: string,
   user: SystemPermissionAPI.UserVO,
-  rolePermissions: string[]
+  rolePermissions: string[],
+  menuPermissions: string[],
+  buttonPermissions: string[]
 }
 
 const useUserStore = defineStore('user', {
   state: (): UserInfo => ({
     token: '',
     user: {},
-    rolePermissions: []
+    rolePermissions: [],
+    menuPermissions: [],
+    buttonPermissions: [],
   }),
 
   getters: {
@@ -30,9 +34,11 @@ const useUserStore = defineStore('user', {
     // 获取用户信息
     async info() {
       const { data } = await SystemRequest.auth.getUserInfo()
-      const { rolePermissionList, user } = data
+      const { rolePermissions, menuPermissions, buttonPermissions, user } = data
       this.user = user
-      this.rolePermissions = rolePermissionList
+      this.rolePermissions = rolePermissions
+      this.menuPermissions = menuPermissions
+      this.buttonPermissions = buttonPermissions
     },
     // 登录
     async login(loginForm: SystemPermissionAPI.LoginParams) {
@@ -58,6 +64,7 @@ const useUserStore = defineStore('user', {
 
     // 退出登录
     async logout() {
+      await SystemRequest.auth.logout();
       this.$reset();
       // 清空Token
       clearToken();

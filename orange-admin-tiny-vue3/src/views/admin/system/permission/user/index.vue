@@ -45,7 +45,9 @@
               <tiny-action-menu :max-show-num="2" :spacing="8" :options="options"
                 @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
                 <template #item="{ data }">
-                  <span> {{ $t(data.label) }}</span>
+                  <span v-if="data.label == 'global.table.operations.delete'" style="color: var(--button-delete-color);">
+                    {{ $t(data.label) }} </span>
+                  <span v-else> {{ $t(data.label) }} </span>
                 </template>
               </tiny-action-menu>
             </template>

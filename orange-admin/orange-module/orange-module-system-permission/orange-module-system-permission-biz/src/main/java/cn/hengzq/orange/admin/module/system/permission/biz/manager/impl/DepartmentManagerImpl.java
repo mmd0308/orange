@@ -52,7 +52,7 @@ public class DepartmentManagerImpl extends BaseManagerImpl<DepartmentMapper, Dep
                 .eq(StrUtil.isNotBlank(query.getName()), DepartmentEntity::getName, query.getName())
                 .like(StrUtil.isNotBlank(query.getNameLike()), DepartmentEntity::getName, query.getNameLike())
                 .in(CollUtil.isNotEmpty(query.getIds()), DepartmentEntity::getId, query.getIds())
-                .orderByDesc(DepartmentEntity::getSort);
+                .orderByAsc(DepartmentEntity::getSort);
         return mapper.selectList(queryWrapper);
     }
 

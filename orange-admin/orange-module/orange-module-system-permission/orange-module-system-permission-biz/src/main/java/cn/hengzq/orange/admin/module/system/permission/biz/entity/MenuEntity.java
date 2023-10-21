@@ -65,7 +65,7 @@ public class MenuEntity extends BaseTenantEntity {
     private String icon;
 
     @TableField("hidden")
-    private boolean hidden;
+    private Boolean hidden;
 
     /**
      * 排序

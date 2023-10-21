@@ -1,7 +1,9 @@
 <template>
   <template v-for="(item, index) in options">
     <template v-if="values.includes(String(item.dictValue))">
-      <tiny-tag :key="item.dictValue" :index="index" :color="item.showStyle"> {{ item.dictLabel }}</tiny-tag>
+      <tiny-tag :key="item.dictValue" :index="index" :color="item.showStyle" style="color: #fff;">
+        {{ item.dictLabel }}
+      </tiny-tag>
     </template>
   </template>
 </template>

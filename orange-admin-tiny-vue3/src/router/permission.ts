@@ -12,8 +12,8 @@ export default function setupPermissionGuard(router: Router) {
       if (to.path === `${import.meta.env.VITE_CONTEXT}login`) {
         next({ path: `${import.meta.env.VITE_CONTEXT}dashboard` })
       } else {
-        const userStore = useUserStore();
-        if (userStore.rolePermissions.length != 0) {
+        const userStore = useUserStore()
+        if (JSON.stringify(userStore.user) != "{}") {
           next()
         } else {
           // 加载用户信息

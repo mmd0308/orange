@@ -27,17 +27,17 @@ public class PermissionController {
 
     private final PermissionService permissionService;
 
-    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot_user_role')")
-    @Operation(summary = "用户分配角色", operationId = "system:permission:permission:allot_user_role", description = "先删除旧关系，然后绑定新的关联关系")
-    @PostMapping("/allot_user_role")
+    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot-user-role')")
+    @Operation(summary = "用户分配角色", operationId = "system:permission:permission:allot-user-role", description = "先删除旧关系，然后绑定新的关联关系")
+    @PostMapping("/allot-user-role")
     public Result<Boolean> allotUserRole(@RequestBody @Validated AllotUserRoleRequest request) {
         return ResultWrapper.ok(permissionService.allotUserRole(request));
     }
 
 
-    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot_role_resource')")
-    @Operation(summary = "角色赋予资源", operationId = "system:permission:permission:allot_role_resource", description = "注意：会删除掉旧的绑定关系！！！ 会删除掉旧的绑定关系！！！从新绑定")
-    @PostMapping("/allot_role_resource")
+    @PreAuthorize("@ss.hasPermission('system:permission:permission:allot-role-resource')")
+    @Operation(summary = "角色赋予资源", operationId = "system:permission:permission:allot-role-resource", description = "注意：会删除掉旧的绑定关系！！！ 会删除掉旧的绑定关系！！！从新绑定")
+    @PostMapping("/allot-role-resource")
     public Result<Boolean> allotRoleResource(@RequestBody @Validated AllotRoleResourceRequest request) {
         Boolean b = permissionService.allotRoleResource(request);
         return ResultWrapper.ok(Boolean.TRUE);

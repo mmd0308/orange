@@ -2,11 +2,11 @@ import axios from 'axios';
 
 const BASE_URL = "/system/permission/v1.0/button"
 
-export function queryButtonPage(params: SystemPermissionAPI.ButtonPageQueryParams) {
+export function queryButtonPage(params: SystemPermissionAPI.ButtonPageQuery) {
   return axios.post(BASE_URL.concat("/page"), params);
 }
 
-export function queryButtonAll(params: SystemPermissionAPI.ButtonAllQueryParams) {
+export function queryButtonAll(params: SystemPermissionAPI.ButtonAllQuery) {
   return axios.post(BASE_URL.concat("/all"), params);
 }
 

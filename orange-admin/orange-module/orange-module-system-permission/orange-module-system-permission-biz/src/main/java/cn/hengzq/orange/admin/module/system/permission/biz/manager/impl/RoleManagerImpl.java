@@ -53,7 +53,7 @@ public class RoleManagerImpl extends BaseManagerImpl<RoleMapper, RoleEntity> imp
                 .eq(Objects.nonNull(query.getStatus()), RoleEntity::getStatus, query.getStatus())
                 .like(StrUtil.isNotBlank(query.getNameLike()), RoleEntity::getName, query.getNameLike())
                 .like(StrUtil.isNotBlank(query.getPermissionLike()), RoleEntity::getPermission, query.getPermissionLike())
-                .orderByDesc(RoleEntity::getSort);
+                .orderByAsc(RoleEntity::getSort);
     }
 
 }

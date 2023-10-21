@@ -1,15 +1,16 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.converter;
 
-import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import  cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
-import  cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Mapper
 public interface ButtonConverter extends Converter {
@@ -33,6 +34,8 @@ public interface ButtonConverter extends Converter {
     ButtonVO toVo(ButtonEntity entity);
 
     ButtonListQuery toListQuery(ButtonPageQuery queryVo);
+
+    ButtonListQuery toListQuery(ButtonAllQuery query);
 
     @Mappings({
             @Mapping(source = "size", target = "pageSize"),

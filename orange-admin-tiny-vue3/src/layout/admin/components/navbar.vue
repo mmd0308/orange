@@ -10,12 +10,12 @@
       </div>
     </div>
     <ul class="right-side">
-      <li>
+      <!-- <li>
         <input id="navbar-search" class="input-icon" :placeholder="$t('setting.input.search')" />
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <div class="divider" />
-      </li>
+      </li> -->
       <li @click="changeLan">
         <span>{{ i18.locale.value }}</span>
         <img src="@/assets/images/lan.png" alt="lan" class="navbar-lan" />
@@ -118,6 +118,7 @@ const logout = async () => {
   await userStore.logout()
   const currentRoute = router.currentRoute.value;
   proxy.$modal.message({ message: t('setting.loginout'), status: 'success', });
+
   router.push({
     path: `${import.meta.env.VITE_CONTEXT}login`,
     query: {

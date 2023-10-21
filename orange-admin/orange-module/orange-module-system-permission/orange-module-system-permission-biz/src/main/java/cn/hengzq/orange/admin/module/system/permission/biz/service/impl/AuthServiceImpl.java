@@ -1,5 +1,16 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.MenuListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.MenuEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleResourceRlEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.manager.*;
+import cn.hengzq.orange.admin.module.system.permission.common.enums.ResourceTypeEnum;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.query.MenuAllQuery;
+import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
@@ -41,7 +52,13 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;
 
-    private final RoleService roleService;
+    private final RoleManager roleManager;
+
+    private final RoleResourceRlManager roleResourceRlManager;
+
+    private final MenuManager menuManager;
+
+    private final ButtonManager buttonManager;
 
     @Override
     public Token login(LoginRequest params) {
@@ -67,10 +84,43 @@ public class AuthServiceImpl implements AuthService {
     public UserInfo getInfo() {
         Long currentUserId = GlobalContextHelper.getCurrentUserId();
         UserVO user = userService.getById(currentUserId);
-        List<RoleVO> roleVOList = roleService.queryByUserId(currentUserId);
-        return UserInfo.builder().user(user)
-                .rolePermissionList(CollUtils.convertList(roleVOList, RoleVO::getPermission))
-                .build();
+        UserInfo.UserInfoBuilder userInfoBuilder = UserInfo.builder().user(user);
+        // 获取用户角色
+        List<RoleEntity> roleEntityList = roleManager.listByUserId(currentUserId);
+        if (CollUtil.isEmpty(roleEntityList)) {
+            return userInfoBuilder.build();
+        }
+        List<String> rolePermissions = CollUtils.convertList(roleEntityList, RoleEntity::getPermission);
+        userInfoBuilder.rolePermissions(rolePermissions);
+
+        // 超级管理员
+        if (rolePermissions.contains(PermissionConstant.ADMIN_DEFAULT_PERMISSION)) {
+            List<MenuEntity> menuEntityList = menuManager.listByParams(MenuListQuery.builder().build());
+            userInfoBuilder.menuPermissions(CollUtils.convertList(menuEntityList, MenuEntity::getPermission));
+
+            List<ButtonEntity> buttonEntityList = buttonManager.listByParams(ButtonListQuery.builder().build());
+            userInfoBuilder.buttonPermissions(CollUtils.convertList(buttonEntityList, ButtonEntity::getPermission));
+        } else {
+            List<Long> roleIds = CollUtils.convertList(roleEntityList, RoleEntity::getId);
+            List<RoleResourceRlEntity> roleResourceRlEntities = roleResourceRlManager.listByRoleIds(roleIds);
+
+            List<Long> menuIds = roleResourceRlEntities.stream().filter(item -> ResourceTypeEnum.MENU.equals(item.getResourceType()))
+                    .map(RoleResourceRlEntity::getResourceId).toList();
+            // 获取菜单编码
+            if (CollUtil.isNotEmpty(menuIds)) {
+                List<MenuEntity> menuEntityList = menuManager.listByIds(menuIds);
+                userInfoBuilder.menuPermissions(CollUtils.convertList(menuEntityList, MenuEntity::getPermission));
+            }
+            List<Long> buttonIds = roleResourceRlEntities.stream().filter(item -> ResourceTypeEnum.BUTTON.equals(item.getResourceType()))
+                    .map(RoleResourceRlEntity::getResourceId).toList();
+            // 获取按钮编码
+            if (CollUtil.isNotEmpty(buttonIds)) {
+                List<ButtonEntity> buttonEntities = buttonManager.listByIds(buttonIds);
+                userInfoBuilder.buttonPermissions(CollUtils.convertList(buttonEntities, ButtonEntity::getPermission));
+            }
+        }
+
+        return userInfoBuilder.build();
     }
 
     @Override

@@ -136,7 +136,8 @@ declare namespace SystemPermissionAPI {
 
   interface ButtonAllQuery {
     /** 菜单ID */
-    menuId: string;
+    menuId?: string;
+    nameLike?: string;
   }
 
   type ButtonVO = {

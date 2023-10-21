@@ -51,15 +51,6 @@ public class PermissionServiceImpl implements PermissionService {
     private final RoleResourceRlManager roleResourceRlManager;
 
     @Override
-    public List<Long> queryRoleIdByUserId(Long userId) {
-        List<UserRoleRlEntity> rlEntityList = userRoleRlManager.listByUserId(userId);
-        if (CollUtil.isEmpty(rlEntityList)) {
-            return List.of();
-        }
-        return CollUtils.convertList(rlEntityList, UserRoleRlEntity::getRoleId);
-    }
-
-    @Override
     @Transactional(rollbackFor = {Exception.class})
     public Boolean allotUserRole(AllotUserRoleRequest allotUserRoleRequest) {
         userRoleRlManager.removeByUserId(allotUserRoleRequest.getUserId());
@@ -143,7 +134,8 @@ public class PermissionServiceImpl implements PermissionService {
             return List.of();
         }
         // 排序
-        menuVOList = menuVOList.stream().filter(item -> !item.isHidden()).sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
+        menuVOList = menuVOList.stream().filter(item -> Objects.nonNull(item.getHidden()) && !item.getHidden())
+                .sorted(Comparator.comparing(MenuVO::getSort)).collect(Collectors.toList());
 
         //组装树型结果
         List<RouterTreeVO> routers = PermissionConverter.INSTANCE.listMenusToRouters(menuVOList);

@@ -46,12 +46,14 @@
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" width="150" />
           <tiny-grid-column field="updatedAt" :title="$t('global.table.columns.updatedAt')" width="150" />
 
-          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
+          <tiny-grid-column :title="$t('global.table.operations')" align="center" width="150">
             <template #default="scope">
               <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
                 @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
                 <template #item="{ data }">
-                  <span> {{ $t(data.label) }}</span>
+                  <span v-if="data.label == 'global.table.operations.delete'" style="color: var(--button-delete-color);">
+                    {{ $t(data.label) }} </span>
+                  <span v-else> {{ $t(data.label) }} </span>
                 </template>
               </tiny-action-menu>
             </template>
@@ -62,11 +64,13 @@
   </div>
 
   <editform ref="editFormRef" @ok="handleFormQuery"></editform>
+  <buttonIndex ref="buttonIndexRef"></buttonIndex>
 </template>
 
 <script lang="ts" setup>
 import SystemRequest from '@/api/system/index'
 import editform from './components/edit-form.vue';
+import buttonIndex from './components/button-index.vue'
 
 const { proxy } = getCurrentInstance() as any
 const state = reactive<{
@@ -99,6 +103,9 @@ getAllData()
 
 const options = ref([
   {
+    label: 'global.table.operations.button-index'
+  },
+  {
     label: 'global.table.operations.edit'
   },
   {
@@ -107,9 +114,14 @@ const options = ref([
 ])
 
 const editFormRef = ref();
+const buttonIndexRef = ref();
 
 const optionsClick = (label: string, data: SystemPermissionAPI.MenuVO) => {
   switch (label) {
+    case 'global.table.operations.button-index': {
+      buttonIndexRef.value.open(data.id)
+      break
+    }
     case 'global.table.operations.edit': {
       editFormRef.value.open(data.id)
       break

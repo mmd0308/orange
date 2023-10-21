@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class DepartmentController {
     @PreAuthorize("@ss.hasPermission('system:permission:department:add')")
     @Operation(summary = "新建", operationId = "system:permission:department:add")
     @PostMapping
-    public Result<Long> add(@RequestBody DepartmentAddOrUpdateRequest request) {
+    public Result<Long> add(@RequestBody @Validated DepartmentAddOrUpdateRequest request) {
         return ResultWrapper.ok(departmentService.add(request));
     }
 
@@ -51,7 +52,7 @@ public class DepartmentController {
     @PreAuthorize("@ss.hasPermission('system:permission:department:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:department:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody DepartmentAddOrUpdateRequest request) {
+    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody @Validated DepartmentAddOrUpdateRequest request) {
         return ResultWrapper.ok(departmentService.updateById(id, request));
     }
 
@@ -76,8 +77,8 @@ public class DepartmentController {
         return ResultWrapper.ok(list);
     }
 
-    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及所有子部门数据", operationId = "system:permission:department:query_self_and_subset")
-    @GetMapping("/query_self_and_subset/{id}")
+    @Operation(summary = "根据ID查询自身及子集部门数据", description = "返回数据包含本部及所有子部门数据", operationId = "system:permission:department:query-self-and-subset")
+    @GetMapping("/query-self-and-subset/{id}")
     public Result<List<DepartmentVO>> querySelfAndSubsetById(@PathVariable("id") Long id) {
         List<DepartmentVO> result = departmentService.querySelfAndSubsetById(id);
         return ResultWrapper.ok(result);

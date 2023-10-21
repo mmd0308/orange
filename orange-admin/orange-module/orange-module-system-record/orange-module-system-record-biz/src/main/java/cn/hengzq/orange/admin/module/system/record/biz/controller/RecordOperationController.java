@@ -67,7 +67,7 @@ public class RecordOperationController {
     @Operation(summary = "清空操作日志", operationId = "system:record:operation:clear")
     @DeleteMapping("/clear")
     public Result<Void> clear() {
-        operationRecordManager.clear();
+        operationRecordManager.removeAll();
         return ResultWrapper.ok();
     }
 }

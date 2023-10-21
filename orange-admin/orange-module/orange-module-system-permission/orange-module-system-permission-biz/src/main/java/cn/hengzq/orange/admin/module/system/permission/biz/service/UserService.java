@@ -7,6 +7,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.UserPageQ
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ResetPasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UpdatePasswordRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserAddRequest;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 
 import java.util.List;
@@ -54,4 +55,6 @@ public interface UserService {
 
 
     UserDetailsVO getDetailsById(Long id);
+
+    Boolean updateById(Long id, UserUpdateRequest request);
 }

@@ -52,7 +52,9 @@
               <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
                 @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
                 <template #item="{ data }">
-                  <span> {{ $t(data.label) }}</span>
+                  <span v-if="data.label == 'global.table.operations.delete'" style="color: var(--button-delete-color);">
+                    {{ $t(data.label) }} </span>
+                  <span v-else> {{ $t(data.label) }} </span>
                 </template>
               </tiny-action-menu>
             </template>
@@ -197,7 +199,7 @@ const toolbarButtonClickEvent = ({ code }: any) => {
       break
     }
     case 'batchDelete': {
-      editFormRef.value.open()
+      proxy.$modal.message("开发中...")
       break
     }
     default:

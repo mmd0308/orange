@@ -4,11 +4,11 @@ const BASE_URL = "/system/permission/v1.0/permission"
 
 
 export function allotUserRole(params: SystemPermissionAPI.AllotUserRoleVO) {
-  return axios.post(BASE_URL.concat("/allot_user_role"), params);
+  return axios.post(BASE_URL.concat("/allot-user-role"), params);
 }
 
 export function allotRoleResource(params: SystemPermissionAPI.AllotRoleResourceRequest) {
-  return axios.post(BASE_URL.concat("/allot_role_resource"), params);
+  return axios.post(BASE_URL.concat("/allot-role-resource"), params);
 }
 
 
@@ -17,7 +17,7 @@ export function queryRoutersTree() {
 }
 
 export function queryResourceIdsByRoleId(roleId: string) {
-  return axios.get(BASE_URL.concat(`/query_resource_ids/${roleId}`));
+  return axios.get(BASE_URL.concat(`/query-resource-ids/${roleId}`));
 }
 
 // export function queryRoleAll(params: SystemPermissionAPI.RoleAllQueryParams) {

@@ -9,3 +9,7 @@ export function login(params: SystemPermissionAPI.LoginParams) {
 export function getUserInfo() {
   return axios.get(BASE_URL.concat("/info"));
 }
+
+export function logout() {
+  return axios.get(BASE_URL.concat("/logout"));
+}

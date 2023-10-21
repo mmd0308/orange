@@ -63,12 +63,5 @@ public class UserManagerImpl extends BaseManagerImpl<UserMapper, UserEntity> imp
     public UserEntity getByUsername(String username) {
         return mapper.selectOneByUsername(username);
     }
-
-    @Override
-    public Boolean updateById(Long id, UserEntity entity) {
-        // 更新接口 不允许修改密码
-        entity.setPassword(null);
-        return super.updateById(id, entity);
-    }
-
+    
 }

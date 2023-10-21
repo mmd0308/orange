@@ -12,4 +12,8 @@ import cn.hengzq.orange.admin.starter.mybatis.manager.BaseManager;
 public interface RecordLoginManager extends BaseManager<RecordLoginEntity> {
 
     Page<RecordLoginEntity> page(Integer pageNo, Integer pageSize, RecordLoginListQuery query);
+
+    void removeAll();
+
+
 }

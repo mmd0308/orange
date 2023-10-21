@@ -1,16 +1,15 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.manager.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
+import cn.hengzq.orange.admin.module.system.permission.biz.mapper.ButtonMapper;
+import cn.hengzq.orange.admin.starter.mybatis.manager.impl.BaseManagerImpl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
-import cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
-import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
-import cn.hengzq.orange.admin.module.system.permission.biz.mapper.ButtonMapper;
-import cn.hengzq.orange.admin.starter.mybatis.entity.BaseEntity;
-import cn.hengzq.orange.admin.starter.mybatis.manager.impl.BaseManagerImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -40,13 +39,12 @@ public class ButtonManagerImpl extends BaseManagerImpl<ButtonMapper, ButtonEntit
     }
 
     private static LambdaQueryWrapper<ButtonEntity> getQueryWrapper(ButtonListQuery query) {
-        LambdaQueryWrapper<ButtonEntity> queryWrapper = Wrappers.<ButtonEntity>lambdaQuery()
+        return Wrappers.<ButtonEntity>lambdaQuery()
                 .eq(Objects.nonNull(query.getMenuId()), ButtonEntity::getMenuId, query.getMenuId())
                 .eq(Objects.nonNull(query.getPermission()), ButtonEntity::getPermission, query.getPermission())
                 .in(CollUtil.isNotEmpty(query.getMenuIds()), ButtonEntity::getMenuId, query.getMenuIds())
                 .like(StrUtil.isNotBlank(query.getPermissionLike()), ButtonEntity::getPermission, query.getPermissionLike())
-                .orderByDesc(BaseEntity::getUpdatedAt);
-        return queryWrapper;
+                .orderByAsc(ButtonEntity::getSort);
     }
 
     @Override

@@ -42,6 +42,7 @@ module.exports = {
     Blob: true,
     document: 'readonly',
     window: 'readonly',
+    "API": true,
     "SystemAPI": true,
     "SystemPermissionAPI": true,
     "SystemDictAPI": true,

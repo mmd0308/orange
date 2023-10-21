@@ -26,7 +26,6 @@ export default {
   'system.role.table.columns.permission': '角色编码',
 
 
-
   'system.menu.form.name': '菜单名称',
   'system.menu.form.name.placeholder': '请输入菜单名称',
   'system.menu.form.permission': '权限编码',
@@ -45,4 +44,11 @@ export default {
   'system.menu.table.columns.component': '组件路径',
   'system.menu.table.columns.path': '菜单路径',
   'system.menu.table.columns.presetFlag': '数据来源',
+
+
+  'system.button.form.name': '按钮名称',
+  'system.button.form.name.placeholder': '请输入按钮名称',
+
+  'system.button.table.columns.name': '按钮名称',
+  'system.button.table.columns.permission': '权限编码',
 };

@@ -5,6 +5,7 @@ import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager
 import cn.hengzq.orange.admin.module.system.permission.biz.service.ButtonService;
 import cn.hengzq.orange.admin.module.system.permission.common.constant.SystemPermissionConstant;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
+import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonAllQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonAddRequest;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.ButtonUpdateRequest;
@@ -17,6 +18,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  *@author 程序员橙子
@@ -37,6 +40,14 @@ public class ButtonController {
         PageVO<ButtonVO> pageVO = buttonService.page(queryVo);
         return ResultWrapper.ok(pageVO);
     }
+
+    @Operation(summary = "查询所有", operationId = "system:permission:button:all")
+    @PostMapping(value = "/all")
+    public Result<List<ButtonVO>> queryAll(@RequestBody ButtonAllQuery query) {
+        List<ButtonVO> list = buttonService.queryAll(query);
+        return ResultWrapper.ok(list);
+    }
+
 
     @PreAuthorize("@ss.hasPermission('system:permission:button:add')")
     @Operation(summary = "创建按钮", operationId = "system:permission:button:add")

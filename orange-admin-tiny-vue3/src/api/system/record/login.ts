@@ -9,3 +9,7 @@ export function queryRecordLoginPage(params: SystemRecordAPI.RecordLoginPageQuer
 export function getRecordLoginById(id: string) {
   return axios.get<SystemRecordAPI.RecordLoginVO>(BASE_URL.concat(`/${id}`));
 }
+
+export function clear() {
+  return axios.delete(BASE_URL.concat("/clear"));
+}

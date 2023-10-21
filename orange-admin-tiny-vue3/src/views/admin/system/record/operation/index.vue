@@ -35,7 +35,11 @@
           <tiny-grid-column field="resourceId" :title="$t('system.record.operation.table.columns.resourceId')"
             width="380" />
           <tiny-grid-column field="requestMethod" :title="$t('system.record.operation.table.columns.requestMethod')"
-            align="center" width="80" />
+            align="center" width="80">
+            <template #default="data">
+              <dict-tag :value="data.row.requestMethod" :options="proxy.$dict.getDict('sys_common_request_method')" />
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="userIp" :title="$t('system.record.operation.table.columns.userIp')" align="center" />
           <tiny-grid-column field="userId" :title="$t('system.record.operation.table.columns.userId')" align="center" />
           <tiny-grid-column field="status" :title="$t('system.record.operation.table.columns.status')" align="center">
@@ -156,6 +160,10 @@ const handleFormReset = () => {
 
 const toolbarButtons = reactive([
   {
+    code: 'clear',
+    name: '清空'
+  },
+  {
     code: 'export',
     name: '导出'
   }
@@ -163,6 +171,10 @@ const toolbarButtons = reactive([
 
 const toolbarButtonClickEvent = ({ code }: any) => {
   switch (code) {
+    case 'clear': {
+      handleClear()
+      break
+    }
     case 'export': {
       proxy.$modal.message("开发中...")
       break
@@ -170,6 +182,17 @@ const toolbarButtonClickEvent = ({ code }: any) => {
     default:
       console.log("code is error.")
   }
+}
+
+const handleClear = () => {
+  proxy.$modal.confirm({ message: `确定清空所有操作日志吗？`, maskClosable: true, title: '系统提示' }).then((res: string) => {
+    if (res === 'confirm') {
+      SystemRequest.recordOperation.clear().then(() => {
+        handleFormQuery()
+        proxy.$modal.message({ message: '清空成功', status: 'success' });
+      })
+    }
+  })
 }
 
 </script>

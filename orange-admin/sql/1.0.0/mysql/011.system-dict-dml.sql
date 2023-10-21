@@ -25,8 +25,8 @@ VALUES (1, @t_id, '系统数据状态', 'sys_common_data_status', 0, 0, '系统�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (100, @t_id, 1, '正常', 'NORMAL', 'sys_common_data_status', 0, 0, '#87d068', 0, '正常状态', @u_id, NOW(), @u_id, NOW()),
-       (101, @t_id, 1, '禁用', 'DISABLE', 'sys_common_data_status', 0, 0, '#f20707', 0, '禁用状态', @u_id, NOW(), @u_id, NOW());
+VALUES (100, @t_id, 1, '正常', 'NORMAL', 'sys_common_data_status', 0, 0, '#67c23a', 0, '正常状态', @u_id, NOW(), @u_id, NOW()),
+       (101, @t_id, 1, '禁用', 'DISABLE', 'sys_common_data_status', 0, 0, '#f56c6c', 0, '禁用状态', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,8 +40,8 @@ VALUES (2, @t_id, '系统操作状态', 'sys_common_operation_status', 0, 0, '�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (200, @t_id, 1, '成功', 'SUCCESS', 'sys_common_operation_status', 0, 0, '#87d068', 0, '操作成功状态', @u_id, NOW(), @u_id, NOW()),
-       (201, @t_id, 1, '失败', 'FAIL', 'sys_common_operation_status', 0, 0, '#f20707', 0, '操作失败状态', @u_id, NOW(), @u_id, NOW());
+VALUES (200, @t_id, 1, '成功', 'SUCCESS', 'sys_common_operation_status', 0, 0, '#67c23a', 0, '操作成功状态', @u_id, NOW(), @u_id, NOW()),
+       (201, @t_id, 1, '失败', 'FAIL', 'sys_common_operation_status', 0, 0, '#f56c6c', 0, '操作失败状态', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,8 +71,8 @@ VALUES (4, @t_id, '数据预设标记', 'sys_common_data_preset_flag', 0, 0, '�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (400, @t_id, 1, '预置', 'PRESET', 'sys_common_data_preset_flag', 0, 0, '#83888f', 0, '数据预设标记-预置', @u_id, NOW(), @u_id, NOW()),
-       (401, @t_id, 1, '自定义', 'CUSTOM', 'sys_common_data_preset_flag', 0, 0, '#87d068', 0, '数据预设标记-自定义', @u_id, NOW(), @u_id, NOW());
+VALUES (400, @t_id, 1, '预置', 'PRESET', 'sys_common_data_preset_flag', 0, 0, '#909399', 0, '数据预设标记-预置', @u_id, NOW(), @u_id, NOW()),
+       (401, @t_id, 1, '自定义', 'CUSTOM', 'sys_common_data_preset_flag', 0, 0, '#67c23a', 0, '数据预设标记-自定义', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -109,8 +109,8 @@ VALUES (6, @t_id, '数据可见标记', 'sys_common_data_hidden_flag', 0, 0, '�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (600, @t_id, 1, '隐藏', 1, 'sys_common_data_hidden_flag', 0, 0, '#83888f', 0, '数据可见标记-隐藏', @u_id, NOW(), @u_id, NOW()),
-       (601, @t_id, 2, '显示', 0, 'sys_common_data_hidden_flag', 0, 0, '#87d068', 0, '数据可见标记-显示', @u_id, NOW(), @u_id, NOW());
+VALUES (600, @t_id, 1, '隐藏', 'true', 'sys_common_data_hidden_flag', 0, 0, '#909399', 0, '数据可见标记-隐藏', @u_id, NOW(), @u_id, NOW()),
+       (601, @t_id, 2, '显示', 'false', 'sys_common_data_hidden_flag', 0, 0, '#67c23a', 0, '数据可见标记-显示', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 
@@ -126,6 +126,6 @@ VALUES (7, @t_id, '登录日志类型', 'sys_record_login_type', 0, 0, '登录�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (700, @t_id, 1, '登录', 'LOGIN', 'sys_record_login_type', 0, 0, '#83888f', 0, '登录日志类型-登录', @u_id, NOW(), @u_id, NOW()),
+VALUES (700, @t_id, 1, '登录', 'LOGIN', 'sys_record_login_type', 0, 0, '#67c23a', 0, '登录日志类型-登录', @u_id, NOW(), @u_id, NOW()),
        (701, @t_id, 2, '登出', 'LOGOUT', 'sys_record_login_type', 0, 0, '#87d068', 0, '登录日志类型-登出', @u_id, NOW(), @u_id, NOW());
 COMMIT;

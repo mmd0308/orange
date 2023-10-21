@@ -43,7 +43,6 @@ const formData = ref<SystemPermissionAPI.DepartmentVO>({})
 const initFromData = () => {
   formData.value = {
     parentId: '-1',
-    name: '',
     sort: 1,
   }
 }

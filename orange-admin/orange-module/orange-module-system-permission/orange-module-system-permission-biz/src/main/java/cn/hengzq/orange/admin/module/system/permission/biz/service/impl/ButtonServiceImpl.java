@@ -1,12 +1,13 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonAllQuery;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import  cn.hengzq.orange.admin.module.system.permission.biz.converter.ButtonConverter;
-import  cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
-import  cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
-import  cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
-import  cn.hengzq.orange.admin.module.system.permission.biz.service.ButtonService;
+import cn.hengzq.orange.admin.module.system.permission.biz.converter.ButtonConverter;
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.ButtonListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.ButtonEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.manager.ButtonManager;
+import cn.hengzq.orange.admin.module.system.permission.biz.service.ButtonService;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.support.ButtonErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.ButtonVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.ButtonPageQuery;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Slf4j
 @Service
@@ -57,6 +58,12 @@ public class ButtonServiceImpl implements ButtonService {
         }
         entity = ButtonConverter.INSTANCE.updateConvert(entity, request);
         return buttonManager.updateById(entity);
+    }
+
+    @Override
+    public List<ButtonVO> queryAll(ButtonAllQuery query) {
+        List<ButtonEntity> entityList = buttonManager.listByParams(ButtonConverter.INSTANCE.toListQuery(query));
+        return ButtonConverter.INSTANCE.toListVo(entityList);
     }
 
 }

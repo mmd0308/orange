@@ -47,4 +47,5 @@ public interface RoleService {
     Boolean updateById(Long id, RoleUpdateRequest request);
 
 
+    List<RoleVO> queryRolesByUserId(Long userId);
 }

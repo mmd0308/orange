@@ -9,11 +9,15 @@ export default {
   'global.table.operations': '操作',
   'global.table.operations.view': '查看',
   'global.table.operations.detail': '详情',
+  'global.table.operations.button-index': '按钮',
   'global.table.operations.edit': '编辑',
   'global.table.operations.delete': '删除',
   'global.table.operations.allotUserRole': '分配角色',
   'global.table.operations.resetPassword': '重置密码',
-  'global.table.operations.menuPermission': '菜单权限',
+  'global.table.operations.menuPermission': '分配菜单',
+
+  'global.table.operations.save': '保存',
+  'global.table.operations.cancel': '取消',
 
 
   'global.table.columns.status': '状态',

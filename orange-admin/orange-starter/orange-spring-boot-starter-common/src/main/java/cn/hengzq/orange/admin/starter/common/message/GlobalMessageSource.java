@@ -9,10 +9,10 @@ import java.util.ResourceBundle;
 
 public class GlobalMessageSource extends ResourceBundleMessageSource {
 
-    private static final GlobalMessageSource instance = new GlobalMessageSource();
+    private static final GlobalMessageSource INSTANCE = new GlobalMessageSource();
 
     public static GlobalMessageSource getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     public GlobalMessageSource() {

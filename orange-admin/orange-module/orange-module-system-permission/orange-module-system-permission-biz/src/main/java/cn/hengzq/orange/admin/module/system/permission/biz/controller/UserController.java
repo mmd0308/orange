@@ -85,8 +85,8 @@ public class UserController {
     @PreAuthorize("@ss.hasPermission('system:permission:user:update')")
     @Operation(summary = "根据ID更新", operationId = "system:permission:user:update")
     @PutMapping("/{id}")
-    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody UserUpdateRequest user) {
-        return ResultWrapper.ok(userManager.updateById(id, UserConverter.INSTANCE.toEntity(user)));
+    public Result<Boolean> updateById(@PathVariable("id") Long id, @RequestBody UserUpdateRequest request) {
+        return ResultWrapper.ok(userService.updateById(id, request));
     }
 
     @PreAuthorize("@ss.hasPermission('system:permission:user:update-password')")

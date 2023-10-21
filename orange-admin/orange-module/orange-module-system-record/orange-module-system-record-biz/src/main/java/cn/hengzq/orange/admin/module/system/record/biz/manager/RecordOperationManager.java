@@ -1,10 +1,10 @@
 package cn.hengzq.orange.admin.module.system.record.biz.manager;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordPageQuery;
 import cn.hengzq.orange.admin.starter.mybatis.manager.BaseManager;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 
 /**
@@ -14,13 +14,12 @@ public interface RecordOperationManager extends BaseManager<RecordOperationEntit
 
 
     /**
-     * 清空操作日志
+     * 删除所有的数据
      */
-    void clear();
+    void removeAll();
 
     /**
      * 分页查询
-     *
      */
     Page<RecordOperationEntity> page(OperationRecordPageQuery query);
 }

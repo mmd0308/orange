@@ -41,7 +41,7 @@ public class MenuVO extends BaseTenantVO {
     private String icon;
 
     @Schema(description = "是否隐藏 true：隐藏 false：不隐藏")
-    private boolean hidden;
+    private Boolean hidden;
 
     @Schema(description = "排序")
     private Integer sort;

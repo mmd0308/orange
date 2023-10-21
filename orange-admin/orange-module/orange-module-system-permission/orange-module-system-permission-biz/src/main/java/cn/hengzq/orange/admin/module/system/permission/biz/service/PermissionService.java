@@ -13,14 +13,11 @@ import java.util.List;
  */
 public interface PermissionService {
 
-    List<Long> queryRoleIdByUserId(Long userId);
-
     Boolean allotUserRole(AllotUserRoleRequest allotUserRoleRequest);
 
     Boolean allotRoleResource(AllotRoleResourceRequest allotUserRoleVo);
 
     ResourceIds queryResourceIdsByRoleId(Long roleId);
-
 
     /**
      * 查询当前

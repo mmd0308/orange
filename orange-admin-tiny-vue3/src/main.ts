@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import * as echarts4 from 'echarts4';
 import globalComponents from '@/components';
 import dict from '@/utils/dict'
+import { hasPermission } from '@/utils/permission'
 
 // Icon 
 import 'virtual:svg-icons-register'
@@ -37,5 +38,8 @@ setupOpentiny(app)
 app.config.globalProperties.$dict = dict
 app.config.globalProperties.$modal = Modal
 app.config.globalProperties.$notify = Notify
+app.config.globalProperties.$hasPermission = hasPermission
+
 
 app.mount('#app');
+

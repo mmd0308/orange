@@ -1,12 +1,15 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.UserRoleRlEntity;
+import cn.hengzq.orange.admin.starter.common.util.CollUtils;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import  cn.hengzq.orange.admin.module.system.permission.biz.converter.RoleConverter;
-import  cn.hengzq.orange.admin.module.system.permission.biz.dto.RoleListQuery;
-import  cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleEntity;
-import  cn.hengzq.orange.admin.module.system.permission.biz.manager.RoleManager;
-import  cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
+import cn.hengzq.orange.admin.module.system.permission.biz.converter.RoleConverter;
+import cn.hengzq.orange.admin.module.system.permission.biz.dto.RoleListQuery;
+import cn.hengzq.orange.admin.module.system.permission.biz.entity.RoleEntity;
+import cn.hengzq.orange.admin.module.system.permission.biz.manager.RoleManager;
+import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.support.RoleErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.RoleVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.RolePageQuery;
@@ -23,7 +26,7 @@ import java.util.List;
 
 
 /**
- *@author 程序员橙子
+ * @author 程序员橙子
  */
 @Slf4j
 @Service
@@ -65,5 +68,11 @@ public class RoleServiceImpl implements RoleService {
         }
         entity = RoleConverter.INSTANCE.updateConvert(entity, request);
         return roleManager.updateById(entity);
+    }
+
+    @Override
+    public List<RoleVO> queryRolesByUserId(Long userId) {
+        List<RoleEntity> entityList = roleManager.listByUserId(userId);
+        return RoleConverter.INSTANCE.toListVo(entityList);
     }
 }

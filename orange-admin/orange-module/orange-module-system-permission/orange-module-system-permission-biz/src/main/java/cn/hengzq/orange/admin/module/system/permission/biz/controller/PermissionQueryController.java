@@ -29,15 +29,8 @@ public class PermissionQueryController {
 
     private final PermissionService permissionService;
 
-    @Operation(summary = "查询用户角色ID", operationId = "system:permission:permission:queryRoleIdByUserId", description = "根据用户ID获取该用户拥有的角色")
-    @GetMapping("/queryRoleIdByUserId/{userId}")
-    public Result<List<Long>> queryRoleIdByUserId(@PathVariable("userId") Long userId) {
-        List<Long> list = permissionService.queryRoleIdByUserId(userId);
-        return ResultWrapper.ok(list);
-    }
-
-    @Operation(summary = "根据角色ID查询资源ID", operationId = "system:permission:permission:query_resource_ids")
-    @GetMapping("/query_resource_ids/{roleId}")
+    @Operation(summary = "根据角色ID查询资源ID", operationId = "system:permission:permission:query-resource-ids")
+    @GetMapping("/query-resource-ids/{roleId}")
     public Result<ResourceIds> queryResourceIdsByRoleId(@PathVariable("roleId") Long roleId) {
         return ResultWrapper.ok(permissionService.queryResourceIdsByRoleId(roleId));
     }

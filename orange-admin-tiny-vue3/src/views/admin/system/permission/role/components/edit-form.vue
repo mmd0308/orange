@@ -48,7 +48,8 @@ const formData = ref<SystemPermissionAPI.RoleVO>({})
 
 const initFromData = () => {
   formData.value = {
-    sort: 1
+    sort: 1,
+    status: 'NORMAL'
   }
 }
 

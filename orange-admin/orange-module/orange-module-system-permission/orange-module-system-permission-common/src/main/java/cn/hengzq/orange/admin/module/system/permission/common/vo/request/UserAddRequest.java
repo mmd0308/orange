@@ -2,6 +2,7 @@ package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
 import cn.hengzq.orange.admin.module.system.permission.common.enums.UserSexEnum;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.support.UserErrorCode;
+import cn.hengzq.orange.admin.starter.common.constant.ValidatedGroupConstant;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * @author 程序员橙子
  */
 @Data
-@Schema(description = "用户-新增")
+@Schema(description = "用户管理-新增参数")
 public class UserAddRequest implements Serializable {
 
     @Schema(description = "部门ID")
@@ -34,7 +35,7 @@ public class UserAddRequest implements Serializable {
     @Schema(description = "手机号")
     private String phone;
 
-    @NotBlank(message = UserErrorCode.USER_USERNAME_CANNOT_NULL_KEY)
+    @NotBlank(groups = {ValidatedGroupConstant.ADD.class}, message = UserErrorCode.USER_USERNAME_CANNOT_NULL_KEY)
     @Schema(description = "登陆账号")
     private String username;
 

@@ -25,6 +25,10 @@ export default {
   'system.record.operation.table.columns.userAgent': 'User-Agent',
   'system.record.operation.table.columns.executeTime': '请求耗时',
 
+  'system.record.login.form.account': '登录账号',
+  'system.record.login.form.account.placeholder': '请输入登录账号',
+
+
   'system.record.login.table.columns.traceId': 'RequestId',
   'system.record.login.table.columns.account': '登录账号',
   'system.record.login.table.columns.type': '类型',

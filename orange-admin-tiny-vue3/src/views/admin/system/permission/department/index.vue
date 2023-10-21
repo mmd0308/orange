@@ -20,21 +20,23 @@
         <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
           :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
-            <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
+            <tiny-grid-toolbar :buttons="proxy.$hasPermission(toolbarButtons)" full-screen :setting="{ simple: true }" />
           </template>
 
           <tiny-grid-column field="index" width="50" tree-node></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.department.table.columns.name')" width="200" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />
-          <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')" width="260" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="150" />
+          <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')" width="260" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="scope">
-              <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+              <tiny-action-menu :max-show-num="3" :spacing="8" :options="proxy.$hasPermission(options)"
                 @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
                 <template #item="{ data }">
-                  <span> {{ $t(data.label) }}</span>
+                  <span v-if="data.label == 'global.table.operations.delete'" style="color: var(--button-delete-color);">
+                    {{ $t(data.label) }} </span>
+                  <span v-else> {{ $t(data.label) }} </span>
                 </template>
               </tiny-action-menu>
             </template>
@@ -80,11 +82,13 @@ async function getAllData() {
 getAllData()
 
 
-const options = ref([
+const options = ref<API.Button[]>([
   {
+    permission: ['system:permission:department:edit'],
     label: 'global.table.operations.edit'
   },
   {
+    permission: ['system:permission:department:delete'],
     label: 'global.table.operations.delete'
   }
 ])
@@ -145,8 +149,9 @@ function aggregateTableData(data: SystemPermissionAPI.DepartmentTreeVO[]) {
   return result
 }
 
-const toolbarButtons = reactive([
+const toolbarButtons = reactive<API.Button[]>([
   {
+    permission: ['system:permission:department:add'],
     code: 'insert',
     name: '新增',
   }

@@ -8,6 +8,7 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.query.Departmen
 import cn.hengzq.orange.admin.module.system.permission.common.vo.query.DepartmentTreeQuery;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.DepartmentAddOrUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.convert.Converter;
+import cn.hutool.core.util.StrUtil;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -36,9 +37,18 @@ public interface DepartmentConverter extends Converter {
         if (Objects.isNull(entity)) {
             return null;
         }
-        entity.setParentId(request.getParentId());
-        entity.setName(request.getName());
-        entity.setSort(request.getSort());
+        if (Objects.nonNull(request.getParentId())) {
+            entity.setParentId(request.getParentId());
+        }
+        if (StrUtil.isNotBlank(request.getName())) {
+            entity.setName(request.getName());
+        }
+        if (Objects.nonNull((request.getSort()))) {
+            entity.setSort(request.getSort());
+        }
+        if (Objects.nonNull(request.getRemark())) {
+            entity.setRemark(request.getRemark());
+        }
         return entity;
     }
 

@@ -33,7 +33,7 @@ public class RecordOperationManagerImpl extends BaseManagerImpl<RecordOperationM
     }
 
     @Override
-    public void clear() {
+    public void removeAll() {
         mapper.delete(Wrappers.emptyWrapper());
     }
 

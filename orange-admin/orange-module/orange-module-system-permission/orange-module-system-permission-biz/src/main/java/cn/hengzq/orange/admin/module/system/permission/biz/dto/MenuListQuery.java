@@ -20,4 +20,6 @@ public class MenuListQuery {
 
     private String permissionLike;
 
+    private Boolean hidden;
+
 }

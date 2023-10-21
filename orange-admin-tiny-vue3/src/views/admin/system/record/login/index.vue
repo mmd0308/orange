@@ -3,9 +3,9 @@
     <tiny-form :model="filterOptions" label-position="right" label-width="100px" class="filter-form">
       <tiny-row :flex="true" justify="center">
         <tiny-col :span="4">
-          <tiny-form-item :label="$t('system.role.form.name')">
-            <tiny-input v-model="filterOptions.account"
-              :placeholder="$t('system.role.form.name.placeholder')"></tiny-input>
+          <tiny-form-item :label="$t('system.record.login.form.account')">
+            <tiny-input v-model="filterOptions.account" clearable
+              :placeholder="$t('system.record.login.form.account.placeholder')"></tiny-input>
           </tiny-form-item>
         </tiny-col>
         <tiny-col :span="8">
@@ -59,10 +59,10 @@
 </template>
 
 <script lang="ts" setup>
-import SystemRequest from '@/api/system/index'
+import SystemRequest from '@/api/system/index';
 import detail from './components/detail.vue';
 
-const { proxy } = getCurrentInstance() as any
+const { proxy } = getCurrentInstance() as any;
 const detailsRef = ref();
 
 const state = reactive<{
@@ -94,60 +94,88 @@ const fetchTableData = reactive({
       pageNo: currentPage,
       pageSize,
     });
-  }
+  },
 });
 
-async function getPageData(params: SystemRecordAPI.RecordLoginPageQuery = {
-  pageNo: 1,
-  pageSize: 10
-}) {
+async function getPageData(
+  params: SystemRecordAPI.RecordLoginPageQuery = {
+    pageNo: 1,
+    pageSize: 10,
+  }
+) {
   const queryParmas: SystemRecordAPI.RecordLoginPageQuery = {
     ...filterOptions.value,
     ...params,
   };
   state.loading = true;
   try {
-    const { data } = await SystemRequest.recordLogin.queryRecordLoginPage(queryParmas);
+    const { data } = await SystemRequest.recordLogin.queryRecordLoginPage(
+      queryParmas
+    );
     const { records, total } = data;
     return {
       result: records,
       page: { total },
     };
   } finally {
-    state.loading = false
+    state.loading = false;
   }
 }
 
 const handleDetail = (id: string) => {
-  detailsRef.value.open(id)
-}
+  detailsRef.value.open(id);
+};
 
 const handleFormQuery = () => {
   gridTableRef?.value.handleFetch('reload');
-}
+};
 const handleFormReset = () => {
   state.filterOptions = {} as SystemRecordAPI.RecordLoginPageQuery;
   handleFormQuery();
-}
+};
 
 const toolbarButtons = reactive([
   {
+    code: 'clear',
+    name: '清空',
+  },
+  {
     code: 'export',
-    name: '导出'
-  }
-])
+    name: '导出',
+  },
+]);
 
 const toolbarButtonClickEvent = ({ code }: any) => {
   switch (code) {
+    case 'clear': {
+      handleClear();
+      break;
+    }
     case 'export': {
-      proxy.$modal.message("开发中...")
-      break
+      proxy.$modal.message('开发中...');
+      break;
     }
     default:
-      console.log("code is error.")
+      console.log('code is error.');
   }
-}
+};
 
+const handleClear = () => {
+  proxy.$modal
+    .confirm({
+      message: `确定清空所有登录日志吗？`,
+      maskClosable: true,
+      title: '系统提示',
+    })
+    .then((res: string) => {
+      if (res === 'confirm') {
+        SystemRequest.recordLogin.clear().then(() => {
+          handleFormQuery();
+          proxy.$modal.message({ message: '清空成功', status: 'success' });
+        });
+      }
+    });
+};
 </script>
 
 <style scoped lang="less"></style>

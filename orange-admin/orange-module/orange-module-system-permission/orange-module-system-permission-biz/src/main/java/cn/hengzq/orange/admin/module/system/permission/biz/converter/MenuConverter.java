@@ -39,7 +39,9 @@ public interface MenuConverter extends Converter {
         if (Objects.isNull(request) || Objects.isNull(entity)) {
             return null;
         }
-        entity.setHidden(request.isHidden());
+        if (Objects.nonNull(request.getHidden())) {
+            entity.setHidden(request.getHidden());
+        }
         if (Objects.nonNull(request.getParentId())) {
             entity.setParentId(request.getParentId());
         }

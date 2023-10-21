@@ -21,4 +21,8 @@ public class MenuAllQuery implements Serializable {
 
     @Schema(description = "是否包含关联按钮")
     private boolean includeButton;
+
+    @Schema(description = "是否隐藏 true：隐藏 false：不隐藏 默认: false")
+    private Boolean hidden = Boolean.FALSE;
+
 }

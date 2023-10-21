@@ -16,10 +16,7 @@ public class WebmvcAutoConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         log.info("initialize addInterceptors.");
         //  添加拦截器 顺序不可调整
-//        registry.addInterceptor(new RequestIdInterceptor());
 
-        // 上下文设置
-//        registry.addInterceptor(new SecurityContextInterceptor());
     }
 
 }

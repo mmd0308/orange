@@ -4,11 +4,11 @@ import cn.hengzq.orange.admin.module.system.record.biz.dto.RecordLoginListQuery;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordLoginEntity;
 import cn.hengzq.orange.admin.module.system.record.biz.manager.RecordLoginManager;
 import cn.hengzq.orange.admin.module.system.record.biz.mapper.RecordLoginMapper;
+import cn.hengzq.orange.admin.starter.mybatis.manager.impl.BaseManagerImpl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.hengzq.orange.admin.starter.mybatis.manager.impl.BaseManagerImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,5 +44,10 @@ public class RecordLoginManagerImpl extends BaseManagerImpl<RecordLoginMapper, R
 
         queryWrapper.orderByDesc(RecordLoginEntity::getLoginTime);
         return mapper.selectPage(new Page<>(pageNo, pageSize), queryWrapper);
+    }
+
+    @Override
+    public void removeAll() {
+        mapper.delete(Wrappers.emptyWrapper());
     }
 }

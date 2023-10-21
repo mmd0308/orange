@@ -26,21 +26,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(SystemRecordConstants.V1_0_URL_PREFIX + "/record-login")
 public class RecordLoginController {
 
-    private final RecordLoginService RecordLoginVOService;
+    private final RecordLoginService recordLoginService;
 
-    private final RecordLoginManager RecordLoginVOManager;
+    private final RecordLoginManager recordLoginManager;
 
     @Operation(summary = "分页查询", operationId = "system:record:login:page")
     @PostMapping("/page")
     public Result<PageVO<RecordLoginVO>> page(@RequestBody RecordLoginPageQuery query) {
-        PageVO<RecordLoginVO> result = RecordLoginVOService.page(query);
+        PageVO<RecordLoginVO> result = recordLoginService.page(query);
         return ResultWrapper.ok(result);
     }
 
     @Operation(summary = "根据ID查询详情", operationId = "system:record:login:get")
     @GetMapping("/{id}")
     public Result<RecordLoginVO> getById(@PathVariable("id") Long id) {
-        RecordLoginEntity entity = RecordLoginVOManager.getById(id);
+        RecordLoginEntity entity = recordLoginManager.getById(id);
         return ResultWrapper.ok(RecordLoginConverter.INSTANCE.toVo(entity));
     }
 
@@ -49,7 +49,14 @@ public class RecordLoginController {
     @Operation(summary = "新建", operationId = "system:record:login:add")
     @PostMapping
     public Result<Long> save(@Validated @RequestBody RecordLoginVO record) {
-        return ResultWrapper.ok(RecordLoginVOService.add(record));
+        return ResultWrapper.ok(recordLoginService.add(record));
     }
 
+    @PreAuthorize("@ss.hasPermission('system:record:login:clear')")
+    @Operation(summary = "清空操作日志", operationId = "system:record:login:clear")
+    @DeleteMapping("/clear")
+    public Result<Void> clear() {
+        recordLoginManager.removeAll();
+        return ResultWrapper.ok();
+    }
 }

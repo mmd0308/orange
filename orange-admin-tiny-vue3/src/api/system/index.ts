@@ -3,6 +3,7 @@ import * as role from './permission/role'
 import * as department from './permission/department'
 import * as user from './permission/user'
 import * as menu from './permission/menu'
+import * as button from './permission/button'
 import * as permission from './permission/permission'
 import * as dictType from './dict/type'
 import * as dictData from './dict/data'
@@ -15,6 +16,7 @@ export default {
   department,
   user,
   menu,
+  button,
   permission,
   dictType,
   dictData,

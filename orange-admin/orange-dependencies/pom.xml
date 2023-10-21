@@ -29,6 +29,7 @@
         <swagger.version>2.2.10</swagger.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <poi.version>5.2.3</poi.version>
+        <druid-spring-boot-starter.version>1.2.9</druid-spring-boot-starter.version>
 
         <transmittable-thread-local.version>2.14.2</transmittable-thread-local.version>
     </properties>
@@ -178,7 +179,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.2.4</version>
+                <version>${druid-spring-boot-starter.version}</version>
             </dependency>
             <!--    连接mysql    -->
             <dependency>

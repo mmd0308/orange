@@ -1,4 +1,13 @@
+
 declare namespace API {
+
+  interface Button {
+    permission: string[];
+    code?: string;
+    label?: string,
+    name?: string
+  }
+
   interface Result<T> {
     /** 编码 200表示成功，其他值表示失败 */
     code?: number;
