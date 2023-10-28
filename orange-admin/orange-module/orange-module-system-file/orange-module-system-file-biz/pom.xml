@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn.hengzq.orange.admin.module.system.file</groupId>
+		<artifactId>orange-module-system-file</artifactId>
+		<version>1.1.0</version>
+	</parent>
+
+	<groupId>cn.hengzq.orange.admin.module.system.file.biz</groupId>
+	<artifactId>orange-module-system-file-biz</artifactId>
+	<packaging>jar</packaging>
+
+	<description>
+		orange-module-system-file-biz
+	</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>cn.hengzq.orange.admin.module.system.file.common</groupId>
+			<artifactId>orange-module-system-file-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hengzq.orange.admin.starter.mybatis</groupId>
+			<artifactId>orange-spring-boot-starter-mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hengzq.orange.admin.starter.security</groupId>
+			<artifactId>orange-spring-boot-starter-security</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

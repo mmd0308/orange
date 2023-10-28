@@ -9,4 +9,7 @@ import java.io.Serializable;
 @Data
 public class InfoTypeAllQuery implements Serializable {
 
+
+    @Schema(description = "类型名称,模糊查询")
+    private String nameLike;
 }

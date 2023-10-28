@@ -10,6 +10,9 @@ import * as dictData from './dict/data'
 import * as recordOperation from './record/operation'
 import * as recordLogin from './record/login'
 import * as infoType from './info/type'
+import * as info from './info/info'
+import * as file from './file/file'
+import * as fileConfig from './file/config'
 
 export default {
   auth,
@@ -23,5 +26,8 @@ export default {
   dictData,
   recordOperation,
   recordLogin,
-  infoType
+  infoType,
+  info,
+  file,
+  fileConfig
 }

@@ -26,8 +26,8 @@
     </tiny-form>
     <div class="table-scroll">
       <div class="table-wrapper">
-        <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
-          :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
+        <tiny-grid ref="gridTableRef" max-height="580px" :fetch-data="fetchTableData" :pager="pagerConfig"
+          :loading="loading" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
           </template>

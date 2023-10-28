@@ -17,8 +17,8 @@
       </tiny-row>
     </tiny-form>
 
-    <tiny-grid ref="gridTableRef" :data="tableDataTree" :loading="loading" :tree-config="{ children: 'children' }"
-      :auto-resize="true" :select-config="{ checkStrictly: true }">
+    <tiny-grid ref="gridTableRef" max-height="580px" :data="tableDataTree" :loading="loading"
+      :tree-config="{ children: 'children' }" :auto-resize="true" :select-config="{ checkStrictly: true }">
       <tiny-grid-column field="index" width="30" tree-node></tiny-grid-column>
       <tiny-grid-column type="selection" width="40"></tiny-grid-column>
       <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" width="120" />

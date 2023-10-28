@@ -4,6 +4,8 @@ import localeTheme from '@/components/theme/locale/zh-CN';
 import systemPermission from '@/views/admin/system/permission/locale/zh-CN';
 import systemDict from '@/views/admin/system/dict/locale/zh-CN';
 import systemRecord from '@/views/admin/system/record/locale/zh-CN';
+import systemInfo from '@/views/admin/system/info/locale/zh-CN';
+import systemFile from '@/views/admin/system/file/locale/zh-CN';
 
 import locale403 from '@/views/exception/403/locale/zh-CN';
 import locale404 from '@/views/exception/404/locale/zh-CN';
@@ -43,4 +45,6 @@ export default {
   ...systemPermission,
   ...systemDict,
   ...systemRecord,
+  ...systemInfo,
+  ...systemFile
 };

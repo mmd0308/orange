@@ -43,7 +43,7 @@ export default {
   'system.menu.table.columns.hidden': '可见状态',
   'system.menu.table.columns.component': '组件路径',
   'system.menu.table.columns.path': '菜单路径',
-  'system.menu.table.columns.presetFlag': '数据来源',
+  'system.menu.table.columns.presetFlag': '预置',
 
 
   'system.button.form.name': '按钮名称',

@@ -71,8 +71,8 @@ VALUES (4, @t_id, '数据预设标记', 'sys_common_data_preset_flag', 0, 0, '�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (400, @t_id, 1, '预置', 'PRESET', 'sys_common_data_preset_flag', 0, 0, '#909399', 0, '数据预设标记-预置', @u_id, NOW(), @u_id, NOW()),
-       (401, @t_id, 1, '自定义', 'CUSTOM', 'sys_common_data_preset_flag', 0, 0, '#67c23a', 0, '数据预设标记-自定义', @u_id, NOW(), @u_id, NOW());
+VALUES (400, @t_id, 1, '是', 'PRESET', 'sys_common_data_preset_flag', 0, 0, '#909399', 0, '数据预设标记-预置', @u_id, NOW(), @u_id, NOW()),
+       (401, @t_id, 1, '否', 'CUSTOM', 'sys_common_data_preset_flag', 0, 0, '#67c23a', 0, '数据预设标记-自定义', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------

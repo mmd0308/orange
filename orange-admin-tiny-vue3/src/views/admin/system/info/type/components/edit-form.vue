@@ -4,28 +4,15 @@
       <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
         :model="formData" label-width="100px" validate-position="bottom" validate-type="text">
 
-        <tiny-form-item :label="$t('system.department.form.parentId')" prop="parentId">
+        <tiny-form-item :label="$t('system.info.type.form.parentId')" prop="parentId">
           <tiny-select v-model="formData.parentId" value-field="id" text-field="name" render-type="tree" :tree-op="treeOp"
-            :placeholder="$t('system.department.form.parentId.placeholder')"></tiny-select>
+            :placeholder="$t('system.info.type.form.parentId.placeholder')"></tiny-select>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.name')" prop="name">
-          <tiny-input v-model="formData.name" :placeholder="$t('system.menu.form.name.placeholder')"></tiny-input>
+        <tiny-form-item :label="$t('system.info.type.form.name')" prop="name">
+          <tiny-input v-model="formData.name" :placeholder="$t('system.info.type.form.name.placeholder')"></tiny-input>
         </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.permission')" prop="permission">
-          <tiny-input v-model="formData.permission"
-            :placeholder="$t('system.menu.form.permission.placeholder')"></tiny-input>
-        </tiny-form-item>
-        <tiny-form-item label="可见状态" prop="sex">
-          <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_data_hidden_flag')" :key="index"
-            v-model="formData.hidden" :label="item.dictValue">
-            {{ item.dictLabel }}
-          </tiny-radio>
-        </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.icon')" prop="icon">
-          <tiny-input v-model="formData.icon" :placeholder="$t('system.menu.form.icon.placeholder')"></tiny-input>
-        </tiny-form-item>
-        <tiny-form-item :label="$t('system.menu.form.path')" prop="path">
-          <tiny-input v-model="formData.path" :placeholder="$t('system.menu.form.path.placeholder')"></tiny-input>
+        <tiny-form-item :label="$t('system.info.type.form.code')" prop="code">
+          <tiny-input v-model="formData.code" :placeholder="$t('system.info.type.form.code.placeholder')"></tiny-input>
         </tiny-form-item>
         <tiny-form-item :label="$t('global.form.sort')" prop="sort">
           <tiny-numeric v-model="formData.sort"></tiny-numeric>
@@ -54,34 +41,37 @@ const emit = defineEmits(['ok'])
 const visible = ref(false)
 const isModify = ref(false)
 const title = computed(() => {
-  return isModify.value ? '修改菜单' : '新增菜单'
+  return isModify.value ? '修改类型' : '新增类型'
 })
 
-const formData = ref<SystemPermissionAPI.MenuVO>({
-  hidden: 'true',
-  sort: 1
-})
+const formData = ref<SystemInfoAPI.InfoTypeVO>({})
+
+const initFromData = () => {
+  formData.value = {
+    sort: 1,
+  }
+}
 
 const formDataRules = {
-  parentId: [{ required: true, message: '上级菜单不能为空', trigger: 'change' }],
-  name: [{ required: true, message: '菜单名称不能为空', trigger: 'change' }],
-  permission: [{ required: true, message: '权限编码不能为空', trigger: 'change' }]
+  parentId: [{ required: true, message: '上级类型不能为空', trigger: 'change' }],
+  name: [{ required: true, message: '类型名称不能为空', trigger: 'change' }],
+  code: [{ required: true, message: '类型编码不能为空', trigger: 'change' }]
 }
 
 const onSubmit = () => {
   proxy.$refs.formDataRef.validate((valid: boolean) => {
     if (valid) {
       if (formData.value.id) {
-        SystemRequest.menu
-          .updateMenuById(formData.value.id, toRaw(formData.value))
+        SystemRequest.infoType
+          .updateInfoTypeById(formData.value.id, toRaw(formData.value))
           .then((res) => {
             proxy.$modal.message({ message: '修改成功', status: 'success' });
             onClose(true)
           })
           .catch((err) => { console.log(err) })
       } else {
-        SystemRequest.menu
-          .addMenu(toRaw(formData.value))
+        SystemRequest.infoType
+          .addInfoType(toRaw(formData.value))
           .then((res) => {
             proxy.$modal.message({ message: '创建成功', status: 'success' });
             onClose(true)
@@ -94,7 +84,6 @@ const onSubmit = () => {
 
 const onClose = (refresh: boolean) => {
   visible.value = false
-  formData.value = {}
   proxy.$refs.formDataRef.resetFields()
   if (refresh) {
     emit('ok')
@@ -105,7 +94,7 @@ const treeOp = reactive<{
   data: [{
     id: string,
     name: string,
-    children: SystemPermissionAPI.MenuTreeVO[]
+    children: SystemInfoAPI.InfoTypeTreeVO[]
   }]
 }>({
   data: [{
@@ -115,14 +104,14 @@ const treeOp = reactive<{
   }]
 })
 
-const queryAll = (query: SystemPermissionAPI.MenuAllQuery) => {
-  SystemRequest.menu.queryMenuAll(toRaw(query)).then((res) => {
+const queryAll = (query: SystemInfoAPI.InfoTypeAllQuery) => {
+  SystemRequest.infoType.queryInfoTypeAll(toRaw(query)).then((res) => {
     treeOp.data[0].children = aggregateTableData(res.data)
   })
 }
 
-function aggregateTableData(data: SystemPermissionAPI.MenuTreeVO[]) {
-  const result: SystemPermissionAPI.MenuTreeVO[] = []
+function aggregateTableData(data: SystemInfoAPI.InfoTypeTreeVO[]) {
+  const result: SystemInfoAPI.InfoTypeTreeVO[] = []
   data.forEach((item) => {
     if (item.parentId === '-1') {
       result.push(item)
@@ -141,10 +130,10 @@ function aggregateTableData(data: SystemPermissionAPI.MenuTreeVO[]) {
 
 const open = (id: string) => {
   isModify.value = false
+  initFromData()
   if (id) {
-    SystemRequest.menu.getMenuById(id).then((response) => {
+    SystemRequest.infoType.getInfoTypeById(id).then((response) => {
       formData.value = response.data
-      formData.value.hidden = String(formData.value.hidden)
       isModify.value = true
     })
   }

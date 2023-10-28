@@ -38,7 +38,9 @@ public interface GlobalErrorCodeConstant {
     ErrorCode GLOBAL_PARAMETER_IS_NULL = new ErrorCode(PREFIX + "2003", "参数为空");
     ErrorCode GLOBAL_PARAMETER_IS_FALSE = new ErrorCode(PREFIX + "2004", "参数为False");
     ErrorCode GLOBAL_PARAMETER_IS_TRUE = new ErrorCode(PREFIX + "2005", "参数为True");
-    ErrorCode GLOBAL_PARAMETER_CANNOT_NULL_ARGS = new ErrorCode(PREFIX + "2006", "{1}参数不能为空");
+
+    String GLOBAL_PARAMETER_NAME_CANNOT_NULL_KEY = PREFIX + "2006";
+    ErrorCode GLOBAL_PARAMETER_NAME_CANNOT_NULL = new ErrorCode(GLOBAL_PARAMETER_NAME_CANNOT_NULL_KEY, "名称不能为空");
 
 
     // 数据相关提示 编码 [3000,4000)

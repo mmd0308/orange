@@ -16,4 +16,6 @@ public interface InfoTypeService {
     Long add(InfoTypeAddOrUpdateRequest request);
 
     Boolean updateById(Long id, InfoTypeAddOrUpdateRequest request);
+
+    Boolean removeById(Long id);
 }

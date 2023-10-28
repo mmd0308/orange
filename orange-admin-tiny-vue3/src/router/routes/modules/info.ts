@@ -19,6 +19,17 @@ export default {
         locale: 'menu.system.permission.department',
         requiresAuth: true,
       },
+    },
+    {
+      path: 'info',
+      name: 'Info',
+      id: 'Info',
+      label: '消息管理',
+      component: () => import('@/views/admin/system/info/info/index.vue'),
+      meta: {
+        locale: 'menu.system.permission.department',
+        requiresAuth: true,
+      },
     }
   ],
 

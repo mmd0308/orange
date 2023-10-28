@@ -3,7 +3,7 @@
     <div class="container-list">
       <div class="table-scroll">
         <div class="table-wrapper">
-          <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :auto-resize="true"
+          <tiny-grid ref="gridTableRef" max-height="580px" :data="tableData" :loading="loading" :auto-resize="true"
             :edit-config="{ trigger: 'manual', mode: 'row', autoClear: false }"
             @toolbar-button-click="toolbarButtonClickEvent">
             <template #toolbar>

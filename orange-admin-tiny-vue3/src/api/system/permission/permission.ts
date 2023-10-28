@@ -11,7 +11,6 @@ export function allotRoleResource(params: SystemPermissionAPI.AllotRoleResourceR
   return axios.post(BASE_URL.concat("/allot-role-resource"), params);
 }
 
-
 export function queryRoutersTree() {
   return axios.get(BASE_URL.concat("/query-current-user-routers-tree"));
 }

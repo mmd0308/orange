@@ -33,6 +33,8 @@
     "@types/mockjs": "^1.0.4",
     "@vueuse/core": "^7.3.0",
     "@vueuse/head": "^0.7.9",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
     "echarts": "^5.3.3",

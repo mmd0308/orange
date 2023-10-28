@@ -97,6 +97,17 @@
                 <version>${orange.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.hengzq.orange.admin.module.system.file.common</groupId>
+                <artifactId>orange-module-system-file-common</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.orange.admin.module.system.file.biz</groupId>
+                <artifactId>orange-module-system-file-biz</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+
             <!--    module end        -->
 
             <!-- 自定义starter start -->
@@ -138,6 +149,11 @@
             <dependency>
                 <groupId>cn.hengzq.orange.admin.starter.biz.record</groupId>
                 <artifactId>orange-spring-boot-starter-biz-record</artifactId>
+                <version>${orange.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hengzq.starter.storage</groupId>
+                <artifactId>orange-spring-boot-starter-storage</artifactId>
                 <version>${orange.version}</version>
             </dependency>
             <!-- 自定义starter end -->

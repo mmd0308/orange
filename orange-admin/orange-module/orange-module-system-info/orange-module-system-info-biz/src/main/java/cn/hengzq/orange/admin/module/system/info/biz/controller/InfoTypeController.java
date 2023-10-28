@@ -8,6 +8,7 @@ import cn.hengzq.orange.admin.module.system.info.common.vo.InfoTypeVO;
 import cn.hengzq.orange.admin.module.system.info.common.vo.query.InfoTypeAllQuery;
 import cn.hengzq.orange.admin.module.system.info.common.vo.query.InfoTypePageQuery;
 import cn.hengzq.orange.admin.module.system.info.common.vo.request.InfoTypeAddOrUpdateRequest;
+import cn.hengzq.orange.admin.starter.common.constant.ValidatedGroupConstant;
 import cn.hengzq.orange.admin.starter.common.result.Result;
 import cn.hengzq.orange.admin.starter.common.result.ResultWrapper;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
+/**w
  * @author 程序员橙子
  */
 @Tag(name = "信息管理-类型管理")
@@ -47,11 +48,10 @@ public class InfoTypeController {
         return ResultWrapper.ok(list);
     }
 
-
     @PreAuthorize("@ss.hasPermission('system:info:type:add')")
     @Operation(summary = "创建类型", operationId = "system:info:type:add")
     @PostMapping
-    public Result<Long> add(@RequestBody @Validated InfoTypeAddOrUpdateRequest request) {
+    public Result<Long> add(@RequestBody @Validated(value = ValidatedGroupConstant.ADD.class) InfoTypeAddOrUpdateRequest request) {
         return ResultWrapper.ok(typeService.add(request));
     }
 
@@ -66,7 +66,7 @@ public class InfoTypeController {
     @Operation(summary = "根据ID删除", operationId = "system:info:type:delete")
     @DeleteMapping("/{id}")
     public Result<Boolean> removeById(@PathVariable("id") Long id) {
-        return ResultWrapper.ok(typeManager.removeById(id));
+        return ResultWrapper.ok(typeService.removeById(id));
     }
 
     @Operation(summary = "根据ID查询详情", operationId = "system:info:type:get")
