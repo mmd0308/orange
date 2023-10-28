@@ -40,8 +40,10 @@
               <dict-tag :value="data.row.requestMethod" :options="proxy.$dict.getDict('sys_common_request_method')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="userIp" :title="$t('system.record.operation.table.columns.userIp')" align="center" />
-          <tiny-grid-column field="userId" :title="$t('system.record.operation.table.columns.userId')" align="center" />
+          <tiny-grid-column field="userIp" :title="$t('system.record.operation.table.columns.userIp')" align="center"
+            width="120" />
+          <tiny-grid-column field="userId" :title="$t('system.record.operation.table.columns.userId')" align="center"
+            width="120" />
           <tiny-grid-column field="status" :title="$t('system.record.operation.table.columns.status')" align="center">
             <template #default="data">
               <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />

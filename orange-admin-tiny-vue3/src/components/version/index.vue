@@ -11,7 +11,7 @@
           </tiny-link>
         </div>
       </tiny-collapse-item>
-      <tiny-collapse-item title="v1.0.0" name="100">
+      <tiny-collapse-item title="v1.0.0" title-right="2023年10月21日" name="100">
         <div>
           更新日志：
           <tiny-link :underline="false" href="http://hengzq.cn/orange/admin/version/v1.0.0.html" target="_blank"
