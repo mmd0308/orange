@@ -14,7 +14,7 @@ VALUES (1, @t_id, 'LOCAL', '本地配置',
         '{"@class":"cn.hengzq.starter.storage.core.local.LocalStorageConfig","basePath":"/Users/hzq/workspace/private/orange","domain":"http://localhost:9000"}',
         @u_id, NOW()),
        (2, @t_id, 'ALIYUN', '阿里云测试配置',
-        '{"@class":"cn.hengzq.starter.storage.core.aliyun.AliyunStorageConfig","endPoint":"http://oss-cn-beijing.aliyuncs.com","accessKeyId":"LTAI5tPbma6ekhVJZVpwE8Wi","accessKeySecret":"pcYBKV45hNgQY7kTUddBMH5yR0L6I7","bucketName":"aliyun-orange-test","domain":"https://aliyun-orange-test.oss-cn-beijing.aliyuncs.com"}',
+        '{"@class":"cn.hengzq.starter.storage.core.aliyun.AliyunStorageConfig","endPoint":"http://oss-cn-beijing.aliyuncs.com","accessKeyId":"LTAI5tPbma6ekhVJZVpwE8Wi","accessKeySecret":"secret","bucketName":"aliyun-orange-test","domain":"https://aliyun-orange-test.oss-cn-beijing.aliyuncs.com"}',
         @u_id, NOW());
 
 
