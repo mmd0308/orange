@@ -125,7 +125,7 @@ async function getPageData(params: SystemFileAPI.ConfigPageQuery = {
   }
 }
 
-const storages = ref([])
+const storages = ref<SystemFileAPI.Storage[]>([])
 const getStorages = async () => {
   const key = "file_config_storage"
   let storage = sessionStorage.getItem(key)

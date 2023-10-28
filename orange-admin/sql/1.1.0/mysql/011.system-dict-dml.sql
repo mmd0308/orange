@@ -15,18 +15,18 @@ SET @u_id := -100;
 SET @t_id := -100;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---   系统数据状态-sys_common_data_status type ID范围 [1]  data ID范围 [100 - 200）
+--   系统数据状态-sys_common_data_enable_status type ID范围 [1]  data ID范围 [100 - 200）
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 BEGIN;
 -- 新增字典类型
 INSERT INTO sys_dict_type (id, tenant_id, name, dict_type, status, preset_flag, remark, created_by, created_at, updated_by, updated_at)
-VALUES (1, @t_id, '系统数据状态', 'sys_common_data_status', 0, 0, '系统中数据状态', @u_id, NOW(), @u_id, NOW());
+VALUES (1, @t_id, '系统数据启用状态', 'sys_common_data_enable_status', 0, 0, '系统数据启用状态', @u_id, NOW(), @u_id, NOW());
 
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (100, @t_id, 1, '正常', 'NORMAL', 'sys_common_data_status', 0, 0, '#67c23a', 0, '正常状态', @u_id, NOW(), @u_id, NOW()),
-       (101, @t_id, 1, '禁用', 'DISABLE', 'sys_common_data_status', 0, 0, '#f56c6c', 0, '禁用状态', @u_id, NOW(), @u_id, NOW());
+VALUES (100, @t_id, 1, '启用', 'ENABLE', 'sys_common_data_enable_status', 0, 0, '#67c23a', 0, '启用状态', @u_id, NOW(), @u_id, NOW()),
+       (101, @t_id, 1, '禁用', 'DISABLE', 'sys_common_data_enable_status', 0, 0, '#f56c6c', 0, '禁用状态', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------

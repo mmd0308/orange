@@ -46,4 +46,9 @@ declare namespace SystemFileAPI {
   interface ConfigAllQuery {
     titleLike?: string;
   }
+
+  interface Storage {
+    key?: string;
+    name?: string;
+  }
 }

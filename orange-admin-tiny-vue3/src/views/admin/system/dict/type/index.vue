@@ -29,17 +29,16 @@
         <tiny-grid ref="gridTableRef" max-height="580px" :fetch-data="fetchTableData" :pager="pagerConfig"
           :loading="loading" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
-            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
+            <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
-
           <tiny-grid-column field="name" :title="$t('system.dict-type.table.columns.name')" />
           <tiny-grid-column field="dictType" :title="$t('system.dict-type.table.columns.dictType')" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="scope">
-              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center">
+          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" width="80">
             <template #default="scope">
               <dict-tag :value="scope.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
@@ -163,14 +162,15 @@ const optionsClick = (label: string, data: SystemDictAPI.DictTypeVO) => {
 }
 
 const handleDelete = (data: SystemDictAPI.DictTypeVO) => {
-  proxy.$modal.confirm({ message: `确定要删除字典类型【${data.name}】吗?`, maskClosable: true, title: '删除提示' }).then((res: string) => {
-    if (data.id && res === 'confirm') {
-      SystemRequest.dictType.deleteDictTypeById(data.id).then(() => {
-        handleFormQuery()
-        proxy.$modal.message({ message: '删除成功', status: 'success' });
-      })
-    }
-  })
+  proxy.$modal.confirm({ message: `确定要删除字典类型【${data.name}】吗?`, maskClosable: true, title: '删除提示' })
+    .then((res: string) => {
+      if (data.id && res === 'confirm') {
+        SystemRequest.dictType.deleteDictTypeById(data.id).then(() => {
+          handleFormQuery()
+          proxy.$modal.message({ message: '删除成功', status: 'success' });
+        })
+      }
+    })
 }
 
 const handleFormQuery = () => {

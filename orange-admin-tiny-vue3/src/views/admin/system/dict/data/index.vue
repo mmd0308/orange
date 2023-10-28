@@ -39,12 +39,12 @@
               {{ scope.row.dictType }}
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="scope">
-              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center">
+          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" width="80">
             <template #default="scope">
               <dict-tag :value="scope.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>

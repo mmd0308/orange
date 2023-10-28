@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -23,7 +23,7 @@ public class RoleUpdateRequest implements Serializable {
     private Integer sort;
 
     @Schema(description = "状态")
-    private CommonDataStatusEnum status;
+    private CommonDataEnableStatusEnum status;
 
     @Schema(description = "备注")
     private String remark;

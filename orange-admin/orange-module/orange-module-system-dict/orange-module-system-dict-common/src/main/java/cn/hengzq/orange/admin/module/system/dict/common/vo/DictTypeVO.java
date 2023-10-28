@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.dict.common.vo;
 
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.common.vo.BaseTenantVO;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +24,7 @@ public class DictTypeVO extends BaseTenantVO {
     private String dictType;
 
     @Schema(description = "状态")
-    private CommonDataStatusEnum status;
+    private CommonDataEnableStatusEnum status;
 
     @Schema(description = "预设标记")
     private DataPresetFlagEnum presetFlag;

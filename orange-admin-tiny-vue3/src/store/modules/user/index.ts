@@ -66,9 +66,9 @@ const useUserStore = defineStore('user', {
     async logout() {
       await SystemRequest.auth.logout();
       this.$reset();
-      // 清空Token
-      clearToken();
-      // 清空缓存
+      // 清空localStorage缓存
+      localStorage.clear()
+      // 清空sessionStorage缓存
       sessionStorage.clear()
       removeRouteListener();
     },

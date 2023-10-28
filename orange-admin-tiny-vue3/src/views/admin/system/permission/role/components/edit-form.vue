@@ -10,7 +10,7 @@
           :placeholder="$t('system.role.form.permission.placeholder')"></tiny-input>
       </tiny-form-item>
       <tiny-form-item label="可见状态" prop="sex">
-        <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_data_status')" :key="index"
+        <tiny-radio v-for="(item, index) in proxy.$dict.getDict('sys_common_data_enable_status')" :key="index"
           v-model="formData.status" :label="item.dictValue">
           {{ item.dictLabel }}
         </tiny-radio>

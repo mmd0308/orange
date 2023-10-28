@@ -31,9 +31,9 @@
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.role.table.columns.name')" align="center" />
           <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="data">
-              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column>
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />

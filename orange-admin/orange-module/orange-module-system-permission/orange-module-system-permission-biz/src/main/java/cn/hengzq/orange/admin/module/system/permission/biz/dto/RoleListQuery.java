@@ -1,6 +1,6 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.dto;
 
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,6 +19,6 @@ public class RoleListQuery {
 
     private String permissionLike;
 
-    private CommonDataStatusEnum status;
+    private CommonDataEnableStatusEnum status;
 
 }

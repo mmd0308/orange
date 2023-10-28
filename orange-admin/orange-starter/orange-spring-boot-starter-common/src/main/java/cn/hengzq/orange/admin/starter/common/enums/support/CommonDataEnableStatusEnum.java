@@ -4,16 +4,16 @@ package cn.hengzq.orange.admin.starter.common.enums.support;
 import cn.hengzq.orange.admin.starter.common.enums.BaseEnum;
 
 /**
- * 数据状态
+ * 数据启用状态
  *
  * @author 程序员橙子
  */
 
-public enum CommonDataStatusEnum implements BaseEnum<Integer> {
+public enum CommonDataEnableStatusEnum implements BaseEnum<Integer> {
     /**
-     * 正常
+     * 启用
      */
-    NORMAL(0, "正常"),
+    ENABLE(0, "启用"),
     /**
      * 禁用
      */
@@ -22,7 +22,7 @@ public enum CommonDataStatusEnum implements BaseEnum<Integer> {
     private final Integer code;
     private final String msg;
 
-    CommonDataStatusEnum(Integer code, String msg) {
+    CommonDataEnableStatusEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }

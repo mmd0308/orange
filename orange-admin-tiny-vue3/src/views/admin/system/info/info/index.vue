@@ -30,7 +30,7 @@
           </tiny-grid-column>
           <!-- <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
             <template #default="data">
-              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column> -->
           <tiny-grid-column field="typeName" :title="$t('system.info.table.columns.type')" align="center" width="100" />

@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.permission.common.vo.request;
 
 import cn.hengzq.orange.admin.module.system.permission.common.exception.support.RoleErrorCode;
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -27,7 +27,7 @@ public class RoleAddRequest implements Serializable {
     private Integer sort;
 
     @Schema(description = "状态")
-    private CommonDataStatusEnum status = CommonDataStatusEnum.NORMAL;
+    private CommonDataEnableStatusEnum status = CommonDataEnableStatusEnum.ENABLE;
 
     @Schema(description = "备注")
     private String remark;

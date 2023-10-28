@@ -119,7 +119,7 @@ const buttonIndexRef = ref();
 const optionsClick = (label: string, data: SystemPermissionAPI.MenuVO) => {
   switch (label) {
     case 'global.table.operations.button-index': {
-      buttonIndexRef.value.open(data.id)
+      buttonIndexRef.value.open(data)
       break
     }
     case 'global.table.operations.edit': {
