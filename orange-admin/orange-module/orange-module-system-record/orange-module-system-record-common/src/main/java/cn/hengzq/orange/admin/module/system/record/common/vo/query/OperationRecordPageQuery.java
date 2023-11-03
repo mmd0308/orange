@@ -19,6 +19,9 @@ public class OperationRecordPageQuery extends PageQuery {
     @Schema(description = "请求ID")
     private String traceId;
 
+    @Schema(description = "资源ID")
+    private String resourceId;
+
     @Schema(description = "操作结果")
     private CommonOperationStatusEnum status;
 

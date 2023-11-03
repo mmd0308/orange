@@ -29,4 +29,7 @@ public class FileConfigVO extends BaseTenantVO {
 
     @Schema(description = "是否为主节点")
     private Boolean master;
+
+    @Schema(description = "备注")
+    private String remark;
 }

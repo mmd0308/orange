@@ -30,7 +30,7 @@ public class AliyunStorageConfig implements StorageConfig {
     /**
      * 查看AccessKey https://ram.console.aliyun.com/manage/ak
      */
-    private String accessKeyId;
+    private String accessKey;
 
     private String accessKeySecret;
 

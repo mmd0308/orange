@@ -20,15 +20,15 @@ SET @s_id := 1;
 BEGIN;
 
 INSERT INTO sys_menu (id, tenant_id, parent_id, name, permission, preset_flag, path, icon, hidden, sort, remark, created_by, created_at, updated_by, updated_at)
-VALUES (100, @t_id, @s_id, '字典管理', 'system:dict:view', 0, 'system/permission/dict', 'system-library', 0, 14, null, @u_id, NOW(), @u_id, NOW());
+VALUES (100, @t_id, @s_id, '字典管理', 'system:dict:view', 0, 'system/permission/dict', 'system-library', 0, 60, null, @u_id, NOW(), @u_id, NOW());
 
 insert into sys_button (id, tenant_id, menu_id, root_id, name, permission, preset_flag, sort, remark, created_by, created_at, updated_by, updated_at)
-values  (10000, @t_id, 100, -1, '新增', 'system:dict:dict-type:add', 0, 0, '字典管理类型-新增', @u_id, NOW(), @u_id, NOW()),
-       (10001, @t_id, 100, -1, '删除', 'system:dict:dict-type:delete', 0, 0, '字典管理类型-删除', @u_id, NOW(), @u_id, NOW()),
-       (10002, @t_id, 100, -1, '修改', 'system:dict:dict-type:update', 0, 0, '字典管理类型-修改', @u_id, NOW(), @u_id, NOW()),
-       (10010, @t_id, 100, -1, '数据-新增', 'system:dict:dict-data:add', 0, 0, '字典数据管理-新增', @u_id, NOW(), @u_id, NOW()),
-       (10011, @t_id, 100, -1, '数据-修改', 'system:dict:dict-data:update', 0, 0, '字典数据管理-修改', @u_id, NOW(), @u_id, NOW()),
-       (10012, @t_id, 100, -1, '数据-删除', 'system:dict:dict-data:delete', 0, 0, '字典数据管理-删除', @u_id, NOW(), @u_id, NOW())
+values (10000, @t_id, 100, -1, '新增', 'system:dict:dict-type:add', 0, 1, '字典管理类型-新增', @u_id, NOW(), @u_id, NOW()),
+       (10001, @t_id, 100, -1, '删除', 'system:dict:dict-type:delete', 0, 10, '字典管理类型-根据ID删除', @u_id, NOW(), @u_id, NOW()),
+       (10002, @t_id, 100, -1, '修改', 'system:dict:dict-type:update', 0, 20, '字典管理类型-修改', @u_id, NOW(), @u_id, NOW()),
+       (10010, @t_id, 100, -1, '数据-新增', 'system:dict:dict-data:add', 0, 100, '字典数据管理-新增', @u_id, NOW(), @u_id, NOW()),
+       (10012, @t_id, 100, -1, '数据-删除', 'system:dict:dict-data:delete', 0, 120, '字典数据管理-删除', @u_id, NOW(), @u_id, NOW()),
+       (10011, @t_id, 100, -1, '数据-修改', 'system:dict:dict-data:update', 0, 130, '字典数据管理-修改', @u_id, NOW(), @u_id, NOW())
 ;
 
 COMMIT;

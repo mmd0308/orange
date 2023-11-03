@@ -23,7 +23,7 @@ public class AliyunStorageService extends AbstractStorageService<AliyunStorageCo
 
     @Override
     public UploadResult upload(byte[] content, String path, String filename) {
-        OSS client = new OSSClientBuilder().build(config.getEndPoint(), config.getAccessKeyId(), config.getAccessKeySecret());
+        OSS client = new OSSClientBuilder().build(config.getEndPoint(), config.getAccessKey(), config.getAccessKeySecret());
         try {
             client.putObject(config.getBucketName(), path + StrUtil.SLASH + filename, new ByteArrayInputStream(content));
         } catch (Exception e) {

@@ -18,6 +18,10 @@ public interface FileConfigManager extends BaseManager<FileConfigEntity> {
 
     List<FileConfigEntity> listByParams(FileConfigListQuery query);
 
+    default List<FileConfigEntity> listByMaster(Boolean master) {
+        return listByParams(FileConfigListQuery.builder().master(master).build());
+    }
+
     /**
      * 获取默认的配置
      *

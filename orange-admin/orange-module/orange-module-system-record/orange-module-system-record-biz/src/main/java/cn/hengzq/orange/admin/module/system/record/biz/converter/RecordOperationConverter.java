@@ -1,10 +1,12 @@
 package cn.hengzq.orange.admin.module.system.record.biz.converter;
 
+import cn.hengzq.orange.admin.module.system.record.biz.dto.RecordOperationListQuery;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordOperationVO;
+import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordPageQuery;
 import cn.hengzq.orange.admin.starter.common.convert.Converter;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -26,4 +28,6 @@ public interface RecordOperationConverter extends Converter {
     RecordOperationVO toVo(RecordOperationEntity entity);
 
     RecordOperationEntity toEntity(RecordOperationVO recordOperationVO);
+
+    RecordOperationListQuery toListQuery(OperationRecordPageQuery queryVo);
 }

@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author 程序员橙子
@@ -40,6 +41,7 @@ public class FileConfigManagerImpl extends BaseManagerImpl<FileConfigMapper, Fil
     private static LambdaQueryWrapper<FileConfigEntity> getQueryWrapper(FileConfigListQuery query) {
         return Wrappers.<FileConfigEntity>lambdaQuery()
                 .eq(StrUtil.isNotBlank(query.getName()), FileConfigEntity::getName, query.getName())
+                .eq(Objects.nonNull(query.getMaster()), FileConfigEntity::getMaster, query.getMaster())
                 .like(StrUtil.isNotBlank(query.getNameLike()), FileConfigEntity::getName, query.getNameLike())
                 .orderByDesc(FileConfigEntity::getCreatedAt);
     }

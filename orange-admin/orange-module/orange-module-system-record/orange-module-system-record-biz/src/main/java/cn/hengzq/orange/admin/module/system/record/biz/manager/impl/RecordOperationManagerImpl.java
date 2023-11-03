@@ -1,5 +1,6 @@
 package cn.hengzq.orange.admin.module.system.record.biz.manager.impl;
 
+import cn.hengzq.orange.admin.module.system.record.biz.dto.RecordOperationListQuery;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
 import cn.hengzq.orange.admin.module.system.record.biz.manager.RecordOperationManager;
 import cn.hengzq.orange.admin.module.system.record.biz.mapper.RecordOperationMapper;
@@ -38,14 +39,15 @@ public class RecordOperationManagerImpl extends BaseManagerImpl<RecordOperationM
     }
 
     @Override
-    public Page<RecordOperationEntity> page(OperationRecordPageQuery query) {
+    public Page<RecordOperationEntity> page(Integer pageNo, Integer pageSize, RecordOperationListQuery query) {
         LambdaQueryWrapper<RecordOperationEntity> queryWrapper = Wrappers.<RecordOperationEntity>lambdaQuery()
                 .eq(StrUtil.isNotBlank(query.getTraceId()), RecordOperationEntity::getTraceId, query.getTraceId())
+                .eq(StrUtil.isNotBlank(query.getResourceId()), RecordOperationEntity::getResourceId, query.getResourceId())
                 .eq(Objects.nonNull(query.getStatus()), RecordOperationEntity::getStatus, query.getStatus())
                 .ge(Objects.nonNull(query.getOperationStartTime()), RecordOperationEntity::getStartTime, query.getOperationStartTime())
                 .le(Objects.nonNull(query.getOperationEndTime()), RecordOperationEntity::getStartTime, query.getOperationEndTime())
                 .orderByDesc(RecordOperationEntity::getStartTime);
-        return mapper.selectPage(new Page<>(query.getPageNo(), query.getPageSize()), queryWrapper);
+        return mapper.selectPage(new Page<>(pageNo, pageSize), queryWrapper);
     }
 
 //    @Override

@@ -23,16 +23,11 @@
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
-          <tiny-grid-column field="title" :title="$t('system.info.table.columns.title')" align="center">
+          <tiny-grid-column field="title" :title="$t('system.info.table.columns.title')">
             <template #default="data">
               <tiny-link :underline="false" type="primary" @click="toDetail(data.row)"> {{ data.row.title }} </tiny-link>
             </template>
           </tiny-grid-column>
-          <!-- <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
-            <template #default="data">
-              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
-            </template>
-          </tiny-grid-column> -->
           <tiny-grid-column field="typeName" :title="$t('system.info.table.columns.type')" align="center" width="100" />
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="150" />

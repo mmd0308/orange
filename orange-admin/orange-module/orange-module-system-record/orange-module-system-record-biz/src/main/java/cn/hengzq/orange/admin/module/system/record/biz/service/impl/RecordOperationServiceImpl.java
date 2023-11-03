@@ -1,16 +1,26 @@
 package cn.hengzq.orange.admin.module.system.record.biz.service.impl;
 
+import cn.hengzq.orange.admin.module.system.permission.api.UserApi;
 import cn.hengzq.orange.admin.module.system.record.biz.converter.RecordOperationConverter;
+import cn.hengzq.orange.admin.module.system.record.biz.dto.RecordOperationListQuery;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
 import cn.hengzq.orange.admin.module.system.record.biz.manager.RecordOperationManager;
 import cn.hengzq.orange.admin.module.system.record.biz.service.RecordOperationService;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordOperationVO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordExportQuery;
+import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordPageQuery;
+import cn.hengzq.orange.admin.starter.common.util.CollUtils;
+import cn.hengzq.orange.admin.starter.common.vo.PageVO;
+import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 
 /**
@@ -21,7 +31,9 @@ import java.util.List;
 @AllArgsConstructor
 public class RecordOperationServiceImpl implements RecordOperationService {
 
-    private final RecordOperationManager recordOperationManager;
+    private final RecordOperationManager manager;
+
+    private final UserApi userApi;
 
     @Override
     public List<RecordOperationVO> queryExportList(OperationRecordExportQuery query) {
@@ -31,7 +43,36 @@ public class RecordOperationServiceImpl implements RecordOperationService {
     @Override
     public Long add(RecordOperationVO recordOperationVO) {
         RecordOperationEntity entity = RecordOperationConverter.INSTANCE.toEntity(recordOperationVO);
-        return recordOperationManager.add(entity);
+        return manager.add(entity);
+    }
+
+    @Override
+    public PageVO<RecordOperationVO> page(OperationRecordPageQuery queryVo) {
+        RecordOperationListQuery listQuery = RecordOperationConverter.INSTANCE.toListQuery(queryVo);
+        Page<RecordOperationEntity> page = manager.page(queryVo.getPageNo(), queryVo.getPageSize(), listQuery);
+        PageVO<RecordOperationVO> result = RecordOperationConverter.INSTANCE.toPage(page);
+        List<RecordOperationVO> records = result.getRecords();
+        if (CollUtil.isEmpty(records)) {
+            return result;
+        }
+        Set<Long> userIds = CollUtils.convertSet(records, RecordOperationVO::getUserId);
+        Map<Long, String> userNameMap = userApi.queryMapNameByIds(userIds);
+        records.forEach(record -> {
+            record.setUserName(userNameMap.get(record.getUserId()));
+        });
+        return result;
+    }
+
+    @Override
+    public RecordOperationVO getById(Long id) {
+        RecordOperationEntity entity = manager.getById(id);
+        if (Objects.isNull(entity)) {
+            return null;
+        }
+        RecordOperationVO vo = RecordOperationConverter.INSTANCE.toVo(entity);
+        Map<Long, String> userNameMap = userApi.queryMapNameByIds(Set.of(entity.getUserId()));
+        vo.setUserName(userNameMap.get(vo.getUserId()));
+        return vo;
     }
 
 //    @Override

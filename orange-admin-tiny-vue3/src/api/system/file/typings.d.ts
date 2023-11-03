@@ -32,10 +32,16 @@ declare namespace SystemFileAPI {
   interface ConfigVO {
     tenantId?: string;
     id?: string;
-    storage?: string;
     name?: string;
-    configs?: string;
+    storage?: string;
+    domain?: string;
+    basePath?: string;
+    endPoint?: string;
+    bucketName?: string;
+    accessKey?: string;
+    accessKeySecret?: string;
     master?: boolean;
+    remark?: string;
   };
 
   interface ConfigPageQuery extends ConfigAllQuery {

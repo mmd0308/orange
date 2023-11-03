@@ -1,4 +1,4 @@
-package cn.hengzq.orange.admin.starter.biz.record.converter;
+package cn.hengzq.orange.admin.starter.biz.record.convert;
 
 import cn.hengzq.orange.admin.starter.biz.record.dto.RecordDTO;
 import cn.hengzq.orange.admin.module.system.record.common.vo.RecordLoginVO;

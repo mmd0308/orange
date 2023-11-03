@@ -36,7 +36,7 @@ from sys_user
 where id = @u_id;
 
 INSERT INTO sys_user (id, tenant_id, department_id, name, email, sex, phone, username, password, remark, created_by, created_at, updated_by, updated_at)
-VALUES (@u_id, @t_id, @d_id, '系统管理员', 'hengzq@yeah.net', '1', '', 'admin',
+VALUES (@u_id, @t_id, @d_id, '系统管理员', 'hengzq@yeah.net', '1', '17629990001', 'admin',
         '$2a$10$.pPlcDi1qZfD6RXRzGagdeuamQXIGRFuG83bKf9MEYiUxEwnvHj4S', '系统管理员', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 

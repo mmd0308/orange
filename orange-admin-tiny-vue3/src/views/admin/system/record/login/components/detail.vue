@@ -8,11 +8,14 @@
       <tiny-form-item :label="$t('system.record.operation.form.status')">
         <dict-tag :value="formData.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />
       </tiny-form-item>
-      <tiny-form-item :label="$t('system.record.operation.form.startTime')">
+      <tiny-form-item :label="$t('system.record.login.form.userName')">
+        <tiny-input v-model="formData.userName"></tiny-input>
+      </tiny-form-item>
+      <tiny-form-item :label="$t('system.record.login.form.loginTime')">
         <tiny-input v-model="formData.loginTime"></tiny-input>
       </tiny-form-item>
-      <tiny-form-item :label="$t('system.record.operation.form.userIp')">
-        <tiny-input v-model="formData.userIp"></tiny-input>
+      <tiny-form-item :label="$t('system.record.login.form.address')">
+        {{ formData.userLocation }} [{{ formData.userIp }}]
       </tiny-form-item>
       <tiny-form-item :label="$t('system.record.operation.form.userAgent')">
         <tiny-input v-model="formData.userAgent"></tiny-input>
@@ -37,10 +40,11 @@ const onClose = () => {
   visible.value = false
 }
 
-const open = (id: string) => {
-  SystemRequest.recordLogin.getRecordLoginById(id).then((response) => {
-    formData.value = response.data
-  })
+const open = (data: SystemRecordAPI.RecordLoginVO) => {
+  // SystemRequest.recordLogin.getRecordLoginById(id).then((response) => {
+  //   formData.value = response.data
+  // })
+  formData.value = data
   visible.value = true
 }
 

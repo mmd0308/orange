@@ -60,7 +60,7 @@ public class FileConfigController {
     @Operation(summary = "根据ID修改", operationId = "system:file:config:update")
     @PutMapping("/{id}")
     public Result<Boolean> update(@PathVariable("id") Long id, @RequestBody FileConfigAddOrUpdateRequest request) {
-//        fileConfigManager.updateById(id, fileConfigVo)
+        service.updateById(id, request);
         return ResultWrapper.ok();
     }
 

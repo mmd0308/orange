@@ -86,14 +86,14 @@ VALUES (5, @t_id, '请求方式', 'sys_common_request_method', 0, 0, '请求方�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (500, @t_id, 1, 'GET', 'GET', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-GET', @u_id, NOW(), @u_id, NOW()),
-       (501, @t_id, 1, 'HEAD', 'HEAD', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-HEAD', @u_id, NOW(), @u_id, NOW()),
+VALUES (500, @t_id, 1, 'GET', 'GET', 'sys_common_request_method', 0, 0, '#409eff', 0, '请求方式-GET', @u_id, NOW(), @u_id, NOW()),
+       (501, @t_id, 1, 'HEAD', 'HEAD', 'sys_common_request_method', 0, 0, '#909399', 0, '请求方式-HEAD', @u_id, NOW(), @u_id, NOW()),
        (502, @t_id, 1, 'POST', 'POST', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-POST', @u_id, NOW(), @u_id, NOW()),
-       (503, @t_id, 1, 'PUT', 'PUT', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-PUT', @u_id, NOW(), @u_id, NOW()),
-       (504, @t_id, 1, 'PATCH', 'PATCH', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-PATCH', @u_id, NOW(), @u_id, NOW()),
-       (505, @t_id, 1, 'DELETE', 'DELETE', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-DELETE', @u_id, NOW(), @u_id, NOW()),
-       (506, @t_id, 1, 'OPTIONS', 'OPTIONS', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-OPTIONS', @u_id, NOW(), @u_id, NOW()),
-       (507, @t_id, 1, 'TRACE', 'TRACE', 'sys_common_request_method', 0, 0, '#87d068', 0, '请求方式-TRACE', @u_id, NOW(), @u_id, NOW());
+       (503, @t_id, 1, 'PUT', 'PUT', 'sys_common_request_method', 0, 0, '#e6a23c', 0, '请求方式-PUT', @u_id, NOW(), @u_id, NOW()),
+       (504, @t_id, 1, 'PATCH', 'PATCH', 'sys_common_request_method', 0, 0, '#e6a23c', 0, '请求方式-PATCH', @u_id, NOW(), @u_id, NOW()),
+       (505, @t_id, 1, 'DELETE', 'DELETE', 'sys_common_request_method', 0, 0, '#f56c6c', 0, '请求方式-DELETE', @u_id, NOW(), @u_id, NOW()),
+       (506, @t_id, 1, 'OPTIONS', 'OPTIONS', 'sys_common_request_method', 0, 0, '#909399', 0, '请求方式-OPTIONS', @u_id, NOW(), @u_id, NOW()),
+       (507, @t_id, 1, 'TRACE', 'TRACE', 'sys_common_request_method', 0, 0, '#909399', 0, '请求方式-TRACE', @u_id, NOW(), @u_id, NOW());
 COMMIT;
 
 
@@ -126,6 +126,6 @@ VALUES (7, @t_id, '登录日志类型', 'sys_record_login_type', 0, 0, '登录�
 -- 新增字典数据
 INSERT INTO sys_dict_data (id, tenant_id, sort, dict_label, dict_value, dict_type, preset_flag, default_flag,
                            show_style, status, remark, created_by, created_at, updated_by, updated_at)
-VALUES (700, @t_id, 1, '登录', 'LOGIN', 'sys_record_login_type', 0, 0, '#67c23a', 0, '登录日志类型-登录', @u_id, NOW(), @u_id, NOW()),
-       (701, @t_id, 2, '登出', 'LOGOUT', 'sys_record_login_type', 0, 0, '#87d068', 0, '登录日志类型-登出', @u_id, NOW(), @u_id, NOW());
+VALUES (700, @t_id, 1, '登录', 'LOGIN', 'sys_record_login_type', 0, 0, '#409eff', 0, '登录日志类型-登录', @u_id, NOW(), @u_id, NOW()),
+       (701, @t_id, 2, '登出', 'LOGOUT', 'sys_record_login_type', 0, 0, '#f56c6c', 0, '登录日志类型-登出', @u_id, NOW(), @u_id, NOW());
 COMMIT;

@@ -44,7 +44,6 @@ public class RecordLoginController {
         return ResultWrapper.ok(RecordLoginConverter.INSTANCE.toVo(entity));
     }
 
-
     @PreAuthorize("@ss.hasPermission('system:record:login:add')")
     @Operation(summary = "新建", operationId = "system:record:login:add")
     @PostMapping

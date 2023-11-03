@@ -26,26 +26,29 @@
           <tiny-grid-column field="traceId" :title="$t('system.record.login.table.columns.traceId')" align="center"
             width="150" />
           <tiny-grid-column field="account" :title="$t('system.record.login.table.columns.account')" align="center" />
-          <tiny-grid-column field="userId" :title="$t('system.record.login.table.columns.userId')" align="center" />
-          <tiny-grid-column field="userIp" :title="$t('system.record.login.table.columns.userIp')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="userName" :title="$t('system.record.login.table.columns.userName')" align="center"
+            width="80" />
+          <tiny-grid-column field="userIp" :title="$t('system.record.login.table.columns.userIp')" align="center"
+            width="120" />
+          <tiny-grid-column field="userLocation" :title="$t('system.record.operation.table.columns.userLocation')"
+            align="center" width="120" />
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="data">
               <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="type" :title="$t('system.record.login.table.columns.type')" align="center">
+          <tiny-grid-column field="type" :title="$t('system.record.login.table.columns.type')" align="center" width="80">
             <template #default="data">
               <dict-tag :value="data.row.type" :options="proxy.$dict.getDict('sys_record_login_type')" />
             </template>
           </tiny-grid-column>
           <tiny-grid-column field="loginTime" :title="$t('system.record.login.table.columns.loginTime')" align="center"
             width="150" />
-          <tiny-grid-column field="userAgent" show-overflow :title="$t('system.record.login.table.columns.userAgent')"
-            width="260" />
+          <tiny-grid-column field="userAgent" show-overflow :title="$t('system.record.login.table.columns.userAgent')" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">
             <template #default="data">
-              <tiny-button type="text" @click="handleDetail(data.row.id)">
+              <tiny-button type="text" @click="handleDetail(data.row)">
                 {{ $t('global.table.operations.detail') }}
               </tiny-button>
             </template>
@@ -122,8 +125,8 @@ async function getPageData(
   }
 }
 
-const handleDetail = (id: string) => {
-  detailsRef.value.open(id);
+const handleDetail = (data: SystemRecordAPI.RecordLoginVO) => {
+  detailsRef.value.open(data);
 };
 
 const handleFormQuery = () => {

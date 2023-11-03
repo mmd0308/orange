@@ -12,4 +12,10 @@ public interface StorageConfig {
      * 获取配置域名
      */
     String getDomain();
+
+    /**
+     * 设置配置域名
+     */
+    void setDomain(String domain);
+
 }

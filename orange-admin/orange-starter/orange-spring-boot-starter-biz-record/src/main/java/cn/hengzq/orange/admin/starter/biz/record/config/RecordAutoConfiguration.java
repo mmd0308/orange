@@ -3,7 +3,7 @@ package cn.hengzq.orange.admin.starter.biz.record.config;
 import cn.hengzq.orange.admin.module.system.record.api.RecordLoginApi;
 import cn.hengzq.orange.admin.module.system.record.api.RecordOperationApi;
 import cn.hengzq.orange.admin.starter.biz.record.aspect.RecordAspect;
-import cn.hengzq.orange.admin.starter.biz.record.constants.RecordConstants;
+import cn.hengzq.orange.admin.starter.biz.record.constant.RecordConstant;
 import cn.hengzq.orange.admin.starter.biz.record.listener.RecordLoginBizListener;
 import cn.hengzq.orange.admin.starter.biz.record.listener.RecordOperationListener;
 import cn.hengzq.orange.admin.starter.biz.record.properties.RecordProperties;
@@ -87,7 +87,7 @@ public class RecordAutoConfiguration {
         //执行初始化
         executor.initialize();
         if (log.isDebugEnabled()) {
-            log.debug("{} init logExecutor.", RecordConstants.SERVICE_NAME);
+            log.debug("{} init logExecutor.", RecordConstant.SERVICE_NAME);
         }
         return executor;
     }

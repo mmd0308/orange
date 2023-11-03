@@ -1,6 +1,7 @@
 package cn.hengzq.orange.admin.module.system.record.biz.manager;
 
 
+import cn.hengzq.orange.admin.module.system.record.biz.dto.RecordOperationListQuery;
 import cn.hengzq.orange.admin.module.system.record.biz.entity.RecordOperationEntity;
 import cn.hengzq.orange.admin.module.system.record.common.vo.query.OperationRecordPageQuery;
 import cn.hengzq.orange.admin.starter.mybatis.manager.BaseManager;
@@ -21,5 +22,5 @@ public interface RecordOperationManager extends BaseManager<RecordOperationEntit
     /**
      * 分页查询
      */
-    Page<RecordOperationEntity> page(OperationRecordPageQuery query);
+    Page<RecordOperationEntity> page(Integer pageNo, Integer pageSize, RecordOperationListQuery query);
 }

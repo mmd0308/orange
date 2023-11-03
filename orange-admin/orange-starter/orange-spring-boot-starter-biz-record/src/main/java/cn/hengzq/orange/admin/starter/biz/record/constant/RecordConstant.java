@@ -1,11 +1,11 @@
-package cn.hengzq.orange.admin.starter.biz.record.constants;
+package cn.hengzq.orange.admin.starter.biz.record.constant;
 
 /**
  * 操作记录常量
  *
  * @author 程序员橙子
  */
-public interface RecordConstants {
+public interface RecordConstant {
 
     /**
      * 服务名称

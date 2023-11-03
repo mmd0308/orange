@@ -27,4 +27,5 @@ public class LocalStorageConfig implements StorageConfig {
     public String getDomain() {
         return this.domain;
     }
+
 }

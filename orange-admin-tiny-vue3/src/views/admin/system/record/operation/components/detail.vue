@@ -14,14 +14,17 @@
       <tiny-form-item :label="$t('system.record.operation.form.status')">
         <dict-tag :value="formData.status" :options="proxy.$dict.getDict('sys_common_operation_status')" />
       </tiny-form-item>
+      <tiny-form-item :label="$t('system.record.operation.form.userName')">
+        <tiny-input v-model="formData.userName"></tiny-input>
+      </tiny-form-item>
       <tiny-form-item :label="$t('system.record.operation.form.startTime')">
         <tiny-input v-model="formData.startTime"></tiny-input>
       </tiny-form-item>
       <tiny-form-item :label="$t('system.record.operation.form.executeTime')">
         {{ formData.executeTime }} ms
       </tiny-form-item>
-      <tiny-form-item :label="$t('system.record.operation.form.userIp')">
-        <tiny-input v-model="formData.userIp"></tiny-input>
+      <tiny-form-item :label="$t('system.record.operation.form.address')">
+        {{ formData.userLocation }} [{{ formData.userIp }}]
       </tiny-form-item>
       <tiny-form-item :label="$t('system.record.operation.form.userAgent')">
         <tiny-input v-model="formData.userAgent"></tiny-input>

@@ -20,12 +20,17 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>cn.hengzq.orange.admin.module.system.record.common</groupId>
-			<artifactId>orange-module-system-record-common</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>cn.hengzq.orange.admin.module.system.record.api</groupId>
 			<artifactId>orange-module-system-record-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cn.hengzq.orange.admin.module.system.permission.api</groupId>
+			<artifactId>orange-module-system-permission-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.hengzq.orange.admin.module.system.record.common</groupId>
+			<artifactId>orange-module-system-record-common</artifactId>
 		</dependency>
 
 		<dependency>

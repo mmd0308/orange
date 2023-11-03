@@ -77,7 +77,7 @@ declare namespace SystemPermissionAPI {
     name?: string;
     permission?: string;
     sort?: number;
-    status?: 'NORMAL' | 'DISABLE';
+    status?: 'ENABLE' | 'DISABLE';
     presetFlag?: 'PRESET' | 'CUSTOM';
     remark?: string;
   };
@@ -87,7 +87,7 @@ declare namespace SystemPermissionAPI {
     nameLike?: string;
     permission?: string;
     permissionLike?: string;
-    status?: 'NORMAL' | 'DISABLE';
+    status?: 'ENABLE' | 'DISABLE';
   };
 
   interface RolePageQuery extends RoleAllQuery {

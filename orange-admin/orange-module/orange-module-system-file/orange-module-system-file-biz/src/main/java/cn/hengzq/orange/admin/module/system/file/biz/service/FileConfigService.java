@@ -42,4 +42,6 @@ public interface FileConfigService {
     Boolean updateMaster(Long id);
 
     Boolean removeById(Long id);
+
+    Boolean updateById(Long id, FileConfigAddOrUpdateRequest request);
 }
