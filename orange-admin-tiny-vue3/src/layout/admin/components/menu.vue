@@ -29,8 +29,15 @@ const currentChange = (data: any) => {
 const treeData = ref([])
 
 const getMenuDataSync = async () => {
-  const { data } = await SystemRequest.permission.queryRoutersTree();
-  treeData.value = data
+  const key = "current_user_routers"
+  const routers = localStorage.getItem(key)
+  if (routers) {
+    treeData.value = JSON.parse(routers)
+  } else {
+    const { data } = await SystemRequest.permission.queryRoutersTree();
+    localStorage.setItem(key, JSON.stringify(data));
+    treeData.value = data
+  }
 }
 
 getMenuDataSync()

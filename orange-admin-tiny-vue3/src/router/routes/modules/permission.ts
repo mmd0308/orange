@@ -32,6 +32,17 @@ export default {
       },
     },
     {
+      path: 'user-setting',
+      name: 'UserSetting',
+      id: 'UserSetting',
+      label: 'UserSetting',
+      component: () => import('@/views/admin/system/permission/user/setting/index.vue'),
+      meta: {
+        locale: 'menu.system.permission.user',
+        requiresAuth: true,
+      },
+    },
+    {
       path: 'role',
       name: 'SystemPermissionRole',
       id: 'SystemPermissionRole',

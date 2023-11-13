@@ -22,8 +22,8 @@
     </tiny-form>
     <div class="table-scroll">
       <div class="table-wrapper">
-        <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
-          :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
+        <tiny-grid ref="gridTableRef" max-height="580px" :fetch-data="fetchTableData" :pager="pagerConfig"
+          :loading="loading" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
@@ -34,7 +34,7 @@
           <tiny-grid-column field="name" :title="$t('system.user.table.columns.name')" align="center" />
           <tiny-grid-column field="username" :title="$t('system.user.table.columns.username')" align="center" />
           <tiny-grid-column field="email" :title="$t('system.user.table.columns.email')" align="center" />
-          <tiny-grid-column field="sex" :title="$t('system.user.table.columns.sex')" align="center">
+          <tiny-grid-column field="sex" :title="$t('system.user.table.columns.sex')" align="center" width="80">
             <template #default="data">
               <dict-tag :value="data.row.sex" :options="proxy.$dict.getDict('sys_common_user_sex')" />
             </template>

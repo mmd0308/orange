@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(SystemRecordConstants.V1_0_URL_PREFIX + "/record-operation")
 public class RecordOperationController {
 
-    private final RecordOperationService operationRecordService;
+    private final RecordOperationService service;
 
     private final RecordOperationManager operationRecordManager;
 
@@ -37,8 +37,7 @@ public class RecordOperationController {
     @Operation(summary = "分页查询", operationId = "system:record:operation:page")
     @PostMapping(value = "/page")
     public Result<PageVO<RecordOperationVO>> page(@RequestBody OperationRecordPageQuery queryVo) {
-        Page<RecordOperationEntity> page = operationRecordManager.page(queryVo);
-        PageVO<RecordOperationVO> result = RecordOperationConverter.INSTANCE.toPage(page);
+        PageVO<RecordOperationVO> result = service.page(queryVo);
         return ResultWrapper.ok(result);
     }
 
@@ -52,8 +51,8 @@ public class RecordOperationController {
     @Operation(summary = "根据ID查询详情", operationId = "system:record:operation:get")
     @GetMapping("/{id}")
     public Result<RecordOperationVO> getById(@PathVariable("id") Long id) {
-        RecordOperationEntity entity = operationRecordManager.getById(id);
-        return ResultWrapper.ok(RecordOperationConverter.INSTANCE.toVo(entity));
+        RecordOperationVO result = service.getById(id);
+        return ResultWrapper.ok(result);
     }
 
     @PreAuthorize("@ss.hasPermission('system:record:operation:add')")

@@ -44,8 +44,11 @@ public class RecordOperationVO extends BaseTenantVO {
     @Schema(description = "异常堆栈信息")
     private String stackTrace;
 
-    @Schema(description = "操作用户")
+    @Schema(description = "操作用户ID")
     private Long userId;
+
+    @Schema(description = "操作用户名称")
+    private String userName;
 
     @Schema(description = "操作用户IP")
     private String userIp;

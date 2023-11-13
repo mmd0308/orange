@@ -18,8 +18,6 @@ export function getMenuById(id: string) {
   return axios.get(BASE_URL.concat(`/${id}`));
 }
 
-
-
 export function updateMenuById(id: string, params: SystemPermissionAPI.MenuVO) {
   return axios.put(BASE_URL.concat(`/${id}`), params);
 }

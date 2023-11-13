@@ -26,29 +26,36 @@
 
     <div class="table-scroll">
       <div class="table-wrapper">
-        <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
-          :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
+        <tiny-grid ref="gridTableRef" max-height="580px" :fetch-data="fetchTableData" :pager="pagerConfig"
+          :loading="loading" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen />
           </template>
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
-          <tiny-grid-column field="dictLabel" :title="$t('system.dict-data.table.columns.dictLabel')" align="center" />
+          <tiny-grid-column field="dictLabel" :title="$t('system.dict-data.table.columns.dictLabel')" align="center">
+            <template #default="scope">
+              <tiny-tag :color="scope.row.showStyle" style="color: #fff;">
+                {{ scope.row.dictLabel }}
+              </tiny-tag>
+            </template>
+          </tiny-grid-column>
           <tiny-grid-column field="dictValue" :title="$t('system.dict-data.table.columns.dictValue')" align="center" />
           <tiny-grid-column field="dictType" :title="$t('system.dict-data.table.columns.dictType')" align="center">
             <template #default="scope">
               {{ scope.row.dictType }}
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="scope">
-              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="scope.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column>
-          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center">
+          <tiny-grid-column field="presetFlag" :title="$t('global.table.columns.presetFlag')" align="center" width="80">
             <template #default="scope">
               <dict-tag :value="scope.row.presetFlag" :options="proxy.$dict.getDict('sys_common_data_preset_flag')" />
             </template>
           </tiny-grid-column>
+          <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')" width="260" />
           <tiny-grid-column field="createdAt" :title="$t('global.table.columns.createdAt')" align="center" width="150" />
 
           <tiny-grid-column :title="$t('global.table.operations')" align="center" width="100">

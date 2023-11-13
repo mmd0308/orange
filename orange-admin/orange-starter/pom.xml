@@ -5,7 +5,7 @@
     <parent>
         <groupId>cn.hengzq.orange.admin</groupId>
         <artifactId>orange-admin</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.1.0</version>
     </parent>
 
     <groupId>com.hzqing.orange.starter</groupId>
@@ -24,6 +24,7 @@
         <module>orange-spring-boot-starter-springdoc-webmvc</module>
         <module>orange-spring-boot-starter-webmvc</module>
         <module>orange-spring-boot-starter-biz-record</module>
+        <module>orange-spring-boot-starter-storage</module>
     </modules>
 
     <dependencies>

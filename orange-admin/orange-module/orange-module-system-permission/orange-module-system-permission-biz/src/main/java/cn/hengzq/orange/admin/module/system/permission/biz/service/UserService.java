@@ -57,4 +57,6 @@ public interface UserService {
     UserDetailsVO getDetailsById(Long id);
 
     Boolean updateById(Long id, UserUpdateRequest request);
+
+    List<UserVO> queryByIds(List<Long> ids);
 }

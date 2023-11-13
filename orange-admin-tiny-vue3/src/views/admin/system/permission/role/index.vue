@@ -23,17 +23,17 @@
 
     <div class="table-scroll">
       <div class="table-wrapper">
-        <tiny-grid ref="gridTableRef" :fetch-data="fetchTableData" :pager="pagerConfig" :loading="loading"
-          :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
+        <tiny-grid ref="gridTableRef" max-height="580px" :fetch-data="fetchTableData" :pager="pagerConfig"
+          :loading="loading" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" refresh full-screen :setting="{ simple: true }" />
           </template>
           <tiny-grid-column type="selection" width="50"></tiny-grid-column>
           <tiny-grid-column field="name" :title="$t('system.role.table.columns.name')" align="center" />
           <tiny-grid-column field="permission" :title="$t('system.role.table.columns.permission')" align="center" />
-          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center">
+          <tiny-grid-column field="status" :title="$t('global.table.columns.status')" align="center" width="80">
             <template #default="data">
-              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_status')" />
+              <dict-tag :value="data.row.status" :options="proxy.$dict.getDict('sys_common_data_enable_status')" />
             </template>
           </tiny-grid-column>
           <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" />

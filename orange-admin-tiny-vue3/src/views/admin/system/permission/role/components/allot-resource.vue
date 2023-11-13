@@ -1,7 +1,7 @@
 <template>
   <tiny-drawer :title="title" :visible="visible" :show-footer="true" width="48%" @close="onClose">
-    <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :rules="formDataRules"
-      :model="formData" label-width="100px" validate-position="bottom" :display-only="true" validate-type="text">
+    <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :model="formData" label-width="100px"
+      validate-position="bottom" :display-only="true" validate-type="text">
       <tiny-row>
         <tiny-col :span="6">
           <tiny-form-item :label="$t('system.role.form.name')" prop="name">
@@ -17,8 +17,8 @@
       </tiny-row>
     </tiny-form>
 
-    <tiny-grid ref="gridTableRef" :data="tableDataTree" :loading="loading" :tree-config="{ children: 'children' }"
-      :auto-resize="true" :select-config="{ checkStrictly: true }">
+    <tiny-grid ref="gridTableRef" max-height="750px" :data="tableDataTree" :loading="loading"
+      :tree-config="{ children: 'children' }" :auto-resize="true" :select-config="{ checkStrictly: true }">
       <tiny-grid-column field="index" width="30" tree-node></tiny-grid-column>
       <tiny-grid-column type="selection" width="40"></tiny-grid-column>
       <tiny-grid-column field="name" :title="$t('system.menu.table.columns.name')" width="120" />
@@ -99,11 +99,6 @@ const checkedButton = (checked: boolean, menuId: string) => {
 const formData = ref<SystemPermissionAPI.RoleVO>({
   name: '',
 })
-
-const formDataRules = {
-  name: [{ required: true, message: '角色名称不能为空', trigger: 'change' }],
-  permission: [{ required: true, message: '权限编码不能为空', trigger: 'change' }]
-}
 
 const onSubmit = () => {
   let menus = proxy.$refs.gridTableRef.getSelectRecords() as SystemPermissionAPI.MenuVO[]

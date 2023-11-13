@@ -1,7 +1,7 @@
 package cn.hengzq.orange.admin.module.system.dict.common.vo.request;
 
 import cn.hengzq.orange.admin.module.system.dict.common.constants.SystemDictErrorCode;
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class DictTypeAddRequest implements Serializable {
     private String dictType;
 
     @Schema(description = "状态")
-    private CommonDataStatusEnum status;
+    private CommonDataEnableStatusEnum status;
 
     @Schema(description = "备注")
     private String remark;

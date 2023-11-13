@@ -16,8 +16,8 @@
     </tiny-form>
     <div class="table-scroll">
       <div class="table-wrapper">
-        <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :tree-config="{ children: 'children' }"
-          :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
+        <tiny-grid ref="gridTableRef" max-height="580px" :data="tableData" :loading="loading"
+          :tree-config="{ children: 'children' }" :auto-resize="true" @toolbar-button-click="toolbarButtonClickEvent">
           <template #toolbar>
             <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
           </template>
@@ -119,7 +119,7 @@ const buttonIndexRef = ref();
 const optionsClick = (label: string, data: SystemPermissionAPI.MenuVO) => {
   switch (label) {
     case 'global.table.operations.button-index': {
-      buttonIndexRef.value.open(data.id)
+      buttonIndexRef.value.open(data)
       break
     }
     case 'global.table.operations.edit': {

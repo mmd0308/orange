@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataStatusEnum;
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonDataEnableStatusEnum;
 import cn.hengzq.orange.admin.starter.common.enums.support.DataPresetFlagEnum;
 import cn.hengzq.orange.admin.starter.mybatis.entity.BaseTenantEntity;
 import lombok.Data;
@@ -41,7 +41,7 @@ public class DictTypeEntity extends BaseTenantEntity {
      * 状态
      */
     @TableField(value = "status")
-    private CommonDataStatusEnum status;
+    private CommonDataEnableStatusEnum status;
 
 
     /**

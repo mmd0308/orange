@@ -5,7 +5,7 @@
     <parent>
         <groupId>cn.hengzq.orange.admin</groupId>
         <artifactId>orange-admin</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.1.0</version>
     </parent>
 
     <groupId>cn.hengzq.orange.admin.module</groupId>
@@ -19,6 +19,8 @@
         <module>orange-module-system-dict</module>
         <module>orange-module-system-permission</module>
         <module>orange-module-system-record</module>
+        <module>orange-module-system-info</module>
+        <module>orange-module-system-file</module>
     </modules>
 
 </project>

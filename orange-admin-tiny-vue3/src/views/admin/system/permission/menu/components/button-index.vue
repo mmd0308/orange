@@ -1,50 +1,60 @@
 <template>
   <tiny-drawer :title="title" :visible="visible" width="48%" @close="onClose()">
-    <div class="container-list">
-      <div class="table-scroll">
-        <div class="table-wrapper">
-          <tiny-grid ref="gridTableRef" :data="tableData" :loading="loading" :auto-resize="true"
-            :edit-config="{ trigger: 'manual', mode: 'row', autoClear: false }"
-            @toolbar-button-click="toolbarButtonClickEvent">
-            <template #toolbar>
-              <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
-            </template>
-            <tiny-grid-column type="selection" width="50"></tiny-grid-column>
-            <tiny-grid-column field="name" :title="$t('system.button.table.columns.name')" width="100"
-              :editor="{ component: 'input' }" />
-            <tiny-grid-column field="permission" :title="$t('system.button.table.columns.permission')" width="260"
-              :editor="{ component: 'input' }" />
-            <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80"
-              :editor="{ component: 'input' }" />
-            <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')"
-              :editor="{ component: 'input' }" />
+    <tiny-form ref="formDataRef" class="tiny-drawer-body-form" label-position="left" :model="formData" label-width="100px"
+      validate-position="bottom" :display-only="true" validate-type="text">
+      <tiny-row>
+        <tiny-col :span="6">
+          <tiny-form-item :label="$t('system.menu.form.name')" prop="name">
+            <tiny-input v-model="formData.name"></tiny-input>
+          </tiny-form-item>
+        </tiny-col>
+        <tiny-col :span="6">
+          <tiny-form-item :label="$t('system.menu.form.permission')" prop="permission">
+            <tiny-input v-model="formData.permission"></tiny-input>
+          </tiny-form-item>
+        </tiny-col>
+      </tiny-row>
+    </tiny-form>
 
-            <tiny-grid-column :title="$t('global.table.operations')" align="center" width="120">
-              <template #default="scope">
-                <template v-if="gridTableRef && gridTableRef.hasActiveRow(scope.row)">
-                  <tiny-action-menu :max-show-num="3" :spacing="8" :options="saveOptions"
-                    @item-click="(data: any) => saveOptionsClick(data.itemData.label, scope.row)">
-                    <template #item="{ data }">
-                      <span> {{ $t(data.label) }} </span>
-                    </template>
-                  </tiny-action-menu>
-                </template>
-                <template v-else>
-                  <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
-                    @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
-                    <template #item="{ data }">
-                      <span v-if="data.label == 'global.table.operations.delete'"
-                        style="color: var(--button-delete-color);"> {{ $t(data.label) }} </span>
-                      <span v-else> {{ $t(data.label) }} </span>
-                    </template>
-                  </tiny-action-menu>
-                </template>
+
+    <tiny-grid ref="gridTableRef" max-height="730px" :data="tableData" :loading="loading" :auto-resize="true"
+      :edit-config="{ trigger: 'manual', mode: 'row', autoClear: false }" @toolbar-button-click="toolbarButtonClickEvent">
+      <template #toolbar>
+        <tiny-grid-toolbar :buttons="toolbarButtons" full-screen :setting="{ simple: true }" />
+      </template>
+      <tiny-grid-column type="selection" width="50"></tiny-grid-column>
+      <tiny-grid-column field="name" :title="$t('system.button.table.columns.name')" width="100"
+        :editor="{ component: 'input' }" />
+      <tiny-grid-column field="permission" :title="$t('system.button.table.columns.permission')" width="260"
+        :editor="{ component: 'input' }" />
+      <tiny-grid-column field="sort" :title="$t('global.table.columns.sort')" align="center" width="80"
+        :editor="{ component: 'input' }" />
+      <tiny-grid-column field="remark" show-overflow :title="$t('global.table.columns.remark')"
+        :editor="{ component: 'input' }" />
+
+      <tiny-grid-column :title="$t('global.table.operations')" align="center" width="120">
+        <template #default="scope">
+          <template v-if="gridTableRef && gridTableRef.hasActiveRow(scope.row)">
+            <tiny-action-menu :max-show-num="3" :spacing="8" :options="saveOptions"
+              @item-click="(data: any) => saveOptionsClick(data.itemData.label, scope.row)">
+              <template #item="{ data }">
+                <span> {{ $t(data.label) }} </span>
               </template>
-            </tiny-grid-column>
-          </tiny-grid>
-        </div>
-      </div>
-    </div>
+            </tiny-action-menu>
+          </template>
+          <template v-else>
+            <tiny-action-menu :max-show-num="3" :spacing="8" :options="options"
+              @item-click="(data: any) => optionsClick(data.itemData.label, scope.row)">
+              <template #item="{ data }">
+                <span v-if="data.label == 'global.table.operations.delete'" style="color: var(--button-delete-color);"> {{
+                  $t(data.label) }} </span>
+                <span v-else> {{ $t(data.label) }} </span>
+              </template>
+            </tiny-action-menu>
+          </template>
+        </template>
+      </tiny-grid-column>
+    </tiny-grid>
   </tiny-drawer>
 </template>
 
@@ -184,9 +194,12 @@ const onClose = () => {
   visible.value = false
 }
 
-const open = (mId: string) => {
+const formData = ref<SystemPermissionAPI.MenuVO>({})
+
+const open = (data: SystemPermissionAPI.MenuVO) => {
+  formData.value = data
   visible.value = true
-  menuId.value = mId
+  menuId.value = data.id
   getAllData()
 }
 

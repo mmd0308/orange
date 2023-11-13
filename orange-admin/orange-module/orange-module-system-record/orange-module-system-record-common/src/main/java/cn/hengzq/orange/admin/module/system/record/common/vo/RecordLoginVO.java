@@ -35,6 +35,10 @@ public class RecordLoginVO implements Serializable {
     @Schema(description = "操作用户ID")
     private Long userId;
 
+    @Schema(description = "操作用户名称")
+    private String userName;
+
+    @Schema(description = "操作用户IP")
     private String userIp;
 
     @Schema(description = "User-Agent")
@@ -43,6 +47,7 @@ public class RecordLoginVO implements Serializable {
     @Schema(description = "登录时间")
     private LocalDateTime loginTime;
 
+    @Schema(description = "用户操作地点")
     private String userLocation;
 
     @Schema(description = "操作状态")

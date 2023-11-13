@@ -1,5 +1,6 @@
 package cn.hengzq.orange.admin.module.system.record.biz.dto;
 
+import cn.hengzq.orange.admin.starter.common.enums.support.CommonOperationStatusEnum;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,9 +10,13 @@ import java.time.LocalDateTime;
 @Builder
 public class RecordOperationListQuery {
 
-    private String account;
+    private String traceId;
 
-    private LocalDateTime startLoginTime;
+    private String resourceId;
 
-    private LocalDateTime endLoginTime;
+    private CommonOperationStatusEnum status;
+
+    private LocalDateTime operationStartTime;
+
+    private LocalDateTime operationEndTime;
 }

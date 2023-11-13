@@ -16,6 +16,7 @@ declare namespace SystemRecordAPI {
     account?: string;
     type?: 'LOGIN' | 'LOGOUT';
     userId?: number;
+    userName?: string;
     userIp?: string;
     userAgent?: string;
     loginTime?: string;
@@ -38,6 +39,7 @@ declare namespace SystemRecordAPI {
     status?: 'SUCCESS' | 'FAIL';
     operationStartTime?: string;
     operationEndTime?: string;
+    resourceId?: string;
   }
 
   interface RecordOperationVO {
@@ -57,6 +59,7 @@ declare namespace SystemRecordAPI {
     requestMethod?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
     /** 操作用户 */
     userId?: string;
+    userName?: string;
     /** 操作用户IP */
     userIp?: string;
     /** 用户操作地点 */

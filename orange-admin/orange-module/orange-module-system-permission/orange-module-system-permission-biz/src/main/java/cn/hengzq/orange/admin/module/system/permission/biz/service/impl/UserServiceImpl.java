@@ -1,6 +1,5 @@
 package cn.hengzq.orange.admin.module.system.permission.biz.service.impl;
 
-import cn.hengzq.orange.admin.module.system.permission.biz.converter.DepartmentConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.converter.UserConverter;
 import cn.hengzq.orange.admin.module.system.permission.biz.dto.UserListQuery;
 import cn.hengzq.orange.admin.module.system.permission.biz.entity.DepartmentEntity;
@@ -10,7 +9,6 @@ import cn.hengzq.orange.admin.module.system.permission.biz.manager.UserManager;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.RoleService;
 import cn.hengzq.orange.admin.module.system.permission.biz.service.UserService;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.SystemPermissionErrorCode;
-import cn.hengzq.orange.admin.module.system.permission.common.exception.support.DepartmentErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.exception.support.UserErrorCode;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserDetailsVO;
 import cn.hengzq.orange.admin.module.system.permission.common.vo.UserVO;
@@ -22,8 +20,8 @@ import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserAdd
 import cn.hengzq.orange.admin.module.system.permission.common.vo.request.UserUpdateRequest;
 import cn.hengzq.orange.admin.starter.common.constant.PermissionConstant;
 import cn.hengzq.orange.admin.starter.common.exception.ServiceException;
-import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hengzq.orange.admin.starter.common.util.Assert;
+import cn.hengzq.orange.admin.starter.common.util.CollUtils;
 import cn.hengzq.orange.admin.starter.common.vo.PageVO;
 import cn.hengzq.orange.admin.starter.context.GlobalContextHelper;
 import cn.hutool.core.collection.CollUtil;
@@ -49,7 +47,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserManager userManager;
+    private final UserManager manager;
 
     private final DepartmentManager departmentManager;
 
@@ -59,13 +57,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO getByUsername(String username) {
-        UserEntity entity = userManager.getByUsername(username);
+        UserEntity entity = manager.getByUsername(username);
         return UserConverter.INSTANCE.toVo(entity);
     }
 
     @Override
     public UserVO getById(Long userId) {
-        UserEntity entity = userManager.getById(userId);
+        UserEntity entity = manager.getById(userId);
         return UserConverter.INSTANCE.toVo(entity);
     }
 
@@ -74,14 +72,14 @@ public class UserServiceImpl implements UserService {
         // 密码加密
         String password = StrUtil.isBlank(request.getPassword()) ? PermissionConstant.DEFAULT_USER_PASSWORD : request.getPassword();
         request.setPassword(passwordEncoder.encode(password));
-        return userManager.add(UserConverter.INSTANCE.toEntity(request));
+        return manager.add(UserConverter.INSTANCE.toEntity(request));
     }
 
     @Override
     @Transactional(rollbackFor = {Exception.class})
     public Boolean updatePassword(UpdatePasswordRequest request) {
         Long userId = Objects.isNull(request.getUserId()) ? GlobalContextHelper.getCurrentUserId() : request.getUserId();
-        UserEntity entity = userManager.getById(userId);
+        UserEntity entity = manager.getById(userId);
         Assert.nonNull(entity, SystemPermissionErrorCode.GLOBAL_DATA_NOT_EXIST);
         boolean matches = passwordEncoder.matches(request.getNewPassword(), entity.getPassword());
         if (!matches) {
@@ -89,16 +87,16 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(SystemPermissionErrorCode.GLOBAL_AUTH_PASSWORD_ERROR);
         }
         entity.setPassword(passwordEncoder.encode(request.getNewPassword()));
-        return userManager.updateById(userId, entity);
+        return manager.updateById(userId, entity);
     }
 
     @Override
     public Boolean resetPassword(ResetPasswordRequest request) {
         request.check();
-        UserEntity entity = userManager.getById(request.getUserId());
+        UserEntity entity = manager.getById(request.getUserId());
         Assert.nonNull(entity, SystemPermissionErrorCode.GLOBAL_DATA_NOT_EXIST);
         entity.setPassword(passwordEncoder.encode(request.getNewPassword()));
-        return userManager.updateById(entity);
+        return manager.updateById(entity);
     }
 
     @Override
@@ -112,7 +110,7 @@ public class UserServiceImpl implements UserService {
             listQuery.setDepartmentIds(departmentIds);
             listQuery.setDepartmentId(null);
         }
-        Page<UserEntity> page = userManager.page(query.getPageNo(), query.getPageSize(), listQuery);
+        Page<UserEntity> page = manager.page(query.getPageNo(), query.getPageSize(), listQuery);
         return UserConverter.INSTANCE.toPage(page);
     }
 
@@ -129,7 +127,7 @@ public class UserServiceImpl implements UserService {
             listQuery.setDepartmentId(null);
         }
 
-        List<UserEntity> entityList = userManager.listByParams(listQuery);
+        List<UserEntity> entityList = manager.listByParams(listQuery);
         return UserConverter.INSTANCE.toListVo(entityList);
     }
 
@@ -146,10 +144,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean updateById(Long id, UserUpdateRequest request) {
-        UserEntity entity = userManager.getById(id);
+        UserEntity entity = manager.getById(id);
         Assert.nonNull(entity, UserErrorCode.GLOBAL_DATA_NOT_EXIST);
         entity = UserConverter.INSTANCE.updateConvert(entity, request);
-        return userManager.updateById(entity);
+        return manager.updateById(entity);
+    }
+
+    @Override
+    public List<UserVO> queryByIds(List<Long> ids) {
+        if (CollUtil.isEmpty(ids)) {
+            return List.of();
+        }
+        List<UserEntity> entityList = manager.listByIds(ids);
+        return UserConverter.INSTANCE.toListVo(entityList);
     }
 
     private List<Long> getDepartmentIds(Long departmentId) {

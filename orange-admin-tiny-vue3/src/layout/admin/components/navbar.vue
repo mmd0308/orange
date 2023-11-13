@@ -16,38 +16,19 @@
       <!-- <li>
         <div class="divider" />
       </li> -->
-      <li @click="changeLan">
-        <span>{{ i18.locale.value }}</span>
-        <img src="@/assets/images/lan.png" alt="lan" class="navbar-lan" />
-        <div v-if="lan" class="trigger-lan">
-      <li v-for="(item, index) in locales" :key="index" :value="item.value" @click="changeLocale(locales[index].value)">
-        {{ item.label }}
+      <li>
+        <screenfull></screenfull>
       </li>
-  </div>
-  </li>
-  <li>
-    <span @click="setVisible">
-      {{ $t('settings.title') }}
-    </span>
-  </li>
-
-  <li class="navbar-user">
-    <tiny-user-head type="icon" round min>
-      <div class="user-image">
-        <img src="@/assets/images/avatar.png" alt="user" />
-      </div>
-    </tiny-user-head>
-    <div class="trigger-user">
-  <li v-for="(item, index) in userlist" :key="index" :value="item.label" @click="switchUser(item.value)">
-    <iconReplace v-if="item.value === 1"></iconReplace>
-    <iconUser v-if="item.value === 2"></iconUser>
-    <iconWriting v-if="item.value === 3"></iconWriting>
-    <iconCheckOut v-if="item.value === 4"></iconCheckOut>
-    {{ $t(item.label) }}
-  </li>
-  </div>
-  </li>
-  </ul>
+      <li>
+        <toggle-language></toggle-language>
+      </li>
+      <li>
+        <svg-icon name="system-settings" width="20px" height="20px" @click="setVisible" />
+      </li>
+      <li>
+        <user-center></user-center>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -63,6 +44,7 @@ import { useAppStore, useUserStore } from '@/store';
 import router from '@/router';
 import { LOCALE_OPTIONS } from '@/locale';
 import useLocale from '@/plugins/locale';
+import userCenter from './navbar/user/index.vue'
 
 const { proxy } = getCurrentInstance() as any
 
@@ -79,11 +61,6 @@ const userStore = useUserStore();
 const { changeLocale } = useLocale();
 const locales = [...LOCALE_OPTIONS];
 
-// 切换语言
-const changeLan = () => {
-  lan.value = !lan.value;
-};
-
 // 设置页面显示
 const setVisible = () => {
   appStore.updateSettings({ Settings: true });
@@ -96,8 +73,6 @@ const userlist = [
   { label: 'messageBox.userSettings', value: 3 },
   { label: 'messageBox.logout', value: 4 },
 ];
-
-
 
 const switchUser = (e: number) => {
   switch (e) {
@@ -233,17 +208,6 @@ const jumpUrl = () => {
     }
   }
 
-  .user-image {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    font-weight: 600;
-    font-size: 2em;
-    font-style: oblique;
-    cursor: pointer;
-    fill: var(--ti-common-color-line-active);
-  }
-
   a {
     color: var(--color-text-1);
     text-decoration: none;
@@ -254,41 +218,6 @@ const jumpUrl = () => {
     bottom: -44px;
     width: 100px;
     margin-left: -35px;
-  }
-
-  .navbar-user:hover>.trigger-user {
-    display: inline-block;
-  }
-
-  .trigger-user {
-    position: absolute;
-    bottom: -102px;
-    display: none;
-    width: 100px;
-    margin-left: -43px;
-  }
-
-  .trigger-user:hover {
-    display: inline-block;
-  }
-
-  .trigger-user {
-    li {
-      display: flex;
-      justify-content: space-around;
-      padding: 6px;
-      font-size: 12px;
-      text-align: center;
-      list-style-type: none;
-      background-color: #fff;
-      box-shadow: 0 0 2px 2px var(--ti-common-color-bg-normal);
-      cursor: pointer;
-    }
-
-    li:hover {
-      color: #2f5bea;
-      background-color: #f5f6f7;
-    }
   }
 
   .trigger-lan {

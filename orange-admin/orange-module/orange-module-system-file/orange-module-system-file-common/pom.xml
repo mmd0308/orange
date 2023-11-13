@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>cn.hengzq.orange.admin.module.system.file</groupId>
+        <artifactId>orange-module-system-file</artifactId>
+        <version>1.1.0</version>
+    </parent>
+
+    <groupId>cn.hengzq.orange.admin.module.system.file.common</groupId>
+    <artifactId>orange-module-system-file-common</artifactId>
+    <packaging>jar</packaging>
+
+    <description>
+        orange-module-system-file-common
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.hengzq.starter.storage</groupId>
+            <artifactId>orange-spring-boot-starter-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hengzq.orange.admin.starter.common</groupId>
+            <artifactId>orange-spring-boot-starter-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+    </dependencies>
+</project>
